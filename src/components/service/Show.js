@@ -1,40 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import {fetchData} from "./FetchData";
+import service from './service'
 
 
 const Show = () => {
     const [data, setData] = useState([]);
-    useEffect(() => fetchData().then(data=> setData(data)), []);
+    useEffect(() => service.fetchSearchResult().then(data => setData(data)), []);
     
-    // useEffect(() => {
-    //         fetch("https://tasty.p.rapidapi.com/recipes/auto-complete?prefix=chicken%20soup", {
-    //             "method": "GET",
-    //             "headers": {
-    //                 "x-rapidapi-host": "tasty.p.rapidapi.com",
-    //                 "x-rapidapi-key": "bc4fe255dcmsh226f8341d7ebb53p169a42jsn58714141d5e1"
-    //             }
-    //         })
-    //             .then(response =>
-    //                 // console.log(response);
-    //                 response.json()
-    //             )
-    //             .then((data) =>{
-    //                 console.log("in useEffect: ----", data.results);
-    //                 setData(data.results);
-    //             } )}
-    //     ,[]);
+    const[recipe, setRecipe] = useState({});
+    useEffect(() => service.fetchByID().then(data => {
+        // console.log("in useEffect: ----", data);
+        setRecipe(data);
+    }), []);
     
+    console.log("recipe-------", recipe);
     
-    
-    
-    console.log(data);
     
     return(
         <>
             <p>{data.length}</p>
             <ul className="">
                 {data.map(item => (
-                    <li  >
+                    <li key={item.display} >
                         
                         <p>Display: {item.display}</p>
                         <p>Search_value: {item.search_value}</p>
@@ -43,6 +29,22 @@ const Show = () => {
                     </li>
                 ))}
             </ul>
+            <hr/>
+            
+            
+           <p>{recipe.created_at}</p>
+    
+            {/*<ul className="">*/}
+            {/*    {recipe.instructions.map(item => (*/}
+            {/*        <li key={item.id} >*/}
+            {/*    */}
+            {/*            <p>{item.display_text}</p>*/}
+            
+            {/*        </li>*/}
+            {/*    ))}*/}
+            {/*</ul>*/}
+            <hr/>
+      
             
            
         </>
