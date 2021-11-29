@@ -12,7 +12,14 @@ const Show = () => {
         setRecipe(data);
     }), []);
     
+    const[list, setList] = useState([]);
+    useEffect(() => service.fetchList().then(data => {
+        console.log("in useEffect: ----", data);
+        setList(data);
+    }), []);
+    
     console.log("recipe-------", recipe);
+    console.log("list --->", list);
     
     
     return(
@@ -24,7 +31,7 @@ const Show = () => {
                         
                         <p>Display: {item.display}</p>
                         <p>Search_value: {item.search_value}</p>
-                        <p>type: {item.type}</p>
+                     
               
                     </li>
                 ))}

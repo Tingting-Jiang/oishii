@@ -1,13 +1,13 @@
 const fetch = require("node-fetch");
 // const URL = "https://tasty.p.rapidapi.com/recipes/auto-complete?prefix=chicken%20soup";
 const API_KEY = 'bc4fe255dcmsh226f8341d7ebb53p169a42jsn58714141d5e1';
-const URL = "https://tasty.p.rapidapi.com/recipes";
+const URL = "https://tasty.p.rapidapi.com";
 
 const HOST = 'tasty.p.rapidapi.com';
 
 module.exports = (app) =>  {
     const fetchSearchResult = (req, res) => {
-        const str = `/auto-complete?prefix=${req.params.prefix}`;
+        const str = `/recipes/auto-complete?prefix=${req.params.prefix}`;
         // console.log("in fetchSearchResult -->", URL + str);
     
         fetch(URL + str, {
@@ -27,8 +27,8 @@ module.exports = (app) =>  {
     
     
     const fetchByID = (req, res) => {
-        const detail = `/detail?id=${req.params.id}`;
-        console.log("in fetchByID -->", URL + detail);
+        const detail = `/recipes/detail?id=${req.params.id}`;
+        // console.log("in fetchByID -->", detail);
         fetch(URL + detail, {
             "method": "GET",
             "headers": {
@@ -46,8 +46,53 @@ module.exports = (app) =>  {
         
     }
     
+    
+    const fetchByTag= (req, res) =>{
+        const list = `/recipes/list?from=0&size=${req.params.size}&tags=${req.params.tag}&q=${req.params.key}`;
+    
+        console.log("in fetchTrendingList -->", list);
+        fetch(URL + list, {
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-host": HOST,
+                "x-rapidapi-key": API_KEY
+            }
+        })
+            .then(response => response.json())
+            .then((data) =>{
+                // console.log("fetchByID -->", data);
+                res.json(data);
+            }).catch(e => {
+            console.log("error is -->", e);
+        })
+        
+    }
+    
+    const fetchTrendingList = (req, res) =>{
+        const list = `feeds/list?size=${req.params.size}&timezone=%2B0700&vegetarian=false&from=0`;
+        
+        console.log("in fetchTrendingList -->", list);
+        fetch(URL + list, {
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-host": HOST,
+                "x-rapidapi-key": API_KEY
+            }
+        })
+            .then(response => response.json())
+            .then((data) =>{
+                // console.log("fetchByID -->", data);
+                res.json(data);
+            }).catch(e => {
+            console.log("error is -->", e);
+        })
+        
+    }
+    
     app.get("/:prefix", fetchSearchResult);
     app.get("/details/:id", fetchByID);
+    app.get("/list/:size/:tag/:key", fetchByTag);
+    app.get("/trending/:size", fetchTrendingList);
     
 }
 

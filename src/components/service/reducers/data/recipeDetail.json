@@ -1,0 +1,1060 @@
+{
+  "beauty_url": null,
+  "brand_id": null,
+  "seo_title": "",
+  "thumbnail_alt_text": "",
+  "nutrition_visibility": "auto",
+  "tags": [
+    {
+      "id": 65848,
+      "name": "stove_top",
+      "display_name": "Stove Top",
+      "type": "appliance"
+    },
+    {
+      "id": 65846,
+      "name": "oven",
+      "display_name": "Oven",
+      "type": "appliance"
+    },
+    {
+      "id": 64468,
+      "name": "vegan",
+      "display_name": "Vegan",
+      "type": "dietary"
+    },
+    {
+      "type": "equipment",
+      "id": 1247775,
+      "name": "oven_mitts",
+      "display_name": "Oven Mitts"
+    },
+    {
+      "name": "baking_pan",
+      "display_name": "Baking Pan",
+      "type": "equipment",
+      "id": 1280500
+    },
+    {
+      "id": 1247793,
+      "name": "whisk",
+      "display_name": "Whisk",
+      "type": "equipment"
+    },
+    {
+      "id": 1280510,
+      "name": "mixing_bowl",
+      "display_name": "Mixing Bowl",
+      "type": "equipment"
+    },
+    {
+      "name": "spatula",
+      "display_name": "Spatula",
+      "type": "equipment",
+      "id": 1247788
+    },
+    {
+      "type": "equipment",
+      "id": 1280503,
+      "name": "cutting_board",
+      "display_name": "Cutting Board"
+    },
+    {
+      "id": 1280501,
+      "name": "chefs_knife",
+      "display_name": "Chef's Knife",
+      "type": "equipment"
+    },
+    {
+      "type": "meal",
+      "id": 64489,
+      "name": "lunch",
+      "display_name": "Lunch"
+    },
+    {
+      "id": 188967,
+      "name": "special_occasion",
+      "display_name": "Special Occasion",
+      "type": "occasion"
+    }
+  ],
+  "renditions": [
+    {
+      "poster_url": "https://img.buzzfeed.com/video-transcoder-prod/output/143538/square_720/1567118032_00001.png",
+      "height": 720,
+      "file_size": 140311336,
+      "bit_rate": 2370,
+      "maximum_bit_rate": null,
+      "minimum_bit_rate": null,
+      "aspect": "square",
+      "container": "mp4",
+      "width": 720,
+      "duration": 473711,
+      "content_type": "video/mp4",
+      "url": "https://vid.tasty.co/output/143538/square_720/1567118032",
+      "name": "mp4_720x720"
+    },
+    {
+      "url": "https://vid.tasty.co/output/143538/square_320/1567118032",
+      "poster_url": "https://img.buzzfeed.com/video-transcoder-prod/output/143538/square_320/1567118032_00001.png",
+      "name": "mp4_320x320",
+      "duration": 473711,
+      "maximum_bit_rate": null,
+      "aspect": "square",
+      "bit_rate": 778,
+      "minimum_bit_rate": null,
+      "content_type": "video/mp4",
+      "container": "mp4",
+      "height": 320,
+      "width": 320,
+      "file_size": 46042552
+    },
+    {
+      "file_size": 140424036,
+      "bit_rate": 2372,
+      "maximum_bit_rate": null,
+      "minimum_bit_rate": null,
+      "content_type": "video/mp4",
+      "aspect": "square",
+      "container": "mp4",
+      "height": 720,
+      "poster_url": "https://img.buzzfeed.com/video-transcoder-prod/output/143538/landscape_720/1567118032_00001.png",
+      "duration": 473711,
+      "url": "https://vid.tasty.co/output/143538/landscape_720/1567118032",
+      "name": "mp4_720x720",
+      "width": 720
+    },
+    {
+      "width": 480,
+      "file_size": 79628154,
+      "bit_rate": 1345,
+      "maximum_bit_rate": null,
+      "minimum_bit_rate": null,
+      "content_type": "video/mp4",
+      "container": "mp4",
+      "height": 480,
+      "aspect": "square",
+      "url": "https://vid.tasty.co/output/143538/landscape_480/1567118032",
+      "poster_url": "https://img.buzzfeed.com/video-transcoder-prod/output/143538/landscape_480/1567118032_00001.png",
+      "name": "mp4_480x480",
+      "duration": 473711
+    },
+    {
+      "url": "https://vid.tasty.co/output/143538/hls24_1567118032.m3u8",
+      "poster_url": "https://img.buzzfeed.com/video-transcoder-prod/output/143538/1445289064805-h2exzu/1567118032_00001.png",
+      "bit_rate": null,
+      "maximum_bit_rate": 4104,
+      "minimum_bit_rate": 275,
+      "content_type": "application/vnd.apple.mpegurl",
+      "aspect": "square",
+      "container": "ts",
+      "name": "low",
+      "height": 1080,
+      "width": 1080,
+      "duration": 473724,
+      "file_size": null
+    },
+    {
+      "name": "mp4_720x720",
+      "duration": 473711,
+      "content_type": "video/mp4",
+      "container": "mp4",
+      "poster_url": "https://img.buzzfeed.com/video-transcoder-prod/output/143538/square_720/1567118032_00001.png",
+      "maximum_bit_rate": null,
+      "minimum_bit_rate": null,
+      "aspect": "square",
+      "url": "https://vid.tasty.co/output/143538/square_720/1567118032",
+      "height": 720,
+      "width": 720,
+      "file_size": 140311336,
+      "bit_rate": 2370
+    },
+    {
+      "bit_rate": 778,
+      "minimum_bit_rate": null,
+      "content_type": "video/mp4",
+      "aspect": "square",
+      "url": "https://vid.tasty.co/output/143538/square_320/1567118032",
+      "height": 320,
+      "width": 320,
+      "duration": 473711,
+      "poster_url": "https://img.buzzfeed.com/video-transcoder-prod/output/143538/square_320/1567118032_00001.png",
+      "name": "mp4_320x320",
+      "file_size": 46042552,
+      "maximum_bit_rate": null,
+      "container": "mp4"
+    },
+    {
+      "file_size": 140424036,
+      "minimum_bit_rate": null,
+      "content_type": "video/mp4",
+      "url": "https://vid.tasty.co/output/143538/landscape_720/1567118032",
+      "poster_url": "https://img.buzzfeed.com/video-transcoder-prod/output/143538/landscape_720/1567118032_00001.png",
+      "width": 720,
+      "duration": 473711,
+      "maximum_bit_rate": null,
+      "aspect": "square",
+      "container": "mp4",
+      "name": "mp4_720x720",
+      "height": 720,
+      "bit_rate": 2372
+    },
+    {
+      "bit_rate": 1345,
+      "content_type": "video/mp4",
+      "aspect": "square",
+      "container": "mp4",
+      "url": "https://vid.tasty.co/output/143538/landscape_480/1567118032",
+      "name": "mp4_480x480",
+      "width": 480,
+      "file_size": 79628154,
+      "maximum_bit_rate": null,
+      "minimum_bit_rate": null,
+      "poster_url": "https://img.buzzfeed.com/video-transcoder-prod/output/143538/landscape_480/1567118032_00001.png",
+      "height": 480,
+      "duration": 473711
+    },
+    {
+      "height": 1080,
+      "duration": 473724,
+      "file_size": null,
+      "maximum_bit_rate": 4104,
+      "minimum_bit_rate": 275,
+      "url": "https://vid.tasty.co/output/143538/hls24_1567118032.m3u8",
+      "poster_url": "https://img.buzzfeed.com/video-transcoder-prod/output/143538/1445289064805-h2exzu/1567118032_00001.png",
+      "width": 1080,
+      "bit_rate": null,
+      "content_type": "application/vnd.apple.mpegurl",
+      "aspect": "square",
+      "container": "ts",
+      "name": "low"
+    }
+  ],
+  "country": "US",
+  "draft_status": "published",
+  "is_one_top": false,
+  "thumbnail_url": "https://img.buzzfeed.com/thumbnailer-prod-us-east-1/8dfa8274937b4685aa0b672e2afbb5a4/FB.jpg",
+  "total_time_tier": {
+    "tier": "under_1.5_hours",
+    "display_tier": "Under 1.5 hours"
+  },
+  "canonical_id": "recipe:5580",
+  "topics": [
+    {
+      "name": "BBQ Season",
+      "slug": "bbq"
+    },
+    {
+      "slug": "vegan",
+      "name": "Vegan"
+    },
+    {
+      "name": "Lunch",
+      "slug": "lunch"
+    }
+  ],
+  "video_ad_content": "none",
+  "approved_at": 1568080995,
+  "cook_time_minutes": 60,
+  "language": "eng",
+  "prep_time_minutes": 10,
+  "promotion": "full",
+  "servings_noun_singular": "serving",
+  "credits": [
+    {
+      "name": "Merle O'Neal",
+      "type": "internal"
+    }
+  ],
+  "facebook_posts": [],
+  "user_ratings": {
+    "score": 0.923077,
+    "count_positive": 24,
+    "count_negative": 2
+  },
+  "aspect_ratio": "1:1",
+  "created_at": 1567173677,
+  "name": "Skillet BBQ Vegan Baked Beans",
+  "show_id": 34,
+  "slug": "skillet-bbq-vegan-baked-beans",
+  "tips_and_ratings_enabled": true,
+  "compilations": [],
+  "nutrition": {
+    "carbohydrates": 94,
+    "fat": 73,
+    "protein": 22,
+    "sugar": 37,
+    "fiber": 15,
+    "updated_at": "2021-05-03T13:22:42+02:00",
+    "calories": 648
+  },
+  "id": 5580,
+  "is_shoppable": true,
+  "keywords": "",
+  "video_id": 90620,
+  "instructions": [
+    {
+      "temperature": null,
+      "appliance": null,
+      "id": 50128,
+      "display_text": "Make the portobello bacon: Slice the portobello mushrooms into ¼-inch (6 mm) thick slices.",
+      "position": 1,
+      "start_time": 155000,
+      "end_time": 163166
+    },
+    {
+      "temperature": null,
+      "appliance": null,
+      "id": 50129,
+      "display_text": "In a 9 x 13-inch (22 x 33 cm) baking dish, whisk together the canola oil, liquid aminos, maple syrup, brown sugar, and paprika.",
+      "position": 2,
+      "start_time": 165000,
+      "end_time": 177833
+    },
+    {
+      "id": 50130,
+      "display_text": "Lay the mushroom slices in the dish, and let marinate for 30 minutes, flipping halfway through.",
+      "position": 3,
+      "start_time": 179000,
+      "end_time": 194166,
+      "temperature": null,
+      "appliance": null
+    },
+    {
+      "id": 50131,
+      "display_text": "Make the portobello bacon: Preheat the oven to 400°F (200°C). Set a wire rack inside a rimmed baking sheet.",
+      "position": 4,
+      "start_time": 0,
+      "end_time": 0,
+      "temperature": null,
+      "appliance": null
+    },
+    {
+      "temperature": null,
+      "appliance": null,
+      "id": 50132,
+      "display_text": "Transfer the mushroom slices to the wire rack, spacing evenly so they aren’t touching.",
+      "position": 5,
+      "start_time": 198000,
+      "end_time": 205000
+    },
+    {
+      "id": 50133,
+      "display_text": "Bake for 30-40 minutes, until the mushrooms are slightly leathery and have lost most of their moisture and the edges are crispy. Remove from the oven and let cool completely; the mushrooms will continue to crisp as they cool. Once cool, roughly chop the mushrooms into ½-inch (1 ¼ cm) pieces.",
+      "position": 6,
+      "start_time": 0,
+      "end_time": 0,
+      "temperature": null,
+      "appliance": null
+    },
+    {
+      "start_time": 207000,
+      "end_time": 231166,
+      "temperature": null,
+      "appliance": null,
+      "id": 50134,
+      "display_text": "Meanwhile, make the baked beans: Heat the canola oil in a large skillet over medium-low heat. When the oil is shimmering, add the onion and sauté for 10 minutes, until translucent and starting to caramelize. Add the garlic and sauté for another 5 minutes, until translucent and softened. Add the paprika and mustard and cook for about 30 seconds, until fragrant.",
+      "position": 7
+    },
+    {
+      "temperature": null,
+      "appliance": null,
+      "id": 50135,
+      "display_text": "Stir in the water, tomato paste, pepper, and salt. Bring to a simmer, and then add the brown sugar, vegan Worcestershire, molasses, maple syrup, and apple cider vinegar and stir to combine. Add the beans. Increase the heat to medium and simmer for 30 minutes, stirring frequently so the sauce doesn’t burn. Adjust the heat as necessary to maintain a low simmer, and add more water, a few tablespoons at a time, if the mixture starts to look dry. Season with more salt to taste, then remove the pan from the heat.",
+      "position": 8,
+      "start_time": 232000,
+      "end_time": 278500
+    },
+    {
+      "appliance": null,
+      "id": 50136,
+      "display_text": "Serve the beans immediately, garnished with the portobello bacon, or let cool to room temperature, cover, and refrigerate until ready to serve. Store the portobello bacon in an airtight container at room temperature until ready to use.",
+      "position": 9,
+      "start_time": 280000,
+      "end_time": 288500,
+      "temperature": null
+    },
+    {
+      "id": 50137,
+      "display_text": "Enjoy!",
+      "position": 10,
+      "start_time": 291000,
+      "end_time": 295833,
+      "temperature": null,
+      "appliance": null
+    }
+  ],
+  "sections": [
+    {
+      "name": "Portobello Bacon",
+      "position": 1,
+      "components": [
+        {
+          "id": 60148,
+          "raw_text": "2 portobello mushrooms",
+          "extra_comment": "",
+          "position": 2,
+          "measurements": [
+            {
+              "id": 515496,
+              "quantity": "2",
+              "unit": {
+                "display_singular": "",
+                "display_plural": "",
+                "system": "none",
+                "name": "",
+                "abbreviation": ""
+              }
+            }
+          ],
+          "ingredient": {
+            "display_plural": "portobello mushrooms",
+            "created_at": 1517402791,
+            "updated_at": 1517402791,
+            "id": 3604,
+            "name": "portobello mushroom",
+            "display_singular": "portobello mushroom"
+          }
+        },
+        {
+          "id": 60149,
+          "raw_text": "⅓ cup canola oil",
+          "extra_comment": "",
+          "position": 3,
+          "measurements": [
+            {
+              "id": 515493,
+              "quantity": "80",
+              "unit": {
+                "abbreviation": "mL",
+                "display_singular": "mL",
+                "display_plural": "mL",
+                "system": "metric",
+                "name": "milliliter"
+              }
+            },
+            {
+              "id": 515490,
+              "quantity": "⅓",
+              "unit": {
+                "abbreviation": "c",
+                "display_singular": "cup",
+                "display_plural": "cups",
+                "system": "imperial",
+                "name": "cup"
+              }
+            }
+          ],
+          "ingredient": {
+            "id": 825,
+            "name": "canola oil",
+            "display_singular": "canola oil",
+            "display_plural": "canola oils",
+            "created_at": 1495764700,
+            "updated_at": 1509035230
+          }
+        },
+        {
+          "position": 4,
+          "measurements": [
+            {
+              "quantity": "60",
+              "unit": {
+                "name": "milliliter",
+                "abbreviation": "mL",
+                "display_singular": "mL",
+                "display_plural": "mL",
+                "system": "metric"
+              },
+              "id": 515494
+            },
+            {
+              "unit": {
+                "name": "cup",
+                "abbreviation": "c",
+                "display_singular": "cup",
+                "display_plural": "cups",
+                "system": "imperial"
+              },
+              "id": 515491,
+              "quantity": "¼"
+            }
+          ],
+          "ingredient": {
+            "display_plural": "liquid aminoes",
+            "created_at": 1561488153,
+            "updated_at": 1561488153,
+            "id": 5537,
+            "name": "liquid aminos",
+            "display_singular": "liquid amino"
+          },
+          "id": 60150,
+          "raw_text": "¼ cup liquid aminos",
+          "extra_comment": ""
+        },
+        {
+          "ingredient": {
+            "id": 359,
+            "name": "maple syrup",
+            "display_singular": "maple syrup",
+            "display_plural": "maple syrups",
+            "created_at": 1494966352,
+            "updated_at": 1509035267
+          },
+          "id": 60151,
+          "raw_text": "⅓ cup maple syrup",
+          "extra_comment": "",
+          "position": 5,
+          "measurements": [
+            {
+              "id": 515498,
+              "quantity": "110",
+              "unit": {
+                "name": "gram",
+                "abbreviation": "g",
+                "display_singular": "g",
+                "display_plural": "g",
+                "system": "metric"
+              }
+            },
+            {
+              "id": 515495,
+              "quantity": "⅓",
+              "unit": {
+                "name": "cup",
+                "abbreviation": "c",
+                "display_singular": "cup",
+                "display_plural": "cups",
+                "system": "imperial"
+              }
+            }
+          ]
+        },
+        {
+          "id": 60152,
+          "raw_text": "2 tablespoons brown sugar",
+          "extra_comment": "",
+          "position": 6,
+          "measurements": [
+            {
+              "id": 515492,
+              "quantity": "2",
+              "unit": {
+                "name": "tablespoon",
+                "abbreviation": "tbsp",
+                "display_singular": "tablespoon",
+                "display_plural": "tablespoons",
+                "system": "imperial"
+              }
+            }
+          ],
+          "ingredient": {
+            "created_at": 1493307081,
+            "updated_at": 1509035289,
+            "id": 6,
+            "name": "brown sugar",
+            "display_singular": "brown sugar",
+            "display_plural": "brown sugars"
+          }
+        },
+        {
+          "id": 60153,
+          "raw_text": "1 teaspoon smoked paprika",
+          "extra_comment": "",
+          "position": 7,
+          "measurements": [
+            {
+              "unit": {
+                "abbreviation": "tsp",
+                "display_singular": "teaspoon",
+                "display_plural": "teaspoons",
+                "system": "imperial",
+                "name": "teaspoon"
+              },
+              "id": 515497,
+              "quantity": "1"
+            }
+          ],
+          "ingredient": {
+            "created_at": 1495929686,
+            "updated_at": 1509035226,
+            "id": 878,
+            "name": "smoked paprika",
+            "display_singular": "smoked paprika",
+            "display_plural": "smoked paprikas"
+          }
+        }
+      ]
+    },
+    {
+      "components": [
+        {
+          "id": 60155,
+          "raw_text": "1 tablespoon canola oil",
+          "extra_comment": "",
+          "position": 9,
+          "measurements": [
+            {
+              "unit": {
+                "display_singular": "tablespoon",
+                "display_plural": "tablespoons",
+                "system": "imperial",
+                "name": "tablespoon",
+                "abbreviation": "tbsp"
+              },
+              "id": 515499,
+              "quantity": "1"
+            }
+          ],
+          "ingredient": {
+            "name": "canola oil",
+            "display_singular": "canola oil",
+            "display_plural": "canola oils",
+            "created_at": 1495764700,
+            "updated_at": 1509035230,
+            "id": 825
+          }
+        },
+        {
+          "position": 10,
+          "measurements": [
+            {
+              "id": 515501,
+              "quantity": "½",
+              "unit": {
+                "abbreviation": "",
+                "display_singular": "",
+                "display_plural": "",
+                "system": "none",
+                "name": ""
+              }
+            }
+          ],
+          "ingredient": {
+            "id": 942,
+            "name": "medium yellow onion",
+            "display_singular": "medium yellow onion",
+            "display_plural": "medium yellow onions",
+            "created_at": 1496102165,
+            "updated_at": 1509035220
+          },
+          "id": 60156,
+          "raw_text": "½ medium yellow onion, diced",
+          "extra_comment": "diced"
+        },
+        {
+          "measurements": [
+            {
+              "id": 515500,
+              "quantity": "3",
+              "unit": {
+                "system": "none",
+                "name": "clove",
+                "abbreviation": "clove",
+                "display_singular": "clove",
+                "display_plural": "cloves"
+              }
+            }
+          ],
+          "ingredient": {
+            "id": 95,
+            "name": "garlic",
+            "display_singular": "garlic",
+            "display_plural": "garlics",
+            "created_at": 1493744766,
+            "updated_at": 1509035285
+          },
+          "id": 60157,
+          "raw_text": "3 cloves garlic, minced",
+          "extra_comment": "minced",
+          "position": 11
+        },
+        {
+          "ingredient": {
+            "id": 878,
+            "name": "smoked paprika",
+            "display_singular": "smoked paprika",
+            "display_plural": "smoked paprikas",
+            "created_at": 1495929686,
+            "updated_at": 1509035226
+          },
+          "id": 60158,
+          "raw_text": "1 teaspoon smoked paprika",
+          "extra_comment": "",
+          "position": 12,
+          "measurements": [
+            {
+              "id": 515502,
+              "quantity": "1",
+              "unit": {
+                "name": "teaspoon",
+                "abbreviation": "tsp",
+                "display_singular": "teaspoon",
+                "display_plural": "teaspoons",
+                "system": "imperial"
+              }
+            }
+          ]
+        },
+        {
+          "id": 60159,
+          "raw_text": "1 teaspoon Dijon mustard",
+          "extra_comment": "",
+          "position": 13,
+          "measurements": [
+            {
+              "id": 515503,
+              "quantity": "1",
+              "unit": {
+                "name": "teaspoon",
+                "abbreviation": "tsp",
+                "display_singular": "teaspoon",
+                "display_plural": "teaspoons",
+                "system": "imperial"
+              }
+            }
+          ],
+          "ingredient": {
+            "display_plural": "dijon mustards",
+            "created_at": 1494812213,
+            "updated_at": 1509035271,
+            "id": 307,
+            "name": "dijon mustard",
+            "display_singular": "dijon mustard"
+          }
+        },
+        {
+          "ingredient": {
+            "id": 197,
+            "name": "water",
+            "display_singular": "water",
+            "display_plural": "waters",
+            "created_at": 1494124627,
+            "updated_at": 1509035280
+          },
+          "id": 60160,
+          "raw_text": "¾ cup water, plus more as needed",
+          "extra_comment": "plus more as needed",
+          "position": 14,
+          "measurements": [
+            {
+              "id": 515517,
+              "quantity": "180",
+              "unit": {
+                "display_singular": "mL",
+                "display_plural": "mL",
+                "system": "metric",
+                "name": "milliliter",
+                "abbreviation": "mL"
+              }
+            },
+            {
+              "id": 515516,
+              "quantity": "¾",
+              "unit": {
+                "abbreviation": "c",
+                "display_singular": "cup",
+                "display_plural": "cups",
+                "system": "imperial",
+                "name": "cup"
+              }
+            }
+          ]
+        },
+        {
+          "raw_text": "¼ cup tomato paste",
+          "extra_comment": "",
+          "position": 15,
+          "measurements": [
+            {
+              "id": 515505,
+              "quantity": "55",
+              "unit": {
+                "name": "gram",
+                "abbreviation": "g",
+                "display_singular": "g",
+                "display_plural": "g",
+                "system": "metric"
+              }
+            },
+            {
+              "id": 515504,
+              "quantity": "¼",
+              "unit": {
+                "name": "cup",
+                "abbreviation": "c",
+                "display_singular": "cup",
+                "display_plural": "cups",
+                "system": "imperial"
+              }
+            }
+          ],
+          "ingredient": {
+            "id": 456,
+            "name": "tomato paste",
+            "display_singular": "tomato paste",
+            "display_plural": "tomato pastes",
+            "created_at": 1495078295,
+            "updated_at": 1509035259
+          },
+          "id": 60161
+        },
+        {
+          "id": 60162,
+          "raw_text": "¼ teaspoon ground black pepper",
+          "extra_comment": "",
+          "position": 16,
+          "measurements": [
+            {
+              "id": 515508,
+              "quantity": "¼",
+              "unit": {
+                "display_plural": "teaspoons",
+                "system": "imperial",
+                "name": "teaspoon",
+                "abbreviation": "tsp",
+                "display_singular": "teaspoon"
+              }
+            }
+          ],
+          "ingredient": {
+            "id": 166,
+            "name": "freshly ground black pepper",
+            "display_singular": "freshly ground black pepper",
+            "display_plural": "freshly ground black peppers",
+            "created_at": 1493925438,
+            "updated_at": 1509035282
+          }
+        },
+        {
+          "id": 60163,
+          "raw_text": "1½ teaspoons kosher salt, plus more to taste",
+          "extra_comment": "plus more taste",
+          "position": 17,
+          "measurements": [
+            {
+              "id": 515506,
+              "quantity": "1 ½",
+              "unit": {
+                "name": "teaspoon",
+                "abbreviation": "tsp",
+                "display_singular": "teaspoon",
+                "display_plural": "teaspoons",
+                "system": "imperial"
+              }
+            }
+          ],
+          "ingredient": {
+            "id": 11,
+            "name": "kosher salt",
+            "display_singular": "kosher salt",
+            "display_plural": "kosher salts",
+            "created_at": 1493307153,
+            "updated_at": 1509035289
+          }
+        },
+        {
+          "id": 60164,
+          "raw_text": "¼ cup brown sugar",
+          "extra_comment": "",
+          "position": 18,
+          "measurements": [
+            {
+              "id": 515509,
+              "quantity": "55",
+              "unit": {
+                "name": "gram",
+                "abbreviation": "g",
+                "display_singular": "g",
+                "display_plural": "g",
+                "system": "metric"
+              }
+            },
+            {
+              "quantity": "¼",
+              "unit": {
+                "display_singular": "cup",
+                "display_plural": "cups",
+                "system": "imperial",
+                "name": "cup",
+                "abbreviation": "c"
+              },
+              "id": 515507
+            }
+          ],
+          "ingredient": {
+            "display_plural": "brown sugars",
+            "created_at": 1493307081,
+            "updated_at": 1509035289,
+            "id": 6,
+            "name": "brown sugar",
+            "display_singular": "brown sugar"
+          }
+        },
+        {
+          "id": 60165,
+          "raw_text": "1 tablespoon vegan Worcestershire sauce",
+          "extra_comment": "",
+          "position": 19,
+          "measurements": [
+            {
+              "id": 515511,
+              "quantity": "1",
+              "unit": {
+                "system": "imperial",
+                "name": "tablespoon",
+                "abbreviation": "tbsp",
+                "display_singular": "tablespoon",
+                "display_plural": "tablespoons"
+              }
+            }
+          ],
+          "ingredient": {
+            "id": 4206,
+            "name": "vegan worcestershire sauce",
+            "display_singular": "vegan worcestershire sauce",
+            "display_plural": "vegan worcestershire sauces",
+            "created_at": 1527800614,
+            "updated_at": 1527800614
+          }
+        },
+        {
+          "raw_text": "2 tablespoons molasses",
+          "extra_comment": "",
+          "position": 20,
+          "measurements": [
+            {
+              "unit": {
+                "display_singular": "tablespoon",
+                "display_plural": "tablespoons",
+                "system": "imperial",
+                "name": "tablespoon",
+                "abbreviation": "tbsp"
+              },
+              "id": 515512,
+              "quantity": "2"
+            }
+          ],
+          "ingredient": {
+            "id": 2730,
+            "name": "molasses",
+            "display_singular": "molass",
+            "display_plural": "molasses",
+            "created_at": 1501549847,
+            "updated_at": 1509035113
+          },
+          "id": 60166
+        },
+        {
+          "id": 60167,
+          "raw_text": "1 tablespoon maple syrup",
+          "extra_comment": "",
+          "position": 21,
+          "measurements": [
+            {
+              "id": 515513,
+              "quantity": "1",
+              "unit": {
+                "display_singular": "tablespoon",
+                "display_plural": "tablespoons",
+                "system": "imperial",
+                "name": "tablespoon",
+                "abbreviation": "tbsp"
+              }
+            }
+          ],
+          "ingredient": {
+            "id": 359,
+            "name": "maple syrup",
+            "display_singular": "maple syrup",
+            "display_plural": "maple syrups",
+            "created_at": 1494966352,
+            "updated_at": 1509035267
+          }
+        },
+        {
+          "raw_text": "3 tablespoons apple cider vinegar",
+          "extra_comment": "",
+          "position": 22,
+          "measurements": [
+            {
+              "id": 515510,
+              "quantity": "3",
+              "unit": {
+                "display_plural": "tablespoons",
+                "system": "imperial",
+                "name": "tablespoon",
+                "abbreviation": "tbsp",
+                "display_singular": "tablespoon"
+              }
+            }
+          ],
+          "ingredient": {
+            "name": "apple cider vinegar",
+            "display_singular": "apple cider vinegar",
+            "display_plural": "apple cider vinegars",
+            "created_at": 1494882105,
+            "updated_at": 1509035268,
+            "id": 345
+          },
+          "id": 60168
+        },
+        {
+          "id": 60169,
+          "raw_text": "30 ounces canned white or Great Northern beans, drained and rinsed",
+          "extra_comment": "drained and rinsed",
+          "position": 23,
+          "measurements": [
+            {
+              "id": 515515,
+              "quantity": "850",
+              "unit": {
+                "display_singular": "g",
+                "display_plural": "g",
+                "system": "metric",
+                "name": "gram",
+                "abbreviation": "g"
+              }
+            },
+            {
+              "id": 515514,
+              "quantity": "30",
+              "unit": {
+                "abbreviation": "oz",
+                "display_singular": "oz",
+                "display_plural": "oz",
+                "system": "imperial",
+                "name": "ounce"
+              }
+            }
+          ],
+          "ingredient": {
+            "id": 4235,
+            "name": "great northern beans",
+            "display_singular": "great northern bean",
+            "display_plural": "great northern beans",
+            "created_at": 1528077790,
+            "updated_at": 1528077790
+          }
+        }
+      ],
+      "name": "Baked Beans",
+      "position": 2
+    }
+  ],
+  "original_video_url": "https://s3.amazonaws.com/video-api-prod/assets/2ca8b7b70daf4e7aa970b024a11c5696/FB.mp4",
+  "buzz_id": null,
+  "video_url": "https://vid.tasty.co/output/143538/hls24_1567118032.m3u8",
+  "yields": "Servings: 4",
+  "description": "These vegan baked beans taste like home. They’re great for a chilly night in or to share at your next BBQ. The portobello mushroom bacon is the perfect topper, offering a combination of chew and crunch to satiate any bacon cravings!",
+  "inspired_by_url": null,
+  "num_servings": 4,
+  "servings_noun_plural": "servings",
+  "total_time_minutes": 75,
+  "updated_at": 1568080994,
+  "brand": null,
+  "show": {
+    "name": "Goodful",
+    "id": 34
+  }
+}
