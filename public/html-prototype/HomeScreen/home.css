@@ -1,3 +1,5 @@
+/*top nav bar*/
+
 .wd-magnifier {
     color: #F17C67;
     position: absolute;
@@ -12,9 +14,11 @@
     height: 40px;
 }
 
-.wd-color-coral {
-    color: #F17C67;
+.wd-home-header {
+
 }
+
+/*user greeting*/
 
 .wd-about {
     margin-top: 10px;
@@ -58,7 +62,11 @@
     background-color: #fad2ca;
 }
 
+
+/*recipe cards*/
+
 .wd-category-container {
+    margin: 20px 0 0 0;
     padding: 20px 0 0 0;
     min-width: 400px;
 }
@@ -70,8 +78,18 @@
     border-radius: 10%;
 }
 
+.wd-block-title {
+    background-color: #fad2ca;
+    text-align: center;
+    margin: 30px 0 30px 0;
+}
+
+
+/*nav bar and headings*/
+
 .nav {
     flex-wrap: nowrap;
+    font-size: 18px;
 }
 .nav-link {
     color: #000000;
@@ -87,18 +105,16 @@
 }
 
 h1, h2, h3 {
-    font-family: Pacifico, serif;
+    font-family: 'Pacifico', serif;
+    text-shadow: 2px 2px 2px #e3d5d3
 }
 
 h6 {
     color: #4d4d4d;
 }
 
-.wd-block-title {
-    background-color: #fad2ca;
-    text-align: center;
-    margin: 30px 0 30px 0;
-}
+
+/*footer and body*/
 
 .wd-footer {
     margin-top: 40px;
@@ -106,11 +122,15 @@ h6 {
     background-color: #fad2ca;
 }
 
+.wd-color-coral {
+    color: #F17C67;
+}
+
 body {
     background: white;
     margin: 0;
     padding: 0;
-    font-family: Helvetica Neue, serif;
+    font-family: 'Quicksand', sans-serif;
     font-size: 16px;
     color: black;
 }
