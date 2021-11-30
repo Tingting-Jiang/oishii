@@ -1,6 +1,6 @@
 import React from 'react';
 
-const URL1 = 'http://localhost:4000/chicken%20soup';
+const URL1 = 'http://localhost:4000/apple';
 const URL2 = 'http://localhost:4000/details/5580';
 const URL3 = 'http://localhost:4000/list/4/under_30_minutes/apple';
 const URL4 = 'http://localhost:4000/trending/1';

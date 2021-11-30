@@ -1,7 +1,9 @@
 const fetch = require("node-fetch");
 // const URL = "https://tasty.p.rapidapi.com/recipes/auto-complete?prefix=chicken%20soup";
-const API_KEY = 'bc4fe255dcmsh226f8341d7ebb53p169a42jsn58714141d5e1';
+// const API_KEY = 'bc4fe255dcmsh226f8341d7ebb53p169a42jsn58714141d5e1';
 const URL = "https://tasty.p.rapidapi.com";
+
+const API_KEY ="8aacabbec3msh0d6aaeca6a49cb0p128f31jsn0c6ed3c6e8d0";
 
 const HOST = 'tasty.p.rapidapi.com';
 
@@ -16,7 +18,7 @@ module.exports = (app) =>  {
     
     const fetchSearchResult = (req, res) => {
         const str = `/recipes/auto-complete?prefix=${req.params.prefix}`;
-        // console.log("in fetchSearchResult -->", URL + str);
+        // console.log("in fetchSearchResult -->", str);
     
         fetch(URL + str, {
             "method": "GET",
@@ -78,11 +80,7 @@ module.exports = (app) =>  {
     
    
     const fetchTrendingList = (req, res) =>{
-        // const startPoint = getRandomInt();
-        // console.log("number is -->", startPoint);
-        // const trendingList = `/feeds/list?size=${req.params.size}&timezone=%2B0700&vegetarian=false&from=${startPoint}`;
-    
-        const trendingList = `/feeds/list?size=1&timezone=%2B0700&vegetarian=false&from=0&category=Trending`;
+        const trendingList = `/feeds/list?size=1&timezone=%2B0700&vegetarian=false&from=0`;
         console.log("in fetchTrendingList -->", trendingList);
         fetch(URL + trendingList, {
             "method": "GET",

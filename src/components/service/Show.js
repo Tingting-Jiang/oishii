@@ -8,21 +8,19 @@ const Show = () => {
     const [listByIngredients, setListByIngredients] = useState([]);
     const [trendingList, setTrendingList] = useState([]);
     const [tagList, setTagList] = useState([]);
-    const [recommendInt, setRecommendInt] = useState(1);
-    let [recommend, setRecommend] = useState({});
-    let [trending, setTrending] = useState({});
+    const [finalList] = useState([]);
     
     
-    const getRandomInt = (min, max, origin) =>{
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        let newInt = Math.floor(Math.random() * (max - min + 1) + min);
-        while (newInt === origin){
-            newInt = Math.floor(Math.random() * (max - min + 1) + min);
-        }
-        return newInt;
-    }
-    
+    // const getRandomInt = (min, max, origin) =>{
+    //     min = Math.ceil(min);
+    //     max = Math.floor(max);
+    //     let newInt = Math.floor(Math.random() * (max - min + 1) + min);
+    //     while (newInt === origin){
+    //         newInt = Math.floor(Math.random() * (max - min + 1) + min);
+    //     }
+    //     return newInt;
+    // }
+    //
     
     
     useEffect(() =>
@@ -42,20 +40,18 @@ const Show = () => {
     useEffect(() =>
         service.fetchTrendingList()
             .then(data =>{
-                setTrendingList(data.results.slice(1,8));
-                // const newRecommendInt = getRandomInt(1, 7, recommendInt);
-                // console.log("The randInt for RECOMMEND is -->", newRecommendInt);
-                // setRecommend(data.results[newRecommendInt]);
-                // setRecommendInt(newRecommendInt);
                 
+              
+                setTrendingList(data.results.slice(1,8));
+                generateList(trendingList);
             }), []);
     
     
     
-    
-    useEffect(() =>
-        service.fetchTagList()
-            .then(data =>setTagList(data)), []);
+    //
+    // useEffect(() =>
+    //     service.fetchTagList()
+    //         .then(data =>setTagList(data)), []);
 
     // console.log("recipe-->", recipe);
     // console.log("listByIngredients --->", listByIngredients);
@@ -63,10 +59,26 @@ const Show = () => {
     // console.log("type chek-->", typeof trendingList);
     // console.log("tagList -->", tagList);
     
-    const getRecommend = (origin) => {
-        const randInt = getRandomInt(0, 6, origin);
-        // console.log("The randInt is -->", randInt);
-        setRecommend(trendingList[randInt]);
+    // const getRecommend = (origin) => {
+    //     const randInt = getRandomInt(0, 6, origin);
+    //     // console.log("The randInt is -->", randInt);
+    //     setRecommend(trendingList[randInt]);
+    // }
+    
+    console.log("------------ final list--------", finalList);
+    
+    
+    
+    const generateList = (trendingList) =>{
+        console.log(" inside generateList");
+        for (const singleObject in trendingList) {
+            for (const insideObject in singleObject.items) {
+                finalList.push(insideObject.id);
+            }
+        }
+        console.log(finalList);
+        console.log(" DONE generateList");
+
     }
     
     
