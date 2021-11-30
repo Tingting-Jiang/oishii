@@ -7,6 +7,9 @@ const API_KEY ="8aacabbec3msh0d6aaeca6a49cb0p128f31jsn0c6ed3c6e8d0";
 
 const HOST = 'tasty.p.rapidapi.com';
 
+
+const dao = require("../db/Recipe/recipe-dao")
+
 module.exports = (app) =>  {
     const getRandomInt = () =>{
         let min = Math.ceil(0);
@@ -18,8 +21,6 @@ module.exports = (app) =>  {
     
     const fetchSearchResult = (req, res) => {
         const str = `/recipes/auto-complete?prefix=${req.params.prefix}`;
-        // console.log("in fetchSearchResult -->", str);
-    
         fetch(URL + str, {
             "method": "GET",
             "headers": {
@@ -29,7 +30,6 @@ module.exports = (app) =>  {
         })
             .then(response => response.json())
             .then((data) => {
-                // console.log("fetchData", data.results);
                 res.json(data.results);
             })
     }
@@ -38,7 +38,6 @@ module.exports = (app) =>  {
     
     const fetchByID = (req, res) => {
         const detail = `/recipes/detail?id=${req.params.id}`;
-        // console.log("in fetchByID -->", detail);
         fetch(URL + detail, {
             "method": "GET",
             "headers": {
@@ -48,7 +47,6 @@ module.exports = (app) =>  {
         })
             .then(response => response.json())
             .then((data) =>{
-                // console.log("fetchByID -->", data);
                 res.json(data);
             }).catch(e => {
                 console.log("error is -->", e);
@@ -79,25 +77,82 @@ module.exports = (app) =>  {
     }
     
    
-    const fetchTrendingList = (req, res) =>{
-        const trendingList = `/feeds/list?size=1&timezone=%2B0700&vegetarian=false&from=0`;
-        console.log("in fetchTrendingList -->", trendingList);
-        fetch(URL + trendingList, {
-            "method": "GET",
-            "headers": {
-                "x-rapidapi-host": HOST,
-                "x-rapidapi-key": API_KEY
-            }
-        })
-            .then(response => response.json())
-            .then((data) =>{
-                // console.log("fetchTrendingList data-->", data);
-                res.json(data);
-            }).catch(e => {
-            console.log("error is -->", e);
-        })
+    // const fetchTrendingList = (req, res) =>{
+    //     const trendingList = `/feeds/list?size=1&timezone=%2B0700&vegetarian=false&from=0`;
+    //     console.log("in fetchTrendingList -->", trendingList);
+    //     fetch(URL + trendingList, {
+    //         "method": "GET",
+    //         "headers": {
+    //             "x-rapidapi-host": HOST,
+    //             "x-rapidapi-key": API_KEY
+    //         }
+    //     })
+    //         .then(response => response.json())
+    //         .then((data) =>{
+    //             // console.log("fetchTrendingList data-->", data);
+    //             res.json(data);
+    //         }).catch(e => {
+    //         console.log("error is -->", e);
+    //     })
+    // }
+    
+    
+    const fetchRecipes = () => {
+        const trending= `/feeds/list?size=1&timezone=%2B0700&vegetarian=false&from=0`;
+            console.log("in fetchTrendingList -->", trending);
+            fetch(URL + trending, {
+                "method": "GET",
+                "headers": {
+                    "x-rapidapi-host": HOST,
+                    "x-rapidapi-key": API_KEY
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // console.log(typeof data.results);
+                    // console.log(data.results);
+                    console.log("before process data ----")
+                    processRecipe(data.results);
+                    console.log("after process data ----")
+                })
+                .catch(err => {
+                    console.error(err);
+                });
         
     }
+    
+    const processRecipe = (data) => {
+        // let res = data.results;   // data.results is an array
+        // console.log("type -----", data);
+        for(let i = 1; i < 8; i++) { // item is an object
+            let firstObject = data[i];
+            // console.log(firstObject);
+                let recipeList = firstObject.items;  // item.items is an array;
+                recipeList.forEach((recipe) => {  // recipe is an object
+                    const newRecipe = {
+                        ID: recipe.id,
+                        thumbnail_url: recipe.thumbnail_url,
+                        name: recipe.name,
+                        description: recipe.description,
+                        num_servings: recipe.num_servings,
+                        author_name: recipe.credits[0].name
+                    }
+                    // console.log("new Recipe is --> " , newRecipe);
+                     dao.createRecipe(newRecipe);
+                })
+            }
+        }
+    
+    
+    const fetchFromDB = (req, res) =>{
+       // fetchRecipes();
+       dao.findAllRecipes()
+           .then(recipes => res.json(recipes));
+        
+    }
+    
+    
+    
     
     
     const fetchTagList = (req, res) =>{
@@ -123,8 +178,9 @@ module.exports = (app) =>  {
     app.get("/:prefix", fetchSearchResult); // auto-complete
     app.get("/details/:id", fetchByID); // recipe-details
     app.get("/list/:size/:tag/:ingredients", fetchByTagAndIngredients); // recipe list
-    app.get("/trending/1", fetchTrendingList); // feed/list
+    // app.get("/trending/1", fetchTrendingList); // feed/list
     app.get("/tag/list", fetchTagList); // tag list
+    app.get("/trending/1", fetchFromDB); // feed/list
     
     
 }

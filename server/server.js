@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/Oishii');
 
 
 app.use(function(req, res, next) {

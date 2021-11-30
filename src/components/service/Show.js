@@ -23,29 +23,29 @@ const Show = () => {
     //
     
     
-    useEffect(() =>
-        service.fetchSearchResult()
-            .then(data => setSearchResult(data)), []);
-    
-    
-    useEffect(() =>
-        service.fetchByID()
-            .then(data => setRecipe(data)), []);
+    // useEffect(() =>
+    //     service.fetchSearchResult()
+    //         .then(data => setSearchResult(data)), []);
+    //
+    //
+    // useEffect(() =>
+    //     service.fetchByID()
+    //         .then(data => setRecipe(data)), []);
     
    
     useEffect(() =>
         service.fetchByTagAndIngredients()
             .then(data =>setListByIngredients(data)), []);
-    
-    useEffect(() =>
-        service.fetchTrendingList()
-            .then(data =>{
-                
-              
-                setTrendingList(data.results.slice(1,8));
-                generateList(trendingList);
-            }), []);
-    
+    //
+    // useEffect(() =>
+    //     service.fetchTrendingList()
+    //         .then(data =>{
+    //
+    //
+    //             setTrendingList(data.results.slice(1,8));
+    //             generateList(trendingList);
+    //         }), []);
+    //
     
     
     //
@@ -64,8 +64,6 @@ const Show = () => {
     //     // console.log("The randInt is -->", randInt);
     //     setRecommend(trendingList[randInt]);
     // }
-    
-    console.log("------------ final list--------", finalList);
     
     
     
@@ -86,22 +84,22 @@ const Show = () => {
     
     return(
         <>
-            <p>{searchResult.length}</p>
-            <ul className="">
-                {searchResult.map(item => (
-                    <li key={item.display} >
-                        
-                        <p>Display: {item.display}</p>
-                        <p>Search_value: {item.search_value}</p>
-                     
-              
-                    </li>
-                ))}
-            </ul>
-            <hr/>
-            
-            
-           <p>{recipe.created_at}</p>
+        {/*//     <p>{searchResult.length}</p>*/}
+        {/*//     <ul className="">*/}
+        {/*//         {searchResult.map(item => (*/}
+        {/*//             <li key={item.display} >*/}
+        {/*//                */}
+        {/*//                 <p>Display: {item.display}</p>*/}
+        {/*//                 <p>Search_value: {item.search_value}</p>*/}
+        {/*//             */}
+        {/*//      */}
+        {/*//             </li>*/}
+        {/*//         ))}*/}
+        {/*//     </ul>*/}
+        {/*//     <hr/>*/}
+        {/*//    */}
+        {/*//    */}
+        {/*//    <p>{recipe.created_at}</p>*/}
             
             {/*<p>{recommend.name}</p>*/}
             
