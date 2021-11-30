@@ -7,99 +7,72 @@ const Show = () => {
     const [recipe, setRecipe] = useState({});
     const [listByIngredients, setListByIngredients] = useState([]);
     const [trendingList, setTrendingList] = useState([]);
-    const [tagList, setTagList] = useState([]);
-    const [finalList] = useState([]);
     
-    
-    // const getRandomInt = (min, max, origin) =>{
-    //     min = Math.ceil(min);
-    //     max = Math.floor(max);
-    //     let newInt = Math.floor(Math.random() * (max - min + 1) + min);
-    //     while (newInt === origin){
-    //         newInt = Math.floor(Math.random() * (max - min + 1) + min);
-    //     }
-    //     return newInt;
-    // }
-    //
-    
-    
-    // useEffect(() =>
-    //     service.fetchSearchResult()
-    //         .then(data => setSearchResult(data)), []);
-    //
-    //
-    // useEffect(() =>
-    //     service.fetchByID()
-    //         .then(data => setRecipe(data)), []);
+    const searchRecipe = (event) =>
+        service.fetchSearchResult(event.target.value)
+            .then(data => setSearchResult(data));
+
+
+    const findRecipeByID =(recipe)=>
+        service.fetchByID(recipe.id)
+            .then(data => setRecipe(data));
     
    
-    useEffect(() =>
-        service.fetchByTagAndIngredients()
-            .then(data =>setListByIngredients(data)), []);
-    //
+    const searchByIngredient = (event) =>
+        service.fetchByTagAndIngredients(event.target.value)
+            .then(data =>setListByIngredients(data));
+
     // useEffect(() =>
     //     service.fetchTrendingList()
     //         .then(data =>{
-    //
-    //
-    //             setTrendingList(data.results.slice(1,8));
-    //             generateList(trendingList);
+    //             setTrendingList(data);
+    //             // generateList(trendingList);
     //         }), []);
-    //
-    
-    
-    //
-    // useEffect(() =>
-    //     service.fetchTagList()
-    //         .then(data =>setTagList(data)), []);
 
-    // console.log("recipe-->", recipe);
+    
+    console.log("recipe-->", recipe);
+    console.log("search result-->", searchResult);
     // console.log("listByIngredients --->", listByIngredients);
-    console.log("trendingList -->", trendingList);
+    // console.log("trendingList -->", trendingList);
     // console.log("type chek-->", typeof trendingList);
-    // console.log("tagList -->", tagList);
-    
-    // const getRecommend = (origin) => {
-    //     const randInt = getRandomInt(0, 6, origin);
-    //     // console.log("The randInt is -->", randInt);
-    //     setRecommend(trendingList[randInt]);
-    // }
-    
-    
-    
-    const generateList = (trendingList) =>{
-        console.log(" inside generateList");
-        for (const singleObject in trendingList) {
-            for (const insideObject in singleObject.items) {
-                finalList.push(insideObject.id);
-            }
-        }
-        console.log(finalList);
-        console.log(" DONE generateList");
-
-    }
-    
-    
     
     
     return(
         <>
-        {/*//     <p>{searchResult.length}</p>*/}
-        {/*//     <ul className="">*/}
-        {/*//         {searchResult.map(item => (*/}
-        {/*//             <li key={item.display} >*/}
-        {/*//                */}
-        {/*//                 <p>Display: {item.display}</p>*/}
-        {/*//                 <p>Search_value: {item.search_value}</p>*/}
-        {/*//             */}
-        {/*//      */}
-        {/*//             </li>*/}
-        {/*//         ))}*/}
-        {/*//     </ul>*/}
-        {/*//     <hr/>*/}
-        {/*//    */}
-        {/*//    */}
-        {/*//    <p>{recipe.created_at}</p>*/}
+            <div>
+                <h2>Recipes</h2>
+                <ul className="list-group">
+                    <li className="list-group-item">
+                        <input
+                            onChange={e => searchRecipe(e)}
+                            // defaultValue={movie.title}
+                            className="form-control"
+                            // style={{ width: "60%" }}
+                        />
+                        <button
+                            onClick={e => searchByIngredient(e)}
+                            className="btn btn-success"
+                            // style={{ width: "15%" }}
+                        >
+                            Search
+                        </button>
+                    </li>
+                    </ul>
+                </div>
+            
+             <p>{searchResult.length}</p>
+             <ol className="">
+                 {searchResult.map(item => (
+                     <li key={item.display} >
+                        
+                         {/*<p>Display: {item.display}</p>*/}
+                         <p>Search_value: {item.search_value}</p>
+              
+                     </li>
+                 ))}
+             </ol>
+             <hr/>
+           <p>{recipe.created_at}</p>
             
             {/*<p>{recommend.name}</p>*/}
             

@@ -11,3 +11,25 @@
 //             console.log("in useEffect: ----", data);
 //             setRecipe(data);
 //                         } )}, []);
+
+
+
+// const getRandomInt = (min, max, origin) =>{
+//     min = Math.ceil(min);
+//     max = Math.floor(max);
+//     let newInt = Math.floor(Math.random() * (max - min + 1) + min);
+//     while (newInt === origin){
+//         newInt = Math.floor(Math.random() * (max - min + 1) + min);
+//     }
+//     return newInt;
+// }
+//
+
+
+// import { useState } from 'react'
+//
+// const [tagList, setTagList] = useState([]);
+
+// useEffect(() =>
+//     service.fetchTagList()
+//         .then(data =>setTagList(data)), []);

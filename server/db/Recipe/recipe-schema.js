@@ -8,5 +8,5 @@ const schema = mongoose.Schema({
     author_name:String
     
     
-}, {collection: 'oishii'});
+}, {collection: 'recipe'});
 module.exports = schema;

@@ -56,7 +56,8 @@ module.exports = (app) =>  {
     
     
     const fetchByTagAndIngredients= (req, res) => {
-        const recipeList = `/recipes/list?from=0&size=${req.params.size}&tags=${req.params.tag}&q=${req.params.ingredients}`;
+        // const recipeList = `/recipes/list?from=0&size=${req.params.size}&tags=${req.params.tag}&q=${req.params.ingredients}`;
+        const recipeList = `/recipes/list?from=0&size=${req.params.size}&q=${req.params.ingredients}`;
     
         console.log("in fetchByTagAndIngredients -->", recipeList);
         fetch(URL + recipeList, {
@@ -97,7 +98,7 @@ module.exports = (app) =>  {
     // }
     
     
-    const fetchRecipes = () => {
+    const addTrendingToDB = () => {
         const trending= `/feeds/list?size=1&timezone=%2B0700&vegetarian=false&from=0`;
             console.log("in fetchTrendingList -->", trending);
             fetch(URL + trending, {
@@ -109,11 +110,9 @@ module.exports = (app) =>  {
             })
                 .then(response => response.json())
                 .then(data => {
-                    // console.log(typeof data.results);
-                    // console.log(data.results);
                     console.log("before process data ----")
                     processRecipe(data.results);
-                    console.log("after process data ----")
+                    console.log("DONE process data ----")
                 })
                 .catch(err => {
                     console.error(err);
@@ -122,11 +121,8 @@ module.exports = (app) =>  {
     }
     
     const processRecipe = (data) => {
-        // let res = data.results;   // data.results is an array
-        // console.log("type -----", data);
         for(let i = 1; i < 8; i++) { // item is an object
             let firstObject = data[i];
-            // console.log(firstObject);
                 let recipeList = firstObject.items;  // item.items is an array;
                 recipeList.forEach((recipe) => {  // recipe is an object
                     const newRecipe = {
@@ -137,7 +133,6 @@ module.exports = (app) =>  {
                         num_servings: recipe.num_servings,
                         author_name: recipe.credits[0].name
                     }
-                    // console.log("new Recipe is --> " , newRecipe);
                      dao.createRecipe(newRecipe);
                 })
             }
@@ -145,7 +140,7 @@ module.exports = (app) =>  {
     
     
     const fetchFromDB = (req, res) =>{
-       // fetchRecipes();
+       // addTrendingToDB();
        dao.findAllRecipes()
            .then(recipes => res.json(recipes));
         
@@ -177,7 +172,9 @@ module.exports = (app) =>  {
     
     app.get("/:prefix", fetchSearchResult); // auto-complete
     app.get("/details/:id", fetchByID); // recipe-details
-    app.get("/list/:size/:tag/:ingredients", fetchByTagAndIngredients); // recipe list
+    // app.get("/list/:size/:tag/:ingredients", fetchByTagAndIngredients); // recipe list
+    app.get("/list/:size/:ingredients", fetchByTagAndIngredients); // recipe list
+    
     // app.get("/trending/1", fetchTrendingList); // feed/list
     app.get("/tag/list", fetchTagList); // tag list
     app.get("/trending/1", fetchFromDB); // feed/list
