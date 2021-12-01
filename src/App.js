@@ -4,11 +4,9 @@ import Show from './components/service/Show'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className="container">
         <Show/>
-       
-      </header>
+        
     </div>
   );
 }

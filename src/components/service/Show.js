@@ -3,24 +3,28 @@ import service from './service'
 
 
 const Show = () => {
+    const [searchTerm, setSearchTerm] = useState("");
     const [searchResult, setSearchResult] = useState([]);
-    const [recipe, setRecipe] = useState({});
-    const [listByIngredients, setListByIngredients] = useState([]);
+    const [recipeList, setRecipeList] = useState([]);
+    // const [listByIngredients, setListByIngredients] = useState([]);
     const [trendingList, setTrendingList] = useState([]);
+    const [recipeDetail, setRecipeDetail] = useState({});
     
-    const searchRecipe = (event) =>
+    const searchRecipe = (event) =>{
+        setSearchTerm(event.target.value);
         service.fetchSearchResult(event.target.value)
-            .then(data => setSearchResult(data));
+            .then(data => setSearchResult(data))
+    };
 
 
     const findRecipeByID =(recipe)=>
         service.fetchByID(recipe.id)
-            .then(data => setRecipe(data));
+            .then(data => setRecipeDetail(data));
     
    
-    const searchByIngredient = (event) =>
-        service.fetchByTagAndIngredients(event.target.value)
-            .then(data =>setListByIngredients(data));
+    const searchByIngredient = () =>
+        service.fetchByTagAndIngredients(searchTerm)
+            .then(data =>setRecipeList(data.results));
 
     // useEffect(() =>
     //     service.fetchTrendingList()
@@ -30,7 +34,7 @@ const Show = () => {
     //         }), []);
 
     
-    console.log("recipe-->", recipe);
+    console.log("recipe-->", recipeList);
     console.log("search result-->", searchResult);
     // console.log("listByIngredients --->", listByIngredients);
     // console.log("trendingList -->", trendingList);
@@ -39,53 +43,57 @@ const Show = () => {
     
     return(
         <>
-            <div>
-                <h2>Recipes</h2>
-                <ul className="list-group">
-                    <li className="list-group-item">
-                        <input
-                            onChange={e => searchRecipe(e)}
-                            // defaultValue={movie.title}
-                            className="form-control"
-                            // style={{ width: "60%" }}
-                        />
-                        <button
-                            onClick={e => searchByIngredient(e)}
-                            className="btn btn-success"
-                            // style={{ width: "15%" }}
-                        >
-                            Search
-                        </button>
-                    </li>
-                    </ul>
-                </div>
+            <h2>Recipes</h2>
+            <p>The length of search result: {searchResult.length}</p>
+                <input
+                    onChange={e => searchRecipe(e)}
+                    className="form-control"
+                    list="datalistOptions"
+                    placeholder="Type to search..."
+                />
+            <datalist id="datalistOptions">
+    
+                {searchResult.map(item => (
+                            <option value={item.search_value} >
+                            </option>
+                        ))}
+                
+            </datalist>
+   
+                <button
+                    onClick={e => searchByIngredient(e)}
+                    className="btn btn-primary float-end"
+                >
+                    Search
+                </button>
+               
             
-             <p>{searchResult.length}</p>
-             <ol className="">
-                 {searchResult.map(item => (
-                     <li key={item.display} >
-                        
-                         {/*<p>Display: {item.display}</p>*/}
-                         <p>Search_value: {item.search_value}</p>
-              
-                     </li>
-                 ))}
-             </ol>
+            
+             
+             {/*// <ol className="">*/}
+             {/*//     {searchResult.map(item => (*/}
+             {/*//         <li key={item.display} >*/}
+             {/*//*/}
+             {/*//             /!*<p>Display: {item.display}</p>*!/*/}
+             {/*//             <p>Search_value: {item.search_value}</p>*/}
+             {/*//*/}
+             {/*//         </li>*/}
+             {/*//     ))}*/}
+             {/*// </ol>*/}
              <hr/>
-           <p>{recipe.created_at}</p>
+      
             
             {/*<p>{recommend.name}</p>*/}
             
-            {/*<ul className="">*/}
-            {/*    {recipe.instructions.map(item => (*/}
-            {/*        <li key={item.id} >*/}
-            {/*    */}
-            {/*            <p>{item.display_text}</p>*/}
+            <ul className="">
+                {recipeList.map(item => (
+                    <li key={item.id} >
+                        
+                        <p>{item.name} {item.id}</p>
             
-            {/*        </li>*/}
-            {/*    ))}*/}
-            {/*</ul>*/}
-            <hr/>
+                    </li>
+                ))}
+            </ul>
       
             
            

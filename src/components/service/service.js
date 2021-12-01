@@ -8,14 +8,15 @@ const URL5 = 'http://localhost:4000/tag/list';
 
 export const fetchSearchResult = (key_words) =>
     // key_words = key_words.replace(/\s+/g, '%20');
-    fetch(`${URL}/${key_words.replace(/\\s+/g, '%20')}`)
+    fetch(`${URL}/${key_words}`)
         .then((response) => response.json());
 
-export const fetchByID = () =>
-    fetch(URL2).then((response) => response.json());
+export const fetchByID = (id) =>
+    fetch(`${URL}/${id}`)
+        .then((response) => response.json());
 
 export const fetchByTagAndIngredients = (ingredient) =>
-    fetch(`${URL}/list/10/${ingredient.replace(/\\s+/g, '%20')}`)
+    fetch(`${URL}/list/10/${ingredient}`)
         .then((response) => response.json());
 
 export const fetchTrendingList = () =>
