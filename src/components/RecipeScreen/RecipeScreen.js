@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import service from '../service/service'
-import oldIngredient from "../service/reducers/data/newRecipe.json.json";
+import oldIngredient from "../service/reducers/data/newRecipe.json";
 import oldInstruction from "../service/reducers/data/instruction.json";
 import "./recipe.css"
 
 const RecipeScreen = ({recipeID}) => {
     console.log("in 1st line ->", recipeID);
-    const [ingredient, setIngredient] = useState(oldIngredient);
-    const [instruction, setInstruction] = useState(oldInstruction)
-    useEffect(() => {
-        service.fetchByID(recipeID)
-            .then((data) => setIngredient(data))
-        },[]
-    );
+    const [recipe, setRecipe] = useState(oldIngredient);
+    // const [instruction, setInstruction] = useState(oldInstruction)
+    // useEffect(() => {
+    //     service.fetchByID(recipeID)
+    //         .then((data) => setRecipe(data))
+    //     },[]
+    // );
     
-    useEffect(() => {
-            service.fetchInstruction(recipeID)
-                .then((data) => setInstruction(data))
-        },[]
-    );
+    // useEffect(() => {
+    //         service.fetchInstruction(recipeID)
+    //             .then((data) => setInstruction(data))
+    //     },[]
+    // );
     
     
     
@@ -34,17 +34,26 @@ const RecipeScreen = ({recipeID}) => {
         <div className="wd-recipe">
             <div className="row">
                 <div className="col-12 col-md-8">
-                    <h6 className="wd-color-coral">Total Time: {recipe.total_time_minutes} min</h6>
+                    <h6 className="wd-color-coral">Total Time: {recipe.readyInMinutes} min</h6>
                     <h2 className="wd-recipe-title">
-                        {recipe.name}
+                        {recipe.title}
+                    
+                    <button className="btn btn-outline-primary wd-button ms-3">
+                        <i className="fas fa-heart"></i>
+                    </button>
                     </h2>
-                    <h6 className="wd-color-coral">By {recipe.credits[0].name}</h6>
-                    <p>{recipe.description}</p>
+                    
+
+                    <h6 className="wd-color-coral">By {recipe.sourceName}</h6>
+                    {recipe.summary.split('.', 4).join(".")
+                        .replaceAll("<b>","")
+                        .replaceAll("</b>", "")
+                       }.
                 </div>
                 <div className="d-none d-md-block col-4">
                     <div>
                         <img className="wd-recipe-thumbnail d-md-float-end"
-                             src={recipe.thumbnail_url}/>
+                             src={recipe.image}/>
                     </div>
                 </div>
             </div>
@@ -55,26 +64,12 @@ const RecipeScreen = ({recipeID}) => {
                             Ingredients
                         </h5>
                         <ul className="list-group">
-                            <li className="list-group-item">
-                                {recipe.sections.map(singleIngredient => (
-                                    <div className="d-flex align-items-center py-1">
-                                        <i className="fas fa-chevron-circle-right wd-color-coral align-self-center pe-2"></i>
-                                        <span className="align-self-center fw-bold">
-                                            {singleIngredient.name}
-                                        </span>
-                                        <ul className="list-group">
-                                            {singleIngredient.components.map(item => (
-                                            <li className="list-group-item ps-4">
-                                                {item.raw_text}
-                                            </li>
-                                        ))}
-                                        </ul>
-                                    </div>
-                                ))}
-                            </li>
+                           
+                                {recipe.extendedIngredients.map(singleIngredient => (
+                                    <li className="list-group-item">
+                                        {singleIngredient.originalString}
+                            </li>))}
                         </ul>
-                        
-                        
                       
                     </div>
                     <div className="col-12 col-md-7">
@@ -82,9 +77,9 @@ const RecipeScreen = ({recipeID}) => {
                             Preparation
                         </h5>
                         <ol>
-                            {recipe.instructions.map(data => (
+                            {recipe.analyzedInstructions[0].steps.map(data => (
                                 <li>
-                                    {data.display_text}
+                                    {data.step}
                                 </li>
                             ))}
                             

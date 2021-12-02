@@ -19,6 +19,18 @@
 }
 
 
+/*button*/
+.wd-button {
+    color: #F17C67;
+    border-color: #F17C67;
+}
+
+.wd-button:hover {
+    color: #c95b48;
+    border-color: #F17C67;
+    background-color: #fad2ca;
+}
+
 /*recipe*/
 
 .wd-recipe-container {
@@ -35,7 +47,7 @@
 
 .wd-bg {
     width: 100%;
-    height: 900px;
+    height: 1220px;
     object-fit: cover;
 }
 
@@ -43,7 +55,7 @@
     background-color: rgba(255, 255, 255, 0.9);
     position: absolute;
     width: 68%;
-    height: 835px;
+    height: 1145px;
     left: 16%;
     top: 100px;
     padding: 40px;
@@ -57,14 +69,19 @@
     text-shadow: none;
 }
 
+.wd-recipe-intro {
+    max-height: 140px;
+    overflow: auto;
+}
+
 .wd-recipe-detail-container {
     margin-top: 20px;
-    height: 500px;
+    height: 600px;
     padding: 3px;
 }
 
 .wd-recipe-detail {
-    height: 444px;
+    height: 574px;
     overflow: auto;
 }
 
@@ -77,6 +94,44 @@
     max-height: 300px;
 }
 
+/*liked users*/
+
+.wd-like-user-container {
+    margin: 20px 0;
+    max-width: 100%;
+    position: relative;
+    height: 100px;
+}
+
+.wd-like-user-container > .nav{
+    font-size: 14px;
+}
+
+.wd-like-user-container > .nav-link:active {
+    font-weight: normal;
+}
+
+.wd-like-user-container > .nav-link:focus {
+    font-weight: normal;
+}
+
+.wd-like-user {
+    max-width: 100%;
+    overflow: auto;
+    position: absolute;
+}
+
+.wd-block-title {
+    background-color: #fad2ca;
+    text-align: center;
+    margin: 30px 0 30px 0;
+}
+
+.wd-following-user-img {
+    max-height: 70px;
+    object-fit: cover;
+    border-radius: 50%;
+}
 
 .list-group, .list-group-item {
     border: none;
