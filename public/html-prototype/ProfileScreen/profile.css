@@ -95,9 +95,60 @@
     margin: 30px 0 30px 0;
 }
 
+.wd-card-img {
+    position: relative;
+}
+
+.wd-button-on-img {
+    position: absolute;
+    left: 3%;
+    top: 0.5%;
+    border: none;
+    font-size: xx-large;
+    color: white;
+    /*background-color: rgba(255, 255, 255, 0.5);*/
+}
+
+.wd-button-on-img:hover {
+    background: none;
+    color: #ff2500;
+}
+
+/*liked users*/
+
+.wd-like-user-container {
+    margin: 20px 0;
+    max-width: 100%;
+    position: relative;
+    height: 100px;
+}
+
+.wd-like-user-container > .nav{
+    font-size: 14px;
+}
+
+.wd-like-user-container > .nav-link:active {
+    font-weight: normal;
+}
+
+.wd-like-user-container > .nav-link:focus {
+    font-weight: normal;
+}
+
+.wd-like-user {
+    max-width: 100%;
+    overflow: auto;
+    position: absolute;
+}
+
+.wd-block-title {
+    background-color: #fad2ca;
+    text-align: center;
+    margin: 30px 0 30px 0;
+}
+
 .wd-following-user-img {
-    width: 80%;
-    max-height: 200px;
+    max-height: 70px;
     object-fit: cover;
     border-radius: 50%;
 }
@@ -143,10 +194,15 @@ h6 {
     margin-top: 40px;
     padding: 20px 50px;
     background-color: #fad2ca;
+    position: relative;
 }
 
 .wd-color-coral {
     color: #F17C67;
+}
+
+.wd-color-red {
+    color: #ff2500;
 }
 
 body {
