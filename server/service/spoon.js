@@ -1,5 +1,5 @@
 const fetch = require("node-fetch");
-// const URL = "https://tasty.p.rapidapi.com/recipes/auto-complete?prefix=chicken%20soup";
+
 // const API_KEY = 'bc4fe255dcmsh226f8341d7ebb53p169a42jsn58714141d5e1';
 const URL = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com";
 
@@ -11,7 +11,7 @@ const HOST = 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com';
 module.exports = (app) =>  {
     
     const fetchSearchResult = (req, res) => {
-        const str = `/recipes/auto-complete?prefix=${req.params.prefix}`;
+        const str = `/recipes/autocomplete?query=${req.params.key}&number=10`;
         fetch(URL + str, {
             "method": "GET",
             "headers": {
@@ -47,10 +47,8 @@ module.exports = (app) =>  {
     }
     
     
-    const fetchByTagAndIngredients= (req, res) => {
-        // const recipeList = `/recipes/list?from=0&size=${req.params.size}&tags=${req.params.tag}&q=${req.params.ingredients}`;
-        const recipeList = `/recipes/list?from=0&size=${req.params.size}&q=${req.params.ingredients}`;
-    
+    const fetchByIngredients= (req, res) => {
+        const recipeList = `/findByIngredients?ingredients=${req.params.ingredients}&number=12&ignorePantry=true&ranking=1`;
         console.log("in fetchByTagAndIngredients -->", recipeList);
         fetch(URL + recipeList, {
             "method": "GET",
@@ -71,9 +69,9 @@ module.exports = (app) =>  {
     
    
     const fetchInstruction = (req, res) =>{
-        const trendingList = `/recipes/${req.params.id}/analyzedInstructions?stepBreakdown=true`;
-        console.log("in fetchInstruction -->", trendingList);
-        fetch(URL + trendingList, {
+        const instruction = `/recipes/${req.params.id}/analyzedInstructions?stepBreakdown=true`;
+        console.log("in fetchInstruction -->", instruction);
+        fetch(URL + instruction, {
             "method": "GET",
             "headers": {
                 "x-rapidapi-host": HOST,
@@ -82,7 +80,7 @@ module.exports = (app) =>  {
         })
             .then(response => response.json())
             .then((data) =>{
-                // console.log("fetchTrendingList data-->", data);
+                // console.log("fetchInstruction data-->", data);
                 res.json(data);
             }).catch(e => {
             console.log("error is -->", e);
@@ -90,16 +88,10 @@ module.exports = (app) =>  {
     }
     
     
- 
- 
-    
-    
-    
-    
-    
-    const fetchTagList = (req, res) =>{
-        const tag = "/tags/list";
-        fetch(URL + tag, {
+
+    const fetchSimilar = (req, res) =>{
+        const similar = `/recipes/${req.params.id}/similar`;
+        fetch(URL + similar, {
             "method": "GET",
             "headers": {
                 "x-rapidapi-host": HOST,
@@ -108,7 +100,7 @@ module.exports = (app) =>  {
         })
             .then(response => response.json())
             .then((data) =>{
-                // console.log("fetchTagList data-->", data);
+                // console.log("fetchSimilar data-->", data);
                 res.json(data);
             }).catch(e => {
             console.log("error is -->", e);
@@ -117,14 +109,39 @@ module.exports = (app) =>  {
         
     }
     
-    app.get("/:prefix", fetchSearchResult); // auto-complete
-    app.get("/details/:id", fetchInfoByID); // recipe-details
-    // app.get("/list/:size/:tag/:ingredients", fetchByTagAndIngredients); // recipe list
-    app.get("/list/:size/:ingredients", fetchByTagAndIngredients); // recipe list
     
-    // app.get("/trending/1", fetchTrendingList); // feed/list
-    app.get("/tag/list", fetchTagList); // tag list
-    app.get("/instruction/:id", fetchInstruction); // feed/list
+    const fetchRandom = (req, res) =>{
+        const random = `/recipes/random?number=4`;
+        
+        console.log("in random -->", random);
+        fetch(URL + random, {
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-host": HOST,
+                "x-rapidapi-key": API_KEY
+            }
+        })
+            .then(response => response.json())
+            .then((data) =>{
+                // console.log("fetchRandom data-->", data);
+                res.json(data);
+            }).catch(e => {
+            console.log("error is -->", e);
+        })
+        
+        
+    }
+    
+    
+    
+    
+    
+    app.get("/search/:key", fetchSearchResult); // auto-complete
+    app.get("/details/:id", fetchInfoByID); // recipe-details(ingredients & instructions)
+    app.get("/ingredients/:ingredients", fetchByIngredients); // recipe list
+    app.get("/trending", fetchRandom); // trending and latest
+    app.get("/similar/: id", fetchSimilar); // similar recipe list
+    app.get("/instruction/:id", fetchInstruction); // only have instruction
     
     
 }

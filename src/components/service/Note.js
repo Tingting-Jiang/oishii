@@ -33,3 +33,17 @@
 // useEffect(() =>
 //     service.fetchTagList()
 //         .then(data =>setTagList(data)), []);
+
+
+// useEffect(() => {
+//         service.fetchInstruction(recipeID)
+//             .then((data) => {
+//                 // console.log(data);
+//                 if (data !== []) {
+//                     setInstruction(data)
+//                 } else {
+//                     setInstruction(oldInstruction)
+//                 }
+//             })
+//     },[]
+// );

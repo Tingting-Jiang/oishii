@@ -8,7 +8,7 @@ const URL5 = 'http://localhost:4000/tag/list';
 
 export const fetchSearchResult = (key_words) =>
     // key_words = key_words.replace(/\s+/g, '%20');
-    fetch(`${URL}/${key_words}`)
+    fetch(`${URL}/search/${key_words}`)
         .then((response) => response.json());
 
 export const fetchByID = (id) =>
@@ -19,15 +19,17 @@ export const fetchInstruction = (id) =>
     fetch(`${URL}/instruction/${id}`)
         .then((response) => response.json());
 
-export const fetchByTagAndIngredients = (ingredient) =>
-    fetch(`${URL}/list/10/${ingredient}`)
+export const fetchByIngredients = (ingredient) =>
+    fetch(`${URL}/ingredients/${ingredient}`)
         .then((response) => response.json());
 
-export const fetchTrendingList = () =>
-    fetch(URL4).then((response) => response.json());
+export const fetchSimilar = (id) =>
+    fetch(`${URL}/similar/${id}`)
+        .then((response) => response.json());
 
-export const fetchTagList = () =>
-    fetch(URL5).then((response) => response.json());
+export const fetchTrending = () =>
+    fetch(`${URL}/trending`)
+        .then((response) => response.json());
 
 
 
@@ -35,8 +37,8 @@ export const fetchTagList = () =>
 export default {
     fetchSearchResult,
     fetchByID,
-    fetchByTagAndIngredients,
-    fetchTrendingList,
-    fetchTagList,
+    fetchByIngredients,
+    fetchSimilar,
+    fetchTrending,
     fetchInstruction
 };

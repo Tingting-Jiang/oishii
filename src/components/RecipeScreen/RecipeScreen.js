@@ -5,20 +5,20 @@ import oldInstruction from "../service/reducers/data/instruction.json";
 import "./recipe.css"
 
 const RecipeScreen = ({recipeID}) => {
+    // console.log(oldInstruction);
     console.log("in 1st line ->", recipeID);
     const [recipe, setRecipe] = useState(oldIngredient);
     // const [instruction, setInstruction] = useState(oldInstruction)
-    // useEffect(() => {
-    //     service.fetchByID(recipeID)
-    //         .then((data) => setRecipe(data))
-    //     },[]
-    // );
+    useEffect(() => {
+        service.fetchByID(recipeID)
+            .then((data) => {
+                    setRecipe(data);
+             
+            })
+        },[]
+    );
     
-    // useEffect(() => {
-    //         service.fetchInstruction(recipeID)
-    //             .then((data) => setInstruction(data))
-    //     },[]
-    // );
+ 
     
     
     
@@ -35,6 +35,7 @@ const RecipeScreen = ({recipeID}) => {
             <div className="row">
                 <div className="col-12 col-md-8">
                     <h6 className="wd-color-coral">Total Time: {recipe.readyInMinutes} min</h6>
+                    
                     <h2 className="wd-recipe-title">
                         {recipe.title}
                     
@@ -44,7 +45,9 @@ const RecipeScreen = ({recipeID}) => {
                     </h2>
                     
 
-                    <h6 className="wd-color-coral">By {recipe.sourceName}</h6>
+                    <h6 className="wd-color-coral">By
+                        {recipe.sourceName === null ? " A Great Anonymous Chef" : " "+ recipe.sourceName }
+                    </h6>
                     {recipe.summary.split('.', 4).join(".")
                         .replaceAll("<b>","")
                         .replaceAll("</b>", "")
@@ -76,12 +79,24 @@ const RecipeScreen = ({recipeID}) => {
                         <h5 className="wd-color-coral fw-bold my-3">
                             Preparation
                         </h5>
+                        
                         <ol>
-                            {recipe.analyzedInstructions[0].steps.map(data => (
+                            {recipe.analyzedInstructions.length === 0 ?
+                                "Oops... The recipe seems get lost, try another key word ":
+                                (recipe.analyzedInstructions[0].steps.map(data => (
                                 <li>
                                     {data.step}
-                                </li>
+                                </li>)
                             ))}
+                            
+                            
+                            {/*{instruction[0].steps.map((item) => (*/}
+                            {/*    <li>*/}
+                            {/*         {item.step}*/}
+                            {/*    </li>*/}
+                            {/*    )*/}
+                            {/*)}*/}
+                            {recipe.analyzedInstructions.length === 0 ? "" :<li>Enjoy!</li>}
                             
                         </ol>
                     </div>
