@@ -19,6 +19,8 @@ app.use(function(req, res, next) {
 });
 
 console.log("in server");
-require('./service/test')(app);
+// require('./service/test')(app);
+require('./service/spoon')(app);
+
 
 app.listen(4000);

@@ -12,7 +12,11 @@ export const fetchSearchResult = (key_words) =>
         .then((response) => response.json());
 
 export const fetchByID = (id) =>
-    fetch(`${URL}/${id}`)
+    fetch(`${URL}/details/${id}`)
+        .then((response) => response.json());
+
+export const fetchInstruction = (id) =>
+    fetch(`${URL}/instruction/${id}`)
         .then((response) => response.json());
 
 export const fetchByTagAndIngredients = (ingredient) =>
@@ -33,5 +37,6 @@ export default {
     fetchByID,
     fetchByTagAndIngredients,
     fetchTrendingList,
-    fetchTagList
+    fetchTagList,
+    fetchInstruction
 };
