@@ -1,7 +1,13 @@
+/*Will organize later,
+to separate parts for each component*/
+
 /*Almost same with home.css!*/
 
 /*top nav bar*/
 
+.wd-home-header {
+    margin: 10px 0;
+}
 .wd-magnifier {
     color: #F17C67;
     position: absolute;
@@ -70,6 +76,14 @@
     object-fit: cover;
 }
 
+.wd-search-result-name {
+    font-size: 18px;
+    max-height: 80px;
+    overflow: auto;
+    margin: 0;
+}
+
+/*button*/
 .wd-button {
     color: #F17C67;
     border-color: #F17C67;
@@ -83,6 +97,29 @@
     background-color: #fad2ca;
 }
 
+.wd-button-transparent {
+    border: none;
+}
+
+.wd-button-transparent:hover {
+    background: none;
+    color: #f55c40;
+}
+
+
+
+/*login screen*/
+.wd-login-bg {
+    height: 700px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.wd-login-bg-small {
+    height: 150px;
+    width: 100%;
+    object-fit: cover;
+}
 
 /*recipe cards*/
 
@@ -225,7 +262,7 @@ body {
 }
 
 
-.form-control:focus {
+.form-control:focus, .wd-button:focus {
     border-color: #F17C67;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 6px rgb(241, 124, 103);
 }
