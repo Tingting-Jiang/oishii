@@ -9,14 +9,14 @@ const RecipeScreen = ({recipeID}) => {
     console.log("in 1st line ->", recipeID);
     const [recipe, setRecipe] = useState(oldIngredient);
     // const [instruction, setInstruction] = useState(oldInstruction)
-    useEffect(() => {
-        recipeService.fetchByID(recipeID)
-            .then((data) => {
-                    setRecipe(data);
-             
-            })
-        },[]
-    );
+    // useEffect(() => {
+    //     recipeService.fetchByID(recipeID)
+    //         .then((data) => {
+    //                 setRecipe(data);
+    //
+    //         })
+    //     },[]
+    // );
     
  
     
@@ -24,7 +24,42 @@ const RecipeScreen = ({recipeID}) => {
     
     return (
         <>
-            {/*{JSON.stringify(recipe)}*/}
+            <div className="container mt-2">
+                <div className="row wd-home-header">
+                    <div className="col-2 col-md-2">
+                        <h1>Oishii</h1>
+                    </div>
+                    <div className="col-6 col-md-6 align-self-center">
+                        <ul className="nav justify-content-left">
+                            <li className="nav-item">
+                                <a className="nav-link active" aria-current="page" href="#">Home</a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" href="#">Recipes</a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" href="#">Profile</a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" href="#">About</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div className="d-none d-md-block col-4 align-self-center">
+                        <div className="align-items-center">
+                            <div className="wd-magnifier">
+                                <label htmlFor="SearchInput">
+                                    <i className="fas fa-search"></i>
+                                </label>
+                            </div>
+                            <div>
+                                <input id="SearchInput"
+                                       className="form-control wd-search-bar-input"
+                                       placeholder="Search Oishii"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         <div className="wd-recipe-container d-flex">
         <div className="wd-recipe-bg">
             <img className="wd-bg"
@@ -107,6 +142,14 @@ const RecipeScreen = ({recipeID}) => {
     
     
     </div>
+                <div className="wd-footer">
+                    <div>
+                        <h3>Oishii</h3>
+                        <p>Presented by Project Oishii Group</p>
+                        <span>Privacy Policy</span> | <span>Send Feedback</span>
+                    </div>
+                </div>
+            </div>
         </>
     )
     };

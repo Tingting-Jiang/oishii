@@ -22,7 +22,7 @@ function App() {
         {/*<Show/>*/}
         
         
-        {/*<RecipeScreen recipeID={5679}/>*/}
+        <RecipeScreen recipeID={5679}/>
         <ExploreAndTrending/>
        
     </div>
