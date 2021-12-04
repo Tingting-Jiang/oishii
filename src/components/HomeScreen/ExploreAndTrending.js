@@ -23,18 +23,18 @@ const ExploreAndTrending = () => {
 
     
     // useEffect(() =>
-    //     service.fetchTrending()
+    //     recipeService.fetchTrending()
     //         .then(data =>{
     //             setTrending(data.recipes);
     //         }), []);
     //
     // useEffect(() =>
-    //     service.fetchTrending()
+    //     recipeService.fetchTrending()
     //         .then(data =>{
     //             setLatest(data.recipes);
     //         }), []);
-    //
-    // console.log("trending -->", trending);
+
+    console.log("trending -->", trending);
     
     
     

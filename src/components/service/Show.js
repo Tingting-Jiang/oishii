@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import service from './service'
+import recipeService from './recipeService'
 
 
 const Show = () => {
@@ -10,7 +10,7 @@ const Show = () => {
     
     const searchRecipe = (event) =>{
         setSearchTerm(event.target.value);
-        service.fetchSearchResult(event.target.value)
+        recipeService.fetchSearchResult(event.target.value)
             .then(data => setSearchResult(data))
     };
 
@@ -21,7 +21,7 @@ const Show = () => {
     
    
     const searchByIngredient = () =>
-        service.fetchByIngredients(searchTerm)
+        recipeService.fetchByIngredients(searchTerm)
             .then(data =>setRecipeList(data));
     
     
