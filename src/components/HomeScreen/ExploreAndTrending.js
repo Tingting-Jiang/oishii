@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import service from '../service/service'
+import recipeService from '../service/recipeService'
 
 const ExploreAndTrending = () => {
     const [searchTerm, setSearchTerm] = useState("");
@@ -9,14 +9,14 @@ const ExploreAndTrending = () => {
     const [latest, setLatest] = useState([]);
     
     const searchByIngredient = () =>
-        service.fetchByIngredients(searchTerm)
+        recipeService.fetchByIngredients(searchTerm)
             .then(data =>setRecipeList(data));
     
     
     
     const searchRecipe = (event) => {
         setSearchTerm(event.target.value);
-        service.fetchSearchResult(event.target.value)
+        recipeService.fetchSearchResult(event.target.value)
             .then(data => setSearchResult(data))
     };
     

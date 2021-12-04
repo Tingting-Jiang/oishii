@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import service from '../service/service'
+import recipeService from '../service/recipeService'
 import oldIngredient from "../service/reducers/data/newRecipe.json";
 import oldInstruction from "../service/reducers/data/instruction.json";
 import "./recipe.css"
@@ -10,7 +10,7 @@ const RecipeScreen = ({recipeID}) => {
     const [recipe, setRecipe] = useState(oldIngredient);
     // const [instruction, setInstruction] = useState(oldInstruction)
     useEffect(() => {
-        service.fetchByID(recipeID)
+        recipeService.fetchByID(recipeID)
             .then((data) => {
                     setRecipe(data);
              
