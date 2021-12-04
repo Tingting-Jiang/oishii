@@ -6,9 +6,7 @@ const Show = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [searchResult, setSearchResult] = useState([]);
     const [recipeList, setRecipeList] = useState([]);
-    // const [listByIngredients, setListByIngredients] = useState([]);
-    const [trendingList, setTrendingList] = useState([]);
-    const [recipeDetail, setRecipeDetail] = useState({});
+   
     
     const searchRecipe = (event) =>{
         setSearchTerm(event.target.value);
@@ -17,28 +15,19 @@ const Show = () => {
     };
 
 
-    const findRecipeByID =(recipe)=>
-        service.fetchByID(recipe.id)
-            .then(data => setRecipeDetail(data));
+    // const findRecipeByID =(recipe)=>
+    //     service.fetchByID(recipe.id)
+    //         .then(data => setRecipeDetail(data));
     
    
     const searchByIngredient = () =>
-        service.fetchByTagAndIngredients(searchTerm)
-            .then(data =>setRecipeList(data.results));
-
-    // useEffect(() =>
-    //     service.fetchTrendingList()
-    //         .then(data =>{
-    //             setTrendingList(data);
-    //             // generateList(trendingList);
-    //         }), []);
-
+        service.fetchByIngredients(searchTerm)
+            .then(data =>setRecipeList(data));
     
-    console.log("recipe-->", recipeList);
+    
+    // console.log("recipe-->", recipeList);
     console.log("search result-->", searchResult);
-    // console.log("listByIngredients --->", listByIngredients);
-    // console.log("trendingList -->", trendingList);
-    // console.log("type chek-->", typeof trendingList);
+  
     
     
     return(
@@ -52,9 +41,8 @@ const Show = () => {
                     placeholder="Type to search..."
                 />
             <datalist id="datalistOptions">
-    
                 {searchResult.map(item => (
-                            <option value={item.search_value} >
+                            <option value={item.title} >
                             </option>
                         ))}
                 
@@ -66,30 +54,13 @@ const Show = () => {
                 >
                     Search
                 </button>
-               
-            
-            
-             
-             {/*// <ol className="">*/}
-             {/*//     {searchResult.map(item => (*/}
-             {/*//         <li key={item.display} >*/}
-             {/*//*/}
-             {/*//             /!*<p>Display: {item.display}</p>*!/*/}
-             {/*//             <p>Search_value: {item.search_value}</p>*/}
-             {/*//*/}
-             {/*//         </li>*/}
-             {/*//     ))}*/}
-             {/*// </ol>*/}
              <hr/>
-      
-            
-            {/*<p>{recommend.name}</p>*/}
             
             <ul className="">
                 {recipeList.map(item => (
                     <li key={item.id} >
                         
-                        <p>{item.name} {item.id}</p>
+                        <p>{item.title} {item.id}</p>
             
                     </li>
                 ))}

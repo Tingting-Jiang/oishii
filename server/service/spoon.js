@@ -1,9 +1,9 @@
 const fetch = require("node-fetch");
 
-// const API_KEY = 'bc4fe255dcmsh226f8341d7ebb53p169a42jsn58714141d5e1';
+const API_KEY = 'bc4fe255dcmsh226f8341d7ebb53p169a42jsn58714141d5e1';
 const URL = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com";
 
-const API_KEY ="8aacabbec3msh0d6aaeca6a49cb0p128f31jsn0c6ed3c6e8d0";
+// const API_KEY ="8aacabbec3msh0d6aaeca6a49cb0p128f31jsn0c6ed3c6e8d0";
 
 const HOST = 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com';
 
@@ -21,7 +21,8 @@ module.exports = (app) =>  {
         })
             .then(response => response.json())
             .then((data) => {
-                res.json(data.results);
+                // console.log("search result -->", data);
+                res.json(data);
             })
     }
     
@@ -48,7 +49,7 @@ module.exports = (app) =>  {
     
     
     const fetchByIngredients= (req, res) => {
-        const recipeList = `/findByIngredients?ingredients=${req.params.ingredients}&number=12&ignorePantry=true&ranking=1`;
+        const recipeList = `/recipes/findByIngredients?ingredients=${req.params.ingredients}&number=12&ignorePantry=true&ranking=1`;
         console.log("in fetchByTagAndIngredients -->", recipeList);
         fetch(URL + recipeList, {
             "method": "GET",

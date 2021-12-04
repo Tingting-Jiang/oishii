@@ -1,13 +1,8 @@
 const express = require('express');
 const app = express();
-const bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/Oishii');
 
 
+// CORS
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "http://localhost:3000");
     res.header("Access-Control-Allow-Headers",
@@ -18,9 +13,33 @@ app.use(function(req, res, next) {
     next();
 });
 
+// bodyParser
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+//add session here
+// const session = require('express-session')
+// app.use(session({
+//     secret: 'keyboard cat',
+//     cookie: {}
+// }));
+
+//MongoDB
+
+const URL = 'mongodb://localhost:27017/Oishii';
+// const URL = "mongodb+srv://oishii:oishii@cluster0.9hn8c.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+
+const mongoose = require('mongoose');
+mongoose.connect(URL);
+
+
+
+
 console.log("in server");
+
 // require('./service/test')(app);
 require('./service/spoon')(app);
+// require("./db/User/user-controller")(app);
 
-
-app.listen(4000);
+app.listen(process.env.PORT || 4000);

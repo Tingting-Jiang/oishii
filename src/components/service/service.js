@@ -8,7 +8,7 @@ const URL5 = 'http://localhost:4000/tag/list';
 
 export const fetchSearchResult = (key_words) =>
     // key_words = key_words.replace(/\s+/g, '%20');
-    fetch(`${URL}/search/${key_words}`)
+    fetch(`${URL}/search/${key_words.replace(/\s+/g, "%20")}`)
         .then((response) => response.json());
 
 export const fetchByID = (id) =>
@@ -20,7 +20,7 @@ export const fetchInstruction = (id) =>
         .then((response) => response.json());
 
 export const fetchByIngredients = (ingredient) =>
-    fetch(`${URL}/ingredients/${ingredient}`)
+    fetch(`${URL}/ingredients/${ingredient.replace(/\s+/g, "%20")}`)
         .then((response) => response.json());
 
 export const fetchSimilar = (id) =>

@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="container">
         {/*<Show/>*/}
-        <RecipeScreen recipeID={5679}/>
+        {/*<RecipeScreen recipeID={5679}/>*/}
         <ExploreAndTrending/>
     </div>
   );

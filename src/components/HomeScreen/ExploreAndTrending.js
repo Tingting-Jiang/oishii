@@ -3,10 +3,15 @@ import service from '../service/service'
 
 const ExploreAndTrending = () => {
     const [searchTerm, setSearchTerm] = useState("");
-    
+    const [recipeList, setRecipeList] = useState([]);
     const [searchResult, setSearchResult] = useState([]);
     const [trending, setTrending] = useState([]);
     const [latest, setLatest] = useState([]);
+    
+    const searchByIngredient = () =>
+        service.fetchByIngredients(searchTerm)
+            .then(data =>setRecipeList(data));
+    
     
     
     const searchRecipe = (event) => {
@@ -15,19 +20,23 @@ const ExploreAndTrending = () => {
             .then(data => setSearchResult(data))
     };
     
-    useEffect(() =>
-        service.fetchTrending()
-            .then(data =>{
-                setTrending(data.recipes);
-            }), []);
+
     
-    useEffect(() =>
-        service.fetchTrending()
-            .then(data =>{
-                setLatest(data.recipes);
-            }), []);
+    // useEffect(() =>
+    //     service.fetchTrending()
+    //         .then(data =>{
+    //             setTrending(data.recipes);
+    //         }), []);
+    //
+    // useEffect(() =>
+    //     service.fetchTrending()
+    //         .then(data =>{
+    //             setLatest(data.recipes);
+    //         }), []);
+    //
+    // console.log("trending -->", trending);
     
-    console.log("trending -->", trending);
+    
     
     
     
@@ -65,15 +74,33 @@ const ExploreAndTrending = () => {
                                    list="datalistOptions"
                                    className="form-control wd-search-bar-input"
                                    placeholder="Search Oishii"
-                                   onChange={e => searchRecipe(e)}/>
+                                   onChange={e => searchRecipe(e)}
+                            />
                             <datalist id="datalistOptions">
                                 {searchResult.map(item => (
-                                    <option value={item.search_value} >
-                                    </option>
+                                        <option value={item.title} />
+                                    
                                 ))}
-    
                             </datalist>
+                        
+                            <button
+                                onClick={e => searchByIngredient(e)}
+                                className="btn btn-primary float-end"
+                            >
+                                Search
+                            </button>
                         </div>
+    
+                            <ul className="">
+                                {recipeList.map(item => (
+                                    <li key={item.id} >
+                
+                                        <p>{item.title} {item.id}</p>
+            
+                                    </li>
+                                ))}
+                            </ul>
+                        
                     </div>
                 </div>
             </div>
