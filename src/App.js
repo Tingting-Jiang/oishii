@@ -5,25 +5,28 @@ import RecipeScreen from './components/RecipeScreen/RecipeScreen'
 import ExploreAndTrending from './components/HomeScreen/ExploreAndTrending'
 import Login from './components/LoginScreen/LoginScreen'
 import { Route, Routes, BrowserRouter } from 'react-router-dom'
+import Register from './components/LoginScreen/Register'
+import Profile from './components/ProfileScreen/Profile'
 
 function App() {
   return (
     <div className="container">
-            {/*<BrowserRouter>*/}
-            {/*    <Routes>*/}
+            <BrowserRouter>
+                <Routes>
             
-            {/*/!*<Route path="/" element={<Home/>}/>*!/*/}
-            {/*<Route path="/login" element={<Login/>}/>*/}
-            {/*/!*<Route path="/register" element={<Register/>}/>*!/*/}
-            {/*/!*<Route path="/profile" element={<Profile/>}/>*!/*/}
-            {/*    </Routes>*/}
-            {/*</BrowserRouter>*/}
+            <Route path="/" element={<ExploreAndTrending/>}/>
+            <Route path="/login" element={<Login/>}/>
+            <Route path="/register" element={<Register/>}/>
+            <Route path="/profile" element={<Profile/>}/>
+            <Route path="/recipe/:id" element={<RecipeScreen/>}/>
+                </Routes>
+            </BrowserRouter>
         
-        {/*<Show/>*/}
+         {/*<Show/>*/}
         
         
-        <RecipeScreen recipeID={5679}/>
-        <ExploreAndTrending/>
+        {/*<RecipeScreen recipeID={5679}/>*/}
+        {/*<ExploreAndTrending/>*/}
        
     </div>
   );

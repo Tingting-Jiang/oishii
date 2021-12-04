@@ -4,24 +4,27 @@ import userService from '../service/userService'
 
 
 
-const Login = () => {
+const Register = () => {
+    // const [user, setUser] = useState({username: 'alice', password: 'alice123'});
     const [user, setUser] = useState({});
+    
     const navigate = useNavigate();
-
-    const login = () => {
-        userService.login(user)
-           .then(status => {
-            navigate('/profile')
-        })};
-    //
+    
+    const register = () => {
+        userService.register(user)
+            .then(status => {
+                navigate('/profile')
+            })
+            .catch(e => console.log(e));
+    };
     
     return (
         <>
             <div className="row">
-                <h1>Login Page</h1>
+                <h1>Register Page</h1>
                 <div className="col-4">
                     <h1>Left</h1>
-                
+                    
                     <div className="my-3">
                         <label for="username" className="form-label">Email address</label>
                         <input type="email" className="form-control" id="username"
@@ -39,26 +42,37 @@ const Login = () => {
                                    setUser({...user, password: e.target.value})}/>
                     </div>
                     
+                    <div className="mb-3">
+                        <label htmlFor="password2" className="form-label">Confirm Password</label>
+                        <input type="password" className="form-control" id="password2"
+                               placeholder="Verify Password"
+                               onChange={(e) =>
+                                   setUser({...user, verifyPassword: e.target.value})}/>
+                        {
+                            user && user.verifyPassword !== "" && user.password !== user.verifyPassword &&
+                                <span>Password don't match</span>
+                        }
+                    </div>
                     
                     <div className="mb-3">
                         <div className="form-check">
-                        <label className="form-check-label" for="remember">
-                            Remember me
-                        </label>
-                        
-                            <input type="checkbox" className="form-check-input" id="remember"/>
+                            <label className="form-check-label" for="remember">
+                                Remember me
+                            </label>
                             
+                            <input type="checkbox" className="form-check-input" id="remember"/>
+                        
                         </div>
                     </div>
                     <button type="submit"
                             className="btn btn-primary"
-                            onClick={login}>
-                        Sign in
+                            onClick={register}>
+                        Register
                     </button>
-
+                
                 </div>
                 
-    
+                
                 <div className="col-1">
                     {/*<h1>Middle</h1>*/}
                 </div>
@@ -68,12 +82,12 @@ const Login = () => {
                     <h1>Right</h1>
                     <img src="../../images/recipe2.jpg"/>
                 </div>
-    
-                
-            </div>
             
-      </>
+            
+            </div>
+        
+        </>
     )
     
 };
-export default Login;
+export default Register;

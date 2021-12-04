@@ -24,7 +24,11 @@ const deleteUser = (userId) =>
     userModel.deleteOne({_id: userId});
 
 module.exports = {
-    findByUsername, findAllUsers, findUserById,
+    findByUsername,
+    findAllUsers,
+    findUserById,
     findByUsernameAndPassword,
-    createUser, updateUser, deleteUser
+    createUser,
+    updateUser,
+    deleteUser
 };

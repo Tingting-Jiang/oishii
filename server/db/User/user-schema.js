@@ -5,5 +5,5 @@ const userSchema = mongoose.Schema({
     email: String,
     firstName: String,
     lastName: String,
-}, {collection: 'users'});
+}, {collection: 'oishiiUsers'});
 module.exports = userSchema;

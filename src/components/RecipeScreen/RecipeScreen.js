@@ -3,8 +3,12 @@ import recipeService from '../service/recipeService'
 import oldIngredient from "../service/reducers/data/newRecipe.json";
 import oldInstruction from "../service/reducers/data/instruction.json";
 import "./recipe.css"
+import "../oishii.css"
+import { useParams } from 'react-router-dom'
 
-const RecipeScreen = ({recipeID}) => {
+const RecipeScreen = () => {
+    const params = useParams();
+    const recipeID = params.id;
     // console.log(oldInstruction);
     console.log("in 1st line ->", recipeID);
     const [recipe, setRecipe] = useState(oldIngredient);

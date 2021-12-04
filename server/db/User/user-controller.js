@@ -11,7 +11,7 @@ module.exports = (app) => {
     
     const deleteUser = (req, res) =>
         userDao.deleteUser(req.params.userId)
-            .then(status => req.send(status));
+            .then(status => res.send(status));
     
     const updateUser = (req, res) =>
         userDao.updateUser(req.body)
@@ -30,6 +30,7 @@ module.exports = (app) => {
     }
     
     const register = (req, res) => {
+        console.log("server ->", req.body);
         userDao.findByUsername(req.body)
             .then(user => {
                 if(user) {
@@ -38,7 +39,9 @@ module.exports = (app) => {
                 }
                 userDao.createUser(req.body)
                     .then(user => {
+                        user["fav-dish"] = ["egg pie", "ice-cream chocolate"];
                         req.session['profile'] = user;
+                        console.log("Registered! -->", user);
                         res.json(user)
                     });
             })

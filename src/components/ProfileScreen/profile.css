@@ -1,0 +1,215 @@
+/*Almost same with home.css!*/
+
+/*top nav bar*/
+
+.wd-magnifier {
+    color: #F17C67;
+    position: absolute;
+    margin-left: 20px;
+    margin-top: 8px;
+}
+
+.wd-search-bar-input {
+    border-radius: 20px;
+    padding: 5px 20px 5px 50px;
+    font-size: 14px;
+    height: 40px;
+}
+
+
+/*profile container*/
+
+.wd-profile-container {
+    margin-top: 10px;
+    height: 550px;
+    position: relative;
+}
+
+.wd-profile-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.wd-profile-info {
+    background-color: rgba(255, 255, 255, 0.8);
+    position: absolute;
+    left: 10%;
+    top: 8%;
+    width: 80%;
+    height: 84%;
+    padding: 40px;
+}
+
+.wd-username {
+    margin: 10px 0;
+}
+
+.wd-bio {
+    line-height: 1.2;
+    height: 80px;
+    max-width: 400px;
+    text-align: center;
+    margin: 16px auto;
+    overflow: auto;
+    color: #282c34;
+}
+
+.wd-profile-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 8px solid #ffffff;
+}
+
+.wd-button {
+    color: #F17C67;
+    border-color: #F17C67;
+}
+
+.wd-button:hover {
+    color: #c95b48;
+    border-color: #F17C67;
+    background-color: #fad2ca;
+}
+
+
+/*recipe cards*/
+
+.wd-category-container {
+    margin: 20px 0 0 0;
+    /*padding: 20px 0 0 0;*/
+    min-width: 400px;
+}
+
+.wd-category-img {
+    width: 80%;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 10%;
+}
+
+.wd-block-title {
+    background-color: #fad2ca;
+    text-align: center;
+    margin: 30px 0 30px 0;
+}
+
+.wd-card-img {
+    position: relative;
+}
+
+.wd-button-on-img {
+    position: absolute;
+    left: 3%;
+    top: 0.5%;
+    border: none;
+    font-size: xx-large;
+    color: white;
+    /*background-color: rgba(255, 255, 255, 0.5);*/
+}
+
+.wd-button-on-img:hover {
+    background: none;
+    color: #ff2500;
+}
+
+/*liked users*/
+
+.wd-like-user-container {
+    margin: 20px 0;
+    max-width: 100%;
+    position: relative;
+    height: 100px;
+}
+
+.wd-like-user-container > .nav{
+    font-size: 14px;
+}
+
+.wd-like-user-container > .nav-link:active {
+    font-weight: normal;
+}
+
+.wd-like-user-container > .nav-link:focus {
+    font-weight: normal;
+}
+
+.wd-like-user {
+    max-width: 100%;
+    overflow: auto;
+    position: absolute;
+}
+
+.wd-block-title {
+    background-color: #fad2ca;
+    text-align: center;
+    margin: 30px 0 30px 0;
+}
+
+.wd-following-user-img {
+    max-height: 70px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+
+/*nav bar and headings*/
+
+.nav {
+    flex-wrap: nowrap;
+    font-size: 18px;
+}
+.nav-link {
+    color: #000000;
+}
+
+.nav-link:hover {
+    color: #F17C67;
+}
+
+.nav-link:active, .nav-link:focus {
+    color: #F17C67;
+    font-weight: bold;
+}
+
+h1, h2, h3 {
+    font-family: 'Pacifico', serif;
+    text-shadow: 2px 2px 2px #d9bfbf
+}
+
+h1 {
+    color: #F17C67;
+    text-shadow: none;
+}
+
+h6 {
+    color: #4d4d4d;
+}
+
+
+/*footer and body*/
+
+.wd-footer {
+    margin-top: 40px;
+    padding: 20px 50px;
+    background-color: #fad2ca;
+    position: relative;
+}
+
+.wd-color-coral {
+    color: #F17C67;
+}
+
+.wd-color-red {
+    color: #ff2500;
+}
+
+body {
+    background: white;
+    margin: 0;
+    padding: 0;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 16px;
+    color: black;
+}

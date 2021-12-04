@@ -19,16 +19,18 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 //add session here
-// const session = require('express-session')
-// app.use(session({
-//     secret: 'keyboard cat',
-//     cookie: {}
-// }));
+const session = require('express-session')
+app.use(session({
+    secret: 'keyboard cat',
+    cookie: {},
+    resave: true,
+    saveUninitialized: true
+}));
 
 //MongoDB
 
-const URL = 'mongodb://localhost:27017/Oishii';
-// const URL = "mongodb+srv://oishii:oishii@cluster0.9hn8c.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+// const URL = 'mongodb://localhost:27017/Oishii';
+const URL = "mongodb+srv://oishii:oishii@cluster0.9hn8c.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 
 const mongoose = require('mongoose');
 mongoose.connect(URL);
@@ -39,7 +41,7 @@ mongoose.connect(URL);
 console.log("in server");
 
 // require('./service/test')(app);
-require('./service/spoon')(app);
-// require("./db/User/user-controller")(app);
+// require('./service/spoon')(app);
+require("./db/User/user-controller")(app);
 
 app.listen(process.env.PORT || 4000);
