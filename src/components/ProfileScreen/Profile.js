@@ -68,7 +68,7 @@ const Profile = () => {
                         <div className="wd-profile-info text-center flex">
                             <img className="wd-profile-img"
                                  src="../../images/sample-user.jpeg"/>
-                                <h5 className="wd-username">Username</h5>
+                                <h5 className="wd-username">{user.username}</h5>
                                 <div className="wd-username">
                 <span className="d-inline-block me-2">
                     <i className="fas fa-birthday-cake me-2 wd-color-coral"></i>
@@ -96,6 +96,11 @@ const Profile = () => {
                                 <button className="btn btn-outline-primary wd-button my-2">
                                     Edit Profile / Like <i className="fas fa-heart"></i>
                                 </button>
+    
+                            <button className= "btn btn-danger rounded-pill"
+                                    onClick={logout}>
+                                Log out
+                            </button>
                         </div>
                 </div>
         
@@ -110,10 +115,7 @@ const Profile = () => {
                                 <button className="btn btn-outline-primary wd-button wd-button-on-img">
                                     <i className="fas fa-heart"></i>
                                 </button>
-                                <button className= "btn btn-danger rounded-pill"
-                                    onClick={logout}>
-                                    Log out
-                                </button>
+                               
                                 <div className="card-body">
                                     <h5 className="card-title">Jerk Chicken Wings</h5>
                                     <p className="card-text">for 4 servings</p>

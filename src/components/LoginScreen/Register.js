@@ -18,6 +18,18 @@ const Register = () => {
             .catch(e => console.log(e));
     };
     
+    
+    // const register = () => {
+    //     fetch(`${API_URL}/register`, {
+    //         method: 'POST',
+    //         body: JSON.stringify(user),
+    //         credentials: 'include',
+    //         headers: {
+    //             'content-type': 'application/json'
+    //         }
+    //     }).then(status => navigate('/profile'));
+    // };
+    
     return (
         <>
             <div className="row">

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import recipeService from '../service/recipeService';
+import userService from '../service/userService';
 import "./home.css";
 import "../oishii.css"
+import { useNavigate } from 'react-router'
 
 const ExploreAndTrending = () => {
     const [searchTerm, setSearchTerm] = useState("");
@@ -9,10 +11,17 @@ const ExploreAndTrending = () => {
     const [searchResult, setSearchResult] = useState([]);
     const [trending, setTrending] = useState([]);
     const [latest, setLatest] = useState([]);
+    const [user, setUser] = useState({});
+    const navigate = useNavigate();
     
     const searchByIngredient = () =>
         recipeService.fetchByIngredients(searchTerm)
             .then(data =>setRecipeList(data));
+    
+    useEffect(() =>{
+        userService.getProfile()
+            .then(user => setUser(user));
+    })
     
     
     
@@ -29,7 +38,7 @@ const ExploreAndTrending = () => {
     //         .then(data =>{
     //             setTrending(data.recipes);
     //         }), []);
-    //
+
     // useEffect(() =>
     //     recipeService.fetchTrending()
     //         .then(data =>{

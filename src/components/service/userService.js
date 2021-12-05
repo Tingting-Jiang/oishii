@@ -1,5 +1,5 @@
 import React from 'react';
-const API_URL = 'http://localhost:4000';
+const API_URL = 'http://localhost:4000/api';
 
 export const login = (user) =>
     // console.log("in userService -->", user);

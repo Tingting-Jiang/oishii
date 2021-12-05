@@ -3,7 +3,7 @@ import './App.css';
 import Show from './components/service/Show'
 import RecipeScreen from './components/RecipeScreen/RecipeScreen'
 import ExploreAndTrending from './components/HomeScreen/ExploreAndTrending'
-import Login from './components/LoginScreen/LoginScreen'
+import Login from './components/LoginScreen1/LoginScreen'
 import { Route, Routes, BrowserRouter } from 'react-router-dom'
 import Register from './components/LoginScreen/Register'
 import Profile from './components/ProfileScreen/Profile'
