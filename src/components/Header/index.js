@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from 'react'
 import HeaderNavItem from "./HeaderNavItem";
 import headerNavs from "./headerNavs.json";
 import "./header.css";
+import recipeService from '../service/recipeService'
+import { useNavigate } from 'react-router-dom'
 
 const Header = ({
         active = "home"
@@ -13,10 +15,27 @@ const Header = ({
     }
 
     // TODO submit search term and direct to search page
-    const submitSearchHandler = () => {
-
+    
+    // data part starts from here ----------------
+    const [searchTerm, setSearchTerm] = useState("");
+    const [searchResult, setSearchResult] = useState([]);
+    
+    const searchRecipe = (event) => {
+        setSearchTerm(event.target.value);
+        recipeService.fetchSearchResult(event.target.value)
+            .then(data => {
+                // console.log("auto complete result ->", data);
+                setSearchResult(data)
+            
+            })
+    };
+    
+    const navigate = useNavigate();
+    const submitSearchHandler = (e) => {
+        if(e.key === "Enter")
+            navigate(`/search/${searchTerm}`);
     }
-
+    
     return (
         <>
             <div className="row wd-home-header">
@@ -43,8 +62,17 @@ const Header = ({
                         <div>
                             <input id="SearchInput"
                                    className="form-control wd-search-bar-input"
+                                   list="datalistOptions"
                                    placeholder="Search Oishii"
-                                   onKeyPress={submitSearchHandler}/>
+                                   onChange={e => searchRecipe(e)}
+                                   onKeyPress={e => submitSearchHandler(e)}/>
+    
+                            <datalist id="datalistOptions">
+                                {searchResult.map(item => (
+                                    <option value={item.title} />
+        
+                                ))}
+                            </datalist>
                         </div>
                     </div>
                 </div>

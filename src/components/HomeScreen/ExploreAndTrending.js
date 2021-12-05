@@ -31,6 +31,11 @@ const ExploreAndTrending = () => {
             .then(data => setSearchResult(data))
     };
     
+    //
+    // const likeRecipeHandler = () => {
+    //     // dispatch({ type: "like-tweet", tweet });
+    //     userService.likeRecipe(recipeID);
+    // };
 
     
     // useEffect(() =>

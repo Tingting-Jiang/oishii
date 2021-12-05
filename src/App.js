@@ -9,6 +9,7 @@ import Register from './components/LoginScreen/Register'
 import Profile from './components/ProfileScreen/Profile'
 
 import Home from './components/HomeScreen';
+import Header from './components/Header'
 
 function App() {
   return (
@@ -23,6 +24,9 @@ function App() {
                     <Route path="/recipe/:id" element={<RecipeScreen/>}/>
 
                     <Route path="/home" element={<Home/>} />
+                    <Route path="/home1" element={<Header/>} />
+
+
 
                 </Routes>
             </BrowserRouter>

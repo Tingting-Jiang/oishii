@@ -40,11 +40,20 @@ export const logout = () =>
         .then(res => res.json());
 
 
+export const likeRecipe = (recipeID) =>
+    fetch(`${API_URL}/like/${recipeID}`, {
+        method: "PUT",
+    }).then((response) =>
+        console.log("back from DB like recipe")
+        );
+
+
 
 
 export default {
     login,
     register,
     getProfile,
-    logout
+    logout,
+    likeRecipe
 };

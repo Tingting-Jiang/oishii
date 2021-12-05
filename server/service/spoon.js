@@ -12,6 +12,7 @@ module.exports = (app) =>  {
     
     const fetchSearchResult = (req, res) => {
         const str = `/recipes/autocomplete?query=${req.params.key}&number=10`;
+        // console.log("Auto complet =>", req.params.key);
         fetch(URL + str, {
             "method": "GET",
             "headers": {

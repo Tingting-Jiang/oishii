@@ -38,8 +38,9 @@ module.exports = (app) => {
                 }
                 userDao.createUser(req.body)
                     .then(user => {
-                        user["fav-dish"] = ["egg pie", "ice-cream chocolate"];
+                        user["fav-dish"] = user.favRecipeList;
                         req.session['profile'] = user;
+                        req.session["home"] = user;
                         res.json(user)
                     });
             })
@@ -51,11 +52,11 @@ module.exports = (app) => {
         const recipeID = req.body.recipeId;
         userDao.findUserById(id)
             .then(user => {
-                const idx = user.favList.indexOf(recipeID);
+                const idx = user.favRecipeList.indexOf(recipeID);
                 if (idx === -1 ) {
-                    user.favList.push(recipeID)
+                    user.favRecipeList.push(recipeID)
                 } else {
-                    user.favList.splice(idx, 1);
+                    user.favRecipeList.splice(idx, 1);
                 }
                 userDao.updateUser(id, user)
                     .then(status => res.send(status));
@@ -78,5 +79,5 @@ module.exports = (app) => {
     app.delete('/api/users/:userId', deleteUser);
     app.get('/api/users', findAllUsers);
     app.get('/api/users/:userId', findUserById);
-    app.post('/api/user/like/:recipeId', likeRecipe);
+    app.post('/api/like/:recipeId', likeRecipe);
 };
