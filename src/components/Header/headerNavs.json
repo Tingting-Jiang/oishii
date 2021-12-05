@@ -1,0 +1,22 @@
+[
+  {
+    "navName": "Home",
+    "navTitle": "home",
+    "_id": 1
+  },
+  {
+    "navName": "Search",
+    "navTitle": "search",
+    "_id": 2
+  },
+  {
+    "navName": "Profile",
+    "navTitle": "profile",
+    "_id": 3
+  },
+  {
+    "navName": "About",
+    "navTitle": "about",
+    "_id": 4
+  }
+]

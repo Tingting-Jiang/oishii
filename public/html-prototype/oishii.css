@@ -232,7 +232,7 @@ to separate parts for each component*/
     color: #F17C67;
 }
 
-.nav-link:active, .nav-link:focus {
+.nav-link.active, .nav-link.focus {
     color: #F17C67;
     font-weight: bold;
 }
