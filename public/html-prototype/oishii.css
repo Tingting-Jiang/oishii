@@ -87,6 +87,9 @@ to separate parts for each component*/
 .wd-button {
     color: #F17C67;
     border-color: #F17C67;
+}
+
+.wd-button-mp {
     margin: 10px;
     padding: 10px;
 }
@@ -106,20 +109,34 @@ to separate parts for each component*/
     color: #f55c40;
 }
 
+/*login screen img*/
+/*create screen img*/
 
-
-/*login screen*/
 .wd-login-bg {
     height: 700px;
     width: 100%;
     object-fit: cover;
 }
 
-.wd-login-bg-small {
+.wd-login-bg-small, .wd-create-bg-small {
     height: 150px;
     width: 100%;
     object-fit: cover;
 }
+
+/*create screen*/
+
+.wd-create-bg {
+    height: 800px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.wd-step-number {
+    width: 5%;
+    color: #F17C67;
+}
+
 
 /*recipe cards*/
 
