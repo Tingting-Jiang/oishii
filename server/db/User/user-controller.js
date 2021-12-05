@@ -30,7 +30,6 @@ module.exports = (app) => {
     }
     
     const register = (req, res) => {
-        console.log("server ->", req.body);
         userDao.findByUsername(req.body)
             .then(user => {
                 if(user) {
@@ -41,11 +40,29 @@ module.exports = (app) => {
                     .then(user => {
                         user["fav-dish"] = ["egg pie", "ice-cream chocolate"];
                         req.session['profile'] = user;
-                        console.log("Registered! -->", user);
                         res.json(user)
                     });
             })
     }
+    
+    
+    const likeRecipe= (req, res) => {
+        const id = req.params.id;
+        const recipeID = req.body.recipeId;
+        userDao.findUserById(id)
+            .then(user => {
+                const idx = user.favList.indexOf(recipeID);
+                if (idx === -1 ) {
+                    user.favList.push(recipeID)
+                } else {
+                    user.favList.splice(idx, 1);
+                }
+                userDao.updateUser(id, user)
+                    .then(status => res.send(status));
+            });
+    }
+    
+    
     
     const profile = (req, res) =>
         res.json(req.session['profile']);
@@ -61,4 +78,5 @@ module.exports = (app) => {
     app.delete('/api/users/:userId', deleteUser);
     app.get('/api/users', findAllUsers);
     app.get('/api/users/:userId', findUserById);
+    app.post('/api/user/like/:recipeId', likeRecipe);
 };
