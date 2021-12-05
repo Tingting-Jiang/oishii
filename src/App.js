@@ -12,7 +12,7 @@ import Home from './components/HomeScreen';
 
 function App() {
   return (
-    <div className="container">
+    <div>
             <BrowserRouter>
                 <Routes>
             

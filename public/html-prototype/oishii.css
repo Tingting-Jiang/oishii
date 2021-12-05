@@ -109,6 +109,21 @@ to separate parts for each component*/
     color: #f55c40;
 }
 
+.wd-button-on-img {
+    position: absolute;
+    left: 3%;
+    top: 0.5%;
+    border: none;
+    font-size: xx-large;
+    color: white;
+    /*background-color: rgba(255, 255, 255, 0.5);*/
+}
+
+.wd-button-on-img:hover {
+    background: none;
+    color: #ff2500;
+}
+
 /*login screen img*/
 /*create screen img*/
 
@@ -163,20 +178,7 @@ to separate parts for each component*/
     position: relative;
 }
 
-.wd-button-on-img {
-    position: absolute;
-    left: 3%;
-    top: 0.5%;
-    border: none;
-    font-size: xx-large;
-    color: white;
-    /*background-color: rgba(255, 255, 255, 0.5);*/
-}
 
-.wd-button-on-img:hover {
-    background: none;
-    color: #ff2500;
-}
 
 /*liked users*/
 

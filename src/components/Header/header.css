@@ -1,0 +1,32 @@
+/*header.css*/
+
+/*top nav bar*/
+.wd-home-header {
+    margin: 10px 0;
+}
+.wd-magnifier {
+    color: #F17C67;
+    position: absolute;
+    margin-left: 20px;
+    margin-top: 8px;
+}
+
+.wd-search-bar-input {
+    border-radius: 20px;
+    padding: 5px 50px 5px 50px;
+    font-size: 14px;
+    height: 40px;
+}
+
+.wd-in-search-button {
+    border: none;
+    color: #F17C67;
+    position: absolute;
+}
+
+.wd-in-search-button:hover {
+    color: #c95b48;
+    border-color: #F17C67;
+    background-color: rgba(255, 255, 255, 0);
+}
+

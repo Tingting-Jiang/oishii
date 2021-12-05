@@ -1,3 +1,4 @@
+/*original file*/
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +11,105 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/*public css style*/
+
+/*button*/
+.wd-button {
+  color: #F17C67;
+  border-color: #F17C67;
+}
+
+.wd-button-mp {
+  margin: 10px;
+  padding: 10px;
+}
+
+.wd-button:hover {
+  color: #c95b48;
+  border-color: #F17C67;
+  background-color: #fad2ca;
+}
+
+.wd-button-transparent {
+  border: none;
+}
+
+.wd-button-transparent:hover {
+  background: none;
+  color: #f55c40;
+}
+
+.wd-button-on-img {
+  position: absolute;
+  left: 3%;
+  top: 0.5%;
+  border: none;
+  font-size: xx-large;
+  color: white;
+  /*background-color: rgba(255, 255, 255, 0.5);*/
+}
+
+.wd-button-on-img:hover {
+  background: none;
+  color: #ff2500;
+}
+
+/*nav bar and headings*/
+
+.nav {
+  flex-wrap: nowrap;
+  font-size: 18px;
+}
+.nav-link {
+  color: #000000;
+}
+
+.nav-link:hover {
+  color: #F17C67;
+}
+
+.nav-link.active, .nav-link.focus {
+  color: #F17C67;
+  font-weight: bold;
+}
+
+h1, h2, h3 {
+  font-family: 'Pacifico', serif;
+  text-shadow: 2px 2px 2px #d9bfbf
+}
+
+h1 {
+  color: #F17C67;
+  text-shadow: none;
+}
+
+h6 {
+  color: #4d4d4d;
+}
+
+/*color*/
+.wd-color-coral {
+  color: #F17C67;
+}
+
+.wd-color-red {
+  color: #ff2500;
+}
+
+/*body*/
+body {
+  background: white;
+  margin: 0;
+  padding: 0;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 16px;
+  color: black;
+}
+
+/*input*/
+.form-control:focus, .wd-button:focus, .wd-in-search-button:focus {
+  border-color: #F17C67;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 6px rgb(241, 124, 103);
 }

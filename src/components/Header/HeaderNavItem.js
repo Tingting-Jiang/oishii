@@ -1,5 +1,4 @@
 import React from "react";
-import {Link} from "react-router-dom";
 
 const HeaderNavItem = (
     {
@@ -20,9 +19,9 @@ const HeaderNavItem = (
     linkPathString = "/" + nav.navTitle;
 
     return (
-        <Link to={linkPathString} className={classString}>
-            <div className="d-none d-xl-inline">{nav.navName}</div>
-        </Link>
+        <li className="nav-item">
+            <a className={classString} href={linkPathString}>{nav.navName}</a>
+        </li>
     );
 }
 export default HeaderNavItem;
