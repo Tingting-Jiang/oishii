@@ -59,7 +59,7 @@ module.exports = (app) => {
                     user.favRecipeList.splice(idx, 1);
                 }
                 userDao.updateUser(id, user)
-                    .then(status => res.send(status));
+                    .then(user => res.send(user));
             });
     }
     

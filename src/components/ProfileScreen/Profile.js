@@ -106,7 +106,7 @@ const Profile = () => {
         
                 <div>
                     <h2 className="wd-block-title">
-                        Username's Recipes
+                        {user.username}'s Recipes
                     </h2>
                     <div className="card-group">
                         <div className="card">
@@ -167,7 +167,7 @@ const Profile = () => {
         
                 <div>
                     <h2 className="wd-block-title">
-                        Username's Favorites
+                        {user.username}'s Favorites
                     </h2>
                     <div className="card-group">
                         <div className="card">
@@ -227,7 +227,7 @@ const Profile = () => {
         
                 <div>
                     <h2 className="wd-block-title">
-                        They like Username!
+                        They like {user.username}!
                     </h2>
                     <div className="wd-like-user-container">
                         <ul className="nav wd-like-user">
