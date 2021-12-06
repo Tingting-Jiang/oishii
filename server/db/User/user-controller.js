@@ -39,8 +39,11 @@ module.exports = (app) => {
                 userDao.createUser(req.body)
                     .then(user => {
                         user["fav-dish"] = user.favRecipeList;
+                        console.log("user in Mongo -->", user);
                         req.session['profile'] = user;
-                        req.session["home"] = user;
+                        req.session['/'] = user;
+                        console.log("In session --> ", req.session);
+    
                         res.json(user)
                     });
             })
@@ -48,20 +51,25 @@ module.exports = (app) => {
     
     
     const likeRecipe= (req, res) => {
-        const id = req.params.id;
-        const recipeID = req.body.recipeId;
-        userDao.findUserById(id)
+        const username = req.body.username;
+        console.log("user is -->", username);
+        const recipe = req.body.recipeID;
+        console.log("recipeID", recipe);
+        userDao.findByUsername(req.body)
             .then(user => {
-                const idx = user.favRecipeList.indexOf(recipeID);
+                // console.log("returned user -->", user);
+                
+                const idx = user.favRecipeList.indexOf(recipe);
                 if (idx === -1 ) {
-                    user.favRecipeList.push(recipeID)
+                    user.favRecipeList.push(recipe)
                 } else {
                     user.favRecipeList.splice(idx, 1);
                 }
-                userDao.updateUser(id, user)
-                    .then(user => res.send(user));
-            });
-    }
+                // console.log(" new list -->", favRecipeList);
+                userDao.updateFavRecipe(req.body.username, user)
+                    .then(status => res.json(user.favRecipeList)
+            );
+    })};
     
     
     
@@ -79,5 +87,5 @@ module.exports = (app) => {
     app.delete('/api/users/:userId', deleteUser);
     app.get('/api/users', findAllUsers);
     app.get('/api/users/:userId', findUserById);
-    app.post('/api/like/:recipeId', likeRecipe);
+    app.put('/api/like', likeRecipe);
 };

@@ -12,9 +12,10 @@ const Login = () => {
     const login = () => {
         userService.login(user)
            .then(status => {
-            navigate('/profile')
+               console.log(user);
+                navigate('/profile');
         })};
-    //
+
     
     return (
         <>

@@ -40,12 +40,23 @@ export const logout = () =>
         .then(res => res.json());
 
 
-export const likeRecipe = (recipeID) =>
-    fetch(`${API_URL}/like/${recipeID}`, {
+export const likeRecipe = (recipeID, username) =>
+    fetch(`${API_URL}/like`, {
         method: "PUT",
-    }).then((response) =>
-        console.log("back from DB like recipe")
-        );
+        body: JSON.stringify({recipeID: recipeID, username: username}),
+        credentials: 'include',
+        headers: {
+            'content-type': 'application/json'
+        }
+        })
+        .then(res => res.json());
+
+// export const likeRecipe = (recipeID) =>
+//     fetch(`${API_URL}/like/${recipeID}`, {
+//         method: "PUT",
+//     })
+//         .then(res => res.json());
+//
 
 
 

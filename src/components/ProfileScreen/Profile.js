@@ -33,7 +33,7 @@ const Profile = () => {
                     <div className="col-6 col-md-6 align-self-center">
                         <ul className="nav justify-content-left">
                             <li className="nav-item">
-                                <a className="nav-link active" aria-current="page" href="#">Home</a>
+                                <a className="nav-link active" aria-current="page" href="/">Home</a>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="#">Recipes</a>

@@ -11,8 +11,9 @@ const ExploreAndTrending = () => {
     const [searchResult, setSearchResult] = useState([]);
     const [trending, setTrending] = useState([]);
     const [latest, setLatest] = useState([]);
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState({favRecipeList: []});
     const navigate = useNavigate();
+    // const [userFav, setUserFav] = useState([]);
     
     const searchByIngredient = () =>
         recipeService.fetchByIngredients(searchTerm)
@@ -20,7 +21,10 @@ const ExploreAndTrending = () => {
     
     useEffect(() =>{
         userService.getProfile()
-            .then(user => setUser(user));
+            .then(user => {
+                console.log("in client-->", user);
+                setUser(user)
+            });
     }, [])
     
     
@@ -31,18 +35,34 @@ const ExploreAndTrending = () => {
             .then(data => setSearchResult(data))
     };
     
+    //
+    // useEffect( () =>
+    //     userService.getProfile()
+    //         .then(user => setUser(user))
+    //         .catch(e => navigate('/login')), [user]);
+    //
+    //
     
-    // const likeRecipeHandler = () => {
-    //     // dispatch({ type: "like-tweet", tweet });
-    //     userService.likeRecipe(recipeID);
-    // };
+    
+    
+    
+    const likeRecipeHandler = (recipeID) => {
+        // dispatch({ type: "like-tweet", tweet });
+        console.log("recipe id-->", recipeID);
+        // console.log(user._id);
+        userService.likeRecipe(recipeID, user.username)
+            .then(data => {
+            console.log("back from server, recipeList -->", data);
+            setUser({...user, favRecipeList :data});
+            });
+    };
 
     
-    // useEffect(() =>
-    //     recipeService.fetchTrending()
-    //         .then(data =>{
-    //             setTrending(data.recipes);
-    //         }), []);
+    useEffect(() =>
+        recipeService.fetchTrending()
+            .then(data =>{
+                setTrending(data.recipes);
+            }), []);
 
     // useEffect(() =>
     //     recipeService.fetchTrending()
@@ -50,10 +70,10 @@ const ExploreAndTrending = () => {
     //             setLatest(data.recipes);
     //         }), []);
 
-    console.log("trending -->", trending);
+    // console.log("trending -->", trending);
     
     
-    
+    console.log("later -->", user);
     
     
     return (
@@ -135,7 +155,7 @@ const ExploreAndTrending = () => {
                         <div className="wd-user-info text-center">
                             <img className="wd-profile-img"
                                  src="../../images/sample-user.jpeg"/>
-                                <h5 className="wd-username">Hello</h5>
+                                <h5 className="wd-username">Hello {user.username}</h5>
                                 <h6 className="wd-username">Ready to find some Oishii?</h6>
                                 <button className="btn btn-outline-primary wd-button my-2">
                                     Login | Register
@@ -255,8 +275,11 @@ const ExploreAndTrending = () => {
                             {trending.map((item) =>(
                                 <div className="card">
                                     <img src={item.image} className="card-img-top wd-card-img" alt="sample"/>
-                                    <button className="btn btn-outline-primary wd-button wd-button-on-img">
-                                        <i className="fas fa-heart"></i>
+                                    <button className="btn btn-outline-primary wd-button wd-button-on-img"
+                                        onClick={() => likeRecipeHandler(item.id)}>
+                                        <i className="fas fa-heart text"
+                                           style={{ color: user.favRecipeList.includes(item.id) ? "red" : "white" }}
+                                        ></i>
                                     </button>
                                     <div className="card-body">
                                         <h5 className="card-title">{item.title}</h5>
