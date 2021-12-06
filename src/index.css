@@ -75,19 +75,6 @@ code {
   font-weight: bold;
 }
 
-h1, h2, h3 {
-  font-family: 'Pacifico', serif;
-  text-shadow: 2px 2px 2px #d9bfbf
-}
-
-h1 {
-  color: #F17C67;
-  text-shadow: none;
-}
-
-h6 {
-  color: #4d4d4d;
-}
 
 /*color*/
 .wd-color-coral {
@@ -112,4 +99,26 @@ body {
 .form-control:focus, .wd-button:focus, .wd-in-search-button:focus {
   border-color: #F17C67;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 6px rgb(241, 124, 103);
+}
+
+/*link*/
+h1>a, h1>a:link, h1>a:hover, h1>a:focus, h1>a:visited {
+  text-decoration: none;
+  color: #F17C67;
+}
+
+/*headings*/
+h1, h2, h3 {
+  font-family: 'Pacifico', serif;
+  text-shadow: 2px 2px 2px #d9bfbf
+}
+
+h1 {
+  color: #F17C67!important;
+  text-shadow: none;
+  z-index: 1;
+}
+
+h6 {
+  color: #4d4d4d;
 }

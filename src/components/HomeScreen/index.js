@@ -2,13 +2,23 @@ import React from "react";
 import "./home.css"
 
 import Header from "../Header";
+import Greeting from "../HomeScreen/HomeGreeting";
+import CategoryNav from "./CategoryNav";
 
 const HomeScreen = () => {
     return (
         <div className="container mt-2">
             <Header active="home"/>
 
+            <Greeting />
 
+            <CategoryNav />
+
+            <h1>user favorites</h1>
+
+            <h1>explore latest</h1>
+
+            <h1>trending</h1>
 
             <div className="wd-footer">
                 <div>
