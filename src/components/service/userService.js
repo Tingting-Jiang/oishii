@@ -51,12 +51,19 @@ export const likeRecipe = (recipeID, username) =>
         })
         .then(res => res.json());
 
-// export const likeRecipe = (recipeID) =>
-//     fetch(`${API_URL}/like/${recipeID}`, {
-//         method: "PUT",
-//     })
-//         .then(res => res.json());
-//
+export const createRecipe = (newRecipe) =>
+    fetch(`${API_URL}/create`, {
+        method: "POST",
+        body: JSON.stringify(newRecipe),
+        credentials: 'include',
+        headers: {
+            'content-type': 'application/json'
+        }
+    })
+        .then(res => res.json());
+
+
+
 
 
 
@@ -66,5 +73,6 @@ export default {
     register,
     getProfile,
     logout,
-    likeRecipe
+    likeRecipe,
+    createRecipe
 };

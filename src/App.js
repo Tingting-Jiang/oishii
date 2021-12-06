@@ -10,6 +10,7 @@ import Profile from './components/ProfileScreen/Profile'
 
 import Home from './components/HomeScreen';
 import Header from './components/Header'
+import CreateScreen from './components/CreateScreen/createScreen'
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
                     <Route path="/register" element={<Register/>}/>
                     <Route path="/profile" element={<Profile/>}/>
                     <Route path="/recipe/:id" element={<RecipeScreen/>}/>
+                    <Route path="/create" element={<CreateScreen/>}/>
 
                     <Route path="/home" element={<Home/>} />
                     <Route path="/home1" element={<Header/>} />

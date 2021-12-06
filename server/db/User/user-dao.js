@@ -23,11 +23,15 @@ const updateUser = (user) =>
 
 const updateFavRecipe = (username, user) =>
 
-    userModel.updateOne({username: username}, {
-        $set: user });
+    userModel.updateOne({username: username},
+        { $set: user });
 
 const deleteUser = (userId) =>
     userModel.deleteOne({_id: userId});
+
+const createRecipe = (username, recipe ) =>
+    userModel.updateOne({username},
+        {$push: {usersRecipe : recipe}});
 
 module.exports = {
     findByUsername,
@@ -37,5 +41,6 @@ module.exports = {
     createUser,
     updateUser,
     deleteUser,
-    updateFavRecipe
+    updateFavRecipe,
+    createRecipe
 };

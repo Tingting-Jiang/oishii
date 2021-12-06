@@ -51,25 +51,61 @@ module.exports = (app) => {
     
     
     const likeRecipe= (req, res) => {
-        const username = req.body.username;
-        console.log("user is -->", username);
         const recipe = req.body.recipeID;
-        console.log("recipeID", recipe);
         userDao.findByUsername(req.body)
             .then(user => {
-                // console.log("returned user -->", user);
-                
                 const idx = user.favRecipeList.indexOf(recipe);
                 if (idx === -1 ) {
                     user.favRecipeList.push(recipe)
                 } else {
                     user.favRecipeList.splice(idx, 1);
                 }
-                // console.log(" new list -->", favRecipeList);
                 userDao.updateFavRecipe(req.body.username, user)
                     .then(status => res.json(user.favRecipeList)
             );
     })};
+    
+    const createRecipe = (req, res) =>{
+        
+        // deal with ingredients
+        let oldIngredients = req.body.extendedIngredients;
+        const symbol = /\s*(?:;,|$)\s*/
+        console.log("ingredients before parsing", oldIngredients);
+        const ingredients = oldIngredients.split(",");
+        console.log("ingredients parsing___", typeof oldIngredients);
+        console.log("ingredients parsing ==", oldIngredients);
+        let newIngredients = [];
+        for (let item of ingredients) {
+            console.log(" in for loop, item is --", item);
+            let container = { original : item};
+            newIngredients.push(container);
+        }
+        console.log("after parsing : =====", newIngredients);
+        
+        
+        let instructions = req.body.analyzedInstructions;
+        console.log("instructions before parsing -------------", instructions);
+      
+        let newInstructions = [];
+        for (let item of instructions) {
+            console.log(" in for loop, item is --", item);
+            let steps = { steps : item};
+            newInstructions.push(steps);
+        }
+        console.log("after parsing : =====", newInstructions);
+        const recipe = {
+            ...req.body,
+            extendedIngredients: newIngredients,
+            analyzedInstructions: newInstructions,
+        };
+    
+        userDao.createRecipe("dan", recipe )
+            .then(status => res.sendStatus(200));
+        
+        
+        
+        
+    }
     
     
     
@@ -88,4 +124,5 @@ module.exports = (app) => {
     app.get('/api/users', findAllUsers);
     app.get('/api/users/:userId', findUserById);
     app.put('/api/like', likeRecipe);
+    app.post('/api/create', createRecipe);
 };
