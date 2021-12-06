@@ -3,14 +3,15 @@ import userService from '../service/userService'
 
 const CreateScreen = () => {
     
-    const [recipe, setRecipe] = useState({});
+    const [recipe] = useState({});
     const [title, setTitle] = useState("");
     const [summary, setSummary] = useState("");
     const [servings, setServings] = useState(0);
     const [time, setTime] = useState(0);
-    const [imageURL, setImage] = useState();
+    const [imageURL, setImage] = useState(new FormData());
     const [ingredients, setIngredients] = useState("");
-    const [instructions, setInstructions] = useState([]);
+    const [instructions, setInstructions] = useState(
+        ["","","",""]);
     
     
     const submitRecipe = () =>{
@@ -19,6 +20,7 @@ const CreateScreen = () => {
             title,
             summary,
             servings,
+            image: imageURL,
             readyInMinutes: time,
             extendedIngredients: ingredients,
             analyzedInstructions: instructions,
@@ -30,32 +32,38 @@ const CreateScreen = () => {
     }
     
     
+    // const handleImageUpload = (event) => {
+    //     const files = event.target.files
+    //     const formData = new FormData()
+    //     formData.append('myFile', files[0])
+    //     // setImage(formData);
+    //
+    //     fetch('/saveImage', {
+    //         method: 'POST',
+    //         body: formData
+    //     })
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             console.log(data.path)
+    //         })
+    //         .catch(error => {
+    //             console.error(error)
+    //         })
+    // }
+    
     const handleImageUpload = (event) => {
-        const files = event.target.files
-        const formData = new FormData()
-        formData.append('myFile', files[0])
-        // setImage(formData);
-        
-        fetch('/saveImage', {
-            method: 'POST',
-            body: formData
-        })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data.path)
-            })
-            .catch(error => {
-                console.error(error)
-            })
+        console.log("inside image function");
+        const files = event.target.files;
+        imageURL.append('myFile', files[0])
+        setImage(imageURL);
+        console.log(imageURL);
     }
     
-    const addInstructions = (e) =>{
-        const newInstructions = [...instructions, e.target.value];
-        setInstructions(newInstructions);
+    const addInstructions = () => {
+        setInstructions([...instructions, ""]);
     }
     
-    
-    
+    console.log("out", imageURL);
     
     return(
         <>
@@ -185,44 +193,39 @@ const CreateScreen = () => {
                             <div className="form-label">
                                 Instructions
                             </div>
-                            <div className="d-flex mb-3">
-                                <label className="m-3 wd-step-number"
-                                       htmlFor="instructionInput1">
-                                    1
-                                </label>
-                                <textarea className="form-control"
-                                          id="instructionInput1"
-                                        value={instructions[1]}
-                                        onChange={e => addInstructions(e)}></textarea>
-                            </div>
-                            <div className="d-flex mb-3">
-                                <label className="m-3 wd-step-number"
-                                       htmlFor="instructionInput2">
-                                    2
-                                </label>
-                                <textarea className="form-control" id="instructionInput2"
-                                          value={instructions[2]}
-                                          onChange={e => addInstructions(e)}></textarea>
-                            </div>
-                            <div className="d-flex mb-3">
-                                <label className="m-3 wd-step-number"
-                                       htmlFor="instructionInput3">
-                                    3
-                                </label>
-                                <textarea className="form-control" id="instructionInput3"
-                                          value={instructions[3]}
-                                          onChange={e => addInstructions(e)}></textarea>
-                            </div>
-                            <div className="d-flex mb-3">
-                                <label className="m-3 wd-step-number"
-                                       htmlFor="instructionInput4">
-                                    4
-                                </label>
-                                <textarea className="form-control" id="instructionInput4"
-                                          value={instructions[4]}
-                                          onChange={e => addInstructions(e)}></textarea>
-                            </div>
-                    
+    
+    
+                            {/*<div className="d-flex mb-3">*/}
+                            {/*    <label className="m-3 wd-step-number"*/}
+                            {/*           htmlFor="instructionInput1">*/}
+                            {/*        1*/}
+                            {/*    </label>*/}
+                            {/*    <textarea className="form-control" id="instructionInput1"></textarea>*/}
+                            {/*</div>*/}
+                           
+                            
+                            
+                            {instructions.map((data, index) => {
+                                return (
+                                <div className="d-flex mb-3">
+                                    <label className="m-3 wd-step-number"
+                                           htmlFor="instructionInput1">
+                                        {index + 1}
+                                    </label>
+                                    <textarea className="form-control"
+                                              id="instructionInput1"
+                                              value={instructions[index]}
+                                              onChange={ e =>{
+                                                  instructions[index] = e.target.value;
+                                                  setInstructions([...instructions]);
+                                              }}></textarea>
+                                    {/*<button className="btn btn-danger"> Remove</button>*/}
+                                </div>
+                                )
+                            })}
+                         
+                           
+                            
                             <div className="d-flex mb-3">
                                 <label className="m-3">
                                     (new step input box will be added here.)
@@ -230,7 +233,8 @@ const CreateScreen = () => {
                             </div>
                     
                     
-                            <button className="btn btn-outline-primary wd-button wd-button-transparent">
+                            <button className="btn btn-outline-primary wd-button wd-button-transparent"
+                                onClick={addInstructions}>
                                 Add another step
                             </button>
                         </div>

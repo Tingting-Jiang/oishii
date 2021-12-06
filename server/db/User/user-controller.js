@@ -1,6 +1,7 @@
 const userDao = require('./user-dao');
 
 module.exports = (app) => {
+    
     const findAllUsers = (req, res) =>
         userDao.findAllUsers()
             .then(users => res.json(users));
@@ -39,10 +40,10 @@ module.exports = (app) => {
                 userDao.createUser(req.body)
                     .then(user => {
                         user["fav-dish"] = user.favRecipeList;
-                        console.log("user in Mongo -->", user);
+                        // console.log("user in Mongo -->", user);
                         req.session['profile'] = user;
                         req.session['/'] = user;
-                        console.log("In session --> ", req.session);
+                        // console.log("In session --> ", req.session);
     
                         res.json(user)
                     });
@@ -70,13 +71,9 @@ module.exports = (app) => {
         // deal with ingredients
         let oldIngredients = req.body.extendedIngredients;
         const symbol = /\s*(?:;,|$)\s*/
-        console.log("ingredients before parsing", oldIngredients);
         const ingredients = oldIngredients.split(",");
-        console.log("ingredients parsing___", typeof oldIngredients);
-        console.log("ingredients parsing ==", oldIngredients);
         let newIngredients = [];
         for (let item of ingredients) {
-            console.log(" in for loop, item is --", item);
             let container = { original : item};
             newIngredients.push(container);
         }
@@ -84,11 +81,8 @@ module.exports = (app) => {
         
         
         let instructions = req.body.analyzedInstructions;
-        console.log("instructions before parsing -------------", instructions);
-      
         let newInstructions = [];
         for (let item of instructions) {
-            console.log(" in for loop, item is --", item);
             let steps = { steps : item};
             newInstructions.push(steps);
         }

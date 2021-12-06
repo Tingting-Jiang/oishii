@@ -4,8 +4,8 @@ const app = express();
 
 
 //MongoDB
-const URL = 'mongodb://localhost:27017/Oishii';
-// const URL = "mongodb+srv://oishii:oishii@cluster0.9hn8c.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+// const URL = 'mongodb://localhost:27017/Oishii';
+const URL = "mongodb+srv://oishii:oishii@cluster0.9hn8c.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 
 const mongoose = require('mongoose');
 mongoose.connect(URL);
