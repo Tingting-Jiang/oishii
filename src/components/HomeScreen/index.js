@@ -5,6 +5,7 @@ import Header from "../Header";
 import Greeting from "../HomeScreen/HomeGreeting";
 import CategoryNav from "./CategoryNav";
 import RecipeCards from "../RecipeCards";
+import Footer from "../Footer";
 
 const HomeScreen = () => {
     return (
@@ -17,13 +18,7 @@ const HomeScreen = () => {
 
             <RecipeCards />
 
-            <div className="wd-footer">
-                <div>
-                    <h3>Oishii</h3>
-                    <p>Presented by Project Oishii Group</p>
-                    <span>Privacy Policy</span> | <span>Send Feedback</span>
-                </div>
-            </div>
+            <Footer />
         </div>
     )
 }
