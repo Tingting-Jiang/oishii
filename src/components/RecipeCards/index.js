@@ -37,7 +37,7 @@ const RecipeCards = () => {
                 setTrendingList(data.recipes);
             }), []);
 
-    console.log(trendingList);
+    // console.log(trendingList);
 
     return (
         <>
@@ -50,7 +50,7 @@ const RecipeCards = () => {
                     <div className="card-group">
                         {
                             userFavRecipes.map(recipeId =>
-                                <RecipeCardItem key={recipeId} recipeId={recipeId} user={user}/>
+                                <RecipeCardItem key={recipeId} recipeId={recipeId} user={user} setUser={setUser}/>
                             )
                         }
                     </div>
@@ -64,7 +64,7 @@ const RecipeCards = () => {
                 <div className="card-group">
                     {
                         latestList.map(recipe =>
-                            <RecipeCardItemByObject key={recipe.id} recipe={recipe} user={user}/>
+                            <RecipeCardItemByObject key={recipe.id} recipe={recipe} user={user} setUser={setUser}/>
                         )
                     }
                 </div>
@@ -77,7 +77,7 @@ const RecipeCards = () => {
                 <div className="card-group">
                     {
                         trendingList.map(recipe =>
-                            <RecipeCardItemByObject key={recipe.id} recipe={recipe} user={user}/>
+                            <RecipeCardItemByObject key={recipe.id} recipe={recipe} user={user} setUser={setUser}/>
                         )
                     }
                 </div>

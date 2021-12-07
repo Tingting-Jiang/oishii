@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from "react";
-import {likeRecipe} from "../service/userService";
 
 import recipeService from "../service/recipeService";
+import userService from "../service/userService";
 
-const RecipeCardItem = ({recipeId, user}) => {
-    console.log("recipeId");
-    console.log(recipeId);
+const RecipeCardItem = (paras) => {
+    let recipeId = paras.recipeId;
+    let user = paras.user;
+    const setUser = paras.setUser;
+
     const [recipe, setRecipe] = useState({});
     useEffect(() => {
             recipeService.fetchByID(recipeId)
@@ -23,17 +25,18 @@ const RecipeCardItem = ({recipeId, user}) => {
 
     // TODO like function
     const likeRecipeHandler = () => {
-        // likeRecipe(dispatch, recipe);
-
-        // // dispatch({ type: "like-tweet", tweet });
-        // console.log("recipe id-->", recipeID);
-        // // console.log(user._id);
-        // userService.likeRecipe(recipeID, user.username)
-        //     .then(data => {
-        //         console.log("back from server, recipeList -->", data);
-        //         setUser({...user, favRecipeList :data});
-        //     });
+        if (user.username) {
+            userService.likeRecipe(recipeId, user.username)
+                .then(data => {
+                    // console.log("back from server, recipeList -->", data);
+                    setUser({...user, favRecipeList: data});
+                });
+        }
     };
+
+    if (!recipe.image) {
+        recipe.image = "/images/sample-recipe/thumbnail_sample.jpg";
+    }
 
     return (
         <div className="card mx-2">

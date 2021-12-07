@@ -1,9 +1,18 @@
 import React from "react";
-import {likeRecipe} from "../service/userService";
+import userService from "../service/userService";
 
-const RecipeCardItemByObject = ({recipe, user}) => {
-    console.log("recipe");
-    console.log(recipe);
+const RecipeCardItemByObject = (paras) => {
+    // console.log("recipe");
+    // console.log(paras.recipe);
+    // console.log("user");
+    // console.log(paras.user);
+    // console.log("setUser");
+    // console.log(paras.setUser);
+
+    // dont know why I can not pass 3 parameters, react regards them as a whole.
+    let recipe = paras.recipe;
+    let user = paras.user;
+    const setUser = paras.setUser;
 
     let heartClassName = "fas fa-heart";
 
@@ -11,22 +20,18 @@ const RecipeCardItemByObject = ({recipe, user}) => {
         heartClassName = "fas fa-heart wd-color-red";
     }
 
-    // TODO like function
-    const likeRecipeHandler = () => {
-        // likeRecipe(dispatch, recipe);
-
-        // // dispatch({ type: "like-tweet", tweet });
-        // console.log("recipe id-->", recipeID);
-        // // console.log(user._id);
-        // userService.likeRecipe(recipeID, user.username)
-        //     .then(data => {
-        //         console.log("back from server, recipeList -->", data);
-        //         setUser({...user, favRecipeList :data});
-        //     });
+    const likeRecipeHandler = (recipeId) => {
+        if (user.username) {
+            userService.likeRecipe(recipeId, user.username)
+                .then(data => {
+                    // console.log("back from server, recipeList -->", data);
+                    setUser({...user, favRecipeList: data});
+                });
+        }
     };
 
     if (!recipe.image) {
-        recipe.image = "/images/thumbnail_sample.jpg";
+        recipe.image = "/images/sample-recipe/thumbnail_sample.jpg";
     }
 
     return (
