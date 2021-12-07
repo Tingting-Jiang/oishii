@@ -1,6 +1,9 @@
 import React from "react";
 import "./categoryNav.css";
 
+//TODO: pages for each link
+// maybe just search/salad ?
+
 const CategoryNav = () => {
     return (
         <div className="wd-category-container flex">

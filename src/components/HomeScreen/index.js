@@ -4,6 +4,7 @@ import "./home.css"
 import Header from "../Header";
 import Greeting from "../HomeScreen/HomeGreeting";
 import CategoryNav from "./CategoryNav";
+import RecipeCards from "../RecipeCards";
 
 const HomeScreen = () => {
     return (
@@ -14,11 +15,11 @@ const HomeScreen = () => {
 
             <CategoryNav />
 
-            <h1>user favorites</h1>
+            <RecipeCards type="userFavorites"/>
 
-            <h1>explore latest</h1>
+            <RecipeCards type="latest"/>
 
-            <h1>trending</h1>
+            <RecipeCards type="trending"/>
 
             <div className="wd-footer">
                 <div>
