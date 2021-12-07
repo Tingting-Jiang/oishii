@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import HeaderNavItem from "./HeaderNavItem";
 import headerNavs from "./headerNavs.json";
 import "./header.css";
@@ -13,8 +13,6 @@ const Header = ({
     for (let i = 0; i < headerNavs.length; i++) {
         headerNavs[i].isActive = (headerNavs[i].navTitle === active);
     }
-
-    // TODO submit search term and direct to search page
     
     // data part starts from here ----------------
     const [searchTerm, setSearchTerm] = useState("");

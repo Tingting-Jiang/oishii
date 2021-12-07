@@ -15,11 +15,7 @@ const HomeScreen = () => {
 
             <CategoryNav />
 
-            <RecipeCards type="userFavorites"/>
-
-            <RecipeCards type="latest"/>
-
-            <RecipeCards type="trending"/>
+            <RecipeCards />
 
             <div className="wd-footer">
                 <div>

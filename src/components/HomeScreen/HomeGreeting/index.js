@@ -1,11 +1,25 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import "./homeGreeting.css";
 import {Link} from "react-router-dom";
+import {useSelector} from "react-redux";
+import userService from "../../service/userService";
 
-// TODO: This file needs user session info.
-// show "your kitchen if logged in, show Login | Register if not logged in
+// TODO: need check on why state does not work
 
 const Greeting = () => {
+    // const user = useSelector((state) => state);
+    // console.log("in home: ", user);
+
+    const [user, setUser] = useState({});
+
+    useEffect(() =>{
+        userService.getProfile()
+            .then(user => {
+                console.log("home is setting user -->", user);
+                setUser(user)
+            });
+    }, [])
+
     return (
         <div className="wd-about">
             <img className="wd-about-img"
@@ -15,13 +29,21 @@ const Greeting = () => {
                     <img className="wd-profile-img"
                          src="/images/sample-user.jpeg"
                          alt=""/>
-                        <h5 className="wd-username">Hello</h5>
+                        <h5 className="wd-username">Hello {user.username}</h5>
                         <h6 className="wd-username">Ready to find some Oishii?</h6>
                         <Link to="/profile">
-                            <button className="btn btn-outline-primary wd-button my-2"
-                                    onClick="window.location.href='profile';">
-                                Your Kitchen
-                            </button>
+                            {
+                                user.username &&
+                                <button className="btn btn-outline-primary wd-button my-2">
+                                    Your Kitchen
+                                </button>
+                            }
+                            {
+                                !user.username &&
+                                <button className="btn btn-outline-primary wd-button my-2">
+                                    Login / Register
+                                </button>
+                            }
                         </Link>
                 </div>
         </div>

@@ -11,6 +11,7 @@ const CreateScreen = () => {
     console.log(" in Create page, user is", user);
     
     const [recipe] = useState({});
+
     const [title, setTitle] = useState("");
     const [summary, setSummary] = useState("");
     const [servings, setServings] = useState(0);

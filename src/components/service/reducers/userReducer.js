@@ -11,9 +11,7 @@ const userReducer = (state = {}, action) => {
             console.log("in reducer", state);
             return state;
 
-            
-            
-        
+
         case "update-profile":
             const updatedProfile = {
                 ...state.profile,
