@@ -1,8 +1,14 @@
 import React, { useState } from 'react'
 import userService from '../service/userService';
 import Progress  from "./Progress";
+import { useSelector } from 'react-redux'
 
+
+
+// const getUser = (state) => state.userReducer.user;
 const CreateScreen = () => {
+    const user = useSelector((state) => state);
+    console.log(" in Create page, user is", user);
     
     const [recipe] = useState({});
     const [title, setTitle] = useState("");
@@ -125,13 +131,13 @@ const CreateScreen = () => {
                     <div className="col-6 col-md-6 align-self-center">
                         <ul className="nav justify-content-left">
                             <li className="nav-item">
-                                <a className="nav-link active" aria-current="page" href="#">Home</a>
+                                <a className="nav-link active" aria-current="page" href="/">Home</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link wd-color-coral fw-bold" href="#">Recipes</a>
+                                <a className="nav-link wd-color-coral fw-bold" href="/create">Recipes</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="#">Profile</a>
+                                <a className="nav-link" href="/profile">Profile</a>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="#">About</a>

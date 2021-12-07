@@ -1,34 +1,30 @@
 import React, { useState } from 'react';
 import {useNavigate} from "react-router-dom";
 import userService from '../service/userService'
+import { useDispatch } from 'react-redux'
 
 
 
 const Register = () => {
-    // const [user, setUser] = useState({username: 'alice', password: 'alice123'});
     const [user, setUser] = useState({});
     
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     
     const register = () => {
         userService.register(user)
-            .then(status => {
+            .then((response) => response.json())
+            .then(newUser => {
+                console.log(newUser);
+                dispatch({
+                    type: "get-user",
+                    newUser
+                });
                 navigate('/profile')
             })
             .catch(e => console.log(e));
     };
     
-    
-    // const register = () => {
-    //     fetch(`${API_URL}/register`, {
-    //         method: 'POST',
-    //         body: JSON.stringify(user),
-    //         credentials: 'include',
-    //         headers: {
-    //             'content-type': 'application/json'
-    //         }
-    //     }).then(status => navigate('/profile'));
-    // };
     
     return (
         <>

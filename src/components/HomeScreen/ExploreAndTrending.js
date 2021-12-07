@@ -15,17 +15,19 @@ const ExploreAndTrending = () => {
     const navigate = useNavigate();
     // const [userFav, setUserFav] = useState([]);
     
+   
+    
     const searchByIngredient = () =>
         recipeService.fetchByIngredients(searchTerm)
             .then(data =>setRecipeList(data));
     
-    useEffect(() =>{
-        userService.getProfile()
-            .then(user => {
-                console.log("in client-->", user);
-                setUser(user)
-            });
-    }, [])
+    // useEffect(() =>{
+    //     userService.getProfile()
+    //         .then(user => {
+    //             console.log("in client-->", user);
+    //             setUser(user)
+    //         });
+    // }, [])
     
     
     
@@ -89,7 +91,7 @@ const ExploreAndTrending = () => {
                                 <a className="nav-link active" aria-current="page" href="#">Home</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="#">Recipes</a>
+                                <a className="nav-link" href="/create">Recipes</a>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="/profile">Profile</a>

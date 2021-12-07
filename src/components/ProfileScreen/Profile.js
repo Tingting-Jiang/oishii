@@ -3,14 +3,25 @@ import "./profile.css";
 import "../oishii.css"
 import { useNavigate } from 'react-router';
 import userService from '../service/userService'
+import { useDispatch, useSelector } from 'react-redux'
+
+
 
 
 const Profile = () => {
+    // const userReducer = useSelector(state => state.user);
     const [user, setUser] = useState({});
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const getProfile = () =>
         userService.getProfile()
-            .then(user => setUser(user))
+            .then(newUser => {
+                setUser(newUser);
+                dispatch({
+                    type: "get-user",
+                    newUser,
+                });
+            })
             .catch(e => navigate('/login'));
     
     
@@ -36,7 +47,7 @@ const Profile = () => {
                                 <a className="nav-link active" aria-current="page" href="/">Home</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="#">Recipes</a>
+                                <a className="nav-link" href="/create">Recipes</a>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="#">Profile</a>
