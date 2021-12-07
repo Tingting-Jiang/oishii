@@ -40,7 +40,7 @@ const Header = ({
         <>
             <div className="row wd-home-header">
                 <div className="col-2 col-md-2">
-                    <h1>Oishii</h1>
+                    <h1><a href="/home">Oishii</a></h1>
                 </div>
                 <div className="col-6 col-md-6 align-self-center">
                     <ul className="nav justify-content-left">

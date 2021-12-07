@@ -1,0 +1,32 @@
+/*user greeting*/
+
+.wd-about {
+    margin-top: 20px;
+    height: 500px;
+}
+
+.wd-about-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.wd-user-info {
+    background-color: rgba(255, 255, 255, 0.5);
+    position: absolute;
+    left: 20%;
+    top: 140px;
+    padding: 40px;
+    border-radius: 10px;
+}
+
+.wd-username {
+    margin: 10px 0;
+}
+
+.wd-profile-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 8px solid #ffffff;
+}
