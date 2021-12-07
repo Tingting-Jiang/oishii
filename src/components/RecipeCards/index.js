@@ -18,13 +18,23 @@ const RecipeCards = (
             });
     }, [])
 
+    useEffect(() =>
+        recipeService.fetchTrending()
+            .then(data =>{
+                setRecipeList(data.recipes);
+            }), []);
+
+    // card list title
+    let blockTitle = "";
     switch (type) {
         case "userFavorites":
-             = user.favRecipeList;
+            blockTitle = "Your Favorites";
             break;
         case "latest":
+            blockTitle = "Explore Latest";
             break;
         case "trending":
+            blockTitle = "Trending Recipes";
             break;
         default:
             break;
@@ -33,7 +43,7 @@ const RecipeCards = (
     return (
         <div>
             <h2 className="wd-block-title">
-                Your Favorites
+                {blockTitle}
             </h2>
             <div className="card-group">
                 <div className="card mx-2">

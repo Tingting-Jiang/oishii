@@ -11,9 +11,9 @@ const userReducer = (state = initialState, action) => {
             console.log("before", state.user);
             state = {
                 ...state,
-                user: action.user[0],
+                user: action.user,
             };
-            console.log("in reducer", action.user[0]);
+            console.log("in reducer", action.user);
             return state;
         
         // return action.profile;
