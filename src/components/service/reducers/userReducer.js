@@ -1,22 +1,18 @@
-// import owner from "./data/profile.json";
 //
-const initialState = {
-    user: {},
-};
+// const initialState = {
+//     user: {},
+// };
 
-const userReducer = (state = initialState, action) => {
+const userReducer = (state = {}, action) => {
     switch (action.type) {
         case "get-user":
             console.log("state: ", state);
-            console.log("before", state.user);
-            state = {
-                ...state,
-                user: action.user[0],
-            };
-            console.log("in reducer", action.user[0]);
+            state = action.newUser;
+            console.log("in reducer", state);
             return state;
-        
-        // return action.profile;
+
+            
+            
         
         case "update-profile":
             const updatedProfile = {
@@ -34,7 +30,12 @@ const userReducer = (state = initialState, action) => {
             };
             
             return state;
+        case "set_user":
+            state = action.user;
+            console.log("after setting user", state);
+            return state;
         default:
+            console.log("in default ", state);
             return state;
     }
 };

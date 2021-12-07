@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+
 import './App.css';
 import Show from './components/service/Show'
 import RecipeScreen from './components/RecipeScreen/RecipeScreen'
@@ -11,11 +11,9 @@ import Profile from './components/ProfileScreen/Profile'
 import Home from './components/HomeScreen';
 import Header from './components/Header'
 import CreateScreen from './components/CreateScreen/createScreen';
-import { createStore } from 'redux'
+import {  createStore } from 'redux'
 import userReducer from './components/service/reducers/userReducer'
 import { Provider } from 'react-redux'
-
-
 
 const store = createStore(userReducer);
 

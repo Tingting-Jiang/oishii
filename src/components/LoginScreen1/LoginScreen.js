@@ -2,18 +2,25 @@ import React, { useState } from 'react';
 import {useNavigate} from "react-router-dom";
 import userService from '../service/userService'
 import "../oishii.css";
+import { useDispatch } from 'react-redux'
 
 
 
 const Login = () => {
     const [user, setUser] = useState({});
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const login = () => {
         userService.login(user)
-           .then(status => {
-               console.log(user);
-                navigate('/profile');
+            .then((response) => response.json())
+            .then(newUser => {
+               console.log(newUser);
+               dispatch({
+                   type: "get-user",
+                   newUser,
+               });
+                navigate('/create');
         })};
 
     
