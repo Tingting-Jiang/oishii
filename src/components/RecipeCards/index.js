@@ -20,7 +20,7 @@ const RecipeCards = (
 
     switch (type) {
         case "userFavorites":
-            recipeIDs = user.favRecipeList;
+             = user.favRecipeList;
             break;
         case "latest":
             break;

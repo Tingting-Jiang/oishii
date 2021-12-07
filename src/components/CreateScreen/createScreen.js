@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import userService from '../service/userService'
+import userService from '../service/userService';
+import Progress  from "./Progress";
 
 const CreateScreen = () => {
     
@@ -8,19 +9,24 @@ const CreateScreen = () => {
     const [summary, setSummary] = useState("");
     const [servings, setServings] = useState(0);
     const [time, setTime] = useState(0);
-    const [imageURL, setImage] = useState(new FormData());
+    const [file, setFile] = useState("");
+    const [fileName, setFileName] = useState("Choose File");
     const [ingredients, setIngredients] = useState("");
     const [instructions, setInstructions] = useState(
         ["","","",""]);
     
+    const [uploadedFile, setUploadedFile] = useState({});
+    const [message, setMessage] = useState('');
+    const [uploadPercentage, setUploadPercentage] = useState(0);
+    
     
     const submitRecipe = () =>{
+        // console.log("before sending, image url is", imageURL);
         const newRecipe = {
             ...recipe,
             title,
             summary,
             servings,
-            image: imageURL,
             readyInMinutes: time,
             extendedIngredients: ingredients,
             analyzedInstructions: instructions,
@@ -51,19 +57,63 @@ const CreateScreen = () => {
     //         })
     // }
     
-    const handleImageUpload = (event) => {
-        console.log("inside image function");
-        const files = event.target.files;
-        imageURL.append('myFile', files[0])
-        setImage(imageURL);
-        console.log(imageURL);
-    }
-    
+    // const handleImageUpload = (event) => {
+    //     // console.log("inside image function");
+    //     const files = event.target.files;
+    //     let reader = new FileReader();
+    //     reader.readAsDataURL(files[0]);
+    //     reader.onload = (e) => {
+    //         const formData = {file: e.target.result};
+    //         setImage(formData);
+    //     };
+    //
+    // }
+    //
     const addInstructions = () => {
         setInstructions([...instructions, ""]);
     }
     
-    console.log("out", imageURL);
+    const handleFileChange =(e) =>{
+        setFile(e.target.files[0]);
+        setFileName(e.target.files[0].name);
+    }
+    
+    const submitFile = (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append("file", file);
+    
+        fetch("http://localhost:4000/api/upload", {
+            method: 'POST',
+            body: formData,
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            },
+            onUploadProgress : progressEvent => {
+            setUploadPercentage(
+                parseInt(
+                    Math.round((progressEvent.loaded * 100) / progressEvent.total)
+                )
+            );
+            }
+        })
+            .then(res => {
+                const { fileName, filePath } = res.data;
+                setUploadedFile({ fileName, filePath });
+                setMessage("File Uploaded");
+            })
+            .catch(err => {
+                if (err.response.status === 500) {
+                    setMessage('There was a problem with the server');
+                } else {
+                    setMessage(err.response.data.msg);
+                }
+                setUploadPercentage(0)
+            })
+        };
+    
+   
     
     return(
         <>
@@ -168,11 +218,21 @@ const CreateScreen = () => {
                             <div className="d-flex">
                                 <input type="file" className="form-control"
                                        id="recipeImgInput" alt=""
-                                        onChange={event =>
-                                            handleImageUpload(event)}/>
+                                        onChange={handleFileChange}/>
                                     <button className="btn wd-button-transparent"
-                                            type="button"><i className="fas fa-upload"></i>
+                                            type="button"
+                                        onClick={submitFile}><i className="fas fa-upload"></i>
                                     </button>
+                                <Progress percentage={uploadPercentage} />
+                        
+                            {uploadedFile ? (
+                                <div className='row mt-5'>
+                                    <div className='col-md-6 m-auto'>
+                                        <h3 className='text-center'>{uploadedFile.fileName}</h3>
+                                        <img style={{ width: '100%' }} src={uploadedFile.filePath} alt='' />
+                                    </div>
+                                </div>
+                            ) : null}
                             </div>
                         </div>
                 
