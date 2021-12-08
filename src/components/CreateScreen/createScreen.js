@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import userService from '../service/userService';
-import Progress  from "./Progress";
 import { useSelector } from 'react-redux'
 
 const CreateScreen = () => {
     const user = { username: "dan"} ;
-    console.log(" in Create page, user is", user);
+    // console.log(" in Create page, user is", user);
     
     const [recipe] = useState({});
 
@@ -13,15 +12,13 @@ const CreateScreen = () => {
     const [summary, setSummary] = useState("");
     const [servings, setServings] = useState(0);
     const [time, setTime] = useState(0);
-    const [file, setFile] = useState(new FormData());
+    const [file, setFile]  = useState(new FormData());
     const [fileName, setFileName] = useState("Choose File");
     const [ingredients, setIngredients] = useState("");
     const [instructions, setInstructions] = useState(
         ["","","",""]);
     
     const [uploadedFile, setUploadedFile] = useState();
-    const [message, setMessage] = useState('');
-    const [uploadPercentage, setUploadPercentage] = useState(0);
     
     
     const submitRecipe = () =>{
@@ -48,101 +45,35 @@ const CreateScreen = () => {
     
     
     const handleImageUpload = (event) => {
-        
         const files = event.target.files;
         console.log(files[0]);
-    
-        const formData = new FormData()
-        formData.append('file', files[0])
-        // setImage(formData);
-        console.log(formData);
-    
-        fetch("http://localhost:4000/api/upload", {
-            method: 'POST',
-            
-            credentials: 'include',
-            // headers: {
-            //     'Content-Type': 'multipart/form-data'
-            // },
-            body: formData,
-        })
-            .then(response => response.blob())
-            .then(blob => {
-               setUploadedFile({ src: URL.createObjectURL(blob) })
-            })
-            .catch(error => {
-                console.error(error)
-            })
+        setFileName(files[0].name);
+        setFile(files[0]);
     }
     
-    // const handleImageUpload = (event) => {
-    //     // console.log("inside image function");
-    //     const files = event.target.files;
-    //     let reader = new FileReader();
-    //     reader.readAsDataURL(files[0]);
-    //     reader.onload = (e) => {
-    //         const formData = {file: e.target.result};
-    //         setImage(formData);
-    //     };
-    //
-    // }
-    //
+
     const addInstructions = () => {
         setInstructions([...instructions, ""]);
     }
     
-    // const handleFileChange =(e) =>{
-    //     e.preventDefault();
-    //     const files = e.target.files;
-    //     let reader = new FileReader();
-    //     reader.readAsDataURL(files[0]);
-    //     reader.onload = (e) => {
-    //         const formData = { file: e.target.result };
-    //         setFile(formData);
-    //
-    //         fetch("http://localhost:4000/api/upload", {
-    //             method: 'POST',
-    //             body: formData,
-    //             credentials: 'include',
-    //             headers: {
-    //                 'Content-Type': 'multipart/form-data'
-    //             }
-    //         })
-    //             .then(res => console.log("result", res));
-    //     }
-    //
-    //     setFileName(e.target.files[0].name);
-    //
-    // }
-    
     const submitFile = (e) => {
-        e.preventDefault();
         console.log("submit");
-        console.log(file);
-        // const formData = new FormData();
-        // formData.append('file', file);
-        // console.log("formData", formData);
-        
-        
-
+        const formData = new FormData()
+        formData.append('file', file)
+    
         fetch("http://localhost:4000/api/upload", {
             method: 'POST',
-            body: file,
             credentials: 'include',
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            },
-            // onUploadProgress : progressEvent => {
-            // setUploadPercentage(
-            //     parseInt(
-            //         Math.round((progressEvent.loaded * 100) / progressEvent.total)
-            //     )
-            // );
-            // }
+            body: formData,
         })
-            .then(res => res.json())
-            .then(status =>
-                console.log(status))
+            .then(response => response.blob())
+            .then(blob => {
+                console.log("returned");
+                setUploadedFile({ src: URL.createObjectURL(blob) })
+            })
+            .catch(error => {
+                console.error(error)
+            })
     };
 
 
@@ -256,17 +187,18 @@ const CreateScreen = () => {
                                             type="button"
                                         onClick={submitFile}><i className="fas fa-upload"></i>
                                     </button>
-                                <Progress percentage={uploadPercentage} />
+                              
                         
+                           
+                            </div>
                             {uploadedFile ? (
                                 <div className='row mt-5'>
                                     <div className='col-md-6 m-auto'>
-                                        {/*<h3 className='text-center'>{uploadedFile}</h3>*/}
+                                        <h3 className='text-center'>{fileName}</h3>
                                         <img style={{ width: '100%' }} src={uploadedFile.src} alt='' />
                                     </div>
                                 </div>
                             ) : null}
-                            </div>
                         </div>
                 
                         <hr/>

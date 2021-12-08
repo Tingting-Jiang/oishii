@@ -1,20 +1,8 @@
 const express = require('express');
 const app = express();
-
-
-const path = require("path");
-const crypto = require("crypto");
 const multer = require("multer");
-const GridFsStorage = require("multer-gridfs-storage");
-const Grid = require("gridfs-stream");
-const methodOverride = require("method-override");
 const fs = require("fs");
-//
-// app.use(methodOverride('_method'))
 
-// const fs = require("fs"),
-//     multer = require("multer");
-// const upload = multer({ dest: "uploads/" });
 
 
 //MongoDB
@@ -38,7 +26,7 @@ app.use(function(req, res, next) {
 
 // bodyParser
 const bodyParser = require('body-parser');
-// app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended:true }))
 app.use(bodyParser.json());
 
 //add session here
@@ -60,16 +48,10 @@ console.log("in server");
 require('./service/spoon')(app);
 require("./db/User/user-controller")(app);
 
-////////////////////////////
-
-app.use(bodyParser.urlencoded({ extended:true }))
-
-
-app.use(express.static('public'));
 
 const imgSchema = mongoose.Schema({
-    img:{data:Buffer,contentType: String}}
-,{collection: 'image'}
+        img:{data:Buffer,contentType: String}}
+    ,{collection: 'image'}
 );
 
 const image = mongoose.model("image", imgSchema);
@@ -87,27 +69,27 @@ const upload = multer({ storage: storage })
 app.post("/api/upload",
     upload.single('file'),
     (req,res) => {
-    console.log("in upload");
-    const img = fs.readFileSync(req.file.path);
-    const encode_img = img.toString('base64');
-    console.log(" in function");
-    // console.log(encode_img);
-    const final_img = {
-        contentType:req.file.mimetype,
-        image: Buffer.from(encode_img,'base64')
-    };
-    image.create(final_img,function(err,result){
-        if(err){
-            console.log(err);
-        }else{
-            console.log("----------------------", result.img.Buffer);
-            console.log("Saved To database");
-            res.contentType(final_img.contentType);
-            // console.log(final_img.image);
-            res.send(final_img.image);
-        }
+        console.log("in upload");
+        const img = fs.readFileSync(req.file.path);
+        const encode_img = img.toString('base64');
+        console.log(" in function");
+        // console.log(encode_img);
+        const final_img = {
+            contentType:req.file.mimetype,
+            image: Buffer.from(encode_img,'base64')
+        };
+        image.create(final_img,function(err,result){
+            if(err){
+                console.log(err);
+            }else{
+                console.log("----------------------", result.img.Buffer);
+                console.log("Saved To database");
+                res.contentType(final_img.contentType);
+                // console.log(final_img.image);
+                res.send(final_img.image);
+            }
+        })
     })
-})
 
 
 
