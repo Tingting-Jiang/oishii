@@ -12,15 +12,15 @@ const RecipeScreen = () => {
     // console.log(oldInstruction);
     console.log("in 1st line ->", recipeID);
     const [recipe, setRecipe] = useState(oldIngredient);
-    // const [instruction, setInstruction] = useState(oldInstruction)
-    // useEffect(() => {
-    //     recipeService.fetchByID(recipeID)
-    //         .then((data) => {
-    //                 setRecipe(data);
-    //
-    //         })
-    //     },[]
-    // );
+    const [instruction, setInstruction] = useState(oldInstruction)
+    useEffect(() => {
+        recipeService.fetchByID(recipeID)
+            .then((data) => {
+                    setRecipe(data);
+
+            })
+        },[]
+    );
     
  
     

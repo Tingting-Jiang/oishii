@@ -4,6 +4,8 @@ import "./home.css"
 import Header from "../Header";
 import Greeting from "../HomeScreen/HomeGreeting";
 import CategoryNav from "./CategoryNav";
+import RecipeCards from "../RecipeCards";
+import Footer from "../Footer";
 
 const HomeScreen = () => {
     return (
@@ -14,19 +16,9 @@ const HomeScreen = () => {
 
             <CategoryNav />
 
-            <h1>user favorites</h1>
+            <RecipeCards />
 
-            <h1>explore latest</h1>
-
-            <h1>trending</h1>
-
-            <div className="wd-footer">
-                <div>
-                    <h3>Oishii</h3>
-                    <p>Presented by Project Oishii Group</p>
-                    <span>Privacy Policy</span> | <span>Send Feedback</span>
-                </div>
-            </div>
+            <Footer />
         </div>
     )
 }
