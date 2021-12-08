@@ -19,7 +19,7 @@ const CreateScreen = () => {
     const [instructions, setInstructions] = useState(
         ["","","",""]);
     
-    const [uploadedFile, setUploadedFile] = useState({});
+    const [uploadedFile, setUploadedFile] = useState();
     const [message, setMessage] = useState('');
     const [uploadPercentage, setUploadPercentage] = useState(0);
     
@@ -50,9 +50,12 @@ const CreateScreen = () => {
     const handleImageUpload = (event) => {
         
         const files = event.target.files;
+        console.log(files[0]);
+    
         const formData = new FormData()
         formData.append('file', files[0])
         // setImage(formData);
+        console.log(formData);
     
         fetch("http://localhost:4000/api/upload", {
             method: 'POST',
@@ -63,9 +66,9 @@ const CreateScreen = () => {
             // },
             body: formData,
         })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data.path)
+            .then(response => response.blob())
+            .then(blob => {
+               setUploadedFile({ src: URL.createObjectURL(blob) })
             })
             .catch(error => {
                 console.error(error)
@@ -258,8 +261,8 @@ const CreateScreen = () => {
                             {uploadedFile ? (
                                 <div className='row mt-5'>
                                     <div className='col-md-6 m-auto'>
-                                        <h3 className='text-center'>{uploadedFile.fileName}</h3>
-                                        <img style={{ width: '100%' }} src={uploadedFile.filePath} alt='' />
+                                        {/*<h3 className='text-center'>{uploadedFile}</h3>*/}
+                                        <img style={{ width: '100%' }} src={uploadedFile.src} alt='' />
                                     </div>
                                 </div>
                             ) : null}

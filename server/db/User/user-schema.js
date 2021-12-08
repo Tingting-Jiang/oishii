@@ -47,11 +47,5 @@ const userSchema = mongoose.Schema({
     image: {data:Buffer, contentType: String},
     // role: {type: String, default :["Admin", "Normal", "Editor"], defaultValue: "Normal"}
     
-    
-
-    
-    
-        
-    
 }, {collection: 'oishiiUsers'});
 module.exports = userSchema;
