@@ -50,10 +50,10 @@ export const likeRecipe = (recipeID, username) =>
         })
         .then(res => res.json());
 
-export const createRecipe = (newRecipe) =>
+export const createRecipe = (newRecipe, username) =>
     fetch(`${API_URL}/create`, {
         method: "POST",
-        body: JSON.stringify(newRecipe),
+        body: JSON.stringify({newRecipe: newRecipe, username: username}),
         credentials: 'include',
         headers: {
             'content-type': 'application/json'

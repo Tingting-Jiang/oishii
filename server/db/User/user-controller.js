@@ -1,5 +1,6 @@
 const userDao = require('./user-dao');
 
+
 module.exports = (app) => {
     
     const findAllUsers = (req, res) =>
@@ -87,17 +88,35 @@ module.exports = (app) => {
             newInstructions.push(steps);
         }
         console.log("after parsing : =====", newInstructions);
+    
+    
+       
         const recipe = {
             ...req.body,
             extendedIngredients: newIngredients,
             analyzedInstructions: newInstructions,
         };
+        console.log(" in create recipe:", req.body);
     
-        userDao.createRecipe("dan", recipe )
+        userDao.createRecipe("kk", recipe )
             .then(status => res.sendStatus(200));
         
         
         
+        
+    }
+    
+    const getFile = (req, res) =>{
+        console.log("in getFile");
+    
+        
+        console.log(req.body);
+        const cover = JSON.parse(req.body.file);
+        console.log(cover);
+        let image = new Buffer.from(cover, 'base64');
+        let imageObject = {image: image, contentType: "image/jpeg"};
+        userDao.saveImage("kk", imageObject)
+            .then(status => res.sendStatus(200));
         
     }
     
@@ -119,4 +138,5 @@ module.exports = (app) => {
     app.get('/api/users/:userId', findUserById);
     app.put('/api/like', likeRecipe);
     app.post('/api/create', createRecipe);
+    app.post('/api/uploadssssss', getFile);
 };

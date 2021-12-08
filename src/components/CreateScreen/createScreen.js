@@ -3,11 +3,8 @@ import userService from '../service/userService';
 import Progress  from "./Progress";
 import { useSelector } from 'react-redux'
 
-
-
-// const getUser = (state) => state.userReducer.user;
 const CreateScreen = () => {
-    const user = useSelector((state) => state);
+    const user = { username: "dan"} ;
     console.log(" in Create page, user is", user);
     
     const [recipe] = useState({});
@@ -15,7 +12,7 @@ const CreateScreen = () => {
     const [summary, setSummary] = useState("");
     const [servings, setServings] = useState(0);
     const [time, setTime] = useState(0);
-    const [file, setFile] = useState("");
+    const [file, setFile] = useState(new FormData());
     const [fileName, setFileName] = useState("Choose File");
     const [ingredients, setIngredients] = useState("");
     const [instructions, setInstructions] = useState(
@@ -27,41 +24,52 @@ const CreateScreen = () => {
     
     
     const submitRecipe = () =>{
-        // console.log("before sending, image url is", imageURL);
+        console.log("before sending, image url is", file);
         const newRecipe = {
             ...recipe,
             title,
             summary,
+            image: file,
             servings,
             readyInMinutes: time,
             extendedIngredients: ingredients,
             analyzedInstructions: instructions,
         };
         console.log("NEW RECIPE => ", newRecipe);
-        userService.createRecipe(newRecipe)
+        console.log("who created ==> ", user.username);
+        userService.createRecipe(newRecipe, user.username)
             .then(data => console.log(data));
         
     }
     
+
     
-    // const handleImageUpload = (event) => {
-    //     const files = event.target.files
-    //     const formData = new FormData()
-    //     formData.append('myFile', files[0])
-    //     // setImage(formData);
-    //
-    //     fetch('/saveImage', {
-    //         method: 'POST',
-    //         body: formData
-    //     })
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             console.log(data.path)
-    //         })
-    //         .catch(error => {
-    //             console.error(error)
-    //         })
-    // }
+    
+    
+    const handleImageUpload = (event) => {
+        
+        const files = event.target.files;
+        const formData = new FormData()
+        formData.append('file', files[0])
+        // setImage(formData);
+    
+        fetch("http://localhost:4000/api/upload", {
+            method: 'POST',
+            
+            credentials: 'include',
+            // headers: {
+            //     'Content-Type': 'multipart/form-data'
+            // },
+            body: formData,
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.path)
+            })
+            .catch(error => {
+                console.error(error)
+            })
+    }
     
     // const handleImageUpload = (event) => {
     //     // console.log("inside image function");
@@ -79,47 +87,62 @@ const CreateScreen = () => {
         setInstructions([...instructions, ""]);
     }
     
-    const handleFileChange =(e) =>{
-        setFile(e.target.files[0]);
-        setFileName(e.target.files[0].name);
-    }
+    // const handleFileChange =(e) =>{
+    //     e.preventDefault();
+    //     const files = e.target.files;
+    //     let reader = new FileReader();
+    //     reader.readAsDataURL(files[0]);
+    //     reader.onload = (e) => {
+    //         const formData = { file: e.target.result };
+    //         setFile(formData);
+    //
+    //         fetch("http://localhost:4000/api/upload", {
+    //             method: 'POST',
+    //             body: formData,
+    //             credentials: 'include',
+    //             headers: {
+    //                 'Content-Type': 'multipart/form-data'
+    //             }
+    //         })
+    //             .then(res => console.log("result", res));
+    //     }
+    //
+    //     setFileName(e.target.files[0].name);
+    //
+    // }
     
     const submitFile = (e) => {
         e.preventDefault();
-        const formData = new FormData();
-        formData.append("file", file);
-    
+        console.log("submit");
+        console.log(file);
+        // const formData = new FormData();
+        // formData.append('file', file);
+        // console.log("formData", formData);
+        
+        
+
         fetch("http://localhost:4000/api/upload", {
             method: 'POST',
-            body: formData,
+            body: file,
             credentials: 'include',
             headers: {
                 'Content-Type': 'multipart/form-data'
             },
-            onUploadProgress : progressEvent => {
-            setUploadPercentage(
-                parseInt(
-                    Math.round((progressEvent.loaded * 100) / progressEvent.total)
-                )
-            );
-            }
+            // onUploadProgress : progressEvent => {
+            // setUploadPercentage(
+            //     parseInt(
+            //         Math.round((progressEvent.loaded * 100) / progressEvent.total)
+            //     )
+            // );
+            // }
         })
-            .then(res => {
-                const { fileName, filePath } = res.data;
-                setUploadedFile({ fileName, filePath });
-                setMessage("File Uploaded");
-            })
-            .catch(err => {
-                if (err.response.status === 500) {
-                    setMessage('There was a problem with the server');
-                } else {
-                    setMessage(err.response.data.msg);
-                }
-                setUploadPercentage(0)
-            })
-        };
-    
-   
+            .then(res => res.json())
+            .then(status =>
+                console.log(status))
+    };
+
+
+
     
     return(
         <>
@@ -131,7 +154,7 @@ const CreateScreen = () => {
                     <div className="col-6 col-md-6 align-self-center">
                         <ul className="nav justify-content-left">
                             <li className="nav-item">
-                                <a className="nav-link active" aria-current="page" href="/">Home</a>
+                                <a className="nav-link active" aria-current="page" href="/home1">Home</a>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link wd-color-coral fw-bold" href="/create">Recipes</a>
@@ -224,7 +247,7 @@ const CreateScreen = () => {
                             <div className="d-flex">
                                 <input type="file" className="form-control"
                                        id="recipeImgInput" alt=""
-                                        onChange={handleFileChange}/>
+                                        onChange={handleImageUpload}/>
                                     <button className="btn wd-button-transparent"
                                             type="button"
                                         onClick={submitFile}><i className="fas fa-upload"></i>

@@ -33,6 +33,11 @@ const createRecipe = (username, recipe ) =>
     userModel.updateOne({username},
         {$push: {usersRecipe : recipe}});
 
+const saveImage = (username, image)=>
+    userModel.updateOne({username},
+        {$set: image});
+
+
 module.exports = {
     findByUsername,
     findAllUsers,
@@ -42,5 +47,6 @@ module.exports = {
     updateUser,
     deleteUser,
     updateFavRecipe,
-    createRecipe
+    createRecipe,
+    saveImage
 };

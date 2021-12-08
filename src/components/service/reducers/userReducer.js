@@ -1,9 +1,9 @@
-//
-// const initialState = {
-//     user: {},
-// };
 
-const userReducer = (state = {}, action) => {
+const initialState = {
+    user: {},
+};
+
+const userReducer = (state = initialState, action) => {
     switch (action.type) {
         case "get-user":
             console.log("state: ", state);
@@ -11,9 +11,6 @@ const userReducer = (state = {}, action) => {
             console.log("in reducer", state);
             return state;
 
-            
-            
-        
         case "update-profile":
             const updatedProfile = {
                 ...state.profile,
@@ -30,10 +27,7 @@ const userReducer = (state = {}, action) => {
             };
             
             return state;
-        case "set_user":
-            state = action.user;
-            console.log("after setting user", state);
-            return state;
+       
         default:
             console.log("in default ", state);
             return state;

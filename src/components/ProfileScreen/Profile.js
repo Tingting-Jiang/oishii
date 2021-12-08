@@ -17,10 +17,6 @@ const Profile = () => {
         userService.getProfile()
             .then(newUser => {
                 setUser(newUser);
-                dispatch({
-                    type: "get-user",
-                    newUser,
-                });
             })
             .catch(e => navigate('/login'));
     
