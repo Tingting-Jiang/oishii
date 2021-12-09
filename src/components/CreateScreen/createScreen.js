@@ -1,14 +1,10 @@
 import React, { useState } from 'react'
 import userService from '../service/userService';
-import Progress  from "./Progress";
 import { useSelector } from 'react-redux'
 
-
-
-// const getUser = (state) => state.userReducer.user;
 const CreateScreen = () => {
-    const user = useSelector((state) => state);
-    console.log(" in Create page, user is", user);
+    const user = { username: "kk"};
+    // console.log(" in Create page, user is", user);
     
     const [recipe] = useState({});
 
@@ -16,111 +12,111 @@ const CreateScreen = () => {
     const [summary, setSummary] = useState("");
     const [servings, setServings] = useState(0);
     const [time, setTime] = useState(0);
-    const [file, setFile] = useState("");
+    const [file, setFile]  = useState(new FormData());
     const [fileName, setFileName] = useState("Choose File");
     const [ingredients, setIngredients] = useState("");
     const [instructions, setInstructions] = useState(
         ["","","",""]);
     
-    const [uploadedFile, setUploadedFile] = useState({});
-    const [message, setMessage] = useState('');
-    const [uploadPercentage, setUploadPercentage] = useState(0);
+    const [uploadedFile, setUploadedFile] = useState();
     
     
     const submitRecipe = () =>{
-        // console.log("before sending, image url is", imageURL);
+        console.log("before sending, image url is", file);
         const newRecipe = {
             ...recipe,
             title,
             summary,
+            image: file,
             servings,
             readyInMinutes: time,
             extendedIngredients: ingredients,
             analyzedInstructions: instructions,
         };
         console.log("NEW RECIPE => ", newRecipe);
-        userService.createRecipe(newRecipe)
+        console.log("who created ==> ", user.username);
+        userService.createRecipe(newRecipe, user.username)
             .then(data => console.log(data));
         
     }
     
+
     
-    // const handleImageUpload = (event) => {
-    //     const files = event.target.files
-    //     const formData = new FormData()
-    //     formData.append('myFile', files[0])
-    //     // setImage(formData);
-    //
-    //     fetch('/saveImage', {
-    //         method: 'POST',
-    //         body: formData
-    //     })
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             console.log(data.path)
-    //         })
-    //         .catch(error => {
-    //             console.error(error)
-    //         })
-    // }
     
-    // const handleImageUpload = (event) => {
-    //     // console.log("inside image function");
-    //     const files = event.target.files;
-    //     let reader = new FileReader();
-    //     reader.readAsDataURL(files[0]);
-    //     reader.onload = (e) => {
-    //         const formData = {file: e.target.result};
-    //         setImage(formData);
-    //     };
-    //
-    // }
-    //
+    
+    const handleImageUpload = (event) => {
+        const files = event.target.files;
+        console.log(files[0]);
+        setFileName(files[0].name);
+        setFile(files[0]);
+    }
+    
+
     const addInstructions = () => {
         setInstructions([...instructions, ""]);
     }
     
-    const handleFileChange =(e) =>{
-        setFile(e.target.files[0]);
-        setFileName(e.target.files[0].name);
-    }
+    const submitFile = () => {
+        
+        const oldIngredients = ingredients.split(",");
+        let newIngredients = [];
+        for (let item of oldIngredients) {
+            let container = { original : item};
+            newIngredients.push(container);
+        }
     
-    const submitFile = (e) => {
-        e.preventDefault();
-        const formData = new FormData();
-        formData.append("file", file);
+      
+        let newInstructions = [];
+        let steps = []
+        for (let item of instructions) {
+            let step = { step : item};
+            steps.push(step);
+        }
+        const content = {steps: steps};
+        
+        newInstructions.push(content);
+        
+        
+        const newRecipe = {
+            ...recipe,
+            title: title,
+            summary: summary,
+            servings: servings,
+            readyInMinutes: time,
+            extendedIngredients: newIngredients,
+            analyzedInstructions: newInstructions,
+        };
+        console.log("submit");
+        const formData = new FormData()
+        formData.append('file', file)
+        formData.append("username", "kk");
+        formData.append("recipe", JSON.stringify(newRecipe));
+        // formData.append("title", title);
+        // formData.append("servings", servings);
+        // formData.append("summary", summary);
+        // formData.append("readyInMinutes", time);
+        // formData.append("extendedIngredients", JSON.stringify(newIngredients));
+        // formData.append("analyzedInstructions", JSON.stringify(newInstructions))
+        //
+        //
     
         fetch("http://localhost:4000/api/upload", {
             method: 'POST',
-            body: formData,
             credentials: 'include',
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            },
-            onUploadProgress : progressEvent => {
-            setUploadPercentage(
-                parseInt(
-                    Math.round((progressEvent.loaded * 100) / progressEvent.total)
-                )
-            );
-            }
+            body: formData,
         })
-            .then(res => {
-                const { fileName, filePath } = res.data;
-                setUploadedFile({ fileName, filePath });
-                setMessage("File Uploaded");
+            .then(response => response.blob())
+            .then(blob => {
+                console.log("returned");
+                setUploadedFile({ src: URL.createObjectURL(blob) })
             })
-            .catch(err => {
-                if (err.response.status === 500) {
-                    setMessage('There was a problem with the server');
-                } else {
-                    setMessage(err.response.data.msg);
-                }
-                setUploadPercentage(0)
+            .catch(error => {
+                console.error(error)
             })
-        };
-    
-   
+    };
+
+
+
     
     return(
         <>
@@ -132,7 +128,7 @@ const CreateScreen = () => {
                     <div className="col-6 col-md-6 align-self-center">
                         <ul className="nav justify-content-left">
                             <li className="nav-item">
-                                <a className="nav-link active" aria-current="page" href="/">Home</a>
+                                <a className="nav-link active" aria-current="page" href="/home1">Home</a>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link wd-color-coral fw-bold" href="/create">Recipes</a>
@@ -225,22 +221,23 @@ const CreateScreen = () => {
                             <div className="d-flex">
                                 <input type="file" className="form-control"
                                        id="recipeImgInput" alt=""
-                                        onChange={handleFileChange}/>
+                                        onChange={handleImageUpload}/>
                                     <button className="btn wd-button-transparent"
                                             type="button"
                                         onClick={submitFile}><i className="fas fa-upload"></i>
                                     </button>
-                                <Progress percentage={uploadPercentage} />
+                              
                         
+                           
+                            </div>
                             {uploadedFile ? (
                                 <div className='row mt-5'>
                                     <div className='col-md-6 m-auto'>
-                                        <h3 className='text-center'>{uploadedFile.fileName}</h3>
-                                        <img style={{ width: '100%' }} src={uploadedFile.filePath} alt='' />
+                                        <h3 className='text-center'>{fileName}</h3>
+                                        <img style={{ width: '100%' }} src={uploadedFile.src} alt='' />
                                     </div>
                                 </div>
                             ) : null}
-                            </div>
                         </div>
                 
                         <hr/>

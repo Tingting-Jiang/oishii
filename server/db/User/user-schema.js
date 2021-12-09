@@ -15,25 +15,7 @@ const userSchema = mongoose.Schema({
     //     }
     // ],
     favRecipeList: [],
-    usersRecipe: [
-        {
-            title: String,
-            summary: String,
-            servings:Number,
-            readyInMinutes:Number,
-            image: String,
-            analyzedInstructions: [
-                {
-                    steps: String
-                }
-            ],
-            extendedIngredients: [
-                {
-                    original: String
-                }
-            ]
-        }
-    ],
+    usersRecipe: [],
     usersFollowers: [
         {
             username: String,
@@ -44,11 +26,8 @@ const userSchema = mongoose.Schema({
     location: String,
     birthday: Date,
     bio: String,
-    
-
-    
-    
-        
+    image: {data:Buffer, contentType: String},
+    // role: {type: String, default :["Admin", "Normal", "Editor"], defaultValue: "Normal"}
     
 }, {collection: 'oishiiUsers'});
 module.exports = userSchema;

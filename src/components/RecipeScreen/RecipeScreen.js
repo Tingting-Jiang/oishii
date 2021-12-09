@@ -5,24 +5,63 @@ import oldInstruction from "../service/reducers/data/instruction.json";
 import "./recipe.css"
 import "../oishii.css"
 import { useParams } from 'react-router-dom'
+import userService from '../service/userService'
 
 const RecipeScreen = () => {
-    const params = useParams();
-    const recipeID = params.id;
-    // console.log(oldInstruction);
-    console.log("in 1st line ->", recipeID);
+    // const params = useParams();
+    // const recipeID = params.id;
+    // // console.log(oldInstruction);
+    // console.log("in 1st line ->", recipeID);
+    // const [recipe, setRecipe] = useState(oldIngredient);
+    // const [instruction, setInstruction] = useState(oldInstruction)
+    // useEffect(() => {
+    //     recipeService.fetchByID(recipeID)
+    //         .then((data) => {
+    //                 setRecipe(data);
+    //
+    //         })
+    //     },[]
+    // );
+    
+    const b64toBlob = (b64Data, contentType='', sliceSize=512) => {
+        const byteCharacters = atob(b64Data);
+        const byteArrays = [];
+        
+        for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+            const slice = byteCharacters.slice(offset, offset + sliceSize);
+            
+            const byteNumbers = new Array(slice.length);
+            for (let i = 0; i < slice.length; i++) {
+                byteNumbers[i] = slice.charCodeAt(i);
+            }
+            
+            const byteArray = new Uint8Array(byteNumbers);
+            byteArrays.push(byteArray);
+        }
+        
+        const blob = new Blob(byteArrays, {type: contentType});
+        return blob;
+    }
+    
+    const contentType = 'image/png';
     const [recipe, setRecipe] = useState(oldIngredient);
     const [instruction, setInstruction] = useState(oldInstruction)
+    const [image, setImage] = useState(oldIngredient.image);
     useEffect(() => {
-        recipeService.fetchByID(recipeID)
-            .then((data) => {
+           userService.getRecipe("61b19c13c22a66f5ac610463")
+                .then((data) => {
+                    console.log(" back ", data);
+                    setImage({ src: URL.createObjectURL(b64toBlob(data.image, contentType))});
+                    console.log((data.image));
+                    
                     setRecipe(data);
-
-            })
+                    
+                })
         },[]
     );
     
- 
+    
+    
     
     
     
@@ -95,7 +134,7 @@ const RecipeScreen = () => {
                 <div className="d-none d-md-block col-4">
                     <div>
                         <img className="wd-recipe-thumbnail d-md-float-end"
-                             src={recipe.image}/>
+                             src={image.src}/>
                     </div>
                 </div>
             </div>
@@ -109,7 +148,7 @@ const RecipeScreen = () => {
                            
                                 {recipe.extendedIngredients.map(singleIngredient => (
                                     <li className="list-group-item">
-                                        {singleIngredient.originalString}
+                                        {singleIngredient.original}
                             </li>))}
                         </ul>
                       

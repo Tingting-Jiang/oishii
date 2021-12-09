@@ -4,6 +4,7 @@ import headerNavs from "./headerNavs.json";
 import "./header.css";
 import recipeService from '../service/recipeService'
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const Header = ({
         active = "home"

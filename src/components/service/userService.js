@@ -1,5 +1,5 @@
 import React from 'react';
-const API_URL = 'http://localhost:4000/api';
+const API_URL = 'http://localhost:4000/db';
 
 export const login = (user) =>
     // console.log("in userService -->", user);
@@ -50,10 +50,10 @@ export const likeRecipe = (recipeID, username) =>
         })
         .then(res => res.json());
 
-export const createRecipe = (newRecipe) =>
+export const createRecipe = (newRecipe, username) =>
     fetch(`${API_URL}/create`, {
         method: "POST",
-        body: JSON.stringify(newRecipe),
+        body: JSON.stringify({newRecipe: newRecipe, username: username}),
         credentials: 'include',
         headers: {
             'content-type': 'application/json'
@@ -61,6 +61,19 @@ export const createRecipe = (newRecipe) =>
     })
         .then(res => res.json());
 
+
+
+export const getRecipe = (recipeID) =>
+    fetch(`${API_URL}/details`,{
+        method: 'POST',
+        body: JSON.stringify({recipeID: recipeID}),
+        credentials: 'include',
+        headers: {
+            'content-type': 'application/json'
+        }
+    })
+        .then(res => res.json());
+    
 
 
 
@@ -73,5 +86,6 @@ export default {
     getProfile,
     logout,
     likeRecipe,
-    createRecipe
+    createRecipe,
+    getRecipe
 };

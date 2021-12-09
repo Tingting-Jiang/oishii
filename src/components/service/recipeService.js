@@ -6,9 +6,11 @@ export const fetchSearchResult = (key_words) =>
     fetch(`${URL}/search/${key_words.replace(/\s+/g, "%20")}`)
         .then((response) => response.json());
 
-export const fetchByID = (id) =>
+export const fetchByID= (id) =>
     fetch(`${URL}/details/${id}`)
         .then((response) => response.json());
+
+
 
 export const fetchInstruction = (id) =>
     fetch(`${URL}/instruction/${id}`)

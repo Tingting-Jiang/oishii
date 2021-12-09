@@ -1,4 +1,6 @@
 const userDao = require('./user-dao');
+const { ObjectID } = require('mongodb')
+
 
 module.exports = (app) => {
     
@@ -87,13 +89,17 @@ module.exports = (app) => {
             newInstructions.push(steps);
         }
         console.log("after parsing : =====", newInstructions);
+    
+    
+       
         const recipe = {
             ...req.body,
             extendedIngredients: newIngredients,
             analyzedInstructions: newInstructions,
         };
+        console.log(" in create recipe:", req.body);
     
-        userDao.createRecipe("dan", recipe )
+        userDao.createRecipe("kk", recipe )
             .then(status => res.sendStatus(200));
         
         
@@ -101,6 +107,22 @@ module.exports = (app) => {
         
     }
     
+   const getRecipe = (req, res) =>{
+        const recipeId = req.body.recipeID;
+        console.log(recipeId);
+        userDao.getRecipe(req.body.username, recipeId)
+            // .then(res=> res.json())
+            .then(list => {
+                return list.filter(item => item._id === ObjectID(req.body.recipeID));
+                }
+            )
+            .then(data => {
+                console.log(data);
+                res.json(data);
+            }).catch(e =>{
+                console.log(e)
+        });
+   }
     
     
     const profile = (req, res) =>
@@ -109,14 +131,15 @@ module.exports = (app) => {
     const logout = (req, res) =>
         res.send(req.session.destroy());
     
-    app.post('/api/login', login);
-    app.post('/api/register', register);
-    app.post('/api/profile', profile);
-    app.post('/api/logout', logout);
-    app.put('/api/users', updateUser);
-    app.delete('/api/users/:userId', deleteUser);
-    app.get('/api/users', findAllUsers);
-    app.get('/api/users/:userId', findUserById);
-    app.put('/api/like', likeRecipe);
-    app.post('/api/create', createRecipe);
+    app.post('/db/login', login);
+    app.post('/db/register', register);
+    app.post('/db/profile', profile);
+    app.post('/db/logout', logout);
+    app.put('/db/users', updateUser);
+    app.delete('/db/users/:userId', deleteUser);
+    app.get('/db/users', findAllUsers);
+    app.get('/db/users/:userId', findUserById);
+    app.put('/db/like', likeRecipe);
+    app.post('/db/create', createRecipe);
+    app.post('/db/get', getRecipe);
 };

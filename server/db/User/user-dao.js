@@ -1,4 +1,5 @@
 const userModel = require('./user-model');
+const { ObjectID } = require('mongodb')
 
 const findAllUsers = () =>
     userModel.find();
@@ -33,6 +34,15 @@ const createRecipe = (username, recipe ) =>
     userModel.updateOne({username},
         {$push: {usersRecipe : recipe}});
 
+const saveImage = (username, image)=>
+    userModel.updateOne({username},
+        {$set: image});
+
+
+const getRecipe = ( username, recipeID)=>
+    userModel.find({username: username, usersRecipe: ObjectID(recipeID)});
+
+
 module.exports = {
     findByUsername,
     findAllUsers,
@@ -42,5 +52,7 @@ module.exports = {
     updateUser,
     deleteUser,
     updateFavRecipe,
-    createRecipe
+    createRecipe,
+    saveImage,
+    getRecipe
 };

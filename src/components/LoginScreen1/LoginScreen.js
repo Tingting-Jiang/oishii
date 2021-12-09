@@ -20,7 +20,7 @@ const Login = () => {
                    type: "get-user",
                    newUser,
                });
-                navigate('/create');
+                navigate('/');
         })};
 
     

@@ -14,6 +14,7 @@ import CreateScreen from './components/CreateScreen/createScreen';
 import {  createStore } from 'redux'
 import userReducer from './components/service/reducers/userReducer'
 import { Provider } from 'react-redux'
+import SearchScreen from './components/SearchScreen/SearchScreen'
 
 const store = createStore(userReducer);
 
@@ -25,17 +26,18 @@ function App() {
       <div>
             <BrowserRouter>
                 <Routes>
-            
-                    <Route path=["/", "/home"] element={<ExploreAndTrending/>}/>
-                    <Route path="/login" element={<Login/>}/>
-                    <Route path="/register" element={<Register/>}/>
-                    <Route path="/profile" element={<Profile/>}/>
-                    <Route path="/recipe/:id" element={<RecipeScreen/>}/>
-                    <Route path="/create" element={<CreateScreen/>}/>
 
-                    <Route path="/home" element={<Home/>} />
-                    <Route path="/home1" element={<Header/>} />
+                    <Route path={["/", "/home"]} element={<Home/>} exact={true} />
+                    <Route path="/login" element={<Login/>} exact={true} />
+                    <Route path="/register" element={<Register/>} exact={true} />
+                    <Route path="/profile" element={<Profile/>} exact={true} />
+                    <Route path="/recipe/:id" element={<RecipeScreen/>} exact={true} />
+                    <Route path="/create" element={<CreateScreen/>} exact={true} />
+                    <Route path="/search" element={<SearchScreen/>} exact={true} />
 
+                    <Route path="/home1" element={<Header/>} exact={true} />
+                    <Route path="/recipe/detail" element={<RecipeScreen/>} exact={true} />
+                    <Route path="/oldhome" element={<ExploreAndTrending/>} exact={true} />
 
 
                 </Routes>
