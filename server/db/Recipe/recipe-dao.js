@@ -10,9 +10,13 @@ const createRecipe = (recipe) =>
 const findRecipeById = (id) =>
     model.findById(id);
 
+const findRecipeByTitle = (title) =>
+    model.find({title: `/${title}/`});
+
 
 module.exports = {
     findAllRecipes,
     createRecipe,
     findRecipeById,
+    findRecipeByTitle
 };

@@ -44,8 +44,6 @@ function App() {
             </BrowserRouter>
 
             {/*<Show/>*/}
-
-
             {/*<RecipeScreen recipeID={5679}/>*/}
             {/*<ExploreAndTrending/>*/}
 

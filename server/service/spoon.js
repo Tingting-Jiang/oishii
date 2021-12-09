@@ -50,7 +50,7 @@ module.exports = (app) =>  {
     
     
     const fetchByIngredients= (req, res) => {
-        const recipeList = `/recipes/findByIngredients?ingredients=${req.params.ingredients}&number=12&ignorePantry=true&ranking=1`;
+        const recipeList = `/recipes/findByIngredients?ingredients=${req.params.ingredients}&number=8&ignorePantry=true&ranking=1`;
         console.log("in fetchByTagAndIngredients -->", recipeList);
         fetch(URL + recipeList, {
             "method": "GET",
