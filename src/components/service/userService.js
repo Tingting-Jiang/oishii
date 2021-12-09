@@ -73,6 +73,18 @@ export const getRecipe = (recipeID) =>
         }
     })
         .then(res => res.json());
+
+export const searchRecipeByTitle = (title) =>
+    fetch(`${API_URL}/searchRecipe`,{
+        method: 'POST',
+        body: JSON.stringify({tile: title}),
+        credentials: 'include',
+        headers: {
+            'content-type': 'application/json'
+        }
+    })
+        .then(res => res.json());
+
     
 
 
@@ -87,5 +99,6 @@ export default {
     logout,
     likeRecipe,
     createRecipe,
-    getRecipe
+    getRecipe,
+    searchRecipeByTitle
 };
