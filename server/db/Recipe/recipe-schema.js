@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 const schema = mongoose.Schema({
-    ID: Number,
-    thumbnail_url: String,
+    Author: String,
+    Servings:Number,
     name: String,
     description: String,
     num_servings: Number,
     author_name:String
     
     
-}, {collection: 'recipe'});
+}, {collection: 'Menu'});
 module.exports = schema;
