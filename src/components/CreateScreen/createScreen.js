@@ -3,7 +3,7 @@ import userService from '../service/userService';
 import { useSelector } from 'react-redux'
 
 const CreateScreen = () => {
-    const user = { username: "dan"} ;
+    const user = { username: "kk"};
     // console.log(" in Create page, user is", user);
     
     const [recipe] = useState({});
@@ -56,10 +56,49 @@ const CreateScreen = () => {
         setInstructions([...instructions, ""]);
     }
     
-    const submitFile = (e) => {
+    const submitFile = () => {
+        
+        const oldIngredients = ingredients.split(",");
+        let newIngredients = [];
+        for (let item of oldIngredients) {
+            let container = { original : item};
+            newIngredients.push(container);
+        }
+    
+      
+        let newInstructions = [];
+        let steps = []
+        for (let item of instructions) {
+            let step = { step : item};
+            steps.push(step);
+        }
+        const content = {steps: steps};
+        
+        newInstructions.push(content);
+        
+        
+        const newRecipe = {
+            ...recipe,
+            title: title,
+            summary: summary,
+            servings: servings,
+            readyInMinutes: time,
+            extendedIngredients: newIngredients,
+            analyzedInstructions: newInstructions,
+        };
         console.log("submit");
         const formData = new FormData()
         formData.append('file', file)
+        formData.append("username", "kk");
+        formData.append("recipe", JSON.stringify(newRecipe));
+        // formData.append("title", title);
+        // formData.append("servings", servings);
+        // formData.append("summary", summary);
+        // formData.append("readyInMinutes", time);
+        // formData.append("extendedIngredients", JSON.stringify(newIngredients));
+        // formData.append("analyzedInstructions", JSON.stringify(newInstructions))
+        //
+        //
     
         fetch("http://localhost:4000/api/upload", {
             method: 'POST',

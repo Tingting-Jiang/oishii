@@ -15,25 +15,7 @@ const userSchema = mongoose.Schema({
     //     }
     // ],
     favRecipeList: [],
-    usersRecipe: [
-        {
-            title: String,
-            summary: String,
-            servings:Number,
-            readyInMinutes:Number,
-            image: {data:Buffer, contentType: String},
-            analyzedInstructions: [
-                {
-                    steps: String
-                }
-            ],
-            extendedIngredients: [
-                {
-                    original: String
-                }
-            ]
-        }
-    ],
+    usersRecipe: [],
     usersFollowers: [
         {
             username: String,

@@ -1,5 +1,5 @@
 import React from 'react';
-const API_URL = 'http://localhost:4000/api';
+const API_URL = 'http://localhost:4000/db';
 
 export const login = (user) =>
     // console.log("in userService -->", user);
@@ -63,6 +63,19 @@ export const createRecipe = (newRecipe, username) =>
 
 
 
+export const getRecipe = (recipeID) =>
+    fetch(`${API_URL}/details`,{
+        method: 'POST',
+        body: JSON.stringify({recipeID: recipeID}),
+        credentials: 'include',
+        headers: {
+            'content-type': 'application/json'
+        }
+    })
+        .then(res => res.json());
+    
+
+
 
 
 
@@ -73,5 +86,6 @@ export default {
     getProfile,
     logout,
     likeRecipe,
-    createRecipe
+    createRecipe,
+    getRecipe
 };

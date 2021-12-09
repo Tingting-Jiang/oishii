@@ -40,15 +40,16 @@ app.use(session({
 
 
 
-// const userModel = require("../server/db/User/user-model");
+const recipeModel = require("../server/db/Recipe/recipe-model");
 
 console.log("in server");
 
 // require('./service/test')(app);
 require('./service/spoon')(app);
 require("./db/User/user-controller")(app);
+require("./db/Recipe/recipe-service")(app);
 
-
+let filename;
 const imgSchema = mongoose.Schema({
         img:{data:Buffer,contentType: String}}
     ,{collection: 'image'}
@@ -61,7 +62,8 @@ const storage = multer.diskStorage({
         cb(null, 'uploads')
     },
     filename: function (req, file, cb) {
-        cb(null, Date.now()+ "-" + file.originalname)
+        filename = Date.now()+ "-" + file.originalname;
+        cb(null, filename)
     }
 })
 const upload = multer({ storage: storage })
@@ -69,8 +71,12 @@ const upload = multer({ storage: storage })
 app.post("/api/upload",
     upload.single('file'),
     (req,res) => {
-        // console.log("________", req.body.recipe);
-        console.log("in upload");
+        console.log("in upload1");
+        console.log("________", JSON.parse(req.body.recipe));
+        const recipe = JSON.parse(req.body.recipe);
+        console.log(typeof recipe);
+        
+        console.log("in upload2");
         const username = req.body.username;
         console.log("---9999", username);
         const img = fs.readFileSync(req.file.path);
@@ -80,7 +86,7 @@ app.post("/api/upload",
             contentType:req.file.mimetype,
             image: Buffer.from(encode_img,'base64')
         };
-    
+        //
         // const newRecipe = {
         //     title : req.body.title,
         //     summary: req.body.summary,
@@ -88,30 +94,44 @@ app.post("/api/upload",
         //     readyInMinutes: req.body.readyInMinutes,
         //     extendedIngredients: req.body.extendedIngredients,
         //     analyzedInstructions: req.body.analyzedInstructions,
-        //     image: final_img
+        //     image: filename
         // };
+    
+        console.log("00000", recipe.title);
+        console.log(typeof recipe.title);
+    
+        const newRecipe = {
+            ...recipe,
+            image: filename
+        };
         //
-        //
+        // const newRecipe = {
+        //     // ...req.body.recipe,
+        //     // image: filename
+        //     title: "dljfapfjasodf"
+        // };
+
+
         // userModel.updateOne({username}, {$push: {usersRecipe : newRecipe}}
         // ,function(err,result){
         //     if(err){
         //         console.log(err);
         //     }else{
-        //         console.log("----------------------", result.img.Buffer);
+        //         // console.log("----------------------", result.img.Buffer);
         //         console.log("Saved To database");
         //         res.contentType(final_img.contentType);
         //         // console.log(final_img.image);
         //         res.send(final_img.image);
         //     }
         // })
-        //
+
         
         
-        image.create(final_img,function(err,result){
+        recipeModel.create(newRecipe,function(err,result){
             if(err){
                 console.log(err);
             }else{
-                console.log("----------------------", result.img.Buffer);
+                // console.log("----------------------", result.img.Buffer);
                 console.log("Saved To database");
                 res.contentType(final_img.contentType);
                 // console.log(final_img.image);

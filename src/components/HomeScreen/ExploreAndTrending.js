@@ -4,6 +4,7 @@ import userService from '../service/userService';
 import "./home.css";
 import "../oishii.css"
 import { useNavigate } from 'react-router'
+import { useSelector } from 'react-redux'
 
 const ExploreAndTrending = () => {
     const [searchTerm, setSearchTerm] = useState("");
@@ -11,11 +12,19 @@ const ExploreAndTrending = () => {
     const [searchResult, setSearchResult] = useState([]);
     const [trending, setTrending] = useState([]);
     const [latest, setLatest] = useState([]);
-    const [user, setUser] = useState({favRecipeList: []});
+    
     const navigate = useNavigate();
     // const [userFav, setUserFav] = useState([]);
+    // const [user, setUser] = useState({favRecipeList: []});
     
-   
+    //
+    const user1 = useSelector(state=> state) ;
+    const [user, setUser] = useState({...user1, favRecipeList: [] });
+    
+    console.log(" in Home page, user is", user1);
+    
+    
+    
     
     const searchByIngredient = () =>
         recipeService.fetchByIngredients(searchTerm)
@@ -106,6 +115,10 @@ const ExploreAndTrending = () => {
     
                             <li className="nav-item">
                                 <a className="nav-link" href="/register">Register</a>
+                            </li>
+    
+                            <li className="nav-item">
+                                <a className="nav-link" href="/search">Search</a>
                             </li>
                         </ul>
                     </div>
