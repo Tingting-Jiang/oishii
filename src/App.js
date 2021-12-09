@@ -11,6 +11,7 @@ import Profile from './components/ProfileScreen/Profile'
 
 import Home from './components/HomeScreen/';
 import Header from './components/Header'
+import Search from './components/SearchScreen';
 import CreateScreen from './components/CreateScreen/createScreen';
 
 import userReducer from './components/service/reducers/userReducer';
@@ -29,12 +30,14 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home/>}/>
                     <Route path="/home" element={<Home/>}/>
+                    <Route path="/search" element={<Search/>} exact={true}/>
+                    <Route path="/search/:searchTerm" element={<Search/>} exact={true}/>
+
                     <Route path="/login" element={<Login/>} exact={true}/>
                     <Route path="/register" element={<Register/>} exact={true}/>
                     <Route path="/profile" element={<Profile/>} exact={true}/>
-                    <Route path="/recipe/:id" element={<RecipeScreen/>} exact={true}/>
+                    <Route path="/details/:id" element={<RecipeScreen/>} exact={true}/>
                     <Route path="/create" element={<CreateScreen/>} exact={true}/>
-                    <Route path="/search" element={<SearchScreen/>} exact={true}/>
 
                     <Route path="/home1" element={<Header/>} exact={true}/>
                     <Route path="/recipe/detail" element={<RecipeScreen/>} exact={true}/>

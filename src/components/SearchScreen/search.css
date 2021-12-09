@@ -1,7 +1,7 @@
 /*main search bar*/
 
 .wd-main-magnifier {
-    margin-top: 12px;
+    margin-top: 13px;
 }
 
 .wd-main-search-input {
@@ -46,6 +46,10 @@
     padding: 10px;
 }
 
+.wd-search-result-item:hover {
+    background-color: #f1ebea;
+}
+
 .wd-search-result-image {
     height: 80px;
     width: 120px;
@@ -57,4 +61,5 @@
     max-height: 80px;
     overflow: auto;
     margin: 0;
+    text-underline-mode: none;
 }

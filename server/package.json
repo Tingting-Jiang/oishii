@@ -18,6 +18,7 @@
     "mongodb": "^4.2.1",
     "mongoose": "^6.0.14",
     "multer": "^1.4.4",
-    "node-fetch": "^2.6.6"
+    "node-fetch": "^2.6.6",
+    "react-helmet": "^6.1.0"
   }
 }
