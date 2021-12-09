@@ -1,0 +1,38 @@
+/*liked users*/
+
+.wd-like-user-container {
+    margin: 20px 0;
+    max-width: 100%;
+    position: relative;
+    height: 100px;
+}
+
+.wd-like-user-container > .nav{
+    font-size: 14px;
+}
+
+.wd-like-user-container > .nav-link:active {
+    font-weight: normal;
+}
+
+.wd-like-user-container > .nav-link:focus {
+    font-weight: normal;
+}
+
+.wd-like-user {
+    max-width: 100%;
+    overflow: auto;
+    position: absolute;
+}
+
+.wd-block-title {
+    background-color: #fad2ca;
+    text-align: center;
+    margin: 30px 0 30px 0;
+}
+
+.wd-following-user-img {
+    max-height: 70px;
+    object-fit: cover;
+    border-radius: 50%;
+}

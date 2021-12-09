@@ -127,3 +127,8 @@ h6 {
   text-decoration: none;
   color: #F17C67;
 }
+
+.nav>a, .nav>a:link, .nav>a:hover, .nav>a:focus, .nav>a:visited {
+  text-decoration: none;
+  color: #F17C67;
+}

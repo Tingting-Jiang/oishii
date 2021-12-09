@@ -1,42 +1,7 @@
-/*top nav bar*/
-
-.wd-magnifier {
-    color: #F17C67;
-    position: absolute;
-    margin-left: 20px;
-    margin-top: 8px;
-}
-
-.wd-search-bar-input {
-    border-radius: 20px;
-    padding: 5px 20px 5px 50px;
-    font-size: 14px;
-    height: 40px;
-}
-
-.wd-home-header {
-    height: 40px;
-}
-
-
-/*button*/
-.wd-button {
-    color: #F17C67;
-    border-color: #F17C67;
-}
-
-.wd-button:hover {
-    color: #c95b48;
-    border-color: #F17C67;
-    background-color: #fad2ca;
-}
-
 /*recipe*/
 
 .wd-recipe-container {
-    margin: 10px 0;
     height: 100%;
-    padding-top: 10px;
     padding-bottom: 40px;
     overflow: auto;
 }
@@ -47,7 +12,7 @@
 
 .wd-bg {
     width: 100%;
-    height: 1220px;
+    height: 1120px;
     object-fit: cover;
 }
 
@@ -55,7 +20,7 @@
     background-color: rgba(255, 255, 255, 0.9);
     position: absolute;
     width: 68%;
-    height: 1145px;
+    height: 1045px;
     left: 16%;
     top: 100px;
     padding: 40px;
@@ -94,44 +59,6 @@
     max-height: 300px;
 }
 
-/*liked users*/
-
-.wd-like-user-container {
-    margin: 20px 0;
-    max-width: 100%;
-    position: relative;
-    height: 100px;
-}
-
-.wd-like-user-container > .nav{
-    font-size: 14px;
-}
-
-.wd-like-user-container > .nav-link:active {
-    font-weight: normal;
-}
-
-.wd-like-user-container > .nav-link:focus {
-    font-weight: normal;
-}
-
-.wd-like-user {
-    max-width: 100%;
-    overflow: auto;
-    position: absolute;
-}
-
-.wd-block-title {
-    background-color: #fad2ca;
-    text-align: center;
-    margin: 30px 0 30px 0;
-}
-
-.wd-following-user-img {
-    max-height: 70px;
-    object-fit: cover;
-    border-radius: 50%;
-}
 
 .list-group, .list-group-item {
     border: none;
@@ -153,11 +80,13 @@ ol {
     list-style: none;
     padding-left: 40px;
 }
+
 ol li {
-    margin: 0 0 0.5rem 0;
+    margin: 0 0 0.8rem 0;
     counter-increment: my-counter;
     position: relative;
 }
+
 ol li::before {
     content: counter(my-counter);
     color: #FFFFFF;
@@ -175,58 +104,4 @@ ol li::before {
     border-radius: 50%;
     text-align: center;
     box-shadow: 1px 1px 0 #999;
-}
-
-
-/*nav bar and headings*/
-
-.nav {
-    flex-wrap: nowrap;
-    font-size: 18px;
-}
-.nav-link {
-    color: #000000;
-}
-
-.nav-link:hover {
-    color: #F17C67;
-}
-
-.nav-link:active, .nav-link:focus {
-    color: #F17C67;
-    font-weight: bold;
-}
-
-h1, h2, h3 {
-    font-family: 'Pacifico', serif;
-    text-shadow: 2px 2px 2px #e3d5d3
-}
-
-h6 {
-    color: #4d4d4d;
-}
-
-
-/*footer and body*/
-
-.wd-footer {
-    padding: 20px 50px;
-    background-color: #fad2ca;
-    position: relative;
-    margin-top: -30px; /* negative value of footer height */
-    height: 150px;
-    clear: both;
-}
-
-.wd-color-coral {
-    color: #F17C67;
-}
-
-body {
-    background: white;
-    margin: 0;
-    padding: 0;
-    font-family: 'Quicksand', sans-serif;
-    font-size: 16px;
-    color: black;
 }

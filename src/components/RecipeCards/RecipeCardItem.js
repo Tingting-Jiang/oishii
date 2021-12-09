@@ -23,8 +23,7 @@ const RecipeCardItem = (paras) => {
         heartClassName = "fas fa-heart wd-color-red";
     }
 
-    // TODO like function
-    const likeRecipeHandler = () => {
+    const likeRecipeHandler = (recipeId) => {
         if (user.username) {
             userService.likeRecipe(recipeId, user.username)
                 .then(data => {

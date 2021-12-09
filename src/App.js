@@ -10,14 +10,16 @@ import Register from './components/LoginScreen/Register'
 import Profile from './components/ProfileScreen/Profile'
 
 import Home from './components/HomeScreen/';
-import Header from './components/Header'
+import Header from './components/Header';
+import Footer from "./components/Footer";
 import Search from './components/SearchScreen';
+import SearchDetail from "./components/RecipeScreen";
+
 import CreateScreen from './components/CreateScreen/createScreen';
 
 import userReducer from './components/service/reducers/userReducer';
 
-import SearchScreen from './components/SearchScreen/SearchScreen';
-import Footer from "./components/Footer";
+// import SearchScreen from './components/SearchScreen/SearchScreen';
 
 const store = createStore(userReducer);
 
@@ -32,11 +34,12 @@ function App() {
                     <Route path="/home" element={<Home/>}/>
                     <Route path="/search" element={<Search/>} exact={true}/>
                     <Route path="/search/:searchTerm" element={<Search/>} exact={true}/>
+                    <Route path="/details/:id" element={<SearchDetail/>} exact={true}/>
 
                     <Route path="/login" element={<Login/>} exact={true}/>
                     <Route path="/register" element={<Register/>} exact={true}/>
                     <Route path="/profile" element={<Profile/>} exact={true}/>
-                    <Route path="/details/:id" element={<RecipeScreen/>} exact={true}/>
+                    {/*<Route path="/details/:id" element={<RecipeScreen/>} exact={true}/>*/}
                     <Route path="/create" element={<CreateScreen/>} exact={true}/>
 
                     <Route path="/home1" element={<Header/>} exact={true}/>
