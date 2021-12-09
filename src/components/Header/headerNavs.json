@@ -1,7 +1,7 @@
 [
   {
     "navName": "Home",
-    "navTitle": "home",
+    "navTitle": "",
     "_id": 1
   },
   {
@@ -15,8 +15,14 @@
     "_id": 3
   },
   {
-    "navName": "About",
-    "navTitle": "about",
+    "navName": "Explore",
+    "navTitle": "explore",
     "_id": 4
+  },
+  {
+    "navName": "Create",
+    "navTitle": "create",
+    "_id": 5
   }
+
 ]

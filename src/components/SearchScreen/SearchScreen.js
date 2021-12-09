@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import recipeService from '../service/recipeService'
 import { useNavigate } from 'react-router-dom';
+import './search.css';
 
 
 const SearchScreen = () => {

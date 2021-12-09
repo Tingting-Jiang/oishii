@@ -2,9 +2,8 @@ import React, { useState } from 'react'
 import HeaderNavItem from "./HeaderNavItem";
 import headerNavs from "./headerNavs.json";
 import "./header.css";
-import recipeService from '../service/recipeService'
-import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import recipeService from '../service/recipeService';
+import { useNavigate } from 'react-router-dom';
 
 const Header = ({
         active = "home"
@@ -51,7 +50,7 @@ const Header = ({
                         })}
                     </ul>
                 </div>
-                <div className="d-none d-md-block col-4 align-self-center">
+                <div className="d-none d-lg-block col-4 align-self-center">
                     <div className="align-items-center">
                         <div className="wd-magnifier">
                             <label htmlFor="SearchInput">

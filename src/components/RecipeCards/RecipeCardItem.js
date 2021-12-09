@@ -31,6 +31,8 @@ const RecipeCardItem = (paras) => {
                     // console.log("back from server, recipeList -->", data);
                     setUser({...user, favRecipeList: data});
                 });
+        } else {
+            alert("Please Login to like a recipe.")
         }
     };
 
