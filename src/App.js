@@ -43,10 +43,8 @@ function App() {
 
                     <Route path="/details/:id" element={<RecipeScreen/>} exact={true}/>
                     <Route path="/create" element={<CreateScreen/>} exact={true}/>
-                    <Route path="/search" element={<SearchScreen/>} exact={true}/>
-                    <Route path="/search/:searchTerm" element={<SearchScreen/>} exact={true}/>
 
-                    <Route path="/create" element={<CreateScreen/>} exact={true}/>
+                    {/*<Route path="/create" element={<CreateScreen/>} exact={true}/>*/}
 
 
                     {/*<Route path="/details/:id" element={<RecipeScreen/>} exact={true}/>*/}

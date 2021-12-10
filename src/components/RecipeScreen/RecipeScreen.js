@@ -142,14 +142,6 @@ const RecipeScreen = () => {
                                     {data.step}
                                 </li>)
                             ))}
-                            
-                            
-                            {/*{instruction[0].steps.map((item) => (*/}
-                            {/*    <li>*/}
-                            {/*         {item.step}*/}
-                            {/*    </li>*/}
-                            {/*    )*/}
-                            {/*)}*/}
                             {recipe.analyzedInstructions.length === 0 ? "" :<li>Enjoy!</li>}
                             
                         </ol>

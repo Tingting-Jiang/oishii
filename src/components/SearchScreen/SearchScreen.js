@@ -9,7 +9,7 @@ import {b64toBlob, contentType} from '../const'
 const SearchScreen = () => {
     const params = useParams();
     const ingredient = params.searchTerm || "pork";
-    console.log("searchTerm in Search Screen", ingredient);
+    // console.log("searchTerm in Search Screen", ingredient);
     const navigate = useNavigate();
     let totalRecipes= [];
     
@@ -45,6 +45,7 @@ const SearchScreen = () => {
                 console.log("db data length ==>", data.length );
                     if (data.length !== 0) {
                         console.log("search DB");
+                        console.log(data);
                         for (let item of data) {
                             item.image = URL.createObjectURL(b64toBlob(item.image, contentType));
                         }
@@ -126,10 +127,11 @@ const SearchScreen = () => {
                                     ))}
                                 </datalist>
                             </div>
-                            <button onClick={clickSearch} className="btn btn-pink ">
+                            <button onClick={clickSearch} className="btn btn-primary">
                                 Search
                             </button>
                         </div>
+                        
                 
                         <div className="my-3">
             <span>
