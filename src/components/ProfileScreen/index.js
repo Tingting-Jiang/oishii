@@ -39,11 +39,9 @@ const Profile = () => {
     }
 
     console.log(user);
-
     console.log("userFavRecipes");
     console.log(userFavRecipes);
 
-    console.log(user.userAvatar);
 
     return (
         <>

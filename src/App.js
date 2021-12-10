@@ -5,8 +5,10 @@ import {Provider} from 'react-redux';
 import './App.css';
 // import RecipeScreen from './components/RecipeScreen/RecipeScreen'
 // import ExploreAndTrending from './components/HomeScreen/ExploreAndTrending'
-import Login from './components/LoginScreen/LoginScreen'
-import Register from './components/RegisterScreen/Register'
+import Login from './components/LoginAndRegister/LoginScreen/';
+import Register from './components/LoginAndRegister/RegisterScreen/';
+import Register2 from './components/LoginAndRegister/RegisterScreen/Register';
+
 
 import Home from './components/HomeScreen/';
 import Footer from "./components/Footer";
@@ -44,6 +46,7 @@ function App() {
 
                     <Route path="/login" element={<Login/>} exact={true}/>
                     <Route path="/register" element={<Register/>} exact={true}/>
+                    <Route path="/register2" element={<Register2/>} exact={true}/>
                     {/*<Route path="/profile" element={<ProfileScreen/>} exact={true}/>*/}
 
                     <Route path="/details/:id" element={<RecipeScreen/>} exact={true}/>

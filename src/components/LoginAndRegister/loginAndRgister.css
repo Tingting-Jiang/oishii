@@ -1,0 +1,14 @@
+/*login screen img*/
+/*create screen img*/
+
+.wd-login-bg {
+    height: 700px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.wd-login-bg-small, .wd-create-bg-small {
+    height: 150px;
+    width: 100%;
+    object-fit: cover;
+}
