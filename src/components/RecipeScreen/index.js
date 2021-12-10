@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {Helmet} from "react-helmet";
+import {b64toBlob, contentType} from '../const'
 
 import "./recipe.css";
 
@@ -19,31 +20,12 @@ const RecipeScreen = () => {
     console.log("in 1st line ->", recipeID);
     const [recipe, setRecipe] = useState(oldIngredient);
     const [image, setImage] = useState(oldIngredient.image);
-
-    const b64toBlob = (b64Data, contentType='', sliceSize=512) => {
-        const byteCharacters = atob(b64Data);
-        const byteArrays = [];
-
-        for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-            const slice = byteCharacters.slice(offset, offset + sliceSize);
-
-            const byteNumbers = new Array(slice.length);
-            for (let i = 0; i < slice.length; i++) {
-                byteNumbers[i] = slice.charCodeAt(i);
-            }
-
-            const byteArray = new Uint8Array(byteNumbers);
-            byteArrays.push(byteArray);
-        }
-
-        const blob = new Blob(byteArrays, {type: contentType});
-        return blob;
-    }
-    //TODO: here content type only include png
-    const contentType = 'image/png';
+    // const [followers, setFollowers] = useState([]);
+    const dbRecipe = recipeID.length > 10;
+    
 
     useEffect(() => {
-            if (recipeID.length < 7) {
+            if (!dbRecipe) {
                 recipeService.fetchByID(recipeID)
                     .then((data) => {
                         setRecipe(data);
@@ -88,18 +70,32 @@ const RecipeScreen = () => {
             alert("Please Login to like a recipe.")
         }
     };
+    
+    
+    // useEffect(() => {
+    //     userService.getRecipeFollowers(recipeID)
+    //         .then((data) => {
+    //             console.log(" back ", data);
+    //             for (let item of data) {
+    //                 item.userAvatar = URL.createObjectURL(b64toBlob(item.userAvatar, contentType));
+    //             }
+    //             setFollowers(data);
+    //         })
+    //     },
+    //     []
+    // );
 
     // for test
     const followers = [
         {
             "username": "Alice",
-            "image": "/images/sample-user.jpeg",
-            "id": 123
+            "userAvatar": "/images/sample-user.jpeg",
+            "_id": 123
         },
         {
             "username": "Bob",
-            "image": "/images/sample-user2.png",
-            "id": 124
+            "userAvatar": "/images/sample-user2.png",
+            "_id": 124
         },
     ]
 
