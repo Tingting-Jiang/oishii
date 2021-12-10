@@ -18,6 +18,8 @@ import Profile from "./components/ProfileScreen";
 import CreateScreen from './components/CreateScreen/createScreen';
 
 import userReducer from './components/service/reducers/userReducer';
+import RecipeScreen from './components/RecipeScreen'
+import SearchScreen from './components/SearchScreen/SearchScreen'
 
 // import SearchScreen from './components/SearchScreen/SearchScreen';
 
@@ -42,7 +44,13 @@ function App() {
                     <Route path="/register" element={<Register/>} exact={true}/>
                     {/*<Route path="/profile" element={<ProfileScreen/>} exact={true}/>*/}
 
+                    <Route path="/details/:id" element={<RecipeScreen/>} exact={true}/>
                     <Route path="/create" element={<CreateScreen/>} exact={true}/>
+                    <Route path="/search" element={<SearchScreen/>} exact={true}/>
+                    <Route path="/search/:searchTerm" element={<SearchScreen/>} exact={true}/>
+
+                    <Route path="/create" element={<CreateScreen/>} exact={true}/>
+
 
                     {/*<Route path="/details/:id" element={<RecipeScreen/>} exact={true}/>*/}
                     {/*<Route path="/home1" element={<Header/>} exact={true}/>*/}

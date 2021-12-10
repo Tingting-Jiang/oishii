@@ -50,16 +50,12 @@ export const likeRecipe = (recipeID, username) =>
         })
         .then(res => res.json());
 
-export const createRecipe = (newRecipe, username) =>
-    fetch(`${API_URL}/create`, {
-        method: "POST",
-        body: JSON.stringify({newRecipe: newRecipe, username: username}),
+export const createRecipe = (formData) =>
+    fetch(`${API_URL}/upload`, {
+        method: 'POST',
         credentials: 'include',
-        headers: {
-            'content-type': 'application/json'
-        }
-    })
-        .then(res => res.json());
+        body: formData,
+    });
 
 
 
@@ -77,7 +73,7 @@ export const getRecipe = (recipeID) =>
 export const searchRecipeByTitle = (title) =>
     fetch(`${API_URL}/searchRecipe`,{
         method: 'POST',
-        body: JSON.stringify({tile: title}),
+        body: JSON.stringify({title: title}),
         credentials: 'include',
         headers: {
             'content-type': 'application/json'

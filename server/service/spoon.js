@@ -69,6 +69,31 @@ module.exports = (app) =>  {
         
     }
     
+    
+    
+    const fetchByIngredients1= (req, res) => {
+        const recipeList = `/recipes/search?query=${req.params.ingredients}&number=10&offset=0`;
+        console.log("in fetchByIngredients1 -->", recipeList);
+        fetch(URL + recipeList, {
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-host": HOST,
+                "x-rapidapi-key": API_KEY
+            }
+        })
+            .then(response => response.json())
+            .then((data) =>{
+                // console.log("fetchByTagAndIngredients -->", data);
+                for (let item of data.results) {
+                    item.image = data.baseUri + item.image;
+                }
+                res.json(data.results);
+            }).catch(e => {
+            console.log("error is -->", e);
+        })
+        
+    }
+    
    
     const fetchInstruction = (req, res) =>{
         const instruction = `/recipes/${req.params.id}/analyzedInstructions?stepBreakdown=true`;
@@ -140,7 +165,7 @@ module.exports = (app) =>  {
     
     app.get("/search/:key", fetchSearchResult); // auto-complete
     app.get("/details/:id", fetchInfoByID); // recipe-details(ingredients & instructions)
-    app.get("/ingredients/:ingredients", fetchByIngredients); // recipe list
+    app.get("/ingredients/:ingredients", fetchByIngredients1); // recipe list
     app.get("/trending", fetchRandom); // trending and latest
     app.get("/similar/: id", fetchSimilar); // similar recipe list
     app.get("/instruction/:id", fetchInstruction); // only have instruction

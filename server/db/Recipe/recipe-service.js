@@ -38,6 +38,7 @@ module.exports = (app) => {
                 // const img = fs.readFileSync(filePath);
                 // const encodedString = img.toString('base64');
                 // recipe.image = encodedString;
+      
                 recipe.image = imageTransform(recipe.image);
                 res.json(recipe)
             })
@@ -45,9 +46,13 @@ module.exports = (app) => {
     
     
     const findRecipeByTitle = (req, res) =>{
+        console.log(req.body.title);
         dao.findRecipeByTitle(req.body.title)
             .then( data =>{
-                data.image = imageTransform(data.image);
+                // console.log("returned data", data);
+                for (let item of data) {
+                    item.image = imageTransform(item.image);
+                }
                 res.json(data);
                 }
             )
