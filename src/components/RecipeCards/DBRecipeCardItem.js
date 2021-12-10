@@ -3,7 +3,7 @@ import userService from "../service/userService";
 import {Link} from "react-router-dom";
 import { b64toBlob, contentType } from '../const'
 
-const DBRecipeCard = (paras) => {
+const DBRecipeCardItem = (paras) => {
     let recipeId = paras.recipeId;
     let user = paras.user;
     const setUser = paras.setUser;
@@ -12,6 +12,7 @@ const DBRecipeCard = (paras) => {
     useEffect(() => {
             userService.getRecipe(recipeId)
                 .then((data) => {
+                    console.log("in DB RECIPE", data);
                     data.image = URL.createObjectURL(b64toBlob(data.image, contentType))
                     setRecipe(data);
                 })
@@ -65,4 +66,4 @@ const DBRecipeCard = (paras) => {
     )
 }
 
-export default DBRecipeCard;
+export default DBRecipeCardItem;

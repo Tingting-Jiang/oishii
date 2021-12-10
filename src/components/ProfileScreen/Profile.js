@@ -31,7 +31,7 @@ const Profile = () => {
                 newUser.userAvatar = URL.createObjectURL(b64toBlob(newUser.userAvatar, contentType))
                 setUser(newUser);
                 setCookie('user', newUser, { path: '/' })
-             
+                console.log("returned form server", newUser);
                 setUserFav(newUser.favRecipeList);
                 setUserRecipe(newUser.usersRecipe);
                 setFollowers(newUser.usersFollowers);
@@ -50,6 +50,8 @@ const Profile = () => {
     useEffect(getProfile, [navigate]);
     
   
+    console.log("user recipe", userRecipe);
+    console.log("user fav", userFavRecipes);
     
     
     
@@ -131,6 +133,7 @@ const Profile = () => {
                     <h2 className="wd-block-title">
                         {user.username}'s Recipes
                     </h2>
+                 
                     {
                         userRecipe.map(recipeId =>
                             <DBRecipeCardItem key={recipeId} recipeId={recipeId} user={user} setUser={setUser}/>
@@ -144,6 +147,7 @@ const Profile = () => {
                         {user.username}'s Favorites
                     </h2>
                     <div className="card-group">
+                 
                         {
                             userFavRecipes.map(recipeId =>
                                 <RecipeCardItem key={recipeId} recipeId={recipeId} user={user} setUser={setUser}/>
