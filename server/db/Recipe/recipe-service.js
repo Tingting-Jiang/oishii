@@ -19,7 +19,6 @@ module.exports = (app) => {
    
         dao.findRecipeById(req.body.recipeID)
             .then(recipe => {
-      
                 recipe.image = imageTransform(recipe.image);
                 res.json(recipe)
             })
