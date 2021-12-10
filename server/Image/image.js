@@ -33,25 +33,36 @@ module.exports = (app) =>{
         
         const newRecipe = {
             ...recipe,
-            image: filename
+            image: filename,
+            sourceName:username
         };
         
         recipeModel.create(newRecipe, function(err, result){
+          
             if(err){
                 console.log(err);
             }else{
                 console.log("Saved Recipe To database");
+                recipeDao.findRecipeByFileName(filename)
+                    .then(recipe => {
+                        console.log("find recipe in recipe DB", recipe);
+                        userDao.createRecipe(username, recipe[0]._id)
+                            .then(status =>
+                                console.log("Save recipe in user DB"))
+                    });
                 res.contentType(final_img.contentType);
                 res.send(final_img.image);
             }
         })
+        // console.log("filename is -->", filename);
         
-        recipeDao.findRecipeByFileName(filename)
-            .then(recipe => {
-                userDao.createRecipe(username, recipe)
-                    .then(status =>
-                    console.log("Save recipe in user DB"))
-            })
+        // recipeDao.findRecipeByFileName(filename)
+        //     .then(recipe => {
+        //         console.log("find recipe in recipe DB", recipe);
+        //         userDao.createRecipe(username, recipe)
+        //             .then(status =>
+        //             console.log("Save recipe in user DB"))
+        //     })
         
         
     }

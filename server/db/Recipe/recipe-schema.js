@@ -7,7 +7,8 @@ const schema = mongoose.Schema({
     image: String,
     analyzedInstructions: Array,
     extendedIngredients: Array,
-    followers: Array
+    followers: Array,
+    sourceName:String
     
     
 }, {collection: 'recentRecipe'});
