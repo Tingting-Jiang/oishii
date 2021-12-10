@@ -7,12 +7,13 @@ import './App.css';
 // import ExploreAndTrending from './components/HomeScreen/ExploreAndTrending'
 import Login from './components/LoginScreen1/LoginScreen'
 import Register from './components/LoginScreen/Register'
-import Profile from './components/ProfileScreen/Profile'
+import ProfileScreen from './components/ProfileScreen/Profile'
 
 import Home from './components/HomeScreen/';
 import Footer from "./components/Footer";
 import Search from './components/SearchScreen';
 import SearchDetail from "./components/RecipeScreen";
+import Profile from "./components/ProfileScreen";
 
 import CreateScreen from './components/CreateScreen/createScreen';
 
@@ -34,10 +35,12 @@ function App() {
                     <Route path="/search" element={<Search/>} exact={true}/>
                     <Route path="/search/:searchTerm" element={<Search/>} exact={true}/>
                     <Route path="/details/:id" element={<SearchDetail/>} exact={true}/>
+                    <Route path="/profile" element={<Profile/>} exact={true}/>
+                    <Route path="/profile/:id" element={<Profile/>} exact={true}/>
 
                     <Route path="/login" element={<Login/>} exact={true}/>
                     <Route path="/register" element={<Register/>} exact={true}/>
-                    <Route path="/profile" element={<Profile/>} exact={true}/>
+                    {/*<Route path="/profile" element={<ProfileScreen/>} exact={true}/>*/}
 
                     <Route path="/create" element={<CreateScreen/>} exact={true}/>
 
