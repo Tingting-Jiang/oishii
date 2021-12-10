@@ -8,6 +8,7 @@ import { b64toBlob, contentType } from '../const'
 import RecipeCardItem from '../RecipeCards/RecipeCardItem'
 import FollowerList from '../FollowerList'
 import DBRecipeCardItem from '../RecipeCards/DBRecipeCardItem'
+import { useCookies } from 'react-cookie'
 
 
 
@@ -18,7 +19,10 @@ const Profile = () => {
     const [userRecipe, setUserRecipe] = useState([]);
     const [userFavRecipes, setUserFav] = useState([]);
     const [followers, setFollowers] = useState();
-    // const dispatch = useDispatch();
+    
+    const [cookies, setCookie, removeCookie] = useCookies(['user']);
+    
+
     const navigate = useNavigate();
     const getProfile = () =>
         userService.getProfile()
@@ -26,6 +30,8 @@ const Profile = () => {
                 console.log(newUser)
                 newUser.userAvatar = URL.createObjectURL(b64toBlob(newUser.userAvatar, contentType))
                 setUser(newUser);
+                // setCookie('user', newUser, { path: '/' })
+                // console.log(cookies.user);
                 setUserFav(newUser.favRecipeList);
                 setUserRecipe(newUser.usersRecipe);
                 setFollowers(newUser.usersFollowers);

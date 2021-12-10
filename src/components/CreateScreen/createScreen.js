@@ -1,10 +1,20 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import userService from '../service/userService';
 import { useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
+import { b64toBlob, contentType } from '../const'
 
 
 const CreateScreen = () => {
-    const user = { username: "kk"};
+   
+    const [username, setUsername] = useState();
+    const getProfile = () =>
+        userService.getProfile()
+            .then(newUser => {
+                setUsername(newUser.username);
+            })
+            .catch(e => console.log(e));
+    useEffect(getProfile, []);
     
     const [recipe] = useState({});
 
@@ -50,7 +60,7 @@ const CreateScreen = () => {
         console.log("submit");
         const formData = new FormData()
         formData.append('file', file)
-        formData.append("username", "kk");
+        formData.append("username", username);
         formData.append("recipe", JSON.stringify(newRecipe));
         
         userService.createRecipe(formData)
