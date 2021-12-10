@@ -8,6 +8,7 @@ import {Helmet} from "react-helmet";
 import RecipeCardItem from "../RecipeCards/RecipeCardItem";
 import {Link} from "react-router-dom";
 import FollowerList from "../FollowerList";
+import DBRecipeCardItem from '../RecipeCards/DBRecipeCardItem'
 
 
 const Profile = () => {
@@ -60,7 +61,7 @@ const Profile = () => {
                         <h5 className="wd-username">{user.username}</h5>
                         <div className="wd-username">
                             {
-                                user.birthday &&
+                                user.dateOfBirth &&
                                 <span className="d-inline-block me-2">
                                 <i className="fas fa-birthday-cake me-2 wd-color-coral"/>
                                     {/*<Birthdate birthdate={user.birthday}/>*/}
@@ -121,7 +122,7 @@ const Profile = () => {
                         {
                             user.usersRecipe && user.usersRecipe.length > 0 &&
                             user.usersRecipe.map(recipeId =>
-                                <RecipeCardItem key={recipeId} recipeId={recipeId} user={user} setUser={setUser}/>
+                                <DBRecipeCardItem key={recipeId} recipeId={recipeId} user={user} setUser={setUser}/>
                             )
                         }
                     </div>

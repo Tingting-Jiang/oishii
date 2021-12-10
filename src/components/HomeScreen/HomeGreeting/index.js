@@ -32,11 +32,11 @@ const Greeting = () => {
                  alt=""/>
                 <div className="wd-user-info text-center">
                     <img className="wd-profile-img"
-<<<<<<< HEAD
+
                          src={`${user.userAvatar || "/images/sample-user.jpeg"}`}
-=======
+
                          src={user.userAvatar}
->>>>>>> 4247e641a240128be71118c1b811d5f76ef1a846
+
                          alt=""/>
                         <h5 className="wd-username">Hello {user.username}</h5>
                         <h6 className="wd-username">Ready to find some Oishii?</h6>
