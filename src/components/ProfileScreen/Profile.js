@@ -30,8 +30,8 @@ const Profile = () => {
                 console.log(newUser)
                 newUser.userAvatar = URL.createObjectURL(b64toBlob(newUser.userAvatar, contentType))
                 setUser(newUser);
-                // setCookie('user', newUser, { path: '/' })
-                // console.log(cookies.user);
+                setCookie('user', newUser, { path: '/' })
+             
                 setUserFav(newUser.favRecipeList);
                 setUserRecipe(newUser.usersRecipe);
                 setFollowers(newUser.usersFollowers);
@@ -41,10 +41,15 @@ const Profile = () => {
     
     const logout = () =>{
         userService.logout()
-            .then(res => navigate("/"));
+            .then(res => {
+                removeCookie('user')
+                navigate("/")
+            });
     };
     
     useEffect(getProfile, [navigate]);
+    
+  
     
     
     
