@@ -1,4 +1,4 @@
-import { getRecipeFollowers } from '../../../src/components/service/userService'
+// import { getRecipeFollowers } from '../../../src/components/service/userService'
 
 const dao = require('./recipe-dao')
 const Base64 = require("base-64")

@@ -25,6 +25,7 @@ const RecipeCards = () => {
     let userFavRecipes = [];
     if (user.favRecipeList) {
         for (let i=0; i<4; i++) {
+            user.favRecipeList[i] &&
             userFavRecipes.push(user.favRecipeList[i]);
         }
     }
@@ -50,6 +51,11 @@ const RecipeCards = () => {
                         Your Favorites
                     </h2>
                     <div className="card-group">
+                        {
+                            userFavRecipes.length === 0 &&
+                            <h5>Like some recipes and check them here!</h5>
+
+                        }
                         {
                             userFavRecipes.map(recipeId =>
                                 <RecipeCardItem key={recipeId} recipeId={recipeId} user={user} setUser={setUser}/>
@@ -84,11 +90,6 @@ const RecipeCards = () => {
                     }
                 </div>
             </div>
-
-
-
-
-
 
         </>
 

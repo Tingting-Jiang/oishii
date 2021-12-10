@@ -40,8 +40,6 @@ const RecipeCardItem = (paras) => {
         recipe.image = "/images/sample-recipe/thumbnail_sample.jpg";
     }
 
-    // console.log("in like");
-    // console.log(user.favRecipeList);
 
     return (
         <div className="card mx-2">

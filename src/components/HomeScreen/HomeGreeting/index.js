@@ -27,7 +27,7 @@ const Greeting = () => {
                  alt=""/>
                 <div className="wd-user-info text-center">
                     <img className="wd-profile-img"
-                         src="/images/sample-user.jpeg"
+                         src={`${user.userAvatar || "/images/sample-user.jpeg"}`}
                          alt=""/>
                         <h5 className="wd-username">Hello {user.username}</h5>
                         <h6 className="wd-username">Ready to find some Oishii?</h6>

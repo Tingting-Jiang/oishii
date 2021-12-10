@@ -33,8 +33,7 @@ const Search = () => {
         if (e.key === "Enter")
             clickSearch()
     }
-    
-    
+
     const clickSearch = () => {
         navigate(`/search/${searchTerm}`);
         userService.searchRecipeByTitle(searchTerm)

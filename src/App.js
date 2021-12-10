@@ -7,7 +7,6 @@ import './App.css';
 // import ExploreAndTrending from './components/HomeScreen/ExploreAndTrending'
 import Login from './components/LoginScreen1/LoginScreen'
 import Register from './components/LoginScreen/Register'
-import ProfileScreen from './components/ProfileScreen/Profile'
 
 import Home from './components/HomeScreen/';
 import Footer from "./components/Footer";
@@ -19,9 +18,7 @@ import CreateScreen from './components/CreateScreen/createScreen';
 
 import userReducer from './components/service/reducers/userReducer';
 import RecipeScreen from './components/RecipeScreen'
-import SearchScreen from './components/SearchScreen/SearchScreen'
 
-// import SearchScreen from './components/SearchScreen/SearchScreen';
 
 const store = createStore(userReducer);
 
