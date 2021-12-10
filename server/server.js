@@ -68,7 +68,7 @@ const storage = multer.diskStorage({
 })
 const upload = multer({ storage: storage })
 
-app.post("/api/upload",
+app.post("/db/upload",
     upload.single('file'),
     (req,res) => {
         console.log("in upload1");

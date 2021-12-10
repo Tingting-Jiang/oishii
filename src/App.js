@@ -32,9 +32,10 @@ function App() {
                     <Route path="/login" element={<Login/>} exact={true}/>
                     <Route path="/register" element={<Register/>} exact={true}/>
                     <Route path="/profile" element={<Profile/>} exact={true}/>
-                    <Route path="/recipe/:id" element={<RecipeScreen/>} exact={true}/>
+                    <Route path="/details/:id" element={<RecipeScreen/>} exact={true}/>
                     <Route path="/create" element={<CreateScreen/>} exact={true}/>
                     <Route path="/search" element={<SearchScreen/>} exact={true}/>
+                    <Route path="/search/:searchTerm" element={<SearchScreen/>} exact={true}/>
 
                     <Route path="/home1" element={<Header/>} exact={true}/>
                     <Route path="/recipe/detail" element={<RecipeScreen/>} exact={true}/>

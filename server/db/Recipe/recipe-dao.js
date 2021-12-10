@@ -11,7 +11,7 @@ const findRecipeById = (id) =>
     model.findById(id);
 
 const findRecipeByTitle = (title) =>
-    model.find({title: `/${title}/`});
+    model.find({"title": { $regex: `${title}`} });
 
 
 module.exports = {

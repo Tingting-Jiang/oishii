@@ -63,7 +63,7 @@ module.exports = (app) => {
                 } else {
                     user.favRecipeList.splice(idx, 1);
                 }
-                userDao.updateFavRecipe(req.body.username, user)
+                userDao.updateFavRecipe(req.body.username, user.favRecipeList)
                     .then(status => res.json(user.favRecipeList)
             );
     })};
@@ -101,10 +101,7 @@ module.exports = (app) => {
     
         userDao.createRecipe("kk", recipe )
             .then(status => res.sendStatus(200));
-        
-        
-        
-        
+      
     }
     
    const getRecipe = (req, res) =>{

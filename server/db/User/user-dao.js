@@ -22,10 +22,10 @@ const updateUser = (user) =>
         $set: user
     });
 
-const updateFavRecipe = (username, user) =>
+const updateFavRecipe = (username, favRecipeList) =>
 
     userModel.updateOne({username: username},
-        { $set: user });
+        { $set: {favRecipeList} });
 
 const deleteUser = (userId) =>
     userModel.deleteOne({_id: userId});

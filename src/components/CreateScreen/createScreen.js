@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import userService from '../service/userService';
 import { useSelector } from 'react-redux'
 
+
 const CreateScreen = () => {
     const user = { username: "kk"};
-    // console.log(" in Create page, user is", user);
     
     const [recipe] = useState({});
 
@@ -22,31 +22,51 @@ const CreateScreen = () => {
     
     
     const submitRecipe = () =>{
-        console.log("before sending, image url is", file);
+        const oldIngredients = ingredients.split(",");
+        let newIngredients = [];
+        for (let item of oldIngredients) {
+            newIngredients.push({ original : item});
+        }
+    
+    
+        let newInstructions = [];
+        let steps = []
+        for (let item of instructions) {
+            steps.push( { step : item});
+        }
+        const content = {steps: steps};
+    
+        newInstructions.push(content);
+        
         const newRecipe = {
             ...recipe,
             title,
             summary,
-            image: file,
             servings,
             readyInMinutes: time,
-            extendedIngredients: ingredients,
-            analyzedInstructions: instructions,
+            extendedIngredients: newIngredients,
+            analyzedInstructions: newInstructions,
         };
-        console.log("NEW RECIPE => ", newRecipe);
-        console.log("who created ==> ", user.username);
-        userService.createRecipe(newRecipe, user.username)
-            .then(data => console.log(data));
+        console.log("submit");
+        const formData = new FormData()
+        formData.append('file', file)
+        formData.append("username", "kk");
+        formData.append("recipe", JSON.stringify(newRecipe));
         
+        userService.createRecipe(formData)
+            .then(response => response.blob())
+            .then(blob => {
+                console.log("returned");
+                setUploadedFile({ src: URL.createObjectURL(blob) })
+            })
+            .catch(error => {
+                console.error(error)
+            })
     }
     
-
-    
-    
-    
+ 
     const handleImageUpload = (event) => {
         const files = event.target.files;
-        console.log(files[0]);
         setFileName(files[0].name);
         setFile(files[0]);
     }
@@ -57,62 +77,8 @@ const CreateScreen = () => {
     }
     
     const submitFile = () => {
-        
-        const oldIngredients = ingredients.split(",");
-        let newIngredients = [];
-        for (let item of oldIngredients) {
-            let container = { original : item};
-            newIngredients.push(container);
-        }
-    
+        console.log("file added")
       
-        let newInstructions = [];
-        let steps = []
-        for (let item of instructions) {
-            let step = { step : item};
-            steps.push(step);
-        }
-        const content = {steps: steps};
-        
-        newInstructions.push(content);
-        
-        
-        const newRecipe = {
-            ...recipe,
-            title: title,
-            summary: summary,
-            servings: servings,
-            readyInMinutes: time,
-            extendedIngredients: newIngredients,
-            analyzedInstructions: newInstructions,
-        };
-        console.log("submit");
-        const formData = new FormData()
-        formData.append('file', file)
-        formData.append("username", "kk");
-        formData.append("recipe", JSON.stringify(newRecipe));
-        // formData.append("title", title);
-        // formData.append("servings", servings);
-        // formData.append("summary", summary);
-        // formData.append("readyInMinutes", time);
-        // formData.append("extendedIngredients", JSON.stringify(newIngredients));
-        // formData.append("analyzedInstructions", JSON.stringify(newInstructions))
-        //
-        //
-    
-        fetch("http://localhost:4000/api/upload", {
-            method: 'POST',
-            credentials: 'include',
-            body: formData,
-        })
-            .then(response => response.blob())
-            .then(blob => {
-                console.log("returned");
-                setUploadedFile({ src: URL.createObjectURL(blob) })
-            })
-            .catch(error => {
-                console.error(error)
-            })
     };
 
 
