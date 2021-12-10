@@ -18,6 +18,9 @@ const RecipeCards = () => {
             });
     }, [])
 
+    // console.log("user.favRecipeList");
+    // console.log(user.favRecipeList);
+
     // get user fav recipes
     let userFavRecipes = [];
     if (user.favRecipeList) {
@@ -26,8 +29,7 @@ const RecipeCards = () => {
         }
     }
 
-    // get latest from db
-    // TODO
+    // TODO get latest from db
     let latestList = [];
 
     //get trending recipes

@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 
 import recipeService from "../service/recipeService";
 import userService from "../service/userService";
+import {Link} from "react-router-dom";
 
 const RecipeCardItem = (paras) => {
     let recipeId = paras.recipeId;
@@ -39,6 +40,9 @@ const RecipeCardItem = (paras) => {
         recipe.image = "/images/sample-recipe/thumbnail_sample.jpg";
     }
 
+    // console.log("in like");
+    // console.log(user.favRecipeList);
+
     return (
         <div className="card mx-2">
             <img src={recipe.image} className="card-img-top wd-card-img" alt="sample"/>
@@ -46,14 +50,17 @@ const RecipeCardItem = (paras) => {
                     onClick={() => likeRecipeHandler(recipe.id)}>
                 <i className={heartClassName}/>
             </button>
-            <div className="card-body">
-                <h5 className="card-title">{recipe.title}</h5>
-                <p className="card-text">for {recipe.servings} servings</p>
-                <p className="card-text">
-                    <small className="text-muted">Presented By
-                    { recipe.sourceName === null ? " A Great Anonymous Chef" : " "+ recipe.sourceName }
-                    </small></p>
-            </div>
+            <Link to={`/details/${recipe.id}`}>
+                <div className="card-body">
+                    <h5 className="card-title">{recipe.title}</h5>
+                    <p className="card-text">for {recipe.servings} servings</p>
+                    <p className="card-text">
+                        <small className="text-muted">Presented By
+                            { recipe.sourceName === null ? " A Great Anonymous Chef" : " "+ recipe.sourceName }
+                        </small></p>
+                </div>
+            </Link>
+
         </div>
     )
 }

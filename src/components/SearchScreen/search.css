@@ -41,8 +41,8 @@
 }
 
 .wd-search-result-item {
-    border: none;
-    margin: 10px;
+    border: none!important;
+    margin: 15px;
     padding: 10px;
 }
 

@@ -1,13 +1,8 @@
 import React from "react";
 import userService from "../service/userService";
+import {Link} from "react-router-dom";
 
 const RecipeCardItemByObject = (paras) => {
-    // console.log("recipe");
-    // console.log(paras.recipe);
-    // console.log("user");
-    // console.log(paras.user);
-    // console.log("setUser");
-    // console.log(paras.setUser);
 
     // dont know why I can not pass 3 parameters, react regards them as a whole.
     let recipe = paras.recipe;
@@ -43,14 +38,16 @@ const RecipeCardItemByObject = (paras) => {
                     onClick={() => likeRecipeHandler(recipe.id)}>
                 <i className={heartClassName}/>
             </button>
-            <div className="card-body">
-                <h5 className="card-title">{recipe.title}</h5>
-                <p className="card-text">for {recipe.servings} servings</p>
-                <p className="card-text">
-                    <small className="text-muted">Presented By
-                        { recipe.sourceName === null ? " A Great Anonymous Chef" : " "+ recipe.sourceName }
-                    </small></p>
-            </div>
+            <Link to={`/details/${recipe.id}`}>
+                <div className="card-body">
+                    <h5 className="card-title">{recipe.title}</h5>
+                    <p className="card-text">for {recipe.servings} servings</p>
+                    <p className="card-text">
+                        <small className="text-muted">Presented By
+                            { recipe.sourceName === null ? " A Great Anonymous Chef" : " "+ recipe.sourceName }
+                        </small></p>
+                </div>
+            </Link>
         </div>
     )
 }
