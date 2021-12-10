@@ -37,6 +37,26 @@ const DBRecipeCardItem = (paras) => {
         }
     };
     
+    const likeRecipeHandler1 = (recipeId) => {
+        if (user === undefined) {
+            alert("Please Login to like a recipe.")
+            return;
+        }
+        const idx = user.favRecipeList.indexOf(recipeId);
+        if (idx !== -1) {
+            userService.unlikeRecipe(recipeId, user.username)
+                .then(status =>{
+                    user.favRecipeList.splice(idx, 1);
+                })
+        } else if (idx === -1) {
+            userService.likeRecipe(recipeId, user.username)
+                .then(status =>{
+                    user.favRecipeList = [recipeId, ...user.favRecipeList];
+                })
+        }
+        
+    };
+    
     if (!recipe.image) {
         recipe.image = "/images/sample-recipe/thumbnail_sample.jpg";
     }

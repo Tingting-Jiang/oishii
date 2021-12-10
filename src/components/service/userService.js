@@ -50,6 +50,18 @@ export const likeRecipe = (recipeID, username) =>
         })
         .then(res => res.json());
 
+
+export const unlikeRecipe = (recipeID, username) =>
+    fetch(`${API_URL}/unlike`, {
+        method: "PUT",
+        body: JSON.stringify({recipeID: recipeID, username: username}),
+        credentials: 'include',
+        headers: {
+            'content-type': 'application/json'
+        }
+    })
+        .then(res => res.json());
+
 export const createRecipe = (formData) =>
     fetch(`${API_URL}/upload`, {
         method: 'POST',
@@ -123,6 +135,7 @@ export default {
     getProfile,
     logout,
     likeRecipe,
+    unlikeRecipe,
     createRecipe,
     getRecipe,
     searchRecipeByTitle,
