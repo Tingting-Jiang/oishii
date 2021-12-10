@@ -5,8 +5,8 @@ import {Provider} from 'react-redux';
 import './App.css';
 // import RecipeScreen from './components/RecipeScreen/RecipeScreen'
 // import ExploreAndTrending from './components/HomeScreen/ExploreAndTrending'
-import Login from './components/LoginScreen1/LoginScreen'
-import Register from './components/LoginScreen/Register'
+import Login from './components/LoginScreen/LoginScreen'
+import Register from './components/RegisterScreen/Register'
 
 import Home from './components/HomeScreen/';
 import Footer from "./components/Footer";
