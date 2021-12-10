@@ -29,6 +29,7 @@ const Search = () => {
     };
     
     
+    
     const checkResult = (e) =>{
         if (e.key === "Enter")
             clickSearch()
@@ -69,6 +70,7 @@ const Search = () => {
     }
     
     useEffect(clickSearch, [])
+  
     
     
     return (

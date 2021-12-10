@@ -18,9 +18,8 @@ import CreateScreen from './components/CreateScreen/createScreen';
 
 import userReducer from './components/service/reducers/userReducer';
 import RecipeScreen from './components/RecipeScreen'
-import SearchScreen from './components/SearchScreen/SearchScreen'
+import EditProfile from './components/ProfileScreen/EditProfile'
 
-// import SearchScreen from './components/SearchScreen/SearchScreen';
 
 const store = createStore(userReducer);
 
@@ -43,6 +42,7 @@ function App() {
 
                     <Route path="/details/:id" element={<RecipeScreen/>} exact={true}/>
                     <Route path="/create" element={<CreateScreen/>} exact={true}/>
+                    <Route path="/editProfile" element={<EditProfile/>} exact={true}/>
 
                     {/*<Route path="/create" element={<CreateScreen/>} exact={true}/>*/}
 

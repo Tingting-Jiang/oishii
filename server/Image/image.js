@@ -1,58 +1,85 @@
-const path = require('path');
-const crypto = require('crypto');
-const mongoose = require('mongoose');
-const multer = require('multer');
-const {GridFsStorage} = require('multer-gridfs-storage');
-const Grid = require('gridfs-stream');
-const methodOverride = require('method-override');
+const multer = require("multer");
+const fs = require("fs");
+const recipeModel = require("../db/Recipe/recipe-model");
+const uerModel = require("../db/User/user-model");
+const recipeDao = require("../db/Recipe/recipe-dao");
+const userDao = require("../db/User/user-dao");
 
 
-const URI  = "mongodb+srv://oishii:oishii@cluster0.9hn8c.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+let filename;
 
-
-const conn = mongoose.createConnection(URI);
-conn.once ('open', () => {
-    const gfs = Grid(conn.db, mongoose.mongo);
-    gfs.collection("uploads")
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads')
+    },
+    filename: function (req, file, cb) {
+        filename = Date.now()+ "-" + file.originalname;
+        cb(null, filename)
+    }
 })
+const upload = multer({ storage: storage })
 
-
-const upload = multer({ storage });
-
-
-
-
-const fs = require('fs');
-
-
-
-
-
-module.exports = (app) => {
-    const upload = (req, res) => {
+module.exports = (app) =>{
+    const createRecipe =(req, res) =>{
+        console.log("in create recipe ");
+        const recipe = JSON.parse(req.body.recipe);
+        const username = req.body.username;
         const img = fs.readFileSync(req.file.path);
         const encode_img = img.toString('base64');
         const final_img = {
             contentType:req.file.mimetype,
-            image:new Buffer(encode_img,'base64')
+            image: Buffer.from(encode_img,'base64')
         };
-        image.create(final_img,function(err,result){
+        
+        const newRecipe = {
+            ...recipe,
+            image: filename
+        };
+        
+        recipeModel.create(newRecipe, function(err, result){
             if(err){
                 console.log(err);
             }else{
-                console.log(result.img.Buffer);
-                console.log("Saved To database");
+                console.log("Saved Recipe To database");
                 res.contentType(final_img.contentType);
                 res.send(final_img.image);
             }
         })
+        
+        recipeDao.findRecipeByFileName(filename)
+            .then(recipe => {
+                userDao.createRecipe(username, recipe)
+                    .then(status =>
+                    console.log("Save recipe in user DB"))
+            })
+        
+        
     }
     
+    
+    const updateAvatar = (req, res) => {
+        const img = fs.readFileSync(req.file.path);
+        const encode_img = img.toString('base64');
+        const userAvatar = {
+            contentType: req.file.mimetype,
+            image: Buffer.from(encode_img, 'base64')
+        };
+    
+        userDao.updateAvatar(req.body.username, filename, function (err, result) {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log("Saved Avatar To database");
+                res.contentType(userAvatar.contentType);
+                res.send(userAvatar.image);
+            }
+        })
+    }
+    
+    
+    
+    app.post("/db/upload", upload.single('file'), createRecipe);
+    app.post("/db/updateAvatar", upload.single('file'), updateAvatar);
+}
 
-    
-    
-    
-    
-    
-    app.post('/api/upload',upload("file"), upload );
-};
+

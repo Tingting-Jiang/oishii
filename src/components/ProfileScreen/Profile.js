@@ -4,6 +4,7 @@ import "../oishii.css"
 import { useNavigate } from 'react-router';
 import userService from '../service/userService'
 import { useDispatch, useSelector } from 'react-redux'
+import { b64toBlob, contentType } from '../const'
 
 
 
@@ -16,6 +17,8 @@ const Profile = () => {
     const getProfile = () =>
         userService.getProfile()
             .then(newUser => {
+                console.log(newUser)
+                newUser.userAvatar = URL.createObjectURL(b64toBlob(newUser.userAvatar, contentType))
                 setUser(newUser);
             })
             .catch(e => navigate('/login'));
@@ -74,29 +77,20 @@ const Profile = () => {
                          src="../../images/profile-bg.jpg"/>
                         <div className="wd-profile-info text-center flex">
                             <img className="wd-profile-img"
-                                 src="../../images/sample-user.jpeg"/>
+                                 src={user.userAvatar}/>
                                 <h5 className="wd-username">{user.username}</h5>
                                 <div className="wd-username">
                 <span className="d-inline-block me-2">
                     <i className="fas fa-birthday-cake me-2 wd-color-coral"></i>
-                    Born some date
+                    {user.dateOfBirth}
                 </span>
                                     <span className="d-inline-block me-2">
                     <i className="fas fa-map-marker-alt me-2 wd-color-coral"></i>
-                    Location
+                                        {user.location}
                 </span>
                                 </div>
                                 <div className="wd-bio">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                                        enim
-                                        ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                        aliquip
-                                        ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                                        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                                        sint occaecat cupidatat non proident, sunt in culpa qui officia
-                                        deserunt
-                                        mollit anim id est laborum
+                                    <p>{user.bio}
                                     </p>
                                 </div>
                         
