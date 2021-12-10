@@ -17,6 +17,8 @@ import SearchDetail from "./components/RecipeScreen";
 import CreateScreen from './components/CreateScreen/createScreen';
 
 import userReducer from './components/service/reducers/userReducer';
+import RecipeScreen from './components/RecipeScreen'
+import SearchScreen from './components/SearchScreen/SearchScreen'
 
 // import SearchScreen from './components/SearchScreen/SearchScreen';
 
@@ -38,15 +40,14 @@ function App() {
                     <Route path="/login" element={<Login/>} exact={true}/>
                     <Route path="/register" element={<Register/>} exact={true}/>
                     <Route path="/profile" element={<Profile/>} exact={true}/>
-<<<<<<< HEAD
+
                     <Route path="/details/:id" element={<RecipeScreen/>} exact={true}/>
                     <Route path="/create" element={<CreateScreen/>} exact={true}/>
                     <Route path="/search" element={<SearchScreen/>} exact={true}/>
                     <Route path="/search/:searchTerm" element={<SearchScreen/>} exact={true}/>
-=======
 
                     <Route path="/create" element={<CreateScreen/>} exact={true}/>
->>>>>>> 052117b5e8a8f084fc802af9089f067e40c140bd
+
 
                     {/*<Route path="/details/:id" element={<RecipeScreen/>} exact={true}/>*/}
                     {/*<Route path="/home1" element={<Header/>} exact={true}/>*/}
