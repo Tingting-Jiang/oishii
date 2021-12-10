@@ -5,74 +5,72 @@ import userService from '../service/userService'
 import './search.css';
 import Header from "../Header";
 import { Helmet } from 'react-helmet';
+import { b64toBlob, contentType } from '../const'
 
 
 const Search = () => {
     const params = useParams();
     const ingredient = params.searchTerm || "pork";
-    console.log("searchTerm in Search Screen", ingredient);
-
+    // console.log("searchTerm in Search Screen", ingredient);
+    const navigate = useNavigate();
+    let totalRecipes= [];
+    
     const [searchTerm, setSearchTerm] = useState(ingredient);
     const [searchResult, setSearchResult] = useState([]);
     const [recipeList, setRecipeList] = useState([]);
-
-    const b64toBlob = (b64Data, contentType = '', sliceSize = 512) => {
-        const byteCharacters = atob(b64Data);
-        const byteArrays = [];
-
-        for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-            const slice = byteCharacters.slice(offset, offset + sliceSize);
-
-            const byteNumbers = new Array(slice.length);
-            for (let i = 0; i < slice.length; i++) {
-                byteNumbers[i] = slice.charCodeAt(i);
-            }
-
-            const byteArray = new Uint8Array(byteNumbers);
-            byteArrays.push(byteArray);
-        }
-
-        const blob = new Blob(byteArrays, {type: contentType});
-        return blob;
-    }
-    //TODO: here content type only include png
-    const contentType = 'image/png';
-
+    
     const searchRecipe = (event) => {
         setSearchTerm(event.target.value);
         recipeService.fetchSearchResult(event.target.value)
             .then(data => {
-                // console.log("auto complete result ->", data);
+                console.log("auto complete result -> API");
                 setSearchResult(data)
-
             });
     };
-
-
-    const navigate = useNavigate();
-    const submitSearchHandler = (e) => {
-        if (e.key === "Enter") {
-            navigate(`/search/${searchTerm}`);
-            recipeService.fetchByIngredients(searchTerm)
-                .then(data => {
-                    console.log(data.length);
-                    setRecipeList(data)
-                });
-        }
+    
+    
+    const checkResult = (e) =>{
+        if (e.key === "Enter")
+            clickSearch()
     }
-
+    
+    
     const clickSearch = () => {
         navigate(`/search/${searchTerm}`);
+        userService.searchRecipeByTitle(searchTerm)
+            .then(data => {
+                    console.log("db data length ==>", data.length );
+                    if (data.length !== 0) {
+                        console.log("search DB");
+                        console.log(data);
+                        for (let item of data) {
+                            item.image = URL.createObjectURL(b64toBlob(item.image, contentType));
+                        }
+                        totalRecipes = data;
+                        
+                    }
+                }
+            )
+        
         recipeService.fetchByIngredients(searchTerm)
             .then(data => {
-                console.log(data.length);
-                setRecipeList(data)
+                if (totalRecipes.length !== 0) {
+                    for (let item of data)
+                        totalRecipes = [...totalRecipes, item];
+                }
+                else {
+                    totalRecipes = data;
+                    
+                }
+                setRecipeList(totalRecipes)
+                console.log("total@2", totalRecipes);
+                totalRecipes = [];
             });
-
     }
+    
     useEffect(clickSearch, [])
-
-
+    
+    
     return (
         <>
             <Helmet>
@@ -100,7 +98,7 @@ const Search = () => {
                                        list="datalistOptions"
                                        placeholder="Search Oishii"
                                        onChange={e => searchRecipe(e)}
-                                       onKeyPress={e => submitSearchHandler(e)}/>
+                                       onKeyPress={e => checkResult(e)}/>
 
                                 <datalist id="datalistOptions">
                                     {searchResult.map(item => (

@@ -82,7 +82,20 @@ export const searchRecipeByTitle = (title) =>
         .then(res => res.json());
 
     
-
+export const getRecipeFollowers = (recipeID) => {
+    fetch(`${API_URL}/recipeFollowers`, {
+    
+        method: 'POST',
+        body: JSON.stringify({ recipeID: recipeID }),
+        credentials: 'include',
+        headers: {
+            'content-type': 'application/json'
+        }
+    })
+    
+    
+    
+}
 
 
 
@@ -96,5 +109,6 @@ export default {
     likeRecipe,
     createRecipe,
     getRecipe,
-    searchRecipeByTitle
+    searchRecipeByTitle,
+    getRecipeFollowers
 };

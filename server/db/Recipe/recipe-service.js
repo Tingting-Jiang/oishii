@@ -1,9 +1,12 @@
+import { getRecipeFollowers } from '../../../src/components/service/userService'
+
 const dao = require('./recipe-dao')
 const Base64 = require("base-64")
 const FileUtils= require("fileutils");
 const IoUtils = require("ioutil");
 const path = require("path");
 const fs = require('fs');
+const userDao = require('../User/user-dao');
 
 module.exports = (app) => {
     
@@ -76,12 +79,37 @@ module.exports = (app) => {
         const img = fs.readFileSync(filePath);
         const encodedString = img.toString('base64');
         return encodedString;
+        
     }
     
-    // app.put("/rest/movies/:id", updateMovie);
+    const getRecipeFollowers = (req, res) =>{
+        let followers = [];
+        
+        dao.getRecipeFollowers(req.body.recipeID)
+            .then(data =>{
+                console.log(data);
+                for (let item of data) {
+                    userDao.findUserById(item)
+                        .then(user => {
+                            let userInfo = {
+                                _id: user._id,
+                                userAvatar: imageTransform(user.userAvatar),
+                                username: user.username
+                            };
+                            followers.push(userInfo);
+                        })
+                }
+                return followers;
+            })
+            .then(userList => res.json(userList));
+    }
+    
+    
+    
+    
     app.post("/db/details", findRecipeById);
     app.post("/rest/recipe", createRecipe);
-    // app.delete("/rest/movies/:id", deleteMovie)
     app.get("/rest/recipe", findAllRecipes);
     app.post("/db/searchRecipe", findRecipeByTitle);
+    app.post("/db/recipeFollowers", getRecipeFollowers);
 }

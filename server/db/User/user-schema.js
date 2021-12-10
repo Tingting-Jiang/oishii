@@ -26,7 +26,6 @@ const userSchema = mongoose.Schema({
     location: String,
     birthday: Date,
     bio: String,
-    image: {data:Buffer, contentType: String},
     // role: {type: String, default :["Admin", "Normal", "Editor"], defaultValue: "Normal"}
     
 }, {collection: 'oishiiUsers'});
