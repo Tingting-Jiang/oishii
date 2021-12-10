@@ -8,7 +8,7 @@ const API_KEY ="8aacabbec3msh0d6aaeca6a49cb0p128f31jsn0c6ed3c6e8d0";
 const HOST = 'tasty.p.rapidapi.com';
 
 
-const dao = require("../db/Recipe/recipe-dao")
+const dao = require("../db/latestRecipes/recipe-dao")
 
 module.exports = (app) =>  {
     const getRandomInt = () =>{

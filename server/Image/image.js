@@ -1,8 +1,8 @@
 const multer = require("multer");
 const fs = require("fs");
-const recipeModel = require("../db/Recipe/recipe-model");
+const recipeModel = require("../db/latestRecipes/recipe-model");
 const uerModel = require("../db/User/user-model");
-const recipeDao = require("../db/Recipe/recipe-dao");
+const recipeDao = require("../db/latestRecipes/recipe-dao");
 const userDao = require("../db/User/user-dao");
 
 

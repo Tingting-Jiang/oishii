@@ -22,10 +22,20 @@ const updateUser = (user) =>
         $set: user
     });
 
-const updateFavRecipe = (username, favRecipeList) =>
-
+const removeFavRecipe = (username, recipeID) =>
     userModel.updateOne({username: username},
-        { $set: {favRecipeList} });
+        { $pull: {favRecipeList: recipeID} });
+
+
+const addFavRecipe = (username, recipeID) =>
+    userModel.updateOne({username: username},
+        {$push:
+                {favRecipeList: {
+                        $each: [recipeID],
+                        $position :0}
+                }});
+
+
 
 const deleteUser = (userId) =>
     userModel.deleteOne({_id: userId});
@@ -43,6 +53,8 @@ const updateAvatar = (username, userAvatar) =>
         {$set: userAvatar})
 
 
+
+
 module.exports = {
     findByUsername,
     findAllUsers,
@@ -51,7 +63,8 @@ module.exports = {
     createUser,
     updateUser,
     deleteUser,
-    updateFavRecipe,
+    removeFavRecipe,
+    addFavRecipe,
     createRecipe,
     getRecipe,
     updateAvatar
