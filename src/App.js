@@ -19,13 +19,18 @@ import CreateScreen from './components/CreateScreen/createScreen';
 import userReducer from './components/service/reducers/userReducer';
 import RecipeScreen from './components/RecipeScreen'
 
+import EditProfile from './components/ProfileScreen/EditProfile';
+import { CookiesProvider } from "react-cookie";
+
 
 const store = createStore(userReducer);
 
 
 function App() {
     return (
+        <CookiesProvider>
         <Provider store={store}>
+            
 
             <BrowserRouter>
                 <Routes>
@@ -43,6 +48,7 @@ function App() {
 
                     <Route path="/details/:id" element={<RecipeScreen/>} exact={true}/>
                     <Route path="/create" element={<CreateScreen/>} exact={true}/>
+                    <Route path="/editProfile" element={<EditProfile/>} exact={true}/>
 
                     {/*<Route path="/create" element={<CreateScreen/>} exact={true}/>*/}
 
@@ -61,6 +67,7 @@ function App() {
 
 
         </Provider>
+        </CookiesProvider>
     );
 }
 

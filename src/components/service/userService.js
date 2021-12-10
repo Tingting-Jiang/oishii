@@ -57,6 +57,13 @@ export const createRecipe = (formData) =>
         body: formData,
     });
 
+export const updateAvatar = (avatar) =>
+    fetch(`${API_URL}/updateAvatar`, {
+        method: 'POST',
+        credentials: 'include',
+        body: avatar,
+    });
+
 
 
 export const getRecipe = (recipeID) =>
@@ -82,7 +89,7 @@ export const searchRecipeByTitle = (title) =>
         .then(res => res.json());
 
     
-export const getRecipeFollowers = (recipeID) => {
+export const getRecipeFollowers = (recipeID) =>
     fetch(`${API_URL}/recipeFollowers`, {
     
         method: 'POST',
@@ -92,10 +99,19 @@ export const getRecipeFollowers = (recipeID) => {
             'content-type': 'application/json'
         }
     })
+
+export const updateProfile = (user) =>
+    fetch(`${API_URL}/editProfile`, {
+        method: "PUT",
+        body: JSON.stringify({user: user}),
+        credentials: 'include',
+        headers: {
+            'content-type': 'application/json'
+        }
+    })
     
     
     
-}
 
 
 
@@ -110,5 +126,7 @@ export default {
     createRecipe,
     getRecipe,
     searchRecipeByTitle,
-    getRecipeFollowers
+    getRecipeFollowers,
+    updateProfile,
+    updateAvatar
 };

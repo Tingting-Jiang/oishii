@@ -1,5 +1,8 @@
+
 const userDao = require('./user-dao');
+const imageTransform = require('../../Image/imageTransform')
 const { ObjectID } = require('mongodb')
+
 
 
 module.exports = (app) => {
@@ -10,21 +13,27 @@ module.exports = (app) => {
     
     const findUserById = (req, res) =>
         userDao.findUserById(req.userId)
-            .then(user => res.json(user));
+            .then(user => {
+                user.userAvatar = imageTransform(user.userAvatar);
+                res.json(user)
+            });
     
     const deleteUser = (req, res) =>
         userDao.deleteUser(req.params.userId)
             .then(status => res.send(status));
     
-    const updateUser = (req, res) =>
-        userDao.updateUser(req.body)
-            .then(status => req.send(status));
+    const updateProfile = (req, res) => {
+        console.log("before update user");
+        userDao.updateUser(req.body.user)
+            .then(status => res.sendStatus(200));
+    }
     
     const login = (req, res) => {
         userDao.findByUsernameAndPassword(req.body)
             .then(user => {
                 if(user) {
                     req.session['profile'] = user;
+                    user.userAvatar = imageTransform(user.userAvatar);
                     res.json(user);
                     return;
                 }
@@ -39,14 +48,14 @@ module.exports = (app) => {
                     res.sendStatus(404);
                     return;
                 }
-                userDao.createUser(req.body)
+                const newUser = {
+                    ...req.body.user,
+                    userAvatar: "avatar.jpeg"
+                }
+                userDao.createUser(newUser)
                     .then(user => {
-                        user["fav-dish"] = user.favRecipeList;
-                        // console.log("user in Mongo -->", user);
                         req.session['profile'] = user;
-                        req.session['/'] = user;
-                        // console.log("In session --> ", req.session);
-    
+                        user.userAvatar = imageTransform(user.userAvatar);
                         res.json(user)
                     });
             })
@@ -128,11 +137,12 @@ module.exports = (app) => {
     const logout = (req, res) =>
         res.send(req.session.destroy());
     
+    
     app.post('/db/login', login);
     app.post('/db/register', register);
     app.post('/db/profile', profile);
     app.post('/db/logout', logout);
-    app.put('/db/users', updateUser);
+    app.put('/db/editProfile', updateProfile);
     app.delete('/db/users/:userId', deleteUser);
     app.get('/db/users', findAllUsers);
     app.get('/db/users/:userId', findUserById);

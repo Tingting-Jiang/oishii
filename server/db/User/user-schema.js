@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { ObjectId } = require('mongodb')
 const userSchema = mongoose.Schema({
     username: String,
     password: String,
@@ -20,6 +21,7 @@ const userSchema = mongoose.Schema({
         {
             username: String,
             userAvatar:String,
+            userId: ObjectId,
         }
     ],
     userAvatar: String,

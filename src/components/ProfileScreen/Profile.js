@@ -4,6 +4,11 @@ import "../oishii.css"
 import { useNavigate } from 'react-router';
 import userService from '../service/userService'
 import { useDispatch, useSelector } from 'react-redux'
+import { b64toBlob, contentType } from '../const'
+import RecipeCardItem from '../RecipeCards/RecipeCardItem'
+import FollowerList from '../FollowerList'
+import DBRecipeCardItem from '../RecipeCards/DBRecipeCardItem'
+import { useCookies } from 'react-cookie'
 
 
 
@@ -11,12 +16,25 @@ import { useDispatch, useSelector } from 'react-redux'
 const Profile = () => {
     // const userReducer = useSelector(state => state.user);
     const [user, setUser] = useState({});
-    const dispatch = useDispatch();
+    const [userRecipe, setUserRecipe] = useState([]);
+    const [userFavRecipes, setUserFav] = useState([]);
+    const [followers, setFollowers] = useState();
+    
+    const [cookies, setCookie, removeCookie] = useCookies(['user']);
+    
+
     const navigate = useNavigate();
     const getProfile = () =>
         userService.getProfile()
             .then(newUser => {
+                console.log(newUser)
+                newUser.userAvatar = URL.createObjectURL(b64toBlob(newUser.userAvatar, contentType))
                 setUser(newUser);
+                // setCookie('user', newUser, { path: '/' })
+                // console.log(cookies.user);
+                setUserFav(newUser.favRecipeList);
+                setUserRecipe(newUser.usersRecipe);
+                setFollowers(newUser.usersFollowers);
             })
             .catch(e => navigate('/login'));
     
@@ -24,10 +42,12 @@ const Profile = () => {
     const logout = () =>{
         userService.logout()
             .then(res => navigate("/"));
-        
     };
     
     useEffect(getProfile, [navigate]);
+    
+    
+    
     
     
     return (
@@ -74,29 +94,20 @@ const Profile = () => {
                          src="../../images/profile-bg.jpg"/>
                         <div className="wd-profile-info text-center flex">
                             <img className="wd-profile-img"
-                                 src="../../images/sample-user.jpeg"/>
+                                 src={user.userAvatar}/>
                                 <h5 className="wd-username">{user.username}</h5>
                                 <div className="wd-username">
                 <span className="d-inline-block me-2">
                     <i className="fas fa-birthday-cake me-2 wd-color-coral"></i>
-                    Born some date
+                    {user.dateOfBirth}
                 </span>
                                     <span className="d-inline-block me-2">
                     <i className="fas fa-map-marker-alt me-2 wd-color-coral"></i>
-                    Location
+                                        {user.location}
                 </span>
                                 </div>
                                 <div className="wd-bio">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                                        enim
-                                        ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                        aliquip
-                                        ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                                        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                                        sint occaecat cupidatat non proident, sunt in culpa qui officia
-                                        deserunt
-                                        mollit anim id est laborum
+                                    <p>{user.bio}
                                     </p>
                                 </div>
                         
@@ -115,61 +126,12 @@ const Profile = () => {
                     <h2 className="wd-block-title">
                         {user.username}'s Recipes
                     </h2>
-                    <div className="card-group">
-                        <div className="card">
-                            <img src="../../images/recipe-sample-img.jpeg" className="card-img-top wd-card-img"
-                                 alt="sample"/>
-                                <button className="btn btn-outline-primary wd-button wd-button-on-img">
-                                    <i className="fas fa-heart"></i>
-                                </button>
-                               
-                                <div className="card-body">
-                                    <h5 className="card-title">Jerk Chicken Wings</h5>
-                                    <p className="card-text">for 4 servings</p>
-                                    <p className="card-text"><small className="text-muted">Presented by Guinness</small>
-                                    </p>
-                                </div>
-                        </div>
-                        <div className="card">
-                            <img src="../../images/recipe-sample-img2.jpeg" className="card-img-top wd-card-img"
-                                 alt="sample2"/>
-                                <button className="btn btn-outline-primary wd-button wd-button-on-img">
-                                    <i className="fas fa-heart"></i>
-                                </button>
-                                <div className="card-body">
-                                    <h5 className="card-title">Roasted Garlic Parmesan Brussels Sprouts</h5>
-                                    <p className="card-text">for 4 servings</p>
-                                    <p className="card-text"><small className="text-muted">Robin Broadfoot Tasty
-                                        Team</small></p>
-                                </div>
-                        </div>
-                        <div className="card">
-                            <img src="../../images/recipe-sample-img.jpeg" className="card-img-top wd-card-img"
-                                 alt="sample"/>
-                                <button className="btn btn-outline-primary wd-button wd-button-on-img">
-                                    <i className="fas fa-heart"></i>
-                                </button>
-                                <div className="card-body">
-                                    <h5 className="card-title">Jerk Chicken Wings</h5>
-                                    <p className="card-text">for 4 servings</p>
-                                    <p className="card-text"><small className="text-muted">Presented by Guinness</small>
-                                    </p>
-                                </div>
-                        </div>
-                        <div className="card">
-                            <img src="../../images/recipe-sample-img3.jpeg" className="card-img-top wd-card-img"
-                                 alt="sample3"/>
-                                <button className="btn btn-outline-primary wd-button wd-button-on-img">
-                                    <i className="fas fa-heart"></i>
-                                </button>
-                                <div className="card-body">
-                                    <h5 className="card-title">Brie, Bacon, And Cranberry Mini Pies</h5>
-                                    <p className="card-text">for 12 servings</p>
-                                    <p className="card-text"><small className="text-muted">Matthew Cullum Tasty
-                                        Team</small></p>
-                                </div>
-                        </div>
-                    </div>
+                    {
+                        userRecipe.map(recipeId =>
+                            <DBRecipeCardItem key={recipeId} recipeId={recipeId} user={user} setUser={setUser}/>
+                        )
+                    }
+                 
                 </div>
         
                 <div>
@@ -177,119 +139,20 @@ const Profile = () => {
                         {user.username}'s Favorites
                     </h2>
                     <div className="card-group">
-                        <div className="card">
-                            <img src="../../images/recipe-sample-img.jpeg" className="card-img-top wd-card-img"
-                                 alt="sample"/>
-                                <button className="btn btn-outline-primary wd-button wd-button-on-img">
-                                    <i className="fas fa-heart wd-color-red"></i>
-                                </button>
-                                <div className="card-body">
-                                    <h5 className="card-title">Jerk Chicken Wings</h5>
-                                    <p className="card-text">for 4 servings</p>
-                                    <p className="card-text"><small className="text-muted">Presented by Guinness</small>
-                                    </p>
-                                </div>
-                        </div>
-                        <div className="card">
-                            <img src="../../images/recipe-sample-img2.jpeg" className="card-img-top wd-card-img"
-                                 alt="sample2"/>
-                                <button className="btn btn-outline-primary wd-button wd-button-on-img">
-                                    <i className="fas fa-heart wd-color-red"></i>
-                                </button>
-                                <div className="card-body">
-                                    <h5 className="card-title">Roasted Garlic Parmesan Brussels Sprouts</h5>
-                                    <p className="card-text">for 4 servings</p>
-                                    <p className="card-text"><small className="text-muted">Robin Broadfoot Tasty
-                                        Team</small></p>
-                                </div>
-                        </div>
-                        <div className="card">
-                            <img src="../../images/recipe-sample-img.jpeg" className="card-img-top wd-card-img"
-                                 alt="sample"/>
-                                <button className="btn btn-outline-primary wd-button wd-button-on-img">
-                                    <i className="fas fa-heart wd-color-red"></i>
-                                </button>
-                                <div className="card-body">
-                                    <h5 className="card-title">Jerk Chicken Wings</h5>
-                                    <p className="card-text">for 4 servings</p>
-                                    <p className="card-text"><small className="text-muted">Presented by Guinness</small>
-                                    </p>
-                                </div>
-                        </div>
-                        <div className="card">
-                            <img src="../../images/recipe-sample-img3.jpeg" className="card-img-top wd-card-img"
-                                 alt="sample3"/>
-                                <button className="btn btn-outline-primary wd-button wd-button-on-img">
-                                    <i className="fas fa-heart wd-color-red"></i>
-                                </button>
-                                <div className="card-body">
-                                    <h5 className="card-title">Brie, Bacon, And Cranberry Mini Pies</h5>
-                                    <p className="card-text">for 12 servings</p>
-                                    <p className="card-text"><small className="text-muted">Matthew Cullum Tasty
-                                        Team</small></p>
-                                </div>
-                        </div>
+                        {
+                            userFavRecipes.map(recipeId =>
+                                <RecipeCardItem key={recipeId} recipeId={recipeId} user={user} setUser={setUser}/>
+                            )
+                        }
                     </div>
                 </div>
+                
         
                 <div>
                     <h2 className="wd-block-title">
                         They like {user.username}!
                     </h2>
-                    <div className="wd-like-user-container">
-                        <ul className="nav wd-like-user">
-                            <li className="nav-item text-center me-2">
-                                <img className="wd-following-user-img"
-                                     src="../../images/sample-user.jpeg"/>
-                                    <a className="nav-link" href="#">Alice</a>
-                            </li>
-                            <li className="nav-item text-center me-2">
-                                <img className="wd-following-user-img"
-                                     src="../../images/sample-user2.png"/>
-                                    <a className="nav-link" href="#">Bob</a>
-                            </li>
-                            <li className="nav-item text-center me-2">
-                                <img className="wd-following-user-img"
-                                     src="../../images/sample-user3.png"/>
-                                    <a className="nav-link" href="#">Cindy</a>
-                            </li>
-                            <li className="nav-item text-center me-2">
-                                <img className="wd-following-user-img"
-                                     src="../../images/sample-user4.png"/>
-                                    <a className="nav-link" href="#">Diego</a>
-                            </li>
-                            <li className="nav-item text-center me-2">
-                                <img className="wd-following-user-img"
-                                     src="../../images/sample-user5.jpeg"/>
-                                    <a className="nav-link" href="#">Ellen</a>
-                            </li>
-                            <li className="nav-item text-center me-2">
-                                <img className="wd-following-user-img"
-                                     src="../../images/sample-user.jpeg"/>
-                                    <a className="nav-link" href="#">Alice</a>
-                            </li>
-                            <li className="nav-item text-center me-2">
-                                <img className="wd-following-user-img"
-                                     src="../../images/sample-user2.png"/>
-                                    <a className="nav-link" href="#">Bob</a>
-                            </li>
-                            <li className="nav-item text-center me-2">
-                                <img className="wd-following-user-img"
-                                     src="../../images/sample-user3.png"/>
-                                    <a className="nav-link" href="#">Cindy</a>
-                            </li>
-                            <li className="nav-item text-center me-2">
-                                <img className="wd-following-user-img"
-                                     src="../../images/sample-user4.png"/>
-                                    <a className="nav-link" href="#">Diego</a>
-                            </li>
-                            <li className="nav-item text-center me-2">
-                                <img className="wd-following-user-img"
-                                     src="../../images/sample-user5.jpeg"/>
-                                    <a className="nav-link" href="#">Ellen</a>
-                            </li>
-                        </ul>
-                    </div>
+                    {followers && <FollowerList followers={followers}/>}
                 </div>
         
                 <div className="wd-footer">
