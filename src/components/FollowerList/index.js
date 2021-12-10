@@ -16,8 +16,8 @@ const FollowerList = ({followers}) => {
                         <li className="nav-item text-center me-2">
                             <img className="wd-following-user-img"
                                  src={follower.userAvatar} alt=""/>
-
-                            <a className="nav-link">{follower.username}</a>
+                            {/*TODO: change to button or text*/}
+                            <button className="nav-link wd-button-transparent">{follower.username}</button>
                         </li>
                     </Link>
 

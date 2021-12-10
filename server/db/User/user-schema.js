@@ -17,7 +17,7 @@ const userSchema = mongoose.Schema({
     location: String,
     dateOfBirth: String,
     bio: String,
-    role: {type: String, default :["Admin", "Normal", "Editor"], defaultValue: "Normal"}
+    role: {type: String, defaultValue: "normal"}
     
 }, {collection: 'oishiiUsers'});
 module.exports = userSchema;

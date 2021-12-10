@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import userService from '../service/userService';
-import { useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
-import { b64toBlob, contentType } from '../const'
+// import { useSelector } from 'react-redux'
+// import { useParams } from 'react-router-dom'
+// import { b64toBlob, contentType } from '../const'
 import { useCookies } from 'react-cookie'
 
 
@@ -164,7 +164,7 @@ const CreateScreen = () => {
                           placeholder="Recipe Description"
                           id="descriptionInput"
                             value={summary}
-                            onChange={e => setSummary(e.target.value)}></textarea>
+                            onChange={e => setSummary(e.target.value)}/>
                             <label htmlFor="descriptionInput">
                                 Recipe Description
                             </label>
@@ -262,7 +262,7 @@ const CreateScreen = () => {
                                               onChange={ e =>{
                                                   instructions[index] = e.target.value;
                                                   setInstructions([...instructions]);
-                                              }}></textarea>
+                                              }}/>
                                     {/*<button className="btn btn-danger"> Remove</button>*/}
                                 </div>
                                 )

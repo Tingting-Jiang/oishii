@@ -38,8 +38,10 @@ const Profile = () => {
         }
     }
 
+    console.log(user);
     console.log("userFavRecipes");
     console.log(userFavRecipes);
+
 
     return (
         <>

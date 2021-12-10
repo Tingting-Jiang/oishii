@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {useNavigate} from "react-router-dom";
-import userService from '../service/userService'
-import "../oishii.css";
+import userService from '../../service/userService'
+import "../../oishii.css";
 import { useDispatch } from 'react-redux'
 
 
