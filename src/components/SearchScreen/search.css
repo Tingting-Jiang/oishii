@@ -1,7 +1,7 @@
 /*main search bar*/
 
 .wd-main-magnifier {
-    margin-top: 12px;
+    margin-top: 13px;
 }
 
 .wd-main-search-input {
@@ -41,9 +41,13 @@
 }
 
 .wd-search-result-item {
-    border: none;
-    margin: 10px;
+    border: none!important;
+    margin: 15px;
     padding: 10px;
+}
+
+.wd-search-result-item:hover {
+    background-color: #f1ebea;
 }
 
 .wd-search-result-image {
@@ -57,4 +61,5 @@
     max-height: 80px;
     overflow: auto;
     margin: 0;
+    text-underline-mode: none;
 }

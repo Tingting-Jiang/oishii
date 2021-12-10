@@ -122,3 +122,18 @@ h1 {
 h6 {
   color: #4d4d4d;
 }
+
+/*.list-group>a, .list-group>a:link, .list-group>a:hover, .list-group>a:focus, .list-group>a:visited {*/
+/*  text-decoration: none;*/
+/*  color: #F17C67;*/
+/*}*/
+
+.nav>a, .nav>a:link, .nav>a:hover, .nav>a:focus, .nav>a:visited {
+  text-decoration: none;
+  color: #F17C67;
+}
+
+a, a:link, a:hover, a:focus, .a:visited {
+  text-decoration: none;
+  color: black;
+}
