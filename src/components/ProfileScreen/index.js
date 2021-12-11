@@ -9,23 +9,33 @@ import RecipeCardItem from "../RecipeCards/RecipeCardItem";
 import {Link} from "react-router-dom";
 import FollowerList from "../FollowerList";
 import DBRecipeCardItem from '../RecipeCards/DBRecipeCardItem'
+import { useCookies } from 'react-cookie'
+import { b64toBlob, contentType } from '../const'
 
 
 const Profile = () => {
-    // const userReducer = useSelector(state => state.user);
+
     const [user, setUser] = useState({});
-    const dispatch = useDispatch();
+    const [cookies, setCookie, removeCookie] = useCookies(['user']);
     const navigate = useNavigate();
     const getProfile = () =>
         userService.getProfile()
             .then(newUser => {
+                console.log("returned", newUser);
+                
+                setCookie('user', newUser, { path: '/' })
+                newUser.userAvatar = URL.createObjectURL(b64toBlob(newUser.userAvatar, contentType))
                 setUser(newUser);
+           
             })
             .catch(e => navigate('/login'));
 
     const logout = () =>{
         userService.logout()
-            .then(res => navigate("/"));
+            .then(res => {
+                removeCookie('user');
+                navigate("/");
+            });
     };
 
     useEffect(getProfile, [navigate]);
@@ -38,7 +48,7 @@ const Profile = () => {
         }
     }
 
-    console.log(user);
+    console.log("-------", cookies.user);
     console.log("userFavRecipes");
     console.log(userFavRecipes);
 

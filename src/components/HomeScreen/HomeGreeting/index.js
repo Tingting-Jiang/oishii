@@ -1,15 +1,13 @@
 import React, {useEffect, useState} from "react";
 import "./homeGreeting.css";
 import {Link} from "react-router-dom";
-// import {useSelector} from "react-redux";
 import userService from "../../service/userService";
 import { b64toBlob, contentType } from '../../const'
+
 
 // TODO: need check on why state does not work
 
 const Greeting = () => {
-    // const user = useSelector((state) => state);
-    // console.log("in home: ", user);
 
     const [user, setUser] = useState({});
 
@@ -22,6 +20,14 @@ const Greeting = () => {
                 setUser(user)
             });
     }, [])
+    
+    
+    
+
+    
+    
+    
+    
     
     
 

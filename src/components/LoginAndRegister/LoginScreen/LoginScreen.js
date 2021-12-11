@@ -2,25 +2,19 @@ import React, { useState } from 'react';
 import {useNavigate} from "react-router-dom";
 import userService from '../../service/userService'
 import "../../oishii.css";
-import { useDispatch } from 'react-redux'
 
 
 
-const Login = () => {
+const LoginOld = () => {
     const [user, setUser] = useState({});
     const navigate = useNavigate();
-    const dispatch = useDispatch();
 
     const login = () => {
         userService.login(user)
             .then((response) => response.json())
             .then(newUser => {
                console.log(newUser);
-               dispatch({
-                   type: "get-user",
-                   newUser,
-               });
-                navigate('/');
+                navigate('/profile');
         })};
 
     
@@ -116,14 +110,6 @@ const Login = () => {
                                    onChange={(e) =>
                                        setUser({...user, password: e.target.value})}/>
                         </div>
-                        {/*<div className="ms-3 mb-3">*/}
-                        {/*    <label htmlFor="passwordInput2" className="form-label">*/}
-                        {/*        Verify Password*/}
-                        {/*        <span className="wd-color-coral">*</span>*/}
-                        {/*    </label>*/}
-                        {/*    <input type="password" className="form-control" id="passwordInput2"*/}
-                        {/*           placeholder="verify your password"/>*/}
-                        {/*</div>*/}
                         
                         <div className="mt-4 text-center">
                             <button className="btn btn-outline-primary wd-button w-50"
@@ -148,4 +134,4 @@ const Login = () => {
     )
     
 };
-export default Login;
+export default LoginOld;

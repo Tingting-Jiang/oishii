@@ -18,17 +18,12 @@ const Register = () => {
     });
 
     const navigate = useNavigate();
-    const dispatch = useDispatch();
 
     const register = () => {
         userService.register(user)
             .then((response) => response.json())
             .then(newUser => {
                 console.log(newUser);
-                dispatch({
-                    type: "get-user",
-                    newUser
-                });
                 navigate('/profile')
             })
             .catch(e => console.log(e));

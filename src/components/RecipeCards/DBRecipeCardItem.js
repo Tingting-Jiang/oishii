@@ -12,7 +12,6 @@ const DBRecipeCardItem = (paras) => {
     useEffect(() => {
             userService.getRecipe(recipeId)
                 .then((data) => {
-                    console.log("in DB RECIPE", data);
                     data.image = URL.createObjectURL(b64toBlob(data.image, contentType))
                     setRecipe(data);
                 })
@@ -68,7 +67,7 @@ const DBRecipeCardItem = (paras) => {
         <div className="card mx-2">
             <img src={recipe.image} className="card-img-top wd-card-img" alt="sample"/>
             <button className="btn btn-outline-primary wd-button wd-button-on-img"
-                    onClick={() => likeRecipeHandler(recipe._id)}>
+                    onClick={() => likeRecipeHandler1(recipe._id)}>
                 <i className={heartClassName}/>
             </button>
             <Link to={`/details/${recipe._id}`}>

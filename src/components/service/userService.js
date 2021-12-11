@@ -1,4 +1,4 @@
-import React from 'react';
+
 const API_URL = 'http://localhost:4000/db';
 
 export const login = (user) =>

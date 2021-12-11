@@ -3,7 +3,7 @@ import "./profile.css";
 import "../oishii.css"
 import { useNavigate } from 'react-router';
 import userService from '../service/userService'
-import { useDispatch, useSelector } from 'react-redux'
+
 import { b64toBlob, contentType } from '../const'
 import RecipeCardItem from '../RecipeCards/RecipeCardItem'
 import FollowerList from '../FollowerList'
@@ -14,7 +14,6 @@ import { useCookies } from 'react-cookie'
 
 
 const Profile = () => {
-    // const userReducer = useSelector(state => state.user);
     const [user, setUser] = useState({});
     const [userRecipe, setUserRecipe] = useState([]);
     const [userFavRecipes, setUserFav] = useState([]);
@@ -28,9 +27,11 @@ const Profile = () => {
         userService.getProfile()
             .then(newUser => {
                 console.log(newUser)
+               
                 newUser.userAvatar = URL.createObjectURL(b64toBlob(newUser.userAvatar, contentType))
                 setUser(newUser);
                 setCookie('user', newUser, { path: '/' })
+                
                 console.log("returned form server", newUser);
                 setUserFav(newUser.favRecipeList);
                 setUserRecipe(newUser.usersRecipe);
@@ -52,6 +53,7 @@ const Profile = () => {
   
     console.log("user recipe", userRecipe);
     console.log("user fav", userFavRecipes);
+    console.log("new user", cookies.user);
     
     
     

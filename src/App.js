@@ -1,11 +1,9 @@
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import {createStore} from 'redux';
-import {Provider} from 'react-redux';
 
 import './App.css';
 // import RecipeScreen from './components/RecipeScreen/RecipeScreen'
 // import ExploreAndTrending from './components/HomeScreen/ExploreAndTrending'
-import Login from './components/LoginAndRegister/LoginScreen/';
+import Login from './components/LoginAndRegister/LoginScreen/index';
 import Register from './components/LoginAndRegister/RegisterScreen/';
 import Register2 from './components/LoginAndRegister/RegisterScreen/Register';
 
@@ -14,26 +12,23 @@ import Home from './components/HomeScreen/';
 import Footer from "./components/Footer";
 import Search from './components/SearchScreen';
 import SearchDetail from "./components/RecipeScreen";
-import Profile from "./components/ProfileScreen";
+import Profile from "./components/ProfileScreen/Profile";
 
 import CreateScreen from './components/CreateScreen/createScreen';
 
-import userReducer from './components/service/reducers/userReducer';
 import RecipeScreen from './components/RecipeScreen'
 
 import EditProfile from './components/ProfileScreen/EditProfile';
 import { CookiesProvider } from "react-cookie";
+import LoginOld from './components/LoginAndRegister/LoginScreen/LoginScreen'
 
 
-const store = createStore(userReducer);
+
 
 
 function App() {
     return (
         <CookiesProvider>
-        <Provider store={store}>
-            
-
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Home/>}/>
@@ -44,7 +39,9 @@ function App() {
                     <Route path="/profile" element={<Profile/>} exact={true}/>
                     <Route path="/profile/:id" element={<Profile/>} exact={true}/>
 
-                    <Route path="/login" element={<Login/>} exact={true}/>
+                    {/*<Route path="/login" element={<Login/>} exact={true}/>*/}
+                    <Route path="/login" element={<LoginOld/>} exact={true}/>
+    
                     <Route path="/register" element={<Register/>} exact={true}/>
                     <Route path="/register2" element={<Register2/>} exact={true}/>
                     {/*<Route path="/profile" element={<ProfileScreen/>} exact={true}/>*/}
@@ -67,9 +64,7 @@ function App() {
             {/*<Show/>*/}
             {/*<RecipeScreen recipeID={5679}/>*/}
             {/*<ExploreAndTrending/>*/}
-
-
-        </Provider>
+            
         </CookiesProvider>
     );
 }

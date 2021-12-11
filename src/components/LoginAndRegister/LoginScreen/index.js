@@ -1,28 +1,22 @@
 import React, { useState } from 'react';
-import {Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from 'react-router-dom'
 import userService from '../../service/userService'
 import "../loginAndRgister.css";
-import { useDispatch } from 'react-redux'
 import {Helmet} from "react-helmet";
 import Header from "../../Header";
 
 
 const Login = () => {
-    const [user, setUser] = useState({username:"", password: ""});
+    const [user, setUser] = useState({});
     const navigate = useNavigate();
-    const dispatch = useDispatch();
-
-    const login = () => {
+    
+    const login = () =>
         userService.login(user)
             .then((response) => response.json())
             .then(newUser => {
-                console.log(newUser);
-                dispatch({
-                    type: "get-user",
-                    newUser,
-                });
-                navigate('/');
-            })};
+                console.log("returned", newUser);
+                navigate('/profile');
+            });
 
 
     return (

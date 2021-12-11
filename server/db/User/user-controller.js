@@ -33,6 +33,7 @@ module.exports = (app) => {
         userDao.findByUsernameAndPassword(req.body)
             .then(user => {
                 if(user) {
+                    console.log(" USER login")
                     req.session['profile'] = user;
                     user.userAvatar = imageTransform(user.userAvatar);
                     res.json(user);
