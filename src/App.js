@@ -30,6 +30,7 @@ import RecipeScreen from './components/RecipeScreen'
 import EditProfile from './components/ProfileScreen/EditProfile';
 import { CookiesProvider } from "react-cookie";
 import LoginOld from './components/LoginAndRegister/LoginScreen/LoginScreen'
+import CreateNew from './components/CreateScreen/create'
 
 
 
@@ -60,6 +61,7 @@ function App() {
                     <Route path="/details/:id" element={<RecipeScreen/>} exact={true}/>
                     <Route path="/create2" element={<CreateScreen/>} exact={true}/>
                     <Route path="/editProfile" element={<EditProfile/>} exact={true}/>
+                    <Route path="/create3" element={<CreateNew/>} exact={true}/>
 
                     {/*<Route path="/create" element={<CreateScreen/>} exact={true}/>*/}
 
