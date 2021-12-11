@@ -131,7 +131,7 @@ const Search = () => {
                     <ul className="list-group wd-search-result">
                         {recipeList.map(item => {
                             return (
-                                <Link to={`/details/${item.id}`}>
+                                <Link to={`/details/${item.id === undefined? item._id: item.id}`}>
                                     <li className="list-group-item wd-search-result-item d-flex"
                                         key={item.id}>
 

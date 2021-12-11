@@ -15,7 +15,8 @@ import FollowerList from "../FollowerList";
 
 const RecipeScreen = () => {
     const params = useParams();
-    const recipeID = params.id;
+    const recipeID = params.id || params._id;
+    console.log(recipeID);
 
     console.log("in 1st line ->", recipeID);
     const [recipe, setRecipe] = useState(oldIngredient);

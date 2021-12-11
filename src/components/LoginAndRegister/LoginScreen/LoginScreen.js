@@ -11,7 +11,8 @@ const LoginOld = () => {
 
     const login = () => {
         userService.login(user)
-            .then((response) => response.json())
+            .then((response) => {response.json()
+            })
             .then(newUser => {
                console.log(newUser);
                 navigate('/profile');
@@ -88,16 +89,6 @@ const LoginOld = () => {
                                    onChange={(e) =>
                                        setUser({...user, username: e.target.value})}/>
                         </div>
-                        <div className="ms-3 mb-3">
-                            <label htmlFor="emailInput" className="form-label">
-                                Email
-                            </label>
-                            <input type="email" className="form-control" id="emailInput"
-                                   placeholder="username@email.com"
-                                   value={user.email}
-                                   onChange={(e) =>
-                                       setUser({...user, email: e.target.value})}/>
-                        </div>
                         
                         <div className="ms-3 mb-3">
                             <label htmlFor="passwordInput" className="form-label">
@@ -114,7 +105,7 @@ const LoginOld = () => {
                         <div className="mt-4 text-center">
                             <button className="btn btn-outline-primary wd-button w-50"
                                     onClick={login}>>
-                                Register
+                                Login
                             </button>
                         </div>
             

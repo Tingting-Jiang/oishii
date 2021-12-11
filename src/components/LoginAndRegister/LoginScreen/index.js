@@ -12,10 +12,13 @@ const Login = () => {
     
     const login = () =>
         userService.login(user)
-            .then((response) => response.json())
+            .then((response) => {
+                console.log("before return");
+                return response.json()
+            })
             .then(newUser => {
                 console.log("returned", newUser);
-                navigate('/profile');
+                // navigate('/profile');
             });
 
 

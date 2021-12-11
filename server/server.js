@@ -39,7 +39,7 @@ console.log("in server");
 // require('./service/test')(app);
 require('./service/spoon')(app);
 require("./db/User/user-controller")(app);
-require("./db/latestRecipes/recipe-service")(app);
+require("./db/UserRecipes/recipe-service")(app);
 require("./Image/image")(app)
 
 
