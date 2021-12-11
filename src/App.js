@@ -3,16 +3,25 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import './App.css';
 // import RecipeScreen from './components/RecipeScreen/RecipeScreen'
 // import ExploreAndTrending from './components/HomeScreen/ExploreAndTrending'
-import Login from './components/LoginAndRegister/LoginScreen/index';
+
+import Login from './components/LoginAndRegister/LoginScreen';
 import Register from './components/LoginAndRegister/RegisterScreen/';
+
 import Register2 from './components/LoginAndRegister/RegisterScreen/Register';
+import Login2 from './components/LoginAndRegister/LoginScreen/LoginScreen';
 
 
 import Home from './components/HomeScreen/';
 import Footer from "./components/Footer";
 import Search from './components/SearchScreen';
 import SearchDetail from "./components/RecipeScreen";
-import Profile from "./components/ProfileScreen/Profile";
+
+import Profile from "./components/ProfileScreen";
+
+import Profile2 from "./components/ProfileScreen/Profile";
+
+import Create from './components/CreateScreen';
+
 
 import CreateScreen from './components/CreateScreen/createScreen';
 
@@ -39,15 +48,17 @@ function App() {
                     <Route path="/profile" element={<Profile/>} exact={true}/>
                     <Route path="/profile/:id" element={<Profile/>} exact={true}/>
 
-                    {/*<Route path="/login" element={<Login/>} exact={true}/>*/}
-                    <Route path="/login" element={<LoginOld/>} exact={true}/>
-    
+                    <Route path="/login" element={<Login/>} exact={true}/>
+                    <Route path="/login2" element={<Login2/>} exact={true}/>
+
                     <Route path="/register" element={<Register/>} exact={true}/>
+                    <Route path="/create" element={<Create/>} exact={true}/>
+
                     <Route path="/register2" element={<Register2/>} exact={true}/>
                     {/*<Route path="/profile" element={<ProfileScreen/>} exact={true}/>*/}
 
                     <Route path="/details/:id" element={<RecipeScreen/>} exact={true}/>
-                    <Route path="/create" element={<CreateScreen/>} exact={true}/>
+                    <Route path="/create2" element={<CreateScreen/>} exact={true}/>
                     <Route path="/editProfile" element={<EditProfile/>} exact={true}/>
 
                     {/*<Route path="/create" element={<CreateScreen/>} exact={true}/>*/}

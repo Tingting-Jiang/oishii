@@ -84,14 +84,9 @@ const Login = () => {
                                 </button>
                             </div>
                         </form>
-
-
-
                     </div>
                 </div>
-
             </div>
-
         </>
     )
 
