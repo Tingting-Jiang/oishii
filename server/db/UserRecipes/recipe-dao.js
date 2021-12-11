@@ -3,7 +3,8 @@ const { ObjectId } = require('mongodb')
 
 
 
-const findAllRecipes = () => model.find().limit(4);
+const findAllRecipes = () =>
+    model.find().sort({"$natural": -1}).limit(4);
 
 const createRecipe = (recipe) =>
     model.create(recipe);
@@ -30,8 +31,6 @@ const findRecipeByFileName = (fileName) =>
 const findRecipeByTitle = (title) =>
     model.find({"title": { $regex: `${title}`} });
 
-const getRecipeFollowers = (recipeID) =>
-    model.find({_id : ObjectId(recipeID)}, {followers: 1});
 
 
 module.exports = {
@@ -39,6 +38,5 @@ module.exports = {
     createRecipe,
     findRecipeById,
     findRecipeByTitle,
-    getRecipeFollowers,
     findRecipeByFileName
 };

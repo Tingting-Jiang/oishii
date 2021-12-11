@@ -11,7 +11,7 @@ const RecipeCardItem = (paras) => {
     console.log("in normal recipe CARD", recipeId);
 
     const [recipe, setRecipe] = useState({});
-    const dbRecipe = recipeId.length > 10;
+    const dbRecipe = recipeId > 10000000;
     
     useEffect(() => {
             if (!dbRecipe) {

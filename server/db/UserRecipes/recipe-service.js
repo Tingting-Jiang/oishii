@@ -3,10 +3,15 @@ const userDao = require('../User/user-dao');
 const allRecipeDao = require("../AllRecipes/allRecipe-dao")
 
 module.exports = (app) => {
-    
-    const findAllRecipes = (req, res) =>
+    const findAllRecipes = (req, res) => {
+        console.log("want all recipes");
         dao.findAllRecipes()
-            .then(movies => res.json(movies));
+            .then(recipes => {
+                console.log("all latest recipes", recipes.length)
+                console.log(typeof recipes[0].id);
+                res.json(recipes)
+            })
+    };
     
     const createRecipe = (req, res) => {
         const username = req.body.username;
@@ -42,32 +47,10 @@ module.exports = (app) => {
             )
     }
     
-    const getRecipeFollowers = (req, res) => {
-        let followers = [];
-
-        dao.getRecipeFollowers(req.body.recipeID)
-            .then(data => {
-                console.log(data);
-                for (let item of data) {
-                    userDao.findUserById(item)
-                        .then(user => {
-                            let userInfo = {
-                                _id: user._id,
-                                username: user.username
-                            };
-                            followers.push(userInfo);
-                        })
-                }
-                return followers;
-            })
-            .then(userList => res.json(userList));
-    }
-
-    app.post("/db/details", findRecipeById);
-    app.post("/rest/recipe", createRecipe);
-    app.get("/rest/recipe", findAllRecipes);
-    app.post("/db/searchRecipe", findRecipeByTitle);
-    app.post("/db/recipeFollowers", getRecipeFollowers);
-    app.post("/db/upload", createRecipe);
+    
+    app.post("/db/recipe/details", findRecipeById);
+    app.post("/db/recipe/getAll", findAllRecipes);
+    app.post("/db/recipe/searchRecipe", findRecipeByTitle);
+    app.post("/db/recipe/upload", createRecipe);
     
 }

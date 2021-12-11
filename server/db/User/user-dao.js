@@ -2,7 +2,7 @@ const userModel = require('./user-model');
 const { ObjectId } = require('mongodb')
 
 const findAllUsers = () =>
-    userModel.find();
+    userModel.find().sort({"$natural": -1});
 
 const findUserById = (userId) =>
     userModel.findById(userId);

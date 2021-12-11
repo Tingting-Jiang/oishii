@@ -66,6 +66,11 @@ const DBRecipeCardItem = (paras) => {
         
     };
     
+    
+    
+    
+    
+    
     // if (!recipe.image) {
     //     recipe.image = "/images/sample-recipe/thumbnail_sample.jpg";
     // }
