@@ -8,7 +8,9 @@ const DBRecipeCardItem = (paras) => {
     let user = paras.user;
     const setUser = paras.setUser;
     
+    
     const [recipe, setRecipe] = useState({});
+
     useEffect(() => {
             userService.getRecipe(recipeId)
                 .then((data) => {
@@ -20,21 +22,24 @@ const DBRecipeCardItem = (paras) => {
     
     let heartClassName = "fas fa-heart";
     
-    if (user.favRecipeList && user.favRecipeList.includes(recipeId)) {
-        heartClassName = "fas fa-heart wd-color-red";
+    // if (user.favRecipeList && user.favRecipeList.includes(recipeId)) {
+    //     heartClassName = "fas fa-heart wd-color-red";
+    // }
+    
+    // if (inList) {
+    //     heartClassName = "fas fa-heart wd-color-red";
+    // }
+    const setHeart = () =>{
+        if (inList)
+            return "fas fa-heart wd-color-red";
+        else
+            return "fas fa-heart";
+         
+        
     }
     
-    const likeRecipeHandler = (recipeId) => {
-        if (user.username) {
-            userService.likeRecipe(recipeId, user.username)
-                .then(data => {
-                    // console.log("back from server, recipeList -->", data);
-                    setUser({...user, favRecipeList: data});
-                });
-        } else {
-            alert("Please Login to like a recipe.")
-        }
-    };
+    const[recipeList, setRecipeList]  = useState(user.favRecipeList);
+    const [inList, setInList]= useState(recipeList.includes(recipeId));
     
     const likeRecipeHandler1 = (recipeId) => {
         if (user === undefined) {
@@ -45,11 +50,15 @@ const DBRecipeCardItem = (paras) => {
         if (idx !== -1) {
             userService.unlikeRecipe(recipeId, user.username)
                 .then(status =>{
-                    user.favRecipeList.splice(idx, 1);
+                    setRecipeList(recipeList.splice(idx, 1));
+                    setInList(false);
+                    user.favRecipeList = [user.favRecipeList.splice(idx, 1)];
                 })
         } else if (idx === -1) {
             userService.likeRecipe(recipeId, user.username)
                 .then(status =>{
+                    setRecipeList([recipeId, ...recipeList]);
+                    setInList(true);
                     user.favRecipeList = [recipeId, ...user.favRecipeList];
                 })
         }
@@ -68,7 +77,7 @@ const DBRecipeCardItem = (paras) => {
             <img src={recipe.image} className="card-img-top wd-card-img" alt="sample"/>
             <button className="btn btn-outline-primary wd-button wd-button-on-img"
                     onClick={() => likeRecipeHandler1(recipe._id)}>
-                <i className={heartClassName}/>
+                <i className={`fas fa-heart ${inList ? "wd-color-red" : ""}`}/>
             </button>
             <Link to={`/details/${recipe._id}`}>
                 <div className="card-body">

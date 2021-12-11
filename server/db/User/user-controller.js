@@ -2,7 +2,7 @@
 const userDao = require('./user-dao');
 const imageTransform = require('../../Image/imageTransform')
 const { ObjectId } = require('mongodb')
-const allRecipeDao = require("../RecipesList/allRecipe-dao");
+const allRecipeDao = require("../AllRecipes/allRecipe-dao");
 
 
 
@@ -115,11 +115,12 @@ module.exports = (app) => {
     const likeRecipe= (req, res) => {
         const recipeID = req.body.recipeID;
         const username = req.body.username;
+        console.log("in like recipe, received -->", recipeID);
         userDao.addFavRecipe(username, recipeID)
             .then(status => {
-                allRecipeDao.addFollower()
-                    .then(status => console.log("add follower to recipeList"));
-                console.log("add recipe to user fav list")
+                allRecipeDao.addFollower(recipeID, username)
+                    .then(status => console.log(`add ${username} to recipeList`));
+                console.log(`add recipe from ${username}fav list`);
                 res.sendStatus(200)
             })
     };
@@ -127,11 +128,12 @@ module.exports = (app) => {
     const unlikeRecipe= (req, res) => {
         const recipeID = req.body.recipeID;
         const username = req.body.username;
+        console.log("in -unlike- recipe, received -->", recipeID);
         userDao.removeFavRecipe(username, recipeID)
             .then(status => {
-                allRecipeDao.removeFollower()
-                    .then(status => console.log("remove follower from recipeList"));
-                console.log("remove recipe from user fav list")
+                allRecipeDao.removeFollower(recipeID, username)
+                    .then(status => console.log(`remove ${username} to recipeList`));
+                console.log(`remove recipe from ${username}fav list`)
                 res.sendStatus(200)
             })
     };

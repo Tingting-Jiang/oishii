@@ -3,6 +3,7 @@ import React, {useEffect, useState} from "react";
 import recipeService from "../service/recipeService";
 import userService from "../service/userService";
 import {Link} from "react-router-dom";
+import { b64toBlob, contentType } from '../const'
 
 const RecipeCardItem = (paras) => {
     let recipeId = paras.recipeId;
@@ -10,13 +11,38 @@ const RecipeCardItem = (paras) => {
     const setUser = paras.setUser;
 
     const [recipe, setRecipe] = useState({});
+    const dbRecipe = recipeId.length > 10;
+    
     useEffect(() => {
-            recipeService.fetchByID(recipeId)
-                .then((data) => {
-                    setRecipe(data);
-                })
-        },[]
+            if (!dbRecipe) {
+                recipeService.fetchByID(recipeId)
+                    .then((data) => {
+                        setRecipe(data);
+                    })
+            } else {
+                userService.getRecipe(recipeId)
+                    .then((data) => {
+                        console.log(" back ", data);
+                        data.image = URL.createObjectURL(b64toBlob(data.image, contentType));
+                        setRecipe(data);
+                    })
+            }
+        },
+        []
     );
+    
+    
+    
+    
+    
+    
+    // useEffect(() => {
+    //         recipeService.fetchByID(recipeId)
+    //             .then((data) => {
+    //                 setRecipe(data);
+    //             })
+    //     },[]
+    // );
 
     let heartClassName = "fas fa-heart";
 
@@ -24,29 +50,58 @@ const RecipeCardItem = (paras) => {
         heartClassName = "fas fa-heart wd-color-red";
     }
 
-    const likeRecipeHandler = (recipeId) => {
-        if (user.username) {
-            userService.likeRecipe(recipeId, user.username)
-                .then(data => {
-                    // console.log("back from server, recipeList -->", data);
-                    setUser({...user, favRecipeList: data});
-                });
-        } else {
-            alert("Please Login to like a recipe.")
-        }
-    };
+    // const likeRecipeHandler = (recipeId) => {
+    //     if (user.username) {
+    //         userService.likeRecipe(recipeId, user.username)
+    //             .then(data => {
+    //                 // console.log("back from server, recipeList -->", data);
+    //                 setUser({...user, favRecipeList: data});
+    //             });
+    //     } else {
+    //         alert("Please Login to like a recipe.")
+    //     }
+    // };
 
     if (!recipe.image) {
         recipe.image = "/images/sample-recipe/thumbnail_sample.jpg";
     }
+    
+    const[recipeList, setRecipeList]  = useState(user.favRecipeList);
+    const [inList, setInList]= useState(recipeList.includes(recipeId));
+    
+    const likeRecipeHandler1 = (recipeId) => {
+        if (user === undefined) {
+            alert("Please Login to like a recipe.")
+            return;
+        }
+        const idx = user.favRecipeList.indexOf(recipeId);
+        if (idx !== -1) {
+            userService.unlikeRecipe(recipeId, user.username)
+                .then(status =>{
+                    console.log("returned@1", status);
+                    setRecipeList(recipeList.splice(idx, 1));
+                    setInList(false);
+                })
+        } else if (idx === -1) {
+            userService.likeRecipe(recipeId, user.username)
+                .then(status =>{
+                    console.log("returned@2", status);
+                    setRecipeList([recipeId, ...recipeList]);
+                    setInList(true);
+                })
+        }
+        
+    };
+    
+    
 
 
     return (
         <div className="card mx-2">
             <img src={recipe.image} className="card-img-top wd-card-img" alt="sample"/>
             <button className="btn btn-outline-primary wd-button wd-button-on-img"
-                    onClick={() => likeRecipeHandler(recipe.id)}>
-                <i className={heartClassName}/>
+                    onClick={() => likeRecipeHandler1(dbRecipe ? recipe._id : recipe.id)}>
+                <i className={`fas fa-heart ${inList ? "wd-color-red" : ""}`}/>
             </button>
             <Link to={`/details/${recipe.id}`}>
                 <div className="card-body">

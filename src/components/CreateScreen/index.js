@@ -6,8 +6,8 @@ import Header from "../Header";
 import {Helmet} from "react-helmet";
 
 const CreateScreen = () => {
-    const [cookies, setCookie] = useCookies(['user']);
-    console.log(cookies.user);
+    // const [cookies, setCookie] = useCookies(['avatar']);
+    // console.log(cookies.avatar);
 
     const [recipe] = useState({});
 
@@ -53,7 +53,7 @@ const CreateScreen = () => {
         console.log("submit");
         const formData = new FormData()
         formData.append('file', file)
-        formData.append("username", cookies.user.username);
+        formData.append("username", "kk");
         formData.append("recipe", JSON.stringify(newRecipe));
 
         userService.createRecipe(formData)

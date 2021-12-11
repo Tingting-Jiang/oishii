@@ -16,24 +16,29 @@ import { b64toBlob, contentType } from '../const'
 const Profile = () => {
 
     const [user, setUser] = useState({});
-    const [cookies, setCookie, removeCookie] = useCookies(['user']);
+    const [avatar, setAvatar] = useState();
+    const [cookies, setCookie, removeCookie] = useCookies(["avatar"]);
+
+    
     const navigate = useNavigate();
     const getProfile = () =>
         userService.getProfile()
             .then(newUser => {
                 console.log("returned", newUser);
-                
-                setCookie('user', newUser, { path: '/' })
                 newUser.userAvatar = URL.createObjectURL(b64toBlob(newUser.userAvatar, contentType))
                 setUser(newUser);
-           
+                
+                // setCookie('user', newUser, { path: '/' });
+         
             })
-            .catch(e => navigate('/login'));
-
+            .catch(e => navigate('/login2'));
+            // .catch(e => console.log(e));
+    
+    
     const logout = () =>{
         userService.logout()
             .then(res => {
-                removeCookie('user');
+                removeCookie('avatar');
                 navigate("/");
             });
     };
@@ -48,11 +53,13 @@ const Profile = () => {
         }
     }
 
-    console.log("-------", cookies.user);
+    // console.log("-------@@@", cookies.avatar);
     console.log("userFavRecipes");
     console.log(userFavRecipes);
-
-
+    // console.log("----->", cookies.);
+    
+    
+    
     return (
         <>
             <Helmet>
