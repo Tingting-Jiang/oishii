@@ -49,7 +49,7 @@ const CreateScreen = () => {
         // let spaceRef = storageRef.child(imageName);
         storageRef.child(imageName).getDownloadURL()
             .then(url=>{
-                // console.log(url);
+                console.log(url);
                 setImageUrl(url)
             })
         

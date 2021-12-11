@@ -4,7 +4,6 @@ import "../oishii.css"
 import { useNavigate } from 'react-router';
 import userService from '../service/userService'
 
-import { b64toBlob, contentType } from '../const'
 import RecipeCardItem from '../RecipeCards/RecipeCardItem'
 import FollowerList from '../FollowerList'
 import DBRecipeCardItem from '../RecipeCards/DBRecipeCardItem'
@@ -27,8 +26,6 @@ const Profile = () => {
         userService.getProfile()
             .then(newUser => {
                 console.log(newUser)
-               
-                newUser.userAvatar = URL.createObjectURL(b64toBlob(newUser.userAvatar, contentType))
                 setUser(newUser);
                 setCookie('user', newUser, { path: '/' })
                 

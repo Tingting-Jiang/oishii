@@ -99,7 +99,7 @@ const RecipeCardItem = (paras) => {
         <div className="card mx-2">
             <img src={recipe.image} className="card-img-top wd-card-img" alt="sample"/>
             <button className="btn btn-outline-primary wd-button wd-button-on-img"
-                    onClick={() => likeRecipeHandler1(dbRecipe ? recipe._id : recipe.id)}>
+                    onClick={() => likeRecipeHandler1(recipe.id)}>
                 <i className={`fas fa-heart ${inList ? "wd-color-red" : ""}`}/>
             </button>
             <Link to={`/details/${recipe.id}`}>

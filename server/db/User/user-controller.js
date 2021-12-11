@@ -114,6 +114,12 @@ module.exports = (app) => {
                 allRecipeDao.addFollower(recipeID, username)
                     .then(status => console.log(`add ${username} to recipeList`));
                 console.log(`add recipe from ${username}fav list`);
+                console.log(req.session['profile']);
+                const user = req.session['profile'];
+                user.favRecipeList = [recipeID, ...user.favRecipeList];
+                req.session['profile'] = user;
+                console.log(req.session['profile']);
+                
                 res.sendStatus(200)
             })
     };

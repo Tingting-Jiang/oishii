@@ -15,6 +15,8 @@ const DBRecipeCardItem = (paras) => {
             userService.getRecipe(recipeId)
                 .then((data) => {
                     setRecipe(data);
+                    // console.log("returned data in DB card", data);
+                    // console.log(typeof data.image);
                 })
         },[]
     );
@@ -64,9 +66,11 @@ const DBRecipeCardItem = (paras) => {
         
     };
     
-    if (!recipe.image) {
-        recipe.image = "/images/sample-recipe/thumbnail_sample.jpg";
-    }
+    // if (!recipe.image) {
+    //     recipe.image = "/images/sample-recipe/thumbnail_sample.jpg";
+    // }
+    
+    const defaultImage = "/images/sample-recipe/thumbnail_sample.jpg";
     
     // console.log("in like");
     // console.log(user.favRecipeList);

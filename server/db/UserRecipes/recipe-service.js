@@ -25,10 +25,10 @@ module.exports = (app) => {
     
     const findRecipeById = (req, res) => {
         console.log(" recipe service", req.body.recipeID);
-
         dao.findRecipeById(req.body.recipeID)
             .then(recipe => {
-                res.json(recipe)
+                // console.log("before return ", recipe);
+                res.json(recipe[0])
             })
     };
     
