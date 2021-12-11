@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from "react";
 import userService from "../service/userService";
 import {Link} from "react-router-dom";
-import { b64toBlob, contentType } from '../const'
 
 const DBRecipeCardItem = (paras) => {
     let recipeId = paras.recipeId;
     let user = paras.user;
     const setUser = paras.setUser;
+    console.log("in DB recipe CARD", recipeId);
     
     
     const [recipe, setRecipe] = useState({});
@@ -14,8 +14,9 @@ const DBRecipeCardItem = (paras) => {
     useEffect(() => {
             userService.getRecipe(recipeId)
                 .then((data) => {
-                    data.image = URL.createObjectURL(b64toBlob(data.image, contentType))
                     setRecipe(data);
+                    // console.log("returned data in DB card", data);
+                    // console.log(typeof data.image);
                 })
         },[]
     );
@@ -65,9 +66,16 @@ const DBRecipeCardItem = (paras) => {
         
     };
     
-    if (!recipe.image) {
-        recipe.image = "/images/sample-recipe/thumbnail_sample.jpg";
-    }
+    
+    
+    
+    
+    
+    // if (!recipe.image) {
+    //     recipe.image = "/images/sample-recipe/thumbnail_sample.jpg";
+    // }
+    
+    const defaultImage = "/images/sample-recipe/thumbnail_sample.jpg";
     
     // console.log("in like");
     // console.log(user.favRecipeList);

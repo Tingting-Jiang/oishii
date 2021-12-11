@@ -7,7 +7,7 @@ const schema = mongoose.Schema({
     image: String,
     analyzedInstructions: Array,
     extendedIngredients: Array,
-    followers: Array,
+    id: Number,
     sourceName:String
     
     

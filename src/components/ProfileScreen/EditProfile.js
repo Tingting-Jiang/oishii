@@ -4,7 +4,7 @@ import "../oishii.css"
 import { useNavigate } from 'react-router';
 import userService from '../service/userService'
 import { useDispatch, useSelector } from 'react-redux'
-import { b64toBlob, contentType } from '../const'
+import firebase from '../../firebase'
 
 
 
@@ -20,7 +20,6 @@ const EditProfile = () => {
         userService.getProfile()
             .then(newUser => {
                 console.log(newUser);
-                newUser.userAvatar = URL.createObjectURL(b64toBlob(newUser.userAvatar, contentType))
                 setUser(newUser);
             })
             .catch(e => navigate('/login'));
@@ -29,7 +28,37 @@ const EditProfile = () => {
     const [location, setLocation] = useState(user.location);
     const [bio, setBio] = useState(user.bio);
     const [dateOfBirth, setDOB] = useState(user.dateOfBirth);
-   
+    
+    const [imageName, setImageName] = useState();
+    const [imageUrl, setImageUrl] = useState();
+    
+    
+    const handleChange = (e) => {
+        const file = e.target.files[0];
+        // setImage(file);
+        const name = file.name + "-"+ Date.now();
+        setImageName(name);
+        let storageRef = firebase.storage().ref(`${name}`);
+        let uploadTask = storageRef.put(file);
+        uploadTask
+            .on(firebase.storage.TaskEvent.STATE_CHANGED,
+                () =>{
+                    let downloadUrl = uploadTask.snapshot.getDownloadURL;
+                })
+    }
+    
+    const handleSave = () =>{
+        console.log("in handle save");
+        console.log(imageName);
+        let storageRef = firebase.storage().ref();
+        // let spaceRef = storageRef.child(imageName);
+        storageRef.child(imageName).getDownloadURL()
+            .then(url=>{
+                setImageUrl(url)
+            })
+        
+    }
+ 
     const logout = () =>{
         userService.logout()
             .then(res => navigate("/"));
@@ -43,40 +72,13 @@ const EditProfile = () => {
             location,
             bio,
             dateOfBirth,
+            userAvatar: imageUrl
+            
         };
-        
         userService.updateProfile(newProfile)
             .then(res => res.json())
         
     }
-    
-    const[avatar, setAvatar] = useState();
-    const[avatarName, setAvatarName] = useState("");
-    
-    const handleImageUpload = (event) => {
-        const files = event.target.files;
-        setAvatarName(files[0].name);
-        setAvatar(files[0]);
-    }
-    
-    const saveAvatar = () =>{
-        const formData = new FormData()
-        formData.append('file', avatar)
-        formData.append("username", user.username);
-        
-        userService.updateAvatar(formData)
-            .then(response => response.blob())
-            .then(blob => {
-                console.log("returned");
-                setAvatar({ src: URL.createObjectURL(blob) })
-            })
-            .catch(error => {
-                console.error(error)
-            })
-    };
-    
-    
-    
     
     
     useEffect(getProfile, [navigate]);
@@ -131,17 +133,17 @@ const EditProfile = () => {
                              src={user.userAvatar}/>
                         <input type="file" className="form-control"
                                id="recipeImgInput" alt=""
-                               onChange={handleImageUpload}/>
+                               onChange={e => handleChange(e)}/>
                         <button className="btn btn-primary"
                                 type="button"
-                                onClick={saveAvatar}><i className="fas fa-upload"></i>
+                                onClick={handleSave}><i className="fas fa-upload"></i>
                         </button>
     
-                        {avatar ? (
+                        {imageUrl ? (
                             <div className='row mt-5'>
                                 <div className='col-md-6 m-auto'>
-                                    <h3 className='text-center'>{avatarName}</h3>
-                                    <img style={{ width: '100%' }} src={avatar.src} alt='' />
+                                    <h3 className='text-center'>{imageName.split("-",1)}</h3>
+                                    <img className="wd-profile-img" src={imageUrl} alt='' />
                                 </div>
                             </div>
                         ) : null}

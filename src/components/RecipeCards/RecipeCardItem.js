@@ -3,15 +3,15 @@ import React, {useEffect, useState} from "react";
 import recipeService from "../service/recipeService";
 import userService from "../service/userService";
 import {Link} from "react-router-dom";
-import { b64toBlob, contentType } from '../const'
 
 const RecipeCardItem = (paras) => {
     let recipeId = paras.recipeId;
     let user = paras.user;
     const setUser = paras.setUser;
+    console.log("in normal recipe CARD", recipeId);
 
     const [recipe, setRecipe] = useState({});
-    const dbRecipe = recipeId.length > 10;
+    const dbRecipe = recipeId > 10000000;
     
     useEffect(() => {
             if (!dbRecipe) {
@@ -23,7 +23,6 @@ const RecipeCardItem = (paras) => {
                 userService.getRecipe(recipeId)
                     .then((data) => {
                         console.log(" back ", data);
-                        data.image = URL.createObjectURL(b64toBlob(data.image, contentType));
                         setRecipe(data);
                     })
             }
@@ -100,7 +99,7 @@ const RecipeCardItem = (paras) => {
         <div className="card mx-2">
             <img src={recipe.image} className="card-img-top wd-card-img" alt="sample"/>
             <button className="btn btn-outline-primary wd-button wd-button-on-img"
-                    onClick={() => likeRecipeHandler1(dbRecipe ? recipe._id : recipe.id)}>
+                    onClick={() => likeRecipeHandler1(recipe.id)}>
                 <i className={`fas fa-heart ${inList ? "wd-color-red" : ""}`}/>
             </button>
             <Link to={`/details/${recipe.id}`}>

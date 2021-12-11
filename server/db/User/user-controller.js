@@ -1,6 +1,5 @@
 
 const userDao = require('./user-dao');
-const imageTransform = require('../../Image/imageTransform')
 const { ObjectId } = require('mongodb')
 const allRecipeDao = require("../AllRecipes/allRecipe-dao");
 
@@ -15,7 +14,6 @@ module.exports = (app) => {
     const findUserById = (req, res) =>
         userDao.findUserById(req.userId)
             .then(user => {
-                user.userAvatar = imageTransform(user.userAvatar);
                 res.json(user)
             });
     
@@ -36,7 +34,6 @@ module.exports = (app) => {
                     console.log(" USER login")
                     req.session['profile'] = user;
                     console.log(user);
-                    user.userAvatar = imageTransform(user.userAvatar);
                     res.json(user);
                     return;
                 }
@@ -51,15 +48,10 @@ module.exports = (app) => {
                     res.sendStatus(404);
                     return;
                 }
-                const newUser = {
-                    ...req.body,
-                    userAvatar: "avatar.jpeg"
-                }
 
-                userDao.createUser(newUser)
+                userDao.createUser(req.body)
                     .then(user => {
                         req.session['profile'] = user;
-                        user.userAvatar = imageTransform(user.userAvatar);
                         res.json(user)
                     });
             })
@@ -122,6 +114,12 @@ module.exports = (app) => {
                 allRecipeDao.addFollower(recipeID, username)
                     .then(status => console.log(`add ${username} to recipeList`));
                 console.log(`add recipe from ${username}fav list`);
+                console.log(req.session['profile']);
+                const user = req.session['profile'];
+                user.favRecipeList = [recipeID, ...user.favRecipeList];
+                req.session['profile'] = user;
+                console.log(req.session['profile']);
+                
                 res.sendStatus(200)
             })
     };
@@ -142,62 +140,6 @@ module.exports = (app) => {
     
     
     
-    
-    
-    const createRecipe = (req, res) =>{
-        
-        // deal with ingredients
-        let oldIngredients = req.body.extendedIngredients;
-        const symbol = /\s*(?:;,|$)\s*/
-        const ingredients = oldIngredients.split(",");
-        let newIngredients = [];
-        for (let item of ingredients) {
-            let container = { original : item};
-            newIngredients.push(container);
-        }
-        console.log("after parsing : =====", newIngredients);
-        
-        
-        let instructions = req.body.analyzedInstructions;
-        let newInstructions = [];
-        for (let item of instructions) {
-            let steps = { steps : item};
-            newInstructions.push(steps);
-        }
-        console.log("after parsing : =====", newInstructions);
-    
-    
-       
-        const recipe = {
-            ...req.body,
-            extendedIngredients: newIngredients,
-            analyzedInstructions: newInstructions,
-        };
-        console.log(" in create recipe:", req.body);
-    
-        userDao.createRecipe("kk", recipe )
-            .then(status => res.sendStatus(200));
-      
-    }
-    
-   const getRecipe = (req, res) =>{
-        const recipeId = req.body.recipeID;
-        console.log(recipeId);
-        userDao.getRecipe(req.body.username, recipeId)
-            // .then(res=> res.json())
-            .then(list => {
-                return list.filter(item => item._id === ObjectId(req.body.recipeID));
-                }
-            )
-            .then(data => {
-                console.log(data);
-                res.json(data);
-            }).catch(e =>{
-                console.log(e)
-        });
-   }
-    
-    
     const profile = (req, res) =>
         res.json(req.session['profile']);
     
@@ -205,16 +147,20 @@ module.exports = (app) => {
         res.send(req.session.destroy());
     
     
-    app.post('/db/login', login);
-    app.post('/db/register', register);
-    app.post('/db/profile', profile);
-    app.post('/db/logout', logout);
-    app.put('/db/editProfile', updateProfile);
-    app.delete('/db/users/:userId', deleteUser);
-    app.get('/db/users', findAllUsers);
-    app.get('/db/users/:userId', findUserById);
-    app.put('/db/like', likeRecipe);
-    app.put('/db/unlike', unlikeRecipe);
-    app.post('/db/create', createRecipe);
-    app.post('/db/get', getRecipe);
+    
+    
+    
+    app.post('/db/user/login', login);
+    app.post('/db/user//register', register);
+    app.post('/db/user/profile', profile);
+    app.post('/db/user/logout', logout);
+    app.put('/db/user/editProfile', updateProfile);
+    app.delete('/db/user//delete/:userId', deleteUser);
+    app.get('/db/user/allUsers', findAllUsers);
+    app.get('/db/user/:userId', findUserById);
+    
+    app.put('/db/recipe/like', likeRecipe);
+    app.put('/db/recipe/unlike', unlikeRecipe);
+
+
 };

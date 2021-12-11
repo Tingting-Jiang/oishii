@@ -2,8 +2,6 @@ import React, {useEffect, useState} from "react";
 import "./homeGreeting.css";
 import {Link} from "react-router-dom";
 import userService from "../../service/userService";
-import { b64toBlob, contentType } from '../../const'
-import {useDispatch, useSelector} from "react-redux";
 
 
 // TODO: need check on why state does not work
@@ -21,13 +19,10 @@ const Greeting = () => {
     useEffect(() =>{
         userService.getProfile()
             .then(user => {
-                user.userAvatar = URL.createObjectURL(b64toBlob(user.userAvatar, contentType))
                 console.log("home is setting user -->", user);
                 setUser(user)
             });
     }, [])
-    
-    
 
     return (
         <div className="wd-about">

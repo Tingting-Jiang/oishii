@@ -8,6 +8,7 @@ const RecipeCardItemByObject = (paras) => {
     let recipe = paras.recipe;
     let user = paras.user;
     const setUser = paras.setUser;
+    // console.log("In Recipe Card Object", recipe.id);
 
     let heartClassName = "fas fa-heart";
 

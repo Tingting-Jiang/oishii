@@ -28,7 +28,8 @@ const removeFollower = (id, username) =>
     model.updateOne({ id: id },
         { $pull: { followers: username } });
 
-
+const getFollowers = (id) =>
+    model.find({ id: id });
 
 
 module.exports = {
@@ -37,4 +38,5 @@ module.exports = {
     findRecipeById,
     addFollower,
     removeFollower,
+    getFollowers
 };

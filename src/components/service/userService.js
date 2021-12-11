@@ -1,7 +1,11 @@
 const API_URL = 'http://localhost:4000/db';
+const API_USER = 'http://localhost:4000/db/user';
+const API_RECIPE = 'http://localhost:4000/db/recipe';
+
+const API_ALLRECIPE = 'http://localhost:4000/db/allrecipe';
 
 export const login = (user) =>
-    fetch(`${API_URL}/login`, {
+    fetch(`${API_USER}/login`, {
         method: 'POST',
         body: JSON.stringify(user),
         credentials: 'include',
@@ -11,7 +15,7 @@ export const login = (user) =>
     })
 
 export const register = (user) =>
-    fetch(`${API_URL}/register`, {
+    fetch(`${API_USER}/register`, {
         method: 'POST',
         body: JSON.stringify(user),
         credentials: 'include',
@@ -21,7 +25,7 @@ export const register = (user) =>
     });
 
 export const getProfile = () =>
-    fetch(`${API_URL}/profile`, {
+    fetch(`${API_USER}/profile`, {
         method: 'POST',
         credentials: 'include',
     })
@@ -29,15 +33,35 @@ export const getProfile = () =>
 
 
 export const logout = () =>
-    fetch(`${API_URL}/logout`, {
+    fetch(`${API_USER}/logout`, {
         method: 'POST',
         credentials: 'include',
     })
         .then(res => res.json());
 
 
+
+export const updateProfile = (user) =>
+    fetch(`${API_USER}/editProfile`, {
+        method: "PUT",
+        body: JSON.stringify({user: user}),
+        credentials: 'include',
+        headers: {
+            'content-type': 'application/json'
+        }
+    })
+
+
+
+
+
+
+
+
+
+
 export const likeRecipe = (recipeID, username) =>
-    fetch(`${API_URL}/like`, {
+    fetch(`${API_RECIPE}/like`, {
         method: "PUT",
         body: JSON.stringify({recipeID: recipeID, username: username}),
         credentials: 'include',
@@ -49,7 +73,7 @@ export const likeRecipe = (recipeID, username) =>
 
 
 export const unlikeRecipe = (recipeID, username) =>
-    fetch(`${API_URL}/unlike`, {
+    fetch(`${API_RECIPE}/unlike`, {
         method: "PUT",
         body: JSON.stringify({recipeID: recipeID, username: username}),
         credentials: 'include',
@@ -59,24 +83,20 @@ export const unlikeRecipe = (recipeID, username) =>
     })
         .then(res => res.json());
 
-export const createRecipe = (formData) =>
-    fetch(`${API_URL}/upload`, {
-        method: 'POST',
+export const createRecipe = (recipe, username) =>
+    fetch(`${API_RECIPE}/upload`, {
+        method: "POST",
+        body: JSON.stringify({recipe: recipe, username: username}),
         credentials: 'include',
-        body: formData,
-    });
-
-export const updateAvatar = (avatar) =>
-    fetch(`${API_URL}/updateAvatar`, {
-        method: 'POST',
-        credentials: 'include',
-        body: avatar,
+        headers: {
+            'content-type': 'application/json'
+        }
     });
 
 
 
 export const getRecipe = (recipeID) =>
-    fetch(`${API_URL}/details`,{
+    fetch(`${API_RECIPE}/details`,{
         method: 'POST',
         body: JSON.stringify({recipeID: recipeID}),
         credentials: 'include',
@@ -87,7 +107,7 @@ export const getRecipe = (recipeID) =>
         .then(res => res.json());
 
 export const searchRecipeByTitle = (title) =>
-    fetch(`${API_URL}/searchRecipe`,{
+    fetch(`${API_RECIPE}/searchRecipe`,{
         method: 'POST',
         body: JSON.stringify({title: title}),
         credentials: 'include',
@@ -99,7 +119,7 @@ export const searchRecipeByTitle = (title) =>
 
     
 export const getRecipeFollowers = (recipeID) =>
-    fetch(`${API_URL}/recipeFollowers`, {
+    fetch(`${API_ALLRECIPE}/getRecipeFollowers`, {
     
         method: 'POST',
         body: JSON.stringify({ recipeID: recipeID }),
@@ -109,16 +129,19 @@ export const getRecipeFollowers = (recipeID) =>
         }
     })
 
-export const updateProfile = (user) =>
-    fetch(`${API_URL}/editProfile`, {
-        method: "PUT",
-        body: JSON.stringify({user: user}),
+
+
+
+
+export const getAllLatestRecipes = () =>
+    fetch(`${API_RECIPE}/getAll`, {
+        method: 'POST',
         credentials: 'include',
-        headers: {
-            'content-type': 'application/json'
-        }
     })
-    
+        .then(res => {
+            console.log("");
+            return res.json()
+        });
     
     
 
@@ -138,5 +161,5 @@ export default {
     searchRecipeByTitle,
     getRecipeFollowers,
     updateProfile,
-    updateAvatar
+    getAllLatestRecipes
 };

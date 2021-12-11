@@ -10,7 +10,6 @@ import {Link} from "react-router-dom";
 import FollowerList from "../FollowerList";
 import DBRecipeCardItem from '../RecipeCards/DBRecipeCardItem'
 import { useCookies } from 'react-cookie'
-import { b64toBlob, contentType } from '../const'
 
 const selectProfile = (profile) => profile;
 
@@ -29,8 +28,7 @@ const Profile = () => {
     const getProfile = () =>
         userService.getProfile()
             .then(newUser => {
-                console.log("returned", newUser);
-                newUser.userAvatar = URL.createObjectURL(b64toBlob(newUser.userAvatar, contentType))
+                console.log("returned from SESSION", newUser);
                 setUser(newUser);
                 
                 // setCookie('user', newUser, { path: '/' });

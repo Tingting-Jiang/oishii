@@ -1,6 +1,6 @@
 const allRecipeDao = require('./allRecipe-dao')
 const userDao = require('../User/user-dao');
-const imageTransform = require('../../Image/imageTransform')
+
 
 module.exports = (app) => {
     
@@ -18,7 +18,6 @@ module.exports = (app) => {
     
         allRecipeDao.findRecipeById(req.body.recipeID)
             .then(recipe => {
-                recipe.image = imageTransform(recipe.image);
                 res.json(recipe)
             })
     };
@@ -28,12 +27,18 @@ module.exports = (app) => {
             .then(status => res.sendStatus(200));
     }
     
+    const getFollower = (req, res) =>{
+        allRecipeDao.getFollower(req.body._id)
+            .then(followers => res.json(followers));
+    }
     
     
-    app.post("/db/getRecipeFollowers", findRecipeById);
-    app.post("/db/addRecipe", createRecipe);
-    app.get("/db/getAllRecipe", findAllRecipes);
-    app.put("/db/addFollower", addFollower);
+    
+    app.post("/db/allRecipe/getRecipeFollowers", findRecipeById);
+    app.post("/db/allRecipe/addRecipe", createRecipe);
+    app.post("/db/allRecipe/getAllRecipe", findAllRecipes);
+    app.put("/db/allRecipe/addFollower", addFollower);
+    app.put("/db/allRecipe/addFollower", getFollower);
     
 
 }

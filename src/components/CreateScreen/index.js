@@ -4,10 +4,12 @@ import {useCookies} from 'react-cookie';
 import "./create.css";
 import Header from "../Header";
 import {Helmet} from "react-helmet";
+import firebase from '../../firebase'
 
 const CreateScreen = () => {
     // const [cookies, setCookie] = useCookies(['avatar']);
     // console.log(cookies.avatar);
+    const user = {username: "TT12"};
 
     const [recipe] = useState({});
 
@@ -15,16 +17,44 @@ const CreateScreen = () => {
     const [summary, setSummary] = useState("");
     const [servings, setServings] = useState(0);
     const [time, setTime] = useState(0);
-    const [file, setFile] = useState(new FormData());
-    const [fileName, setFileName] = useState("Choose File");
     const [ingredients, setIngredients] = useState("");
     const [instructions, setInstructions] = useState(
         ["", "", "", ""]);
-
-    const [uploadedFile, setUploadedFile] = useState();
+    
+    const [imageName, setImageName] = useState();
+    const [imageUrl, setImageUrl] = useState();
+    
 
     useEffect(() => setInstructions(instructions), [instructions])
-
+    
+    const handleChange = (e) => {
+        const file = e.target.files[0];
+        // setImage(file);
+        const name = file.name + "-"+ Date.now();
+        setImageName(name);
+        let storageRef = firebase.storage().ref(`${name}`);
+        let uploadTask = storageRef.put(file);
+        uploadTask
+            .on(firebase.storage.TaskEvent.STATE_CHANGED,
+                () =>{
+                    let downloadUrl = uploadTask.snapshot.getDownloadURL;
+                })
+    }
+    
+    const handleSave = () =>{
+        console.log("in handle save");
+       
+        console.log(imageName);
+        let storageRef = firebase.storage().ref();
+        // let spaceRef = storageRef.child(imageName);
+        storageRef.child(imageName).getDownloadURL()
+            .then(url=>{
+                console.log(url);
+                setImageUrl(url)
+            })
+        
+    }
+    
     const submitRecipe = () => {
         const oldIngredients = ingredients.split(",");
         let newIngredients = [];
@@ -46,34 +76,25 @@ const CreateScreen = () => {
             title,
             summary,
             servings,
+            image: imageUrl,
             readyInMinutes: time,
             extendedIngredients: newIngredients,
             analyzedInstructions: newInstructions,
+            sourceName:user.username,
+            id: Date.now(),
         };
         console.log("submit");
-        const formData = new FormData()
-        formData.append('file', file)
-        formData.append("username", "kk");
-        formData.append("recipe", JSON.stringify(newRecipe));
-
-        userService.createRecipe(formData)
-            .then(response => response.blob())
-            .then(blob => {
-                console.log("returned");
-                setUploadedFile({src: URL.createObjectURL(blob)})
+        console.log(newRecipe);
+   
+        userService.createRecipe(newRecipe, user.username)
+            .then(data => {
+                console.log("DONE");
             })
             .catch(error => {
                 console.error(error)
             })
     }
-
-
-    const handleImageUpload = (event) => {
-        const files = event.target.files;
-        setFileName(files[0].name);
-        setFile(files[0]);
-    }
-
+    
     const addInstructions = () => {
         setInstructions([...instructions, ""]);
     }
@@ -82,11 +103,7 @@ const CreateScreen = () => {
         setInstructions(
             instructions.slice(0, index).concat(instructions.slice(index+1, instructions.length)))
     }
-
-    const submitFile = () => {
-        console.log("file added")
-    };
-
+    
 
     return (
         <>
@@ -168,18 +185,18 @@ const CreateScreen = () => {
                             <div className="d-flex">
                                 <input type="file" className="form-control"
                                        id="recipeImgInput" alt=""
-                                       onChange={handleImageUpload}/>
+                                       onChange={e => handleChange(e)}/>
                                 <button className="btn wd-button-transparent"
                                         type="button"
-                                        onClick={submitFile}><i className="fas fa-upload"/>
+                                        onClick={handleSave}><i className="fas fa-upload"/>
                                 </button>
 
                             </div>
-                            {uploadedFile ? (
+                            {imageUrl ? (
                                 <div className='row mt-5'>
                                     <div className='col-md-6 m-auto'>
-                                        <h3 className='text-center'>{fileName}</h3>
-                                        <img style={{width: '100%'}} src={uploadedFile.src} alt=''/>
+                                        <h3 className='text-center'>{imageName.split("-",1)}</h3>
+                                        <img style={{width: '100%'}} src={imageUrl} alt=''/>
                                     </div>
                                 </div>
                             ) : null}

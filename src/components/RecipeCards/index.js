@@ -32,7 +32,14 @@ const RecipeCards = () => {
     }
 
     // TODO get latest from db
-    let latestList = [];
+    const [latestList, setLatest]  = useState([]);
+    
+    useEffect(() =>
+        userService.getAllLatestRecipes()
+            .then(data =>{
+                setLatest(data);
+            })
+    ,[])
 
     //get trending recipes
     useEffect(() =>
