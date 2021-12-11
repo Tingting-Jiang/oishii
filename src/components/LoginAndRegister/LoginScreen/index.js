@@ -4,16 +4,25 @@ import userService from '../../service/userService'
 import "../loginAndRgister.css";
 import {Helmet} from "react-helmet";
 import Header from "../../Header";
+import {useDispatch} from "react-redux";
 
 
 const Login = () => {
     const [user, setUser] = useState({});
     const navigate = useNavigate();
 
+    const dispatch = useDispatch();
+
     const login = () => {
         userService.login(user)
             .then(response => response.json())
             .then(newUser => {
+                console.log("newUser");
+                console.log(newUser);
+                dispatch({
+                        type: "set-user",
+                        newUser
+                })
                 navigate('/profile');
             })};
 

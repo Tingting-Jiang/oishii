@@ -12,9 +12,16 @@ const initialUser = {
 }
 
 const userReducer = (state = initialUser, action) => {
-    console.log("in reducer");
+    console.log("action: ")
+    console.log(action)
 
     switch (action.type) {
+        // after login
+        case "set-user":
+            state = action.newUser;
+            console.log("after setting user", state);
+            return state;
+
         case "get-user":
             console.log("state: ", state);
             state = action.newUser;
@@ -38,10 +45,11 @@ const userReducer = (state = initialUser, action) => {
             
             return state;
 
-        case "set_user":
-            state = action.user;
-            console.log("after setting user", state);
-            return state;
+
+
+        case "get-fav":
+            break;
+
 
         default:
             console.log("in default ", state);

@@ -3,11 +3,17 @@ import "./homeGreeting.css";
 import {Link} from "react-router-dom";
 import userService from "../../service/userService";
 import { b64toBlob, contentType } from '../../const'
+import {useDispatch, useSelector} from "react-redux";
 
 
 // TODO: need check on why state does not work
+const selectProfile = (profile) => profile;
 
 const Greeting = () => {
+    const dispatch = useDispatch();
+    const profile = useSelector(selectProfile);
+    console.log("profile in greeting 22222222222222222222");
+    console.log(profile);
 
     const [user, setUser] = useState({});
 
@@ -20,14 +26,6 @@ const Greeting = () => {
                 setUser(user)
             });
     }, [])
-    
-    
-    
-
-    
-    
-    
-    
     
     
 

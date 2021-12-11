@@ -12,8 +12,13 @@ import DBRecipeCardItem from '../RecipeCards/DBRecipeCardItem'
 import { useCookies } from 'react-cookie'
 import { b64toBlob, contentType } from '../const'
 
+const selectProfile = (profile) => profile;
 
 const Profile = () => {
+    const dispatch = useDispatch();
+    const profile = useSelector(selectProfile);
+    console.log("profile");
+    console.log(profile);
 
     const [user, setUser] = useState({});
     const [avatar, setAvatar] = useState();

@@ -30,8 +30,8 @@ import RecipeScreen from './components/RecipeScreen'
 import EditProfile from './components/ProfileScreen/EditProfile';
 import { CookiesProvider } from "react-cookie";
 
-import LoginOld from './components/LoginAndRegister/LoginScreen/LoginScreen'
-import CreateNew from './components/CreateScreen/create'
+// import LoginOld from './components/LoginAndRegister/LoginScreen/LoginScreen'
+// import CreateNew from './components/CreateScreen/create'
 
 import {Provider} from "react-redux";
 import userReducer from "./components/reducers/userReducer";
