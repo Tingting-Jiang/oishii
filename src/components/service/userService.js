@@ -59,11 +59,14 @@ export const unlikeRecipe = (recipeID, username) =>
     })
         .then(res => res.json());
 
-export const createRecipe = (formData) =>
+export const createRecipe = (recipe, username) =>
     fetch(`${API_URL}/upload`, {
-        method: 'POST',
+        method: "POST",
+        body: JSON.stringify({recipe: recipe, username: username}),
         credentials: 'include',
-        body: formData,
+        headers: {
+            'content-type': 'application/json'
+        }
     });
 
 export const updateAvatar = (avatar) =>

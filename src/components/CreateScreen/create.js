@@ -9,7 +9,6 @@ import firebase from "../../firebase";
 
 const CreateNew = () => {
     
-    const [image, setImage] = useState();
     const [imageName, setImageName] = useState();
     const [imageUrl, setImageUrl] = useState();
 
@@ -27,9 +26,6 @@ const CreateNew = () => {
                 () =>{
                     let downloadUrl = uploadTask.snapshot.getDownloadURL;
                 })
-        
-       
-        
     }
     
     const handleSave = () =>{

@@ -1,6 +1,6 @@
 const allRecipeDao = require('./allRecipe-dao')
 const userDao = require('../User/user-dao');
-const imageTransform = require('../../Image/imageTransform')
+
 
 module.exports = (app) => {
     
@@ -18,7 +18,6 @@ module.exports = (app) => {
     
         allRecipeDao.findRecipeById(req.body.recipeID)
             .then(recipe => {
-                recipe.image = imageTransform(recipe.image);
                 res.json(recipe)
             })
     };

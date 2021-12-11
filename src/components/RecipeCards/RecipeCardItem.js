@@ -3,12 +3,12 @@ import React, {useEffect, useState} from "react";
 import recipeService from "../service/recipeService";
 import userService from "../service/userService";
 import {Link} from "react-router-dom";
-import { b64toBlob, contentType } from '../const'
 
 const RecipeCardItem = (paras) => {
     let recipeId = paras.recipeId;
     let user = paras.user;
     const setUser = paras.setUser;
+    console.log("in normal recipe CARD", recipeId);
 
     const [recipe, setRecipe] = useState({});
     const dbRecipe = recipeId.length > 10;
@@ -23,7 +23,6 @@ const RecipeCardItem = (paras) => {
                 userService.getRecipe(recipeId)
                     .then((data) => {
                         console.log(" back ", data);
-                        data.image = URL.createObjectURL(b64toBlob(data.image, contentType));
                         setRecipe(data);
                     })
             }

@@ -25,7 +25,6 @@ const Profile = () => {
         userService.getProfile()
             .then(newUser => {
                 console.log("returned", newUser);
-                newUser.userAvatar = URL.createObjectURL(b64toBlob(newUser.userAvatar, contentType))
                 setUser(newUser);
                 
                 // setCookie('user', newUser, { path: '/' });

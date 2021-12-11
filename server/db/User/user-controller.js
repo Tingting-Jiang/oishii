@@ -1,6 +1,5 @@
 
 const userDao = require('./user-dao');
-const imageTransform = require('../../Image/imageTransform')
 const { ObjectId } = require('mongodb')
 const allRecipeDao = require("../AllRecipes/allRecipe-dao");
 
@@ -15,7 +14,6 @@ module.exports = (app) => {
     const findUserById = (req, res) =>
         userDao.findUserById(req.userId)
             .then(user => {
-                user.userAvatar = imageTransform(user.userAvatar);
                 res.json(user)
             });
     
@@ -36,7 +34,6 @@ module.exports = (app) => {
                     console.log(" USER login")
                     req.session['profile'] = user;
                     console.log(user);
-                    user.userAvatar = imageTransform(user.userAvatar);
                     res.json(user);
                     return;
                 }
@@ -51,15 +48,10 @@ module.exports = (app) => {
                     res.sendStatus(404);
                     return;
                 }
-                const newUser = {
-                    ...req.body,
-                    userAvatar: "avatar.jpeg"
-                }
 
-                userDao.createUser(newUser)
+                userDao.createUser(req.body)
                     .then(user => {
                         req.session['profile'] = user;
-                        user.userAvatar = imageTransform(user.userAvatar);
                         res.json(user)
                     });
             })
@@ -203,6 +195,9 @@ module.exports = (app) => {
     
     const logout = (req, res) =>
         res.send(req.session.destroy());
+    
+    
+    
     
     
     app.post('/db/login', login);

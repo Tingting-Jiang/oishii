@@ -89,7 +89,7 @@ module.exports = (app) =>{
     
     
     
-    app.post("/db/upload", upload.single('file'), createRecipe);
+    app.post("/db/uploading", upload.single('file'), createRecipe);
     app.post("/db/updateAvatar", upload.single('file'), updateAvatar);
 }
 
