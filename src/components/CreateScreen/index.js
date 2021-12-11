@@ -242,8 +242,7 @@ const CreateScreen = () => {
 
                         <div className="mt-4 text-center">
                             <button className="btn btn-outline-primary wd-button w-50"
-                                    onClick={submitRecipe}
-                            >
+                                    onClick={submitRecipe}>
                                 Submit
                             </button>
                         </div>

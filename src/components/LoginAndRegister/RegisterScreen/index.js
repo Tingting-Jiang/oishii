@@ -63,107 +63,95 @@ const Register = () => {
                                 </button>
                             </Link>
                         </div>
-                        <form>
-                            <div className="ms-3 mb-3">
-                                <label htmlFor="username" className="form-label">
-                                    Username
-                                    <span className="wd-color-coral">*</span>
-                                </label>
-                                <input className="form-control" id="username"
-                                       placeholder="your username" autoComplete="username"
-                                       value={user.username}
-                                       onChange={(e) =>
-                                           setUser({...user, username: e.target.value})}/>
-                            </div>
-                            <div className="ms-3 mb-3">
-                                <label htmlFor="password1" className="form-label">
-                                    Password
-                                    <span className="wd-color-coral">*</span>
-                                </label>
-                                <input type="password" autoComplete="new-password"
-                                       className="form-control" id="password1"
-                                       placeholder="your password"
-                                       value={user.password}
-                                       onChange={(e) =>
-                                           setUser({...user, password: e.target.value})}/>
-                            </div>
-                            <div className="ms-3 mb-3">
-                                <label htmlFor="password2" className="form-label">Confirm Password</label>
-                                <input type="password" className="form-control" id="password2"
-                                       placeholder="Verify Password" autoComplete="current-password"
-                                       onChange={(e) =>
-                                           setUser({...user, verifyPassword: e.target.value})}/>
-                                {
-                                    user && user.verifyPassword !== "" && user.password !== user.verifyPassword &&
-                                    <span>Password don't match</span>
-                                }
-                            </div>
-                            <div className="ms-3 mb-3">
-                                <label htmlFor="email" className="form-label">
-                                    Email
-                                </label>
-                                <input type="email"
-                                       autoComplete="email"
-                                       className="form-control" id="email"
-                                       placeholder="username@email.com"
-                                       value={user.email}
-                                       onChange={(e) =>
-                                           setUser({...user, email: e.target.value})}/>
-                            </div>
-                            <div className="ms-3 mb-3">
-                                <label htmlFor="location" className="form-label">
-                                    Location
-                                </label>
-                                <input autoComplete="location"
-                                       className="form-control" id="location"
-                                       placeholder="your location (only you can see it)"
-                                       value={user.location}
-                                       onChange={(e) =>
-                                           setUser({...user, location: e.target.value})}/>
-                            </div>
-                            <div className="ms-3 mb-3">
-                                <label htmlFor="dateOfBirth" className="form-label">
-                                    Birthday
-                                </label>
-                                <input autoComplete="date-of-birth"
-                                       className="form-control" id="dateOfBirth"
-                                       placeholder="yyyy/mm/dd (only you can see it)"
-                                       value={user.dateOfBirth}
-                                       onChange={(e) =>
-                                           setUser({...user, dateOfBirth: e.target.value})}/>
-                            </div>
+                        <div className="ms-3 mb-3">
+                            <label htmlFor="username" className="form-label">
+                                Username
+                                <span className="wd-color-coral">*</span>
+                            </label>
+                            <input className="form-control" id="username"
+                                   placeholder="your username" autoComplete="username"
+                                   value={user.username}
+                                   onChange={(e) =>
+                                       setUser({...user, username: e.target.value})}/>
+                        </div>
+                        <div className="ms-3 mb-3">
+                            <label htmlFor="password1" className="form-label">
+                                Password
+                                <span className="wd-color-coral">*</span>
+                            </label>
+                            <input type="password" autoComplete="new-password"
+                                   className="form-control" id="password1"
+                                   placeholder="your password"
+                                   value={user.password}
+                                   onChange={(e) =>
+                                       setUser({...user, password: e.target.value})}/>
+                        </div>
+                        <div className="ms-3 mb-3">
+                            <label htmlFor="password2" className="form-label">Confirm Password</label>
+                            <input type="password" className="form-control" id="password2"
+                                   placeholder="Verify Password" autoComplete="current-password"
+                                   onChange={(e) =>
+                                       setUser({...user, verifyPassword: e.target.value})}/>
+                            {
+                                user && user.verifyPassword !== "" && user.password !== user.verifyPassword &&
+                                <span>Password don't match</span>
+                            }
+                        </div>
+                        <div className="ms-3 mb-3">
+                            <label htmlFor="email" className="form-label">
+                                Email
+                            </label>
+                            <input type="email"
+                                   autoComplete="email"
+                                   className="form-control" id="email"
+                                   placeholder="username@email.com"
+                                   value={user.email}
+                                   onChange={(e) =>
+                                       setUser({...user, email: e.target.value})}/>
+                        </div>
+                        <div className="ms-3 mb-3">
+                            <label htmlFor="location" className="form-label">
+                                Location
+                            </label>
+                            <input autoComplete="location"
+                                   className="form-control" id="location"
+                                   placeholder="your location (only you can see it)"
+                                   value={user.location}
+                                   onChange={(e) =>
+                                       setUser({...user, location: e.target.value})}/>
+                        </div>
+                        <div className="ms-3 mb-3">
+                            <label htmlFor="dateOfBirth" className="form-label">
+                                Birthday
+                            </label>
+                            <input autoComplete="date-of-birth"
+                                   className="form-control" id="dateOfBirth"
+                                   placeholder="yyyy/mm/dd (only you can see it)"
+                                   value={user.dateOfBirth}
+                                   onChange={(e) =>
+                                       setUser({...user, dateOfBirth: e.target.value})}/>
+                        </div>
 
-                            <div className="ms-3 mb-3">
-                                <div className="form-check form-check-inline">
-                                    <input className="form-check-input" type="radio" name="role"
-                                           id="userRole" value="normal"
-                                           onChange={(e) => setUser({...user, role: e.target.value})}/>
-                                    <label className="form-check-label" htmlFor="userRole">Member</label>
-                                </div>
-                                <div className="form-check form-check-inline">
-                                    <input className="form-check-input" type="radio" name="role"
-                                           id="userRole2" value="editor"
-                                           onChange={(e) => setUser({...user, role: e.target.value})}/>
-                                    <label className="form-check-label" htmlFor="userRole2">Editor</label>
-                                </div>
+                        <div className="ms-3 mb-3">
+                            <div className="form-check form-check-inline">
+                                <input className="form-check-input" type="radio" name="role"
+                                       id="userRole" value="normal"
+                                       onChange={(e) => setUser({...user, role: e.target.value})}/>
+                                <label className="form-check-label" htmlFor="userRole">Member</label>
                             </div>
-
-                            {/*<div className="ms-3 mb-3">*/}
-                            {/*    <div className="form-check">*/}
-                            {/*        <label className="form-check-label" htmlFor="remember">*/}
-                            {/*            Remember me*/}
-                            {/*        </label>*/}
-                            {/*        <input type="checkbox" className="form-check-input" id="remember"/>*/}
-                            {/*    </div>*/}
-                            {/*</div>*/}
-
-                            <div className="mt-5 text-center">
-                                <button className="btn btn-outline-primary wd-button w-50"
-                                        onClick={register}>
-                                    Register
-                                </button>
+                            <div className="form-check form-check-inline">
+                                <input className="form-check-input" type="radio" name="role"
+                                       id="userRole2" value="editor"
+                                       onChange={(e) => setUser({...user, role: e.target.value})}/>
+                                <label className="form-check-label" htmlFor="userRole2">Editor</label>
                             </div>
-                        </form>
+                        </div>
+                        <div className="mt-5 text-center">
+                            <button className="btn btn-outline-primary wd-button w-50"
+                                    onClick={register}>
+                                Register
+                            </button>
+                        </div>
 
                     </div>
                 </div>

@@ -35,6 +35,7 @@ module.exports = (app) => {
                 if(user) {
                     console.log(" USER login")
                     req.session['profile'] = user;
+                    console.log(user);
                     user.userAvatar = imageTransform(user.userAvatar);
                     res.json(user);
                     return;

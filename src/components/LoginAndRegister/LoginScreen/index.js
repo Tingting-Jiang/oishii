@@ -9,14 +9,14 @@ import Header from "../../Header";
 const Login = () => {
     const [user, setUser] = useState({});
     const navigate = useNavigate();
-    
-    const login = () =>
+
+    const login = () => {
         userService.login(user)
-            .then((response) => response.json())
+            .then(response => response.json())
             .then(newUser => {
-                console.log("returned", newUser);
                 navigate('/profile');
-            });
+            })};
+
 
 
     return (
@@ -53,37 +53,35 @@ const Login = () => {
                                 </button>
                             </Link>
                         </div>
-                        <form>
-                            <div className="ms-3 mb-3">
-                                <label htmlFor="usernameInput" className="form-label">
-                                    Username
-                                    <span className="wd-color-coral">*</span>
-                                </label>
-                                <input className="form-control" id="usernameInput"
-                                       placeholder="your username" autoComplete="username"
-                                       value={user.username}
-                                       onChange={(e) =>
-                                           setUser({...user, username: e.target.value})}/>
-                            </div>
-                            <div className="ms-3 mb-3">
-                                <label htmlFor="passwordInput" className="form-label">
-                                    Password
-                                    <span className="wd-color-coral">*</span>
-                                </label>
-                                <input type="password" autoComplete="current-password"
-                                       className="form-control" id="passwordInput"
-                                       placeholder="your password"
-                                       value={user.password}
-                                       onChange={(e) =>
-                                           setUser({...user, password: e.target.value})}/>
-                            </div>
-                            <div className="mt-5 text-center">
-                                <button className="btn btn-outline-primary wd-button w-50"
-                                        onClick={login}>
-                                    Login
-                                </button>
-                            </div>
-                        </form>
+                        <div className="ms-3 mb-3">
+                            <label htmlFor="usernameInput" className="form-label">
+                                Username
+                                <span className="wd-color-coral">*</span>
+                            </label>
+                            <input className="form-control" id="usernameInput"
+                                   placeholder="your username" autoComplete="username"
+                                   value={user.username}
+                                   onChange={(e) =>
+                                       setUser({...user, username: e.target.value})}/>
+                        </div>
+                        <div className="ms-3 mb-3">
+                            <label htmlFor="passwordInput" className="form-label">
+                                Password
+                                <span className="wd-color-coral">*</span>
+                            </label>
+                            <input type="password" autoComplete="current-password"
+                                   className="form-control" id="passwordInput"
+                                   placeholder="your password"
+                                   value={user.password}
+                                   onChange={(e) =>
+                                       setUser({...user, password: e.target.value})}/>
+                        </div>
+                        <div className="mt-5 text-center">
+                            <button className="btn btn-outline-primary wd-button w-50"
+                                    onClick={login}>
+                                Login
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

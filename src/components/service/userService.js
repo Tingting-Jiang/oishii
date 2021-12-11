@@ -1,8 +1,6 @@
-
 const API_URL = 'http://localhost:4000/db';
 
 export const login = (user) =>
-    // console.log("in userService -->", user);
     fetch(`${API_URL}/login`, {
         method: 'POST',
         body: JSON.stringify(user),
@@ -10,7 +8,7 @@ export const login = (user) =>
         headers: {
             'content-type': 'application/json'
         }
-    });
+    })
 
 export const register = (user) =>
     // console.log("in userService -->", user);

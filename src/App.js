@@ -18,7 +18,7 @@ import SearchDetail from "./components/RecipeScreen";
 
 import Profile from "./components/ProfileScreen";
 
-import Profile2 from "./components/ProfileScreen/Profile";
+// import Profile2 from "./components/ProfileScreen/Profile";
 
 import Create from './components/CreateScreen';
 
@@ -29,9 +29,7 @@ import RecipeScreen from './components/RecipeScreen'
 
 import EditProfile from './components/ProfileScreen/EditProfile';
 import { CookiesProvider } from "react-cookie";
-import LoginOld from './components/LoginAndRegister/LoginScreen/LoginScreen'
-
-
+// import LoginOld from './components/LoginAndRegister/LoginScreen/LoginScreen'
 
 
 

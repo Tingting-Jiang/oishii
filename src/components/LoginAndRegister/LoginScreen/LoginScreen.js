@@ -13,6 +13,7 @@ const LoginOld = () => {
         userService.login(user)
             .then((response) => response.json())
             .then(newUser => {
+                console.log("newUser");
                console.log(newUser);
                 navigate('/profile');
         })};

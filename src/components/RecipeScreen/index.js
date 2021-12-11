@@ -8,7 +8,7 @@ import "./recipe.css";
 import userService from '../service/userService';
 import recipeService from '../service/recipeService';
 // TODO: fake loading recipe
-import oldIngredient from "../service/reducers/data/newRecipe.json";
+import oldIngredient from "../reducers/data/newRecipe.json";
 import Header from "../Header";
 import FollowerList from "../FollowerList";
 
