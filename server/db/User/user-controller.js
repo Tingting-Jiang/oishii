@@ -35,6 +35,7 @@ module.exports = (app) => {
                 if(user) {
                     console.log(" USER login")
                     req.session['profile'] = user;
+                    console.log(user);
                     user.userAvatar = imageTransform(user.userAvatar);
                     res.json(user);
                     return;
@@ -51,9 +52,10 @@ module.exports = (app) => {
                     return;
                 }
                 const newUser = {
-                    ...req.body.user,
+                    ...req.body,
                     userAvatar: "avatar.jpeg"
                 }
+
                 userDao.createUser(newUser)
                     .then(user => {
                         req.session['profile'] = user;

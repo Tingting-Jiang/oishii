@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import recipeService from '../service/recipeService'
-import oldIngredient from "../service/reducers/data/newRecipe.json";
-import oldInstruction from "../service/reducers/data/instruction.json";
+import oldIngredient from "../reducers/data/newRecipe.json";
+import oldInstruction from "../reducers/data/instruction.json";
 import "./recipe.css"
 import "../oishii.css"
 import { useParams } from 'react-router-dom'

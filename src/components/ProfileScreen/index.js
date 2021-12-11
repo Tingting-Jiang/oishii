@@ -31,7 +31,7 @@ const Profile = () => {
                 // setCookie('user', newUser, { path: '/' });
          
             })
-            .catch(e => navigate('/login2'));
+            .catch(e => navigate('/login'));
             // .catch(e => console.log(e));
     
     

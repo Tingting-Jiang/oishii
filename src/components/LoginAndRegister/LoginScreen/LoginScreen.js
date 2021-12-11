@@ -14,6 +14,7 @@ const LoginOld = () => {
             .then((response) => {response.json()
             })
             .then(newUser => {
+                console.log("newUser");
                console.log(newUser);
                 navigate('/profile');
         })};

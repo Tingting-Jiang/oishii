@@ -1,11 +1,23 @@
+const initialUser = {
+    username: "",
+    email: "",
+    favRecipeList: [],
+    usersRecipe: [],
+    usersFollowers: [],
+    userAvatar: "/images/sample-user.jpeg",
+    location: "",
+    dateOfBirth: "",
+    bio: "",
+    role: "normal",
+}
 
+const userReducer = (state = initialUser, action) => {
+    console.log("in reducer");
 
-const userReducer = (state = {username: "dan"}, action) => {
     switch (action.type) {
         case "get-user":
             console.log("state: ", state);
             state = action.newUser;
-            console.log("in reducer", state);
             return state;
         
 
