@@ -52,9 +52,10 @@ module.exports = (app) => {
                     return;
                 }
                 const newUser = {
-                    ...req.body.user,
+                    ...req.body,
                     userAvatar: "avatar.jpeg"
                 }
+
                 userDao.createUser(newUser)
                     .then(user => {
                         req.session['profile'] = user;

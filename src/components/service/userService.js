@@ -11,7 +11,6 @@ export const login = (user) =>
     })
 
 export const register = (user) =>
-    // console.log("in userService -->", user);
     fetch(`${API_URL}/register`, {
         method: 'POST',
         body: JSON.stringify(user),
