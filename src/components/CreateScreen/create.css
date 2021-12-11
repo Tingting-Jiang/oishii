@@ -1,0 +1,18 @@
+.wd-create-bg-small {
+    height: 150px;
+    width: 100%;
+    object-fit: cover;
+}
+
+/*create screen*/
+
+.wd-create-bg {
+    height: 800px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.wd-step-number {
+    width: 5%;
+    color: #F17C67;
+}
