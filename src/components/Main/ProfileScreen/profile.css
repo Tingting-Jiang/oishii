@@ -42,3 +42,7 @@
     border-radius: 50%;
     border: 8px solid #ffffff;
 }
+
+textarea.wd-bio-input {
+    min-height: 120px;
+}

@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, {useEffect, useState} from 'react'
 import "./profile.css";
-import { useHistory } from 'react-router-dom'; // must from dom, react-route won't work
+import {Link, useHistory} from 'react-router-dom'; // must from dom, react-route won't work
 import userService, {getProfile, logout} from '../../service/userService'
-import { useDispatch, useSelector } from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import firebase from '../../../firebase'
 import Header from "../Header";
 
@@ -16,13 +16,12 @@ const EditProfile = () => {
 
     let profile = useSelector(selectProfile);
 
-    const [username, setUsername] = useState(profile.username);
     const [location, setLocation] = useState(profile.location);
     const [bio, setBio] = useState(profile.bio);
     const [dateOfBirth, setDOB] = useState(profile.dateOfBirth);
-    
+
     const [imageName, setImageName] = useState("");
-    const [imageUrl, setImageUrl] = useState(profile.userAvatar);
+    const [imageUrl, setImageUrl] = useState();
 
     const redirectLogin = () => {
         history.push('/login');
@@ -42,44 +41,43 @@ const EditProfile = () => {
             .catch(e => redirectLogin());
         // .catch(e => console.log(e));
     }
-    
+
     const handleChange = (e) => {
         const file = e.target.files[0];
         // setImage(file);
-        const name = file.name + "-"+ Date.now();
+        const name = file.name + "-" + Date.now();
         setImageName(name);
         let storageRef = firebase.storage().ref(`${name}`);
         let uploadTask = storageRef.put(file);
         uploadTask
             .on(firebase.storage.TaskEvent.STATE_CHANGED,
-                () =>{
+                () => {
                     let downloadUrl = uploadTask.snapshot.getDownloadURL;
                 })
     }
-    
-    const handleSave = () =>{
+
+    const handleSave = () => {
         // console.log("in handle save");
         // console.log(imageName);
         let storageRef = firebase.storage().ref();
         // let spaceRef = storageRef.child(imageName);
         storageRef.child(imageName).getDownloadURL()
-            .then(url=>{
+            .then(url => {
                 setImageUrl(url)
             })
-        
+
     }
 
-    const logoutHandler = (dispatch) => {
-        logout(dispatch)
-            .then(res => {
-                // history.push("/");
-            });
-    }
-    
-    const saveProfile = (dispatch) =>{
+    // const logoutHandler = (dispatch) => {
+    //     logout(dispatch)
+    //         .then(res => {
+    //             // history.push("/");
+    //         });
+    // }
+
+    const saveProfile = (dispatch) => {
         const newProfile = {
             ...profile,
-            username,
             location,
             bio,
             dateOfBirth,
@@ -95,7 +93,7 @@ const EditProfile = () => {
                 // res.json();
                 // history.push("/profile")
             })
-        
+
     }
 
     return (
@@ -118,13 +116,38 @@ const EditProfile = () => {
                     {/*start form*/}
 
                     <div className="col-12 col-md-8">
-                        <h4 className="wd-color-coral">Update Profile</h4>
+
+                        <Link to="/profile">
+                            <div className="d-flex">
+                                <i className="fas fa-arrow-left wd-color-coral fa-sm align-self-center"/>
+                                <p className="wd-color-coral align-self-center m-0 ms-3 fw-bolder">Back</p>
+                            </div>
+                        </Link>
+
+                        <div className="text-center mb-3">
+                            <img className="wd-profile-img"
+                                 src={profile.userAvatar}/>
+                            <h5 className="mt-3">{`Update ${profile.username}'s Profile`}</h5>
+                        </div>
+
+                        <div className="d-flex justify-content-center mt-3">
+                            <button className="btn btn-outline-primary wd-button mx-2"
+                                    onClick={() => saveProfile(dispatch)}>
+                                Save Profile
+                            </button>
+
+                            {/*<button className="btn btn-outline-danger ms-3"*/}
+                            {/*        onClick={() => logoutHandler(dispatch)}>*/}
+                            {/*    Log out*/}
+                            {/*</button>*/}
+                        </div>
+
                         <hr/>
 
                         {/*birthday*/}
                         <div className="form-floating mb-3">
                             <input className="form-control" id="floatingInputBirthDay"
-                                   placeholder="Birth date"
+                                   placeholder={dateOfBirth}
                                    value={dateOfBirth}
                                    onChange={e => setDOB(e.target.value)}/>
                             <label htmlFor="floatingInputBirthDay" className="form-label">
@@ -135,28 +158,28 @@ const EditProfile = () => {
                         {/*location*/}
                         <div className="form-floating mb-3">
                             <input className="form-control" id="floatingInputLocation"
-                                   placeholder="Location"
+                                   placeholder={location}
                                    value={location}
                                    onChange={e => setLocation(e.target.value)}/>
                             <label htmlFor="floatingInputLocation" className="form-label">
-                                Birth date
+                                Location
                             </label>
                         </div>
 
                         {/*bio*/}
-                        <div className="form-floating mb-3">
-                                <textarea className="form-control"
-                                          placeholder="Bio"
-                                          id="bioInput"
-                                          value={bio}
-                                          onChange={(e) => setBio(e.target.value)}/>
-                            <label htmlFor="bioInput">
-                                Bio
-                            </label>
-                        </div>
+                        <label htmlFor="bioInput" className="form-label ps-1">
+                            Bio
+                        </label>
+                        <textarea className="form-control wd-bio-input mb-3"
+                                  placeholder={bio}
+                                  id="bioInput"
+                                  value={bio}
+                                  onChange={(e) => setBio(e.target.value)}>
+                        </textarea>
 
+                        {/*avatar*/}
                         <div className="mb-4">
-                            <label htmlFor="userImgInput" className="form-label">
+                            <label htmlFor="userImgInput" className="form-label ps-1">
                                 Change Profile Picture
                             </label>
                             <div className="d-flex">
@@ -167,104 +190,18 @@ const EditProfile = () => {
                                         type="button"
                                         onClick={handleSave}><i className="fas fa-upload"/>
                                 </button>
-
                             </div>
-                            {imageUrl ? (
-                                <div className='row mt-5'>
-                                    <div className='col-md-6 m-auto'>
-                                        <h3 className='text-center'>{imageName.split("-",1)}</h3>
-                                        <img style={{width: '100%'}} src={imageUrl} alt=''/>
+                            {
+                                imageUrl ? (
+                                    <div className='row mt-3'>
+                                        <div className='col-md-6 m-auto'>
+                                            <h4 className='text-center'>{imageName.split("-", 1)}</h4>
+                                            <img style={{width: '100%'}} src={imageUrl} alt=''/>
+                                        </div>
                                     </div>
-                                </div>
-                            ) : null}
-                        </div>
+                                ) : null
+                            }
 
-                    </div>
-                </div>
-    
-                <div className="wd-profile-container">
-                    <img className="wd-profile-bg"
-                         src="/images/profile-bg.jpg"/>
-                    <div className="wd-profile-info  flex">
-                        <div className="text-center">
-                        <img className="wd-profile-img"
-                             src={imageUrl}/>
-                        <input type="file" className="ps-5"
-                               id="recipeImgInput" alt=""
-                               onChange={e => handleChange(e)}/>
-                        <button className="btn wd-button-transparent"
-                                type="button"
-                                onClick={handleSave}><i className="fas fa-upload"/>
-                        </button>
-                        </div>
-                        
-                        <div className="row wd-username">
-                            <div className="col-4">
-                            <label htmlFor="floatingInputName" className="form-label">
-                                User Name
-                            </label>
-                            <input
-                                type="text"
-                                className="form-control border-1 "
-                                id="floatingInputName"
-                                placeholder={username}
-                                value={username}
-                                onChange={e=> setUsername(e.target.value)}/>
-                            </div>
-    
-                            <div className="col-4">
-                                <label htmlFor="floatingInputBirthDay" className="form-label">
-                                    <i className="fas fa-birthday-cake me-2 wd-color-coral"/>
-                                    Birth date
-                                </label>
-                                <input className="form-control me-2"
-                                       placeholder={dateOfBirth}
-                                       value={dateOfBirth}
-                                       onChange={e => setDOB(e.target.value)}/>
-                            </div>
-                            <div className="col-4">
-                                       
-                                <label htmlFor="floatingInputLocation" className="form-label">
-                                    <i className="fas fa-map-marker-alt me-2 wd-color-coral"/>
-                                    Location
-                                </label>
-                            
-                              <input
-                                  type="text"
-                                  className="form-control border-1 pb-3 "
-                                  id="floatingInputLocation"
-                                  placeholder={location}
-                                  value={location}
-                                  onChange={e => setLocation(e.target.value)}
-                              />
-                            </div>
-                         
-                  
-                                <label htmlFor="floatingInputBio" className="form-label mb-2">
-                                    Bio
-                                </label>
-                                  <textarea
-                                      className="form-control border-1 pb-3"
-                                      id="floatingInputBio"
-                                      placeholder={bio}
-                                      rows="2"
-                                      value={bio}
-                                      onChange={(e) => setBio(e.target.value)}
-                                  />
-                         
-                            
-                        <div className="d-flex justify-content-center mt-4">
-                            <button className="btn btn-outline-primary wd-button mx-3"
-                                onClick={() => saveProfile(dispatch)}>
-                                Save Profile
-                            </button>
-                            
-                            <button className= "btn btn-outline-danger ms-3"
-                                    onClick={() => logoutHandler(dispatch)}>
-                                Log out
-                            </button>
-                            </div>
-                    
                         </div>
                     </div>
                 </div>
