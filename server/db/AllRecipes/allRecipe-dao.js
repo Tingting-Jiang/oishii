@@ -12,11 +12,11 @@ const addRecipeAndFollower = (recipe) =>
 const findRecipeById = (id) =>
     model.find({id: id});
 
-const addFollower = (id, username) =>
+const addFollower = (id, userID) =>
     model.updateOne({"id": id},
         {$push:
                 {followers: {
-                        $each: [username],
+                        $each: [userID],
                         $position :0}
                 }},
         {upsert: true});
@@ -24,9 +24,9 @@ const addFollower = (id, username) =>
 
 
 
-const removeFollower = (id, username) =>
+const removeFollower = (id, userID) =>
     model.updateOne({ "id": id },
-        { $pull: { followers: username } });
+        { $pull: { followers: userID } });
 
 const getFollowers = (id) =>
     model.find({ "id": id });

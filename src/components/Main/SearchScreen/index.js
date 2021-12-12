@@ -22,10 +22,11 @@ const Search = () => {
         setSearchTerm(event.target.value);
         recipeService.fetchSearchResult(event.target.value)
             .then(data => {
-                console.log("auto complete result -> API", data.length);
                 setSearchResult(data)
             });
     };
+    
+
     
     
     
@@ -60,10 +61,21 @@ const Search = () => {
                     
                 }
                 setRecipeList(totalRecipes)
-                console.log("total@2", totalRecipes);
                 totalRecipes = [];
             });
     }
+    
+    
+
+    const getRandomRecipe= () =>{
+        console.log("in get random recipe");
+        recipeService.getRandomRecipe()
+            .then(data =>{
+                navigate.push(`/details/${data.id}`);
+            
+            })
+    }
+    
     
     useEffect(clickSearch, [])
   
@@ -110,6 +122,7 @@ const Search = () => {
 
                         <div className="my-3">
                             <span>
+                             
                                 <button onClick={clickSearch}
                                         className="btn btn-outline-primary wd-button me-3">
                                     Search For Recipe
@@ -117,7 +130,8 @@ const Search = () => {
                             </span>
                             <span>
                                 {/*TODO direct to a random recipe page*/}
-                                <button className="btn btn-outline-primary wd-button">
+                                <button className="btn btn-outline-primary wd-button"
+                                    onClick={getRandomRecipe}>
                                     Get a Lucky Oishii
                                 </button>
                             </span>

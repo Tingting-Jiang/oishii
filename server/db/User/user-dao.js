@@ -18,17 +18,17 @@ const createUser = (user) =>
     userModel.create(user);
 
 const updateUser = (user) =>
-    userModel.updateOne({_id: user._id}, {
+    userModel.updateOne({id: user.id}, {
         $set: user
     });
 
-const removeFavRecipe = (username, recipeID) =>
-    userModel.updateOne({username: username},
+const removeFavRecipe = (userID, recipeID) =>
+    userModel.updateOne({id: userID},
         { $pull: {favRecipeList: recipeID} });
 
 
-const addFavRecipe = (username, recipeID) =>
-    userModel.updateOne({username: username},
+const addFavRecipe = (userID, recipeID) =>
+    userModel.updateOne({id: userID},
         {$push:
                 {favRecipeList: {
                         $each: [recipeID],
@@ -38,7 +38,7 @@ const addFavRecipe = (username, recipeID) =>
 
 
 const deleteUser = (userId) =>
-    userModel.deleteOne({_id: userId});
+    userModel.deleteOne({id: userId});
 
 const createRecipe = (username, recipe ) =>
     userModel.updateOne({username},
@@ -48,12 +48,8 @@ const getRecipe = ( username, recipeID)=>
     userModel.find({username: username, usersRecipe: ObjectId(recipeID)});
 
 
-const updateAvatar = (username, userAvatar) =>
-    userModel.updateOne({username: username},
-        {$set: userAvatar})
-
-const getUserInfo = (username) =>
-    userModel.find({username: username},
+const getUserInfo = (userID) =>
+    userModel.find({id: userID},
         {
             usersFollowers: 0,
             __v: 0,
@@ -81,6 +77,5 @@ module.exports = {
     addFavRecipe,
     createRecipe,
     getRecipe,
-    updateAvatar,
     getUserInfo
 };

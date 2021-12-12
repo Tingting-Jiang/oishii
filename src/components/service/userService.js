@@ -66,10 +66,10 @@ export const updateProfile = (dispatch, newProfile) =>
         })
     })
 
-export const getFollowerInfo = (username) =>
+export const getFollowerInfo = (userID) =>
     fetch(`${API_URL}/userInfo`, {
         method: "POST",
-        body: JSON.stringify({username: username}),
+        body: JSON.stringify({userID: userID}),
         credentials: 'include',
         headers: {
             'content-type': 'application/json'
@@ -98,10 +98,10 @@ export const getFavList = (dispatch) =>
         })
 
 
-export const unlikeRecipe = (recipeId, username, dispatch) =>
+export const unlikeRecipe = (recipeId, userID, dispatch) =>
     fetch(`${API_RECIPE}/unlike`, {
         method: "PUT",
-        body: JSON.stringify({recipeID: recipeId, username: username}),
+        body: JSON.stringify({recipeID: recipeId, userID: userID}),
         credentials: 'include',
         headers: {
             'content-type': 'application/json'
@@ -117,10 +117,10 @@ export const unlikeRecipe = (recipeId, username, dispatch) =>
         })
 
 
-export const likeRecipe = (recipeId, username, dispatch) =>
+export const likeRecipe = (recipeId, userID, dispatch) =>
     fetch(`${API_RECIPE}/like`, {
         method: "PUT",
-        body: JSON.stringify({recipeID: recipeId, username: username}),
+        body: JSON.stringify({recipeID: recipeId, userID: userID}),
         credentials: 'include',
         headers: {
             'content-type': 'application/json'
@@ -136,10 +136,10 @@ export const likeRecipe = (recipeId, username, dispatch) =>
         })
 
 
-export const createRecipe = (recipe, username) =>
+export const createRecipe = (recipe, userID) =>
     fetch(`${API_RECIPE}/upload`, {
         method: "POST",
-        body: JSON.stringify({recipe: recipe, username: username}),
+        body: JSON.stringify({recipe: recipe, userID: userID}),
         credentials: 'include',
         headers: {
             'content-type': 'application/json'

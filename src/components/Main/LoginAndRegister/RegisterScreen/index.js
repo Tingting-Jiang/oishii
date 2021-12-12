@@ -17,23 +17,23 @@ const Register = () => {
         role: "normal",
     });
 
-    const navigate = useHistory();
+    const history = useHistory();
     const dispatch = useDispatch();
 
     const register = () => {
         userService.register(user)
-            .then((response) => response.json())
             .then(newUser => {
+                console.log("newUser");
                 console.log(newUser);
+                history.push('/profile');
                 dispatch({
-                    type: "get-user",
+                    type: "set-user",
                     newUser
-                });
-                navigate.push('/profile')
-            })
-            .catch(e => console.log(e));
-    };
-
+                })
+                history.push('/profile');
+            })};
+    
+    
     return (
         <>
             <Helmet>

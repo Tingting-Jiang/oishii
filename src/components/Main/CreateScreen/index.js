@@ -29,7 +29,6 @@ const CreateScreen = () => {
     
     const handleChange = (e) => {
         const file = e.target.files[0];
-        // setImage(file);
         const name = file.name + "-"+ Date.now();
         setImageName(name);
         let storageRef = firebase.storage().ref(`${name}`);
@@ -46,7 +45,6 @@ const CreateScreen = () => {
        
         console.log(imageName);
         let storageRef = firebase.storage().ref();
-        // let spaceRef = storageRef.child(imageName);
         storageRef.child(imageName).getDownloadURL()
             .then(url=>{
                 console.log(url);
@@ -85,7 +83,7 @@ const CreateScreen = () => {
         console.log("submit");
         console.log(newRecipe);
    
-        userService.createRecipe(newRecipe, user.username)
+        userService.createRecipe(newRecipe, user.id)
             .then(data => {
                 console.log("DONE");
             })

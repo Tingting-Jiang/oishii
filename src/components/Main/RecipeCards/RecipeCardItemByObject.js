@@ -10,18 +10,7 @@ const RecipeCardItemByObject = ({recipe, user, dispatch}) => {
     const inList = (recipe) => {
         return user.favRecipeList.includes(recipe.id);
     }
-
-    // const likeRecipeHandler = (recipeId, dispatch) => {
-    //     console.log("!!!!!!!!!!!!!!!!!");
-    //     if (user.username) {
-    //         userService.likeRecipe(recipeId, user.username)
-    //             .then(status => {
-    //                 console.log("returned@3", status);
-    //             });
-    //     } else {
-    //         alert("Please Login to like a recipe.")
-    //     }
-    // };
+    
 
     const likeRecipeHandler1 = (recipeId, dispatch) => {
         if (!user.username || user.username === "") {
@@ -30,13 +19,13 @@ const RecipeCardItemByObject = ({recipe, user, dispatch}) => {
         }
 
         if (inList(recipe)) {
-            userService.unlikeRecipe(recipeId, user.username, dispatch)
+            userService.unlikeRecipe(recipeId, user.id, dispatch)
                 .then(status =>{
                     console.log("returned@3", status);
 
                 })
         } else {
-            userService.likeRecipe(recipeId, user.username, dispatch)
+            userService.likeRecipe(recipeId, user.id, dispatch)
                 .then(status => {
                     console.log("recipeId in Object Cards");
                     console.log(recipeId);
