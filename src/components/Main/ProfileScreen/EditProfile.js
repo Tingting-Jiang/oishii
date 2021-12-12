@@ -126,7 +126,7 @@ const EditProfile = () => {
 
                         <div className="text-center mb-3">
                             <img className="wd-profile-img"
-                                 src={profile.userAvatar}/>
+                                 src={profile.userAvatar || "/images/sample-user.jpeg"}/>
                             <h5 className="mt-3">{`Update ${profile.username}'s Profile`}</h5>
                         </div>
 
