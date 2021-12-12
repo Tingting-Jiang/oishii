@@ -1,6 +1,7 @@
 
 const userDao = require('./user-dao');
 const allRecipeDao = require("../AllRecipes/allRecipe-dao");
+const defaultAvatar = "https://firebasestorage.googleapis.com/v0/b/oishii-794ac.appspot.com/o/category-dessert.jpg-1639336882948?alt=media&token=33586928-61f0-4926-a9af-67ebd84cc87e";
 
 
 
@@ -70,7 +71,8 @@ module.exports = (app) => {
                 }
                 const newUser = {
                     ...req.body,
-                    id: Date.now()
+                    id: Date.now(),
+                    userAvatar: defaultAvatar
                 }
                 userDao.createUser(newUser)
                     .then(user => {
