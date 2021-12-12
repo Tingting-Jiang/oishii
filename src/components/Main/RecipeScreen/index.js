@@ -4,39 +4,44 @@ import {Helmet} from "react-helmet";
 
 import "./recipe.css";
 
-import userService from '../../service/userService';
+import userService, {getProfile} from '../../service/userService';
 import recipeService from '../../service/recipeService';
 // TODO: fake loading recipe
 import oldIngredient from "../../reducers/data/newRecipe.json";
 import Header from "../Header";
 import FollowerList from "../FollowerList";
+import {useDispatch, useSelector} from "react-redux";
 
+const selectProfile = (profile) => profile;
 
 const RecipeScreen = () => {
     const params = useParams();
     const recipeID = params.id;
-    console.log(recipeID);
 
-    console.log("in 1st line ->", recipeID);
+    const dispatch = useDispatch();
+    const user = useSelector(selectProfile);
+    useEffect(() => getProfile(dispatch), [dispatch]);
+
+    // console.log("in 1st line ->", recipeID);
+    // console.log("profile in detail screen ->", user.favRecipeList);
     
     const [recipe, setRecipe] = useState(oldIngredient);
 
     // const [followers, setFollowers] = useState([]);
     const dbRecipe = recipeID.length > 10;
-    
+
 
     useEffect(() => {
             if (!dbRecipe) {
                 recipeService.fetchByID(recipeID)
                     .then((data) => {
                         setRecipe(data);
-                        console.log("in recipe API", data)
-
+                        // console.log("in recipe API", data)
                     })
             } else {
                 userService.getRecipe(recipeID)
                     .then((data) => {
-                        console.log(" back from DB ", data);
+                        // console.log(" back from DB ", data);
                         setRecipe(data);
                     })
             }
@@ -45,37 +50,32 @@ const RecipeScreen = () => {
     );
 
     // get user session
-    const [user, setUser] = useState({});
+    // const [user, setUser] = useState({});
     const [error, setError] = useState(false);
-    useEffect(() =>{
-        userService.getProfile()
-            .then(user => {
-                setUser(user);
-            })
-            .catch(e => {
-                console.log("ERROR-----------profile");
-                setError(true);
-            });
-        
-        
-            
-    }, [])
 
-    let heartClassName = "fas fa-heart";
 
-    if (user && user.favRecipeList && user.favRecipeList.includes(recipe.id)) {
-        heartClassName = "fas fa-heart wd-color-red";
+    let inList = (recipeId) => {
+        return user.favRecipeList.includes(recipeId);
     }
 
-    const likeRecipeHandler = (recipeId) => {
-        if (user.username) {
-            userService.likeRecipe(recipeId, user.username)
-                .then(data => {
-                    // console.log("back from server, recipeList -->", data);
-                    setUser({...user, favRecipeList: data});
-                });
-        } else {
+
+    const likeRecipeHandler = (recipeId, dispatch) => {
+        if (!user.username || user.username === "") {
             alert("Please Login to like a recipe.")
+            return;
+        }
+
+        if (inList(recipeId)) {
+            userService.unlikeRecipe(recipeId, user.username, dispatch)
+                .then(status =>{
+                    console.log("returned@1", status);
+
+                })
+        } else {
+            userService.likeRecipe(recipeId, user.username, dispatch)
+                .then(status => {
+                    console.log("returned@2", status);
+                })
         }
     };
 
@@ -117,9 +117,9 @@ const RecipeScreen = () => {
                                 <h2 className="wd-recipe-title d-flex align-items-center">
                                     {recipe.title}
 
-                                    <button onClick={() => likeRecipeHandler(recipe.id)}
+                                    <button onClick={() => likeRecipeHandler(recipe.id, dispatch)}
                                             className="btn btn-outline-primary wd-button ms-3">
-                                        <i className={heartClassName}/>
+                                        <i className={`fas fa-heart ${inList(recipe.id) ? "wd-color-red" : ""}`}/>
                                     </button>
                                 </h2>
 
@@ -186,9 +186,8 @@ const RecipeScreen = () => {
                     <h5 className="wd-color-coral fw-bold my-3">
                         See Who Likes This Recipe
                     </h5>
-                    {JSON.stringify(followers)}
+                    {/*<h4>followers</h4>{JSON.stringify(followers)}*/}
 
-                    {/*TODO: input should be a list of users following this recipe*/}
                     <FollowerList followers={followers}/>
 
                 </div>

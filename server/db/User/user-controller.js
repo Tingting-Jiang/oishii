@@ -20,6 +20,7 @@ module.exports = (app) => {
     
     
     const getUserInfo =(req, res) => {
+        console.log("11111111111111111111");
         console.log("begin to get user info", req.body.username);
         userDao.getUserInfo(req.body.username)
             .then(user =>{
@@ -105,7 +106,7 @@ module.exports = (app) => {
                 allRecipeDao.removeFollower(recipeID, username)
                     .then(status => console.log(`remove ${username} to recipeList`));
                 console.log(`remove recipe from ${username}fav list`)
-                res.sendStatus(200)
+                res.send(status);
             })
     };
     

@@ -28,7 +28,7 @@ const Main = () => {
             <Route path="/search/:searchTerm" exact={true} component={Search} />
             <Route path="/details/:id" exact={true} component={SearchDetail} />
 
-            {/*<Route path={`/profile/:id`} exact={true} component={Profile} />*/}
+            <Route path="/profile/:id" exact={true} component={Profile} />
 
             <Route path="/login" exact={true} component={Login} />
             <Route path="/register" exact={true} component={Register} />

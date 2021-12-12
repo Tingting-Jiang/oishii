@@ -75,6 +75,9 @@ export const getFollowerInfo = (username) =>
 
 
 
+
+
+
 export const getFavList = (dispatch) =>
     fetch(`${API_USER}/profile`, {
         method: 'POST',
@@ -91,6 +94,25 @@ export const getFavList = (dispatch) =>
         })
 
 
+export const unlikeRecipe = (recipeId, username, dispatch) =>
+    fetch(`${API_RECIPE}/unlike`, {
+        method: "PUT",
+        body: JSON.stringify({recipeID: recipeId, username: username}),
+        credentials: 'include',
+        headers: {
+            'content-type': 'application/json'
+        }
+    })
+        // .then(res => res.json())
+        .then(res => {
+            dispatch ({
+                type: 'unlike-recipe',
+                recipeId
+            })
+            return (recipeId);
+        })
+
+
 export const likeRecipe = (recipeId, username, dispatch) =>
     fetch(`${API_RECIPE}/like`, {
         method: "PUT",
@@ -102,8 +124,6 @@ export const likeRecipe = (recipeId, username, dispatch) =>
         })
         // .then(res => res.json())
         .then(res => {
-            console.log("recipe ID in user Service 555555555555555");
-            console.log(res);
             dispatch ({
                 type: 'like-recipe',
                 recipeId
@@ -111,18 +131,6 @@ export const likeRecipe = (recipeId, username, dispatch) =>
             return (recipeId);
         })
 
-
-
-export const unlikeRecipe = (recipeID, username) =>
-    fetch(`${API_RECIPE}/unlike`, {
-        method: "PUT",
-        body: JSON.stringify({recipeID: recipeID, username: username}),
-        credentials: 'include',
-        headers: {
-            'content-type': 'application/json'
-        }
-    })
-        .then(res => res.json());
 
 export const createRecipe = (recipe, username) =>
     fetch(`${API_RECIPE}/upload`, {

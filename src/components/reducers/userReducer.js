@@ -74,7 +74,7 @@ const userReducer = (state = initialUser, action) => {
             state = {
                 ...state,
                 favRecipeList: state.favRecipeList.filter(
-                    recipe => recipe.id !== action.recipeId
+                    recipeID => recipeID !== action.recipeId
                 )
             }
             return state;
