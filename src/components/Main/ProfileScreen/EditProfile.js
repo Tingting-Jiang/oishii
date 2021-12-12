@@ -76,7 +76,10 @@ const EditProfile = () => {
             
         };
         userService.updateProfile(newProfile)
-            .then(res => res.json())
+            .then(res => {
+                res.json();
+                navigate("/profile")
+            })
         
     }
     
@@ -124,97 +127,91 @@ const EditProfile = () => {
                         </div>
                     </div>
                 </div>
-                
+    
                 <div className="wd-profile-container">
                     <img className="wd-profile-bg"
                          src="../../images/profile-bg.jpg"/>
-                    <div className="wd-profile-info text-center flex">
+                    <div className="wd-profile-info  flex">
+                        <div className="text-center">
                         <img className="wd-profile-img"
-                             src={user.userAvatar}/>
-                        <input type="file" className="form-control"
+                             src={imageUrl || user.userAvatar}/>
+                        <input type="file" className="ps-5"
                                id="recipeImgInput" alt=""
                                onChange={e => handleChange(e)}/>
-                        <button className="btn btn-primary"
+                        <button className="btn wd-button-transparent"
                                 type="button"
                                 onClick={handleSave}><i className="fas fa-upload"></i>
                         </button>
-    
-                        {imageUrl ? (
-                            <div className='row mt-5'>
-                                <div className='col-md-6 m-auto'>
-                                    <h3 className='text-center'>{imageName.split("-",1)}</h3>
-                                    <img className="wd-profile-img" src={imageUrl} alt='' />
-                                </div>
+                        </div>
+                        
+                        <div className="row wd-username">
+                            <div className="col-4">
+                            <label htmlFor="floatingInputName" className="form-label">
+                                User Name
+                            </label>
+                            <input
+                                type="text"
+                                className="form-control border-1 "
+                                id="floatingInputName"
+                                placeholder={user.username}
+                                value={username}
+                                onChange={e=> setUsername(e.target.value)}/>
                             </div>
-                        ) : null}
-                    
-                        <form className="form-floating mb-3">
-                        <input
-                            type="text"
-                            className="form-control border-1 border-secondary   pb-3  "
-                            id="floatingInputName"
-                            placeholder={user.username}
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                        />
-                        <label htmlFor="floatingInputName" className="mb-2">
-                            User Name
-                        </label>
-                    </form>
-                        <div className="wd-username">
-                            <form className="form-floating mb-3 ">
-                                <label htmlFor="floatingInputBirthDay" className="mb-2">
+    
+                            <div className="col-4">
+                                <label htmlFor="floatingInputBirthDay" className="form-label">
                                     <i className="fas fa-birthday-cake me-2 wd-color-coral"></i>
                                     Birth date
                                 </label>
-                                <input className="d-inline-block me-2"
+                                <input className="form-control me-2"
                                        placeholder={user.dateOfBirth}
                                        value={dateOfBirth}
                                        onChange={e => setDOB(e.target.value)}/>
-                                
-                            </form>
-                            
-                            <form className="form-floating mb-3 ">
-                                <label htmlFor="floatingInputLocation" className="mb-2">
+                            </div>
+                            <div className="col-4">
+                                       
+                                <label htmlFor="floatingInputLocation" className="form-label">
                                     <i className="fas fa-map-marker-alt me-2 wd-color-coral"></i>
                                     Location
                                 </label>
+                            
                               <input
                                   type="text"
-                                  className="form-control border-1 border-secondary pb-3 "
+                                  className="form-control border-1 pb-3 "
                                   id="floatingInputLocation"
                                   placeholder={user.location}
                                   value={location}
                                   onChange={e => setLocation(e.target.value)}
                               />
-                              
-                            </form>
-                           
-                        </div>
-                        <div className="wd-bio">
-                            <form className="form-floating mb-3 ">
+                            </div>
+                         
+                  
+                                <label htmlFor="floatingInputBio" className="form-label mb-2">
+                                    Bio
+                                </label>
                                   <textarea
-                                      className="form-control border-1 border-secondary pb-3"
+                                      className="form-control border-1 pb-3"
                                       id="floatingInputBio"
                                       placeholder={user.bio}
+                                      rows="2"
                                       value={bio}
                                       onChange={(e) => setBio(e.target.value)}
                                   ></textarea>
-                                <label htmlFor="floatingInputBio" className="mb-2">
-                                    Bio
-                                </label>
-                            </form>
+                         
+                            
+                        <div className="d-flex justify-content-center mt-4">
+                            <button className="btn btn-outline-primary wd-button mx-3"
+                                onClick={saveProfile}>
+                                Save Profile
+                            </button>
+                            
+                            <button className= "btn btn-outline-danger wd-button ms-3"
+                                    onClick={logout}>
+                                Log out
+                            </button>
+                            </div>
+                    
                         </div>
-                        
-                        <button className="btn btn-outline-primary wd-button my-2"
-                            onClick={saveProfile}>
-                            Save Profile
-                        </button>
-                        
-                        <button className= "btn btn-danger rounded-pill"
-                                onClick={logout}>
-                            Log out
-                        </button>
                     </div>
                 </div>
                 

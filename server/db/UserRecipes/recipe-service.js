@@ -1,6 +1,5 @@
 const dao = require('./recipe-dao')
 const userDao = require('../User/user-dao');
-const allRecipeDao = require("../AllRecipes/allRecipe-dao")
 
 module.exports = (app) => {
     const findAllRecipes = (req, res) => {
@@ -38,7 +37,7 @@ module.exports = (app) => {
     };
     
     const findRecipeByTitle = (req, res) => {
-        console.log(req.body.title);
+        console.log("Title of REcipe ", req.body.title);
         dao.findRecipeByTitle(req.body.title)
             .then(data => {
                     // console.log("returned data", data);

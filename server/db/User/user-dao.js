@@ -11,6 +11,7 @@ const findByUsernameAndPassword = ({username, password}) =>
     userModel.findOne({username, password});
 
 const findByUsername = ({username}) =>
+   
     userModel.findOne({username});
 
 const createUser = (user) =>
@@ -51,6 +52,20 @@ const updateAvatar = (username, userAvatar) =>
     userModel.updateOne({username: username},
         {$set: userAvatar})
 
+const getUserInfo = (username) =>
+    userModel.find({username: username},
+        {
+            usersFollowers: 0,
+            __v: 0,
+            bio: 0,
+            location: 0,
+            password: 0,
+            dateOfBirth: 0,
+            favRecipeList: 0,
+            usersRecipe: 0
+    
+        });
+
 
 
 
@@ -66,5 +81,6 @@ module.exports = {
     addFavRecipe,
     createRecipe,
     getRecipe,
-    updateAvatar
+    updateAvatar,
+    getUserInfo
 };

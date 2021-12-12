@@ -1,86 +1,103 @@
 import React, {useEffect, useState} from "react";
-import userService from "../../service/userService";
+
+import recipeService from "../service/recipeService";
+import userService from "../service/userService";
 import {Link} from "react-router-dom";
 
-const DBRecipeCardItem = (paras) => {
+const RecipeCardItem = (paras) => {
     let recipeId = paras.recipeId;
     let user = paras.user;
     const setUser = paras.setUser;
-    console.log("in DB recipe CARD", recipeId);
-    
-    
-    const [recipe, setRecipe] = useState({});
+    console.log("in normal recipe CARD", recipeId);
 
+    const [recipe, setRecipe] = useState({});
+    const dbRecipe = recipeId > 10000000;
+    
     useEffect(() => {
-            userService.getRecipe(recipeId)
-                .then((data) => {
-                    setRecipe(data);
-                    // console.log("returned data in DB card", data);
-                    // console.log(typeof data.image);
-                })
-        },[]
+            if (!dbRecipe) {
+                recipeService.fetchByID(recipeId)
+                    .then((data) => {
+                        setRecipe(data);
+                    })
+            } else {
+                userService.getRecipe(recipeId)
+                    .then((data) => {
+                        console.log(" back ", data);
+                        setRecipe(data);
+                    })
+            }
+        },
+        []
     );
     
+    
+    
+    
+    
+    
+    // useEffect(() => {
+    //         recipeService.fetchByID(recipeId)
+    //             .then((data) => {
+    //                 setRecipe(data);
+    //             })
+    //     },[]
+    // );
+
     let heartClassName = "fas fa-heart";
-    
-    // if (user.favRecipeList && user.favRecipeList.includes(recipeId)) {
-    //     heartClassName = "fas fa-heart wd-color-red";
-    // }
-    
-    // if (inList) {
-    //     heartClassName = "fas fa-heart wd-color-red";
-    // }
-    const setHeart = () =>{
-        if (inList)
-            return "fas fa-heart wd-color-red";
-        else
-            return "fas fa-heart";
-         
-        
+
+    if (user.favRecipeList && user.favRecipeList.includes(recipeId)) {
+        heartClassName = "fas fa-heart wd-color-red";
+    }
+
+    // const likeRecipeHandler = (recipeId) => {
+    //     if (user.username) {
+    //         userService.likeRecipe(recipeId, user.username)
+    //             .then(data => {
+    //                 // console.log("back from server, recipeList -->", data);
+    //                 setUser({...user, favRecipeList: data});
+    //             });
+    //     } else {
+    //         alert("Please Login to like a recipe.")
+    //     }
+    // };
+
+    if (!recipe.image) {
+        recipe.image = "/images/sample-recipe/thumbnail_sample.jpg";
     }
     
     const[recipeList, setRecipeList]  = useState(user.favRecipeList);
     const [inList, setInList]= useState(recipeList.includes(recipeId));
     
     const likeRecipeHandler1 = (recipeId) => {
+        console.log("WHY ARE YOU NOT BEING CALLED");
         if (user === undefined) {
             alert("Please Login to like a recipe.")
             return;
         }
         const idx = user.favRecipeList.indexOf(recipeId);
         if (idx !== -1) {
+            console.log("@1")
             userService.unlikeRecipe(recipeId, user.username)
                 .then(status =>{
+                    console.log("returned@1", status);
                     setRecipeList(recipeList.splice(idx, 1));
                     setInList(false);
-                    user.favRecipeList = [user.favRecipeList.splice(idx, 1)];
                 })
         } else if (idx === -1) {
-           
+            console.log("@2")
             userService.likeRecipe(recipeId, user.username)
                 .then(status =>{
+                    console.log("returned@2", status);
                     setRecipeList([recipeId, ...recipeList]);
                     setInList(true);
-                    user.favRecipeList = [recipeId, ...user.favRecipeList];
                 })
         }
         
     };
     
     
-    
-    
-    
-    
-    // if (!recipe.image) {
-    //     recipe.image = "/images/sample-recipe/thumbnail_sample.jpg";
-    // }
-    
-    const defaultImage = "/images/sample-recipe/thumbnail_sample.jpg";
-    
-    // console.log("in like");
-    // console.log(user.favRecipeList);
-    
+
+
     return (
         <div className="card mx-2">
             <img src={recipe.image} className="card-img-top wd-card-img" alt="sample"/>
@@ -98,9 +115,9 @@ const DBRecipeCardItem = (paras) => {
                         </small></p>
                 </div>
             </Link>
-        
+
         </div>
     )
 }
 
-export default DBRecipeCardItem;
+export default RecipeCardItem;
