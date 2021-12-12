@@ -18,7 +18,6 @@ const Login = () => {
 
     const login = () => {
         userService.login(user)
-            .then(response => response.json())
             .then(newUser => {
                 console.log("newUser");
                 console.log(newUser);
@@ -28,7 +27,10 @@ const Login = () => {
                         newUser
                 })
                 history.push('/profile');
-            })};
+            }).catch(e =>{
+                alert("Your username and password mismatch. Please check");
+        })
+    };
 
 
     return (

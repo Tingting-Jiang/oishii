@@ -12,7 +12,11 @@ export const login = (user) =>
         headers: {
             'content-type': 'application/json'
         }
-    })
+    }).then(res => {
+        if (res.ok)
+            return res.json();
+        else throw res;
+    });
 
 export const register = (user) =>
     fetch(`${API_USER}/register`, {
@@ -22,14 +26,24 @@ export const register = (user) =>
         headers: {
             'content-type': 'application/json'
         }
-    });
+    })
+        .then(res => {
+            if (res.ok)
+                return res.json();
+            else throw res;
+        });
+
 
 export const getProfile = (dispatch) =>
     fetch(`${API_USER}/profile`, {
         method: 'POST',
         credentials: 'include',
     })
-        .then(res => res.json())
+        .then(res =>{
+            if (res.ok)
+                return res.json();
+            else throw res;
+        })
         .then(newUser => {
             dispatch({
                 type: 'get-user',
@@ -37,7 +51,7 @@ export const getProfile = (dispatch) =>
             })
             return(newUser);
         })
-        .catch(e => console.log(e));
+        .catch(e => console.log("No session record",e ));
 
 export const logout = (dispatch) =>
     fetch(`${API_USER}/logout`, {
@@ -180,7 +194,11 @@ export const getRecipeFollowers = (recipeID) =>
             'content-type': 'application/json'
         }
     })
-        .then(res => res.json())
+        .then(res => {
+            if (res.ok)
+                return res.json();
+            else throw res;
+        });
    
 
 

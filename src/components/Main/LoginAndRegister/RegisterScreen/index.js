@@ -21,17 +21,24 @@ const Register = () => {
     const dispatch = useDispatch();
 
     const register = () => {
+        console.log("before send, ", user);
         userService.register(user)
-            .then(newUser => {
-                console.log("newUser");
-                console.log(newUser);
+            .then(newUser =>{
                 history.push('/profile');
                 dispatch({
                     type: "set-user",
                     newUser
                 })
                 history.push('/profile');
-            })};
+            })
+            .catch(e =>{
+                if (e.status === 404){
+                    alert("You already registered, please go to Login");
+                    history.push('/login');
+                }
+            })
+        
+    };
     
     
     return (
