@@ -44,20 +44,10 @@ const userReducer = (state = initialUser, action) => {
         
 
         case "update-profile":
-            const updatedProfile = {
-                ...state.profile,
-                userName: action.newProfile.userName,
-                bio: action.newProfile.bio,
-                location: action.newProfile.location,
-                website: action.newProfile.website,
-                dateOfBirth: action.newProfile.dateOfBirth,
-            };
-            
-            state = {
-                ...state,
-                profile: updatedProfile,
-            };
-            
+
+            state = action.newProfile
+            console.log("new profile in reducer: ")
+            console.log(state);
             return state;
 
         case "like-recipe":

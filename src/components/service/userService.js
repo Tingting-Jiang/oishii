@@ -51,15 +51,19 @@ export const logout = (dispatch) =>
         })
 
 
-
-export const updateProfile = (user) =>
+export const updateProfile = (dispatch, newProfile) =>
     fetch(`${API_USER}/editProfile`, {
         method: "PUT",
-        body: JSON.stringify({user: user}),
+        body: JSON.stringify({user: newProfile}),
         credentials: 'include',
         headers: {
             'content-type': 'application/json'
         }
+    }).then(res => {
+        dispatch({
+            type: 'update-profile',
+            newProfile
+        })
     })
 
 export const getFollowerInfo = (username) =>
@@ -71,7 +75,7 @@ export const getFollowerInfo = (username) =>
             'content-type': 'application/json'
         }
     })
-        .then(res=> res.json());
+        .then(res => res.json());
 
 
 

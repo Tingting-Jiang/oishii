@@ -9,19 +9,18 @@ module.exports = (app) => {
     const findAllUsers = (req, res) =>
         userDao.findAllUsers()
             .then(users => res.json(users));
-    
+
+
     const findUserById = (req, res) =>
         userDao.findUserById(req.userId)
             .then(user => {
                 res.json(user)
             });
     
-    
-    
-    
+
     const getUserInfo =(req, res) => {
-        console.log("11111111111111111111");
-        console.log("begin to get user info", req.body.username);
+        // console.log("11111111111111111111");
+        // console.log("begin to get user info", req.body.username);
         userDao.getUserInfo(req.body.username)
             .then(user =>{
                 // console.log("inside get user info function ", user);
@@ -30,19 +29,23 @@ module.exports = (app) => {
             )
     };
     
-    
-    
-    
+
     const deleteUser = (req, res) =>
         userDao.deleteUser(req.params.userId)
             .then(status => res.send(status));
-    
+
+
     const updateProfile = (req, res) => {
         console.log("before update user");
         userDao.updateUser(req.body.user)
-            .then(status => res.sendStatus(200));
+            .then(status => {
+                req.session['profile'] = req.body.user;
+                console.log("UPDATED PROFILE", req.session['profile']);
+                res.send(status);
+            });
     }
-    
+
+
     const login = (req, res) => {
         userDao.findByUsernameAndPassword(req.body)
             .then(user => {
@@ -96,7 +99,7 @@ module.exports = (app) => {
                 res.send(status);
             })
     };
-    
+
     const unlikeRecipe= (req, res) => {
         const recipeID = req.body.recipeID;
         const username = req.body.username;
@@ -105,14 +108,19 @@ module.exports = (app) => {
             .then(status => {
                 allRecipeDao.removeFollower(recipeID, username)
                     .then(status => console.log(`remove ${username} to recipeList`));
-                console.log(`remove recipe from ${username}fav list`)
+                const user = req.session['profile'];
+                const idx = user.favRecipeList.indexOf(recipeID);
+                user.favRecipeList = user.favRecipeList.filter(recipeId => recipeId !== recipeID)
+                req.session['profile'] = user;
+                // console.log("updated session profile 44444444444444444");
+                // console.log(user);
+                // console.log(`remove recipe from ${username}fav list`);
                 res.send(status);
             })
     };
     
     
-    
-    
+
     const profile = (req, res) => {
         if (req.session['profile']) {
             res.json(req.session['profile']);

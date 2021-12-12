@@ -79,7 +79,7 @@ const RecipeScreen = () => {
         }
     };
 
-    const[followers, setFollowers] = useState(["TT12"]);
+    const[followers, setFollowers] = useState([]);
     useEffect(() =>
         // console.log("send -----", recipeID);
         userService.getRecipeFollowers(recipeID)

@@ -34,8 +34,7 @@ const FollowerDetail = ({follower}) => {
                     <button className="nav-link wd-button-transparent">{followerNew.username}</button>
                 </li>
             </Link>
-            
-            
+
     )
 }
 

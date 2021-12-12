@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 import "./profile.css";
 import { getProfile, logout } from '../../service/userService';
 import {useDispatch, useSelector} from 'react-redux';
@@ -16,25 +16,11 @@ const Profile = () => {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const [user, setUser] = useState({
-        username: "",
-        email: "",
-        favRecipeList: [],
-        usersRecipe: [],
-        usersFollowers: [],
-        userAvatar: "/images/sample-user.jpeg",
-        location: "",
-        dateOfBirth: "",
-        bio: "",
-        role: "normal",
-    });
+    useEffect(() => getUser(dispatch), [history, dispatch]);
 
-    useEffect(() => getUser(dispatch), [history]);
-
-    const profile = useSelector(selectProfile);
-    console.log("profile");
-    console.log(profile);
-
+   let user = useSelector(selectProfile);
+    // console.log("user in profile screen 333333333333");
+    // console.log(user);
 
     const redirectLogin = () => {
         history.push('/login');
@@ -44,15 +30,15 @@ const Profile = () => {
         getProfile(dispatch)
             // .then(res => setUser(profile))
             .then(newUser => {
-                console.log("returned from SESSION", newUser);
-                if (newUser) {
-                    setUser(newUser);
+                // console.log("returned from SESSION", newUser.favRecipeList);
+                if (newUser.username && newUser.password) {
+                    user = newUser;
                 } else {
                     redirectLogin();
                 }
             })
-            // .catch(e => redirectLogin());
-            .catch(e => console.log(e));
+            .catch(e => redirectLogin());
+            // .catch(e => console.log(e));
     }
 
     const logoutHandler = (dispatch) => {
@@ -63,8 +49,6 @@ const Profile = () => {
     }
 
 
-
-
     let userFavRecipes = [];
     if (user && user.favRecipeList) {
         for (let i=0; i<4; i++) {
@@ -72,11 +56,6 @@ const Profile = () => {
             userFavRecipes.push(user.favRecipeList[i]);
         }
     }
-
-    // console.log("-------@@@", cookies.avatar);
-    console.log("userFavRecipes");
-    console.log(userFavRecipes);
-    // console.log("----->", cookies.);
 
 
     return (
@@ -123,9 +102,12 @@ const Profile = () => {
                         {
                             user.username &&
                                 <>
-                                    <button className="btn btn-outline-primary wd-button my-2">
-                                        Edit Profile
-                                    </button>
+                                    <Link to="/edit-profile">
+                                        <button className="btn btn-outline-primary wd-button my-2">
+                                            Edit Profile
+                                        </button>
+                                    </Link>
+
                                     <button className= "btn btn-outline-danger ms-3"
                                             onClick={() => logoutHandler(dispatch)}>
                                         Log out
@@ -160,7 +142,7 @@ const Profile = () => {
                         {
                             user.usersRecipe && user.usersRecipe.length > 0 &&
                             user.usersRecipe.map(recipeId =>
-                                <DBRecipeCardItem key={recipeId} recipeId={recipeId} user={user} setUser={setUser}/>
+                                <DBRecipeCardItem key={recipeId} recipeId={recipeId} user={user} dispatch={dispatch}/>
                             )
                         }
                     </div>
@@ -178,7 +160,7 @@ const Profile = () => {
                         }
                         {
                             userFavRecipes.map(recipeId =>
-                                <RecipeCardItem key={recipeId} recipeId={recipeId} user={user} setUser={setUser}/>
+                                <RecipeCardItem key={recipeId} recipeId={recipeId} user={user} dispatch={dispatch}/>
                             )
                         }
                     </div>

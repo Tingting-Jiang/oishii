@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import userService from '../../service/userService';
-import {useCookies} from 'react-cookie';
+
 import "./create.css";
 import Header from "../Header";
 import {Helmet} from "react-helmet";
@@ -52,7 +52,6 @@ const CreateScreen = () => {
                 console.log(url);
                 setImageUrl(url)
             })
-        
     }
     
     const submitRecipe = () => {
