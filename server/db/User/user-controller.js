@@ -105,7 +105,9 @@ module.exports = (app) => {
             .then(status => {
                 allRecipeDao.removeFollower(recipeID, username)
                     .then(status => console.log(`remove ${username} to recipeList`));
-                console.log(`remove recipe from ${username}fav list`)
+                const user = req.session['profile'];
+                user.favRecipeList = user.favRecipeList.filter(recipeId => recipeId !== recipeID)
+                req.session['profile'] = user;
                 res.send(status);
             })
     };
@@ -129,11 +131,7 @@ module.exports = (app) => {
     }
 
     
-    const dummy =(req, res) =>{
-        console.log("test dummy");
-        res.json({message: "message"});
-    }
-    
+
     
 
     app.post('/db/user/login', login);

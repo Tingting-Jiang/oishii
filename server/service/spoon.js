@@ -138,10 +138,9 @@ module.exports = (app) =>  {
     
     
     const fetchRandom = (req, res) =>{
-        const random = `/recipes/random?number=4`;
-        
-        console.log("in random -->", random);
-        fetch(URL + random, {
+        const trending = `/recipes/random?number=4`;
+        console.log("in random -->", trending);
+        fetch(URL + trending, {
             "method": "GET",
             "headers": {
                 "x-rapidapi-host": HOST,
@@ -159,16 +158,37 @@ module.exports = (app) =>  {
         
     }
     
+    const getRandomRecipe =(req, res) => {
+        const random = `/recipes/random?number=1`;
+        fetch(URL + random, {
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-host": HOST,
+                "x-rapidapi-key": API_KEY
+            }
+        })
+            .then(response => response.json())
+            .then((data) =>{
+                console.log("fetchRandom data-->", data.recipes[0].id);
+                res.json({ id: data.recipes[0].id} );
+            }).catch(e => {
+            console.log("error is -->", e);
+        })
+    
+    
+    }
     
     
     
     
-    app.get("/search/:key", fetchSearchResult); // auto-complete
-    app.get("/details/:id", fetchInfoByID); // recipe-details(ingredients & instructions)
-    app.get("/ingredients/:ingredients", fetchByIngredients1); // recipe list
-    app.get("/trending", fetchRandom); // trending and latest
-    app.get("/similar/: id", fetchSimilar); // similar recipe list
-    app.get("/instruction/:id", fetchInstruction); // only have instruction
+    
+    app.get("/api/search/:key", fetchSearchResult); // auto-complete
+    app.get("/api/details/:id", fetchInfoByID); // recipe-details(ingredients & instructions)
+    app.get("/api/ingredients/:ingredients", fetchByIngredients1); // recipe list
+    app.get("/api/trending", fetchRandom); // trending and latest
+    app.get("/api/similar/: id", fetchSimilar); // similar recipe list
+    app.get("/api/instruction/:id", fetchInstruction); // only have instruction
+    app.get("/api/random", getRandomRecipe);
     
     
 }
