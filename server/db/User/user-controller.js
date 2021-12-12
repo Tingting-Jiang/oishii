@@ -61,18 +61,20 @@ module.exports = (app) => {
     }
     
     const register = (req, res) => {
+        console.log(" NEW REGISTER REQUEST", req.body);
         userDao.findByUsername(req.body)
             .then(user => {
                 if(user) {
                     res.sendStatus(404);
                     return;
                 }
-                const newUSer = {
-                    ...req.body.user,
+                const newUser = {
+                    ...req.body,
                     id: Date.now()
                 }
-                userDao.createUser(newUSer)
+                userDao.createUser(newUser)
                     .then(user => {
+                        console.log("after register: ", user);
                         req.session['profile'] = user;
                         res.json(user)
                     });
@@ -87,7 +89,7 @@ module.exports = (app) => {
     const likeRecipe= (req, res) => {
         const recipeID = req.body.recipeID;
         const userID = req.body.userID;
-        console.log("in like recipe, received -->", recipeID);
+        console.log("in like recipe, received -->", recipeID, userID);
         userDao.addFavRecipe(userID, recipeID)
             .then(status => {
                 allRecipeDao.addFollower(recipeID, userID)
@@ -140,7 +142,7 @@ module.exports = (app) => {
     
 
     app.post('/db/user/login', login);
-    app.post('/db/user//register', register);
+    app.post('/db/user/register', register);
     app.post('/db/user/profile', profile);
     app.post('/db/user/logout', logout);
     app.put('/db/user/editProfile', updateProfile);
