@@ -28,7 +28,8 @@ const Login = () => {
                         newUser
                 })
                 history.push('/profile');
-            })};
+            })
+            .catch(e => alert("User do not exist or wrong password."))};
 
 
     return (
