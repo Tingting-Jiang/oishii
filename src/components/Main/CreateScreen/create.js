@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import userService from '../../service/userService';
 // import { useSelector } from 'react-redux'
 // import { useParams } from 'react-router-dom'
-// import { b64toBlob, contentType } from '../const'
 import { useCookies } from 'react-cookie';
 import firebase from "../../../firebase";
 

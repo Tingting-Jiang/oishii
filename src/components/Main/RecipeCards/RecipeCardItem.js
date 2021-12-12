@@ -46,13 +46,13 @@ const RecipeCardItem = ({recipeId, user, dispatch}) => {
         }
 
         if (inList(recipeId)) {
-            userService.unlikeRecipe(recipeId, user.username, dispatch)
+            userService.unlikeRecipe(recipeId, user.id, dispatch)
                 .then(status =>{
                     console.log("returned@1", status);
 
                 })
         } else {
-            userService.likeRecipe(recipeId, user.username, dispatch)
+            userService.likeRecipe(recipeId, user.id, dispatch)
                 .then(status => {
                     console.log("returned@2", status);
                 })

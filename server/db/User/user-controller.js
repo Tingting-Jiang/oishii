@@ -21,8 +21,8 @@ module.exports = (app) => {
     
     const getUserInfo =(req, res) => {
         console.log("11111111111111111111");
-        console.log("begin to get user info", req.body.username);
-        userDao.getUserInfo(req.body.username)
+        console.log("begin to get user info", req.body.userID);
+        userDao.getUserInfo(req.body.userID)
             .then(user =>{
                 // console.log("inside get user info function ", user);
                 res.json(user[0]);
@@ -64,8 +64,11 @@ module.exports = (app) => {
                     res.sendStatus(404);
                     return;
                 }
-
-                userDao.createUser(req.body)
+                const newUSer = {
+                    ...req.body.user,
+                    id: Date.now()
+                }
+                userDao.createUser(newUSer)
                     .then(user => {
                         req.session['profile'] = user;
                         res.json(user)
@@ -80,18 +83,18 @@ module.exports = (app) => {
     
     const likeRecipe= (req, res) => {
         const recipeID = req.body.recipeID;
-        const username = req.body.username;
+        const userID = req.body.userID;
         console.log("in like recipe, received -->", recipeID);
-        userDao.addFavRecipe(username, recipeID)
+        userDao.addFavRecipe(userID, recipeID)
             .then(status => {
-                allRecipeDao.addFollower(recipeID, username)
-                    .then(status => console.log(`add ${username} to recipeList`));
-                console.log(`add recipe from ${username}fav list`);
-                console.log(req.session['profile']);
+                allRecipeDao.addFollower(recipeID, userID)
+                    .then(status => console.log(`add ${userID} to recipeList`));
+                console.log(`add recipe to ${userID} fav list`);
+                // console.log(req.session['profile']);
                 const user = req.session['profile'];
                 user.favRecipeList = [recipeID, ...user.favRecipeList];
                 req.session['profile'] = user;
-                console.log(req.session['profile']);
+                // console.log(req.session['profile']);
                 // res.json(recipeID);
                 res.send(status);
             })
@@ -99,12 +102,12 @@ module.exports = (app) => {
     
     const unlikeRecipe= (req, res) => {
         const recipeID = req.body.recipeID;
-        const username = req.body.username;
+        const userID = req.body.userID;
         console.log("in -unlike- recipe, received -->", recipeID);
-        userDao.removeFavRecipe(username, recipeID)
+        userDao.removeFavRecipe(userID, recipeID)
             .then(status => {
-                allRecipeDao.removeFollower(recipeID, username)
-                    .then(status => console.log(`remove ${username} to recipeList`));
+                allRecipeDao.removeFollower(recipeID, userID)
+                    .then(status => console.log(`remove ${userID} from recipeList`));
                 const user = req.session['profile'];
                 user.favRecipeList = user.favRecipeList.filter(recipeId => recipeId !== recipeID)
                 req.session['profile'] = user;

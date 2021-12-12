@@ -1,5 +1,5 @@
 import React from 'react';
-const URL = 'http://localhost:4000';
+const URL = 'http://localhost:4000/api';
 
 export const fetchSearchResult = (key_words) =>
     // key_words = key_words.replace(/\s+/g, '%20');
@@ -28,6 +28,10 @@ export const fetchTrending = () =>
     fetch(`${URL}/trending`)
         .then((response) => response.json());
 
+export const getRandomRecipe = () =>
+    fetch(`${URL}/random`)
+        .then((response) => response.json());
+
 
 
 
@@ -37,5 +41,6 @@ export default {
     fetchByIngredients,
     fetchSimilar,
     fetchTrending,
-    fetchInstruction
+    fetchInstruction,
+    getRandomRecipe
 };

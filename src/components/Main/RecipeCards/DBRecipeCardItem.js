@@ -48,8 +48,11 @@ const DBRecipeCardItem = (paras) => {
             return;
         }
         const idx = user.favRecipeList.indexOf(recipeId);
+        
+        const id = user.id;
+        console.log("This user id is", id);
         if (idx !== -1) {
-            userService.unlikeRecipe(recipeId, user.username)
+            userService.unlikeRecipe(recipeId, user.id)
                 .then(status =>{
                     setRecipeList(recipeList.splice(idx, 1));
                     setInList(false);
@@ -57,7 +60,7 @@ const DBRecipeCardItem = (paras) => {
                 })
         } else if (idx === -1) {
            
-            userService.likeRecipe(recipeId, user.username)
+            userService.likeRecipe(recipeId, user.id)
                 .then(status =>{
                     setRecipeList([recipeId, ...recipeList]);
                     setInList(true);

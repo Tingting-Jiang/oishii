@@ -79,7 +79,7 @@ const RecipeScreen = () => {
         }
     };
 
-    const[followers, setFollowers] = useState(["TT12"]);
+    const[followers, setFollowers] = useState([]);
     useEffect(() =>
         // console.log("send -----", recipeID);
         userService.getRecipeFollowers(recipeID)
@@ -87,7 +87,7 @@ const RecipeScreen = () => {
                 console.log(" followers back ", data);
                 setFollowers(data);
             }) .catch(e => {
-            console.log("ERROR----------- followers", e.status);
+            console.log("ERROR----------- followers", e);
             setError(true);
         }),
         []
