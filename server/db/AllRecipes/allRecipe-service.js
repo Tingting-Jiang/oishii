@@ -35,12 +35,14 @@ module.exports = (app) => {
     
     const getFollower = (req, res) =>{
         allRecipeDao.findRecipeById(req.body.recipeID)
-            .then(recipe =>{
-                if (recipe) {
-                    res.json(recipe[0].followers);
-            }})
+            .then(res =>{
+                if (res) {
+                    res.json(res[0].followers);
+                    return;
+                } else throw res;
+            })
             .catch( e=> {
-                console.log("ERRRRor");
+                console.log("ERROR, NO RECORD");
                 res.sendStatus(403);
                 }
             )
