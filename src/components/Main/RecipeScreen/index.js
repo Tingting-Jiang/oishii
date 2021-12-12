@@ -66,13 +66,13 @@ const RecipeScreen = () => {
         }
 
         if (inList(recipeId)) {
-            userService.unlikeRecipe(recipeId, user.username, dispatch)
+            userService.unlikeRecipe(recipeId, user.id, dispatch)
                 .then(status =>{
                     console.log("returned@1", status);
 
                 })
         } else {
-            userService.likeRecipe(recipeId, user.username, dispatch)
+            userService.likeRecipe(recipeId, user.id, dispatch)
                 .then(status => {
                     console.log("returned@2", status);
                 })
@@ -87,8 +87,8 @@ const RecipeScreen = () => {
                 console.log(" followers back ", data);
                 setFollowers(data);
             }) .catch(e => {
-            console.log("ERROR----------- followers", e);
-            setError(true);
+                if (e.status === 403)
+                    console.log("ERROR----------- followers, NO followers");
         }),
         []
     );
@@ -153,7 +153,8 @@ const RecipeScreen = () => {
                                     <ul className="list-group">
 
                                         {recipe.extendedIngredients.map(singleIngredient => (
-                                            <li className="list-group-item">
+                                            <li className="list-group-item"
+                                            key={singleIngredient.id}>
                                                 {singleIngredient.original}
                                             </li>))}
                                     </ul>
@@ -167,7 +168,7 @@ const RecipeScreen = () => {
                                         {recipe.analyzedInstructions.length === 0 ?
                                             "Oops... The recipe seems get lost, try another key word ":
                                             (recipe.analyzedInstructions[0].steps.map(data => (
-                                                <li>
+                                                <li key={data.step}>
                                                     {data.step}
                                                 </li>)
                                             ))}

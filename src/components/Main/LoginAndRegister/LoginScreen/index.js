@@ -18,7 +18,6 @@ const Login = () => {
 
     const login = () => {
         userService.login(user)
-            .then(response => response.json())
             .then(newUser => {
                 console.log("newUser");
                 console.log(newUser);
@@ -29,7 +28,8 @@ const Login = () => {
                 })
                 history.push('/profile');
             })
-            .catch(e => alert("User do not exist or wrong password."))};
+            .catch(e => alert("User does not exist or wrong password."))};
+
 
 
     return (
