@@ -1,6 +1,5 @@
 const dao = require('./recipe-dao')
 const userDao = require('../User/user-dao');
-const allRecipeDao = require("../AllRecipes/allRecipe-dao")
 
 module.exports = (app) => {
     const findAllRecipes = (req, res) => {
@@ -30,7 +29,6 @@ module.exports = (app) => {
     
     const findRecipeById = (req, res) => {
         console.log(" recipe service", req.body.recipeID);
-        console.log(typeof req.body.recipeID);
         dao.findRecipeById(req.body.recipeID)
             .then(recipe => {
                 // console.log("before return ", recipe);
@@ -39,7 +37,7 @@ module.exports = (app) => {
     };
     
     const findRecipeByTitle = (req, res) => {
-        console.log(req.body.title);
+        console.log("Title of REcipe ", req.body.title);
         dao.findRecipeByTitle(req.body.title)
             .then(data => {
                     // console.log("returned data", data);

@@ -18,10 +18,10 @@ module.exports = (app) => {
         allRecipeDao.findRecipeById(req.body.recipeID)
             .then(recipe => {
                 if (recipe) {
-                    console.log("before return ---", recipe);
-                    res.json(recipe);
+                    res.json(recipe[0]);
                     return;
                 } else {
+                    console.log("ERRRRor");
                     res.sendStatus(403);
                     
                 }
@@ -34,20 +34,59 @@ module.exports = (app) => {
     }
     
     const getFollower = (req, res) =>{
-        allRecipeDao.getFollowers(req.body.id)
-            .then(followers => {
-                console.log("all followers --", followers)
-                res.json(followers)
-            });
-    }
+        allRecipeDao.findRecipeById(req.body.recipeID)
+            .then(recipe =>{
+                if (recipe) {
+                    res.json(recipe[0].followers);
+            }})
+            .catch( e=> {
+                console.log("ERRRRor");
+                res.sendStatus(403);
+                }
+            )
+    };
     
     
+    const getFollower1 =  (req, res) =>{
+        console.log("To get recipe followers")
+        const event = false;
+        let result = [];
+        allRecipeDao.findRecipeById(req.body.recipeID)
+            .then(recipe =>{
+                if (recipe) {
+                    console.log("followers are -->", recipe[0].followers)
+                    for (let name of recipe[0].followers) {
+                        console.log("send list back@0", name);
+                        userDao.getUserInfo(name)
+                            .then(user => {
+                                console.log("for loop--", user);
+                                result.push(user[0]);
+                            })
+                    }
+                    console.log("send list back@1", result);
+                    return result;
+                }})
+            .then(list => {
+                console.log("send list back90", list);
+                res.json(list)
+            })
+            .catch( e=> {
+                    console.log("ERRRRor");
+                    res.sendStatus(403);
+                }
+            )
+    };
     
-    app.post("/db/allRecipe/getRecipeFollowers", findRecipeById);
+
+    
+    
+    app.post("/db/allRecipe/getRecipeById", findRecipeById);
     // app.post("/db/allRecipe/addRecipe", createRecipe);
     app.post("/db/allRecipe/getAllRecipe", findAllRecipes);
     app.put("/db/allRecipe/addFollower", addFollower);
- 
+    app.post("/db/all/getAllFollowers", getFollower);
     
-
+    
+    
+    
 }

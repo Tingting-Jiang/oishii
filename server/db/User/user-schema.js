@@ -3,7 +3,6 @@ const { ObjectId } = require('mongodb')
 const userSchema = mongoose.Schema({
     username: String,
     password: String,
-    email: String,
     favRecipeList: [],
     usersRecipe: [],
     usersFollowers: [

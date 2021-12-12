@@ -79,34 +79,41 @@ const RecipeScreen = () => {
         }
     };
     
-    const[newFollowers, setFollowers] = useState([]);
-    useEffect(() => {
+    const[followers, setFollowers] = useState(["TT12"]);
+    useEffect(() =>
+        // console.log("send -----", recipeID);
         userService.getRecipeFollowers(recipeID)
-            .then((data) => {
+            .then(data => {
                 console.log(" followers back ", data);
                 setFollowers(data);
             }) .catch(e => {
-            console.log("ERROR----------- followers");
+            console.log("ERROR----------- followers", e.status);
             setError(true);
-        });
-        
-        },
+        }),
         []
     );
+    
+    // useEffect(() =>{
+    //     for (let name of newFollowers) {
+    //         userService.getUserInfo
+    //     }
+    // })
 
     // for test
-    const followers = [
-        {
-            "username": "Alice",
-            "userAvatar": "/images/sample-user.jpeg",
-            "_id": 123
-        },
-        {
-            "username": "Bob",
-            "userAvatar": "/images/sample-user2.png",
-            "_id": 124
-        },
-    ]
+    // const followers = [
+    //     {
+    //         "username": "Alice",
+    //         "userAvatar": "/images/sample-user.jpeg",
+    //         "_id": 123
+    //     },
+    //     {
+    //         "username": "Bob",
+    //         "userAvatar": "/images/sample-user2.png",
+    //         "_id": 124
+    //     },
+    // ]
+    
+    // const followers =["TT12", "kk"];
 
     return (
         <>
@@ -199,7 +206,7 @@ const RecipeScreen = () => {
                     <h5 className="wd-color-coral fw-bold my-3">
                         See Who Likes This Recipe
                     </h5>
-                    {JSON.stringify(newFollowers)}
+                    {JSON.stringify(followers)}
 
                     {/*TODO: input should be a list of users following this recipe*/}
                     <FollowerList followers={followers}/>

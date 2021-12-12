@@ -69,12 +69,14 @@ const RecipeCardItem = (paras) => {
     const [inList, setInList]= useState(recipeList.includes(recipeId));
     
     const likeRecipeHandler1 = (recipeId) => {
+        console.log("WHY ARE YOU NOT BEING CALLED");
         if (user === undefined) {
             alert("Please Login to like a recipe.")
             return;
         }
         const idx = user.favRecipeList.indexOf(recipeId);
         if (idx !== -1) {
+            console.log("@1")
             userService.unlikeRecipe(recipeId, user.username)
                 .then(status =>{
                     console.log("returned@1", status);
@@ -82,6 +84,7 @@ const RecipeCardItem = (paras) => {
                     setInList(false);
                 })
         } else if (idx === -1) {
+            console.log("@2")
             userService.likeRecipe(recipeId, user.username)
                 .then(status =>{
                     console.log("returned@2", status);

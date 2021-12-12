@@ -1,6 +1,5 @@
 
 const userDao = require('./user-dao');
-const { ObjectId } = require('mongodb')
 const allRecipeDao = require("../AllRecipes/allRecipe-dao");
 
 
@@ -16,6 +15,22 @@ module.exports = (app) => {
             .then(user => {
                 res.json(user)
             });
+    
+    
+    
+    
+    const getUserInfo =(req, res) => {
+        console.log("begin to get user info", req.body.username);
+        userDao.getUserInfo(req.body.username)
+            .then(user =>{
+                // console.log("inside get user info function ", user);
+                res.json(user[0]);
+                }
+            )
+    };
+    
+    
+    
     
     const deleteUser = (req, res) =>
         userDao.deleteUser(req.params.userId)
@@ -61,49 +76,6 @@ module.exports = (app) => {
     
     
     
-    const likeRecipe1= (req, res) => {
-        const recipeID = req.body.recipeID;
-        const username = req.body.username;
-        userDao.findByUsername(req.body)
-            .then(user => {
-                // check if the recipe in users fav list, delete, else add
-                user.favRecipeList = addOrDelete(recipeID, user.favRecipeList)
-                allRecipeDao.findRecipeById(recipeID)
-                    .then(recipe => {
-                        if (recipe) {
-                            recipe.followers = addOrDelete(username, recipe.followers);
-                            console.log("recipe in DB");
-                            allRecipeDao.updateFollower(recipeID, recipe.followers)
-                                .then(status =>
-                                    console.log("update recipe followers list"))
-                        } else {
-                            const newRecipe = {
-                                id: recipeID,
-                                followers: [username]
-                            }
-                            allRecipeDao.addRecipeAndFollower(newRecipe)
-                                .then(status =>
-                                    console.log("add recipe and its followers to DB"))
-                        }
-                    })
-                        
-                        res.json(user.favRecipeList)
-                }
-            );
-    };
-    
-    
-    
-    const addOrDelete = (item, recipeList) =>{
-        const idx = recipeList.indexOf(item);
-        if (idx === -1 ) {
-            recipeList = [item, ...recipeList];
-        } else {
-            recipeList.splice(idx, 1);
-        }
-        return recipeList;
-    }
-    
     
     const likeRecipe= (req, res) => {
         const recipeID = req.body.recipeID;
@@ -146,6 +118,11 @@ module.exports = (app) => {
     const logout = (req, res) =>
         res.send(req.session.destroy());
     
+    const dummy =(req, res) =>{
+        console.log("test dummy");
+        res.json({message: "message"});
+    }
+    
     
     
     
@@ -156,11 +133,16 @@ module.exports = (app) => {
     app.post('/db/user/logout', logout);
     app.put('/db/user/editProfile', updateProfile);
     app.delete('/db/user//delete/:userId', deleteUser);
-    app.get('/db/user/allUsers', findAllUsers);
-    app.get('/db/user/:userId', findUserById);
+    app.post('/db/user/allUsers', findAllUsers);
+    app.post('/db/user/:userId', findUserById);
+    // app.post('/db/user/userInfo', getUserInfo);
+    
+    app.post('/db/userInfo', getUserInfo);
+    
     
     app.put('/db/recipe/like', likeRecipe);
     app.put('/db/recipe/unlike', unlikeRecipe);
+
 
 
 };

@@ -11,7 +11,7 @@ const RecipeCards = () => {
     const [user, setUser] = useState({});
     const [trendingList, setTrendingList] = useState([]);
 
-    useEffect(() =>{
+    useEffect(() => {
         userService.getProfile()
             .then(user => {
                 // console.log("recipeCards is setting user -->", user);

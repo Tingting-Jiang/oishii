@@ -10,7 +10,7 @@ const addRecipeAndFollower = (recipe) =>
 
 
 const findRecipeById = (id) =>
-    model.findById(id);
+    model.find({id: id});
 
 const addFollower = (id, username) =>
     model.updateOne({"id": id},
