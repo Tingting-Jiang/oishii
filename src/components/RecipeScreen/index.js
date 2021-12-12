@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {Helmet} from "react-helmet";
-import {b64toBlob, contentType} from '../const'
 
 import "./recipe.css";
 
@@ -15,12 +14,13 @@ import FollowerList from "../FollowerList";
 
 const RecipeScreen = () => {
     const params = useParams();
-    const recipeID = params.id || params._id;
+    const recipeID = params.id;
     console.log(recipeID);
 
     console.log("in 1st line ->", recipeID);
+    
     const [recipe, setRecipe] = useState(oldIngredient);
-    const [image, setImage] = useState(oldIngredient.image);
+
     // const [followers, setFollowers] = useState([]);
     const dbRecipe = recipeID.length > 10;
     
@@ -30,14 +30,13 @@ const RecipeScreen = () => {
                 recipeService.fetchByID(recipeID)
                     .then((data) => {
                         setRecipe(data);
-                        setImage(data.image);
+                        console.log("in recipe API", data)
 
                     })
             } else {
                 userService.getRecipe(recipeID)
                     .then((data) => {
-                        console.log(" back ", data);
-                        setImage(URL.createObjectURL(b64toBlob(data.image, contentType)));
+                        console.log(" back from DB ", data);
                         setRecipe(data);
                     })
             }
@@ -47,11 +46,19 @@ const RecipeScreen = () => {
 
     // get user session
     const [user, setUser] = useState({});
+    const [error, setError] = useState(false);
     useEffect(() =>{
         userService.getProfile()
             .then(user => {
-                setUser(user)
+                setUser(user);
+            })
+            .catch(e => {
+                console.log("ERROR-----------profile");
+                setError(true);
             });
+        
+        
+            
     }, [])
 
     let heartClassName = "fas fa-heart";
@@ -72,19 +79,20 @@ const RecipeScreen = () => {
         }
     };
     
-    
-    // useEffect(() => {
-    //     userService.getRecipeFollowers(recipeID)
-    //         .then((data) => {
-    //             console.log(" back ", data);
-    //             for (let item of data) {
-    //                 item.userAvatar = URL.createObjectURL(b64toBlob(item.userAvatar, contentType));
-    //             }
-    //             setFollowers(data);
-    //         })
-    //     },
-    //     []
-    // );
+    const[newFollowers, setFollowers] = useState([]);
+    useEffect(() => {
+        userService.getRecipeFollowers(recipeID)
+            .then((data) => {
+                console.log(" followers back ", data);
+                setFollowers(data);
+            }) .catch(e => {
+            console.log("ERROR----------- followers");
+            setError(true);
+        });
+        
+        },
+        []
+    );
 
     // for test
     const followers = [
@@ -145,7 +153,7 @@ const RecipeScreen = () => {
                             <div className="d-none d-md-block col-4">
                                 <div>
                                     <img className="wd-recipe-thumbnail d-md-float-end"
-                                         src={image}/>
+                                         src={recipe.image}/>
                                 </div>
                             </div>
                         </div>
@@ -191,6 +199,7 @@ const RecipeScreen = () => {
                     <h5 className="wd-color-coral fw-bold my-3">
                         See Who Likes This Recipe
                     </h5>
+                    {JSON.stringify(newFollowers)}
 
                     {/*TODO: input should be a list of users following this recipe*/}
                     <FollowerList followers={followers}/>

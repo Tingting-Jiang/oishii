@@ -2,7 +2,7 @@ const API_URL = 'http://localhost:4000/db';
 const API_USER = 'http://localhost:4000/db/user';
 const API_RECIPE = 'http://localhost:4000/db/recipe';
 
-const API_ALLRECIPE = 'http://localhost:4000/db/allrecipe';
+const API_ALLRECIPE = 'http://localhost:4000/db/allRecipe';
 
 export const login = (user) =>
     fetch(`${API_USER}/login`, {
@@ -103,8 +103,8 @@ export const getRecipe = (recipeID) =>
         headers: {
             'content-type': 'application/json'
         }
-    })
-        .then(res => res.json());
+    }).then((response) => response.json());
+    
 
 export const searchRecipeByTitle = (title) =>
     fetch(`${API_RECIPE}/searchRecipe`,{
@@ -120,7 +120,6 @@ export const searchRecipeByTitle = (title) =>
     
 export const getRecipeFollowers = (recipeID) =>
     fetch(`${API_ALLRECIPE}/getRecipeFollowers`, {
-    
         method: 'POST',
         body: JSON.stringify({ recipeID: recipeID }),
         credentials: 'include',
@@ -128,6 +127,7 @@ export const getRecipeFollowers = (recipeID) =>
             'content-type': 'application/json'
         }
     })
+        .then(res => res.json());
 
 
 

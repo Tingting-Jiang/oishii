@@ -11,7 +11,7 @@ const createRecipe = (recipe) =>
 
 
 const findRecipeById = (id) =>
-    model.find({ id : id });
+    model.find({ "id": id });
 
 const findRecipeByFileName = (fileName) =>
     model.find({image: fileName},

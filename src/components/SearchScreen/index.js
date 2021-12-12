@@ -5,7 +5,7 @@ import userService from '../service/userService'
 import './search.css';
 import Header from "../Header";
 import { Helmet } from 'react-helmet';
-import { b64toBlob, contentType } from '../const'
+
 
 
 const Search = () => {
@@ -23,7 +23,7 @@ const Search = () => {
         setSearchTerm(event.target.value);
         recipeService.fetchSearchResult(event.target.value)
             .then(data => {
-                console.log("auto complete result -> API");
+                console.log("auto complete result -> API", data.length);
                 setSearchResult(data)
             });
     };
@@ -33,6 +33,7 @@ const Search = () => {
     const checkResult = (e) =>{
         if (e.key === "Enter")
             clickSearch()
+
     }
 
     const clickSearch = () => {
@@ -43,9 +44,6 @@ const Search = () => {
                     if (data.length !== 0) {
                         console.log("search DB");
                         console.log(data);
-                        for (let item of data) {
-                            item.image = URL.createObjectURL(b64toBlob(item.image, contentType));
-                        }
                         totalRecipes = data;
                         
                     }
@@ -94,16 +92,18 @@ const Search = () => {
                                 </label>
                             </div>
                             <div>
-                                <input id="MainSearchInput"
+                                <input
                                        className="form-control wd-main-search-input"
-                                       list="datalistOptions"
+                                       list="item-list"
                                        placeholder="Search Oishii"
                                        onChange={e => searchRecipe(e)}
-                                       onKeyPress={e => checkResult(e)}/>
-
-                                <datalist id="datalistOptions">
+                                        onKeyPress={e => checkResult(e)}/>
+    
+    
+                                <datalist id="item-list">
                                     {searchResult.map(item => (
-                                        <option value={item.title}/>
+                                        <option value={item.title} >
+                                        </option>
                                     ))}
                                 </datalist>
                             </div>
@@ -141,7 +141,9 @@ const Search = () => {
                                         </span>
 
                                         <span className="ms-3">
-                                            <h5 className="wd-search-result-name">{item.title}</h5>
+                                            <h4 className="wd-search-result-name fw-bold wd-color-coral">{item.title}</h4>
+                                             <h5 className="wd-search-result-name my-1"> Servings: {item.servings}</h5>
+                                             <h5 className="wd-search-result-name">Preparation Time: {item.readyInMinutes} minutes</h5>
                                         </span>
 
 

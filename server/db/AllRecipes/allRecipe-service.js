@@ -8,17 +8,23 @@ module.exports = (app) => {
         allRecipeDao.findAllRecipes()
             .then(movies => res.json(movies));
     
-    const createRecipe = (req, res) => {
-        allRecipeDao.createRecipe()
-            .then(status => res.sendStatus(200));
-    };
+    // const createRecipe = (req, res) => {
+    //     allRecipeDao.createRecipe()
+    //         .then(status => res.sendStatus(200));
+    // };
     
     const findRecipeById = (req, res) =>{
-        console.log(" recipe service", req.body.recipeID);
-    
+        console.log(" All Recipe find by id", req.body.recipeID);
         allRecipeDao.findRecipeById(req.body.recipeID)
             .then(recipe => {
-                res.json(recipe)
+                if (recipe) {
+                    console.log("before return ---", recipe);
+                    res.json(recipe);
+                    return;
+                } else {
+                    res.sendStatus(403);
+                    
+                }
             })
     };
     
@@ -28,17 +34,20 @@ module.exports = (app) => {
     }
     
     const getFollower = (req, res) =>{
-        allRecipeDao.getFollower(req.body._id)
-            .then(followers => res.json(followers));
+        allRecipeDao.getFollowers(req.body.id)
+            .then(followers => {
+                console.log("all followers --", followers)
+                res.json(followers)
+            });
     }
     
     
     
     app.post("/db/allRecipe/getRecipeFollowers", findRecipeById);
-    app.post("/db/allRecipe/addRecipe", createRecipe);
+    // app.post("/db/allRecipe/addRecipe", createRecipe);
     app.post("/db/allRecipe/getAllRecipe", findAllRecipes);
     app.put("/db/allRecipe/addFollower", addFollower);
-    app.put("/db/allRecipe/addFollower", getFollower);
+ 
     
 
 }
