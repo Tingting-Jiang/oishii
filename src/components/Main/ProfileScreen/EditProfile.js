@@ -126,7 +126,7 @@ const EditProfile = () => {
 
                         <div className="text-center mb-3">
                             <img className="wd-profile-img"
-                                 src={profile.userAvatar || "/images/sample-user.jpeg"}/>
+                                 src={imageUrl || profile.userAvatar}/>
                             <h5 className="mt-3">{`Update ${profile.username}'s Profile`}</h5>
                         </div>
 
@@ -191,17 +191,7 @@ const EditProfile = () => {
                                         onClick={handleSave}><i className="fas fa-upload"/>
                                 </button>
                             </div>
-                            {
-                                imageUrl ? (
-                                    <div className='row mt-3'>
-                                        <div className='col-md-6 m-auto'>
-                                            <h4 className='text-center'>{imageName.split("-", 1)}</h4>
-                                            <img style={{width: '100%'}} src={imageUrl} alt=''/>
-                                        </div>
-                                    </div>
-                                ) : null
-                            }
-
+                            
                         </div>
                     </div>
                 </div>
