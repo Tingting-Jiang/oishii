@@ -119,8 +119,8 @@ module.exports = (app) => {
                 user.favRecipeList = [recipeID, ...user.favRecipeList];
                 req.session['profile'] = user;
                 console.log(req.session['profile']);
-                
-                res.sendStatus(200)
+                // res.json(recipeID);
+                res.send(status);
             })
     };
     
@@ -140,16 +140,24 @@ module.exports = (app) => {
     
     
     
-    const profile = (req, res) =>
-        res.json(req.session['profile']);
+    const profile = (req, res) => {
+        if (req.session['profile']) {
+            res.json(req.session['profile']);
+        } else {
+            res.sendStatus(403);
+        }
+
+    }
+
     
-    const logout = (req, res) =>
+    const logout = (req, res) => {
+        console.log("LOG OUT");
         res.send(req.session.destroy());
+    }
+
     
     
-    
-    
-    
+
     app.post('/db/user/login', login);
     app.post('/db/user//register', register);
     app.post('/db/user/profile', profile);

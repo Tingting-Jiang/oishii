@@ -26,6 +26,21 @@ const userReducer = (state = initialUser, action) => {
             console.log("state: ", state);
             state = action.newUser;
             return state;
+
+        case "logout-user":
+            state = {
+                username: "",
+                email: "",
+                favRecipeList: [],
+                usersRecipe: [],
+                usersFollowers: [],
+                userAvatar: "/images/sample-user.jpeg",
+                location: "",
+                dateOfBirth: "",
+                bio: "",
+                role: "normal"
+            }
+            return state;
         
 
         case "update-profile":
@@ -45,10 +60,32 @@ const userReducer = (state = initialUser, action) => {
             
             return state;
 
+        case "like-recipe":
+            state = {
+                ...state,
+                favRecipeList: [
+                    action.recipeId,
+                    ...state.favRecipeList
+                ]
+            };
+            return state;
 
+        case "unlike-recipe":
+            state = {
+                ...state,
+                favRecipeList: state.favRecipeList.filter(
+                    recipe => recipe.id !== action.recipeId
+                )
+            }
+            return state;
 
-        case "get-fav":
-            break;
+        case "get-user-fav":
+            state = {
+                ...state,
+                favRecipeList: action.list
+            };
+            console.log("state: ", state.favRecipeList);
+            return state;
 
 
         default:

@@ -24,20 +24,31 @@ export const register = (user) =>
         }
     });
 
-export const getProfile = () =>
+export const getProfile = (dispatch) =>
     fetch(`${API_USER}/profile`, {
         method: 'POST',
         credentials: 'include',
     })
-        .then(res => res.json());
+        .then(res => res.json())
+        .then(newUser => {
+            dispatch({
+                type: 'get-user',
+                newUser
+            })
+            return(newUser);
+        })
+        .catch(e => console.log(e));
 
-
-export const logout = () =>
+export const logout = (dispatch) =>
     fetch(`${API_USER}/logout`, {
         method: 'POST',
         credentials: 'include',
     })
-        .then(res => res.json());
+        .then(res => {
+            dispatch({
+                type: 'logout-user',
+            })
+        })
 
 
 
@@ -53,23 +64,42 @@ export const updateProfile = (user) =>
 
 
 
+export const getFavList = (dispatch) =>
+    fetch(`${API_USER}/profile`, {
+        method: 'POST',
+        credentials: 'include',
+    })
+        .then(res => res.json())
+        .then(newUser => {
+            const list = newUser.favRecipeList;
+            dispatch({
+                type: 'get-user-fav',
+                list
+            })
+            return(list);
+        })
 
 
-
-
-
-
-
-export const likeRecipe = (recipeID, username) =>
+export const likeRecipe = (recipeId, username, dispatch) =>
     fetch(`${API_RECIPE}/like`, {
         method: "PUT",
-        body: JSON.stringify({recipeID: recipeID, username: username}),
+        body: JSON.stringify({recipeID: recipeId, username: username}),
         credentials: 'include',
         headers: {
             'content-type': 'application/json'
         }
         })
-        .then(res => res.json());
+        // .then(res => res.json())
+        .then(res => {
+            console.log("recipe ID in user Service 555555555555555");
+            console.log(res);
+            dispatch ({
+                type: 'like-recipe',
+                recipeId
+            })
+            return (recipeId);
+        })
+
 
 
 export const unlikeRecipe = (recipeID, username) =>
