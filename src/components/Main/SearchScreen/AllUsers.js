@@ -5,7 +5,6 @@ import userService from '../../service/userService'
 import './search.css';
 import Header from "../Header";
 import { Helmet } from 'react-helmet';
-import MenuItem from './MenuItem'
 
 
 const AllUsers = () => {

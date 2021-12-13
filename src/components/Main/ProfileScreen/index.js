@@ -114,14 +114,6 @@ const Profile = () => {
                                     </button>
                                 </>
                         }
-                        {/*{*/}
-                        {/*    !user.username &&*/}
-                        {/*    <>*/}
-                        {/*        <button className="btn btn-outline-primary wd-button my-2">*/}
-                        {/*            Like <i className="fas fa-heart"/>*/}
-                        {/*        </button>*/}
-                        {/*    </>*/}
-                        {/*}*/}
 
                     </div>
                 </div>
