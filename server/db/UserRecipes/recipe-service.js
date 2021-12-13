@@ -20,6 +20,9 @@ module.exports = (app) => {
             .then(status =>{
                 userDao.createRecipe(username, recipeId)
                     .then(result => {
+                        const newUser = req.session['profile'];
+                        newUser.usersRecipe = [recipeId, ...newUser.usersRecipe];
+                        req.session['profile'] = newUser;
                         console.log(`add recipe in ${username} recipe list`);
                     });
                 console.log("add recipe in latest recipe list");
@@ -37,7 +40,7 @@ module.exports = (app) => {
     };
     
     const findRecipeByTitle = (req, res) => {
-        console.log("Title of REcipe ", req.body.title);
+        console.log("Title of Recipe ", req.body.title);
         dao.findRecipeByTitle(req.body.title)
             .then(data => {
                     // console.log("returned data", data);
