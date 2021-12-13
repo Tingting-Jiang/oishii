@@ -248,7 +248,7 @@ export const getMenuDetails = (menuId) =>
 export const addToMenu = (menuId, recipeId) =>
    
     fetch(`${API_MENU}/addToMenu`, {
-        method: 'PUT',
+        method: 'POST',
         body: JSON.stringify({ menuId: menuId, recipeId: recipeId }),
         credentials: 'include',
         headers: {
