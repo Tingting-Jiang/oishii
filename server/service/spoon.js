@@ -31,7 +31,7 @@ module.exports = (app) =>  {
     
     const fetchInfoByID = (req, res) => {
         const detail = `/recipes/${req.params.id}/information`;
-        console.log("in FetchByID -->", detail);
+        // console.log("in FetchByID -->", detail);
         fetch(URL + detail, {
             "method": "GET",
             "headers": {
@@ -51,7 +51,7 @@ module.exports = (app) =>  {
     
     const fetchMainInfoByID = (req, res) => {
         const detail = `/recipes/${req.params.id}/information`;
-        console.log("in FetchByID -->", detail);
+        // console.log("in FetchByID -->", detail);
         fetch(URL + detail, {
             "method": "GET",
             "headers": {

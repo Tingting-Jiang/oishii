@@ -1,10 +1,10 @@
 const model = require('./recipe-model');
-const { ObjectId } = require('mongodb')
+
 
 
 
 const findAllRecipes = () =>
-    model.find().sort({"$natural": -1}).limit(4);
+    model.find({isDeleted: false}).sort({"$natural": -1}).limit(4);
 
 const createRecipe = (recipe) =>
     model.create(recipe);
