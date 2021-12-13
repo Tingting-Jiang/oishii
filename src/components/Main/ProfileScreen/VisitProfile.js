@@ -64,6 +64,7 @@ const VisitProfile = () => {
     useEffect(() => {
         getUserById(profileVisited)
             .then(data => {
+                
                 console.log("profile Visited", data);
                 setUser(data);
             })
@@ -104,7 +105,6 @@ const VisitProfile = () => {
             }
             updateProfile(dispatch, newUser)
                 .then(res => {
-                    console.log("Updated user's followers");
                     console.log(user.username, " is liked by ", profile.username);
                 })
         } else {
@@ -116,7 +116,6 @@ const VisitProfile = () => {
             }
             updateProfile(dispatch, newUser)
                 .then(res => {
-                    console.log("Updated user's followers");
                     console.log(user.username, " is unliked by ", profile.username);
                 })
         }
@@ -124,9 +123,11 @@ const VisitProfile = () => {
     }
 
     // check if profile like visited user
-    const isFav = () => {
-        return (user.usersFollowers.includes(profile.id));
-    }
+    const isFav = (user.usersFollowers.includes(profile.id));
+
+
+    console.log("isFav");
+    console.log(isFav);
 
 
     return (
@@ -171,7 +172,7 @@ const VisitProfile = () => {
                         </div>
 
                         <button className="btn btn-outline-primary wd-button my-2" onClick={likeUserHandler}>
-                            Like <i className="fas fa-heart"/>
+                            Like <i className={`fas fa-heart ${isFav ? "wd-color-red" : ""}`}/>
                         </button>
 
                     </div>

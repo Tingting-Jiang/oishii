@@ -51,7 +51,7 @@ const RecipeScreen = () => {
 
     // get user session
     // const [user, setUser] = useState({});
-    const [error, setError] = useState(false);
+    // const [error, setError] = useState(false);
 
 
     let inList = (recipeId) => {
