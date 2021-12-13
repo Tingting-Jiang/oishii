@@ -31,10 +31,10 @@ const MenuItem = ({menuItemId, menuId, isEditor}) => {
     );
 
 
-    const deleteRecipeFromMenu = () => {
-        console.log("before delete recipe from menu");
+    const deleteRecipeFromMenu = (menuItem) => {
+        console.log("before delete recipe from menu ", menuItem.id);
         const sourceName = dbRecipe ? menuItem.sourceName : "NONE"
-        userService.deleteRecipeFromMenu(menuId, menuItemId, sourceName)
+        userService.deleteRecipeFromMenu(menuId, menuItem.id, sourceName)
             .then(data =>
                 console.log(data));
     }
@@ -57,19 +57,21 @@ const MenuItem = ({menuItemId, menuId, isEditor}) => {
                             <h6>servings: {menuItem.servings}</h6>
                             <h6 className="ms-2">| &nbsp;total time: {menuItem.readyInMinutes} min</h6>
                         </div>
-                        {
-                            isEditor &&
-                            <button className="btn btn-sm btn-primary-outline wd-button"
-                                    onClick={deleteRecipeFromMenu}>
-                                delete
-                            </button>
-                        }
+                       
                         {/*<h6>{menuItem.id}</h6>*/}
                     </span>
                 </li>
 
 
             </Link>
+    
+            {
+                isEditor &&
+                <button className="btn btn-sm btn-primary-outline wd-button"
+                        onClick={() =>deleteRecipeFromMenu(menuItem)}>
+                    delete
+                </button>
+            }
 
 
 
