@@ -10,6 +10,10 @@ export const fetchByID= (id) =>
     fetch(`${URL}/details/${id}`)
         .then((response) => response.json());
 
+export const fetchMainInfoByID= (id) =>
+    fetch(`${URL}/main/${id}`)
+        .then((response) => response.json());
+
 
 
 export const fetchInstruction = (id) =>
@@ -42,5 +46,6 @@ export default {
     fetchSimilar,
     fetchTrending,
     fetchInstruction,
-    getRandomRecipe
+    getRandomRecipe,
+    fetchMainInfoByID
 };

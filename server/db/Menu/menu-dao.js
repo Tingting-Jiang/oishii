@@ -3,16 +3,20 @@ const model = require('./menu-model');
 
 
 
-const getMenuDetail = (menuId) => model.find({id: menuId});
+const getMenuDetail = (menuId) => model.find({id: menuId}).limit(4);
 
 const addToMenu = (menuId, recipeId) =>
-    model.updateOne({"id": menuId},
-        {$push:
-            {recipeList: {
-                    $each: [recipeId],
-                    $position :0}
-            }},
-        {upsert: true});
+    model.updateOne({ "id": menuId },
+        {
+            $push:
+                {
+                    recipeList: {
+                        $each: [recipeId],
+                        $position: 0
+                    }
+                }
+        },
+        { upsert: true });
 
 
 const deleteRecipe = (menuId, recipeId) =>
@@ -21,9 +25,11 @@ const deleteRecipe = (menuId, recipeId) =>
 
 
 
+
+
 module.exports = {
     getMenuDetail,
     addToMenu,
-    deleteRecipe
+    deleteRecipe,
     
-};
+}
