@@ -1,15 +1,46 @@
 import React, {useEffect, useState} from 'react';
-import userService from '../../service/userService';
+import {Helmet} from "react-helmet";
+import userService, {getProfile} from '../../service/userService';
 
 import "./create.css";
 import Header from "../Header";
-import {Helmet} from "react-helmet";
-import firebase from '../../../firebase'
+import firebase from '../../../firebase';
+import {useDispatch, useSelector} from "react-redux";
+import {useHistory} from "react-router-dom";
+
+const selectProfile = (profile) => profile;
 
 const CreateScreen = () => {
-    // const [cookies, setCookie] = useCookies(['avatar']);
-    // console.log(cookies.avatar);
-    const user = {username: "TT12"};
+    const dispatch = useDispatch();
+    const history = useHistory();
+    useEffect(() => getUser(dispatch), [history, dispatch]);
+
+    let user = useSelector(selectProfile);
+    // console.log("user in profile screen 333333333333");
+    // console.log(user);
+
+    const redirectLogin = () => {
+        history.push('/login');
+    }
+
+    const getUser = (dispatch) => {
+        getProfile(dispatch)
+            // .then(res => setUser(profile))
+            .then(newUser => {
+                // console.log("returned from SESSION", newUser.favRecipeList);
+                if (newUser.username && newUser.password) {
+                    user = newUser;
+                } else {
+                    redirectLogin();
+                }
+            })
+            .catch(e => {
+                alert("Please login to submit a recipe.");
+                redirectLogin()
+            });
+    }
+
+    // const user = {username: "TT12"};
 
     const [recipe] = useState({});
 
@@ -41,13 +72,13 @@ const CreateScreen = () => {
     }
     
     const handleSave = () =>{
-        console.log("in handle save");
-       
-        console.log(imageName);
+        // console.log("in handle save");
+        //
+        // console.log(imageName);
         let storageRef = firebase.storage().ref();
         storageRef.child(imageName).getDownloadURL()
             .then(url=>{
-                console.log(url);
+                // console.log(url);
                 setImageUrl(url)
             })
     }
@@ -80,12 +111,14 @@ const CreateScreen = () => {
             sourceName:user.username,
             id: Date.now(),
         };
-        console.log("submit");
-        console.log(newRecipe);
+        // console.log("submit");
+        // console.log(newRecipe);
    
         userService.createRecipe(newRecipe, user.id)
             .then(data => {
-                console.log("DONE");
+                console.log("DONE")
+                const path = "/details/" + newRecipe.id;
+                history.push(path);
             })
             .catch(error => {
                 console.error(error)
@@ -190,9 +223,9 @@ const CreateScreen = () => {
 
                             </div>
                             {imageUrl ? (
-                                <div className='row mt-5'>
+                                <div className='row mt-2'>
                                     <div className='col-md-6 m-auto'>
-                                        <h3 className='text-center'>{imageName.split("-",1)}</h3>
+                                        <h4 className='text-center'>{imageName.split("-",1)}</h4>
                                         <img style={{width: '100%'}} src={imageUrl} alt=''/>
                                     </div>
                                 </div>

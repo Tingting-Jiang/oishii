@@ -11,7 +11,7 @@ const FollowerList = ({followers}) => {
             <ul className="nav wd-like-user">
                 {
                     (!followers || followers.length === 0) &&
-                        <h4>Oops. No followers yet.</h4>
+                        <h5 className="ms-2">Oops. No followers yet.</h5>
                 }
 
                 {

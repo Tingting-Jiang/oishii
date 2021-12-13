@@ -155,7 +155,7 @@ const Profile = () => {
                     <div className="card-group">
                         {
                             userFavRecipes.length === 0 &&
-                            <h5>Like some recipes and check them here!</h5>
+                            <h5 className="ms-2">Like some recipes and check them here!</h5>
 
                         }
                         {
