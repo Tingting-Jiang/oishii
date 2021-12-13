@@ -5,13 +5,12 @@ const findAllUsers = () =>
     userModel.find().sort({"$natural": -1});
 
 const findUserById = (userId) =>
-    userModel.findById(userId);
+    userModel.find({id: userId});
 
 const findByUsernameAndPassword = ({username, password}) =>
     userModel.findOne({username, password});
 
 const findByUsername = ({username}) =>
-   
     userModel.findOne({username});
 
 const createUser = (user) =>
@@ -38,7 +37,9 @@ const addFavRecipe = (userID, recipeID) =>
 
 
 const deleteUser = (userId) =>
-    userModel.deleteOne({id: userId});
+    userModel.updateOne({id: userId},{
+        $set: {isDeleted: true}
+    });
 
 const createRecipe = (username, recipe ) =>
     userModel.updateOne({username},
@@ -62,6 +63,11 @@ const getUserInfo = (userID) =>
     
         });
 
+const deleteRecipe =(username, recipeId) =>
+    userModel.updateOne({username : username},
+        { $pull: {favRecipeList: recipeId} });
+
+
 
 
 
@@ -77,5 +83,6 @@ module.exports = {
     addFavRecipe,
     createRecipe,
     getRecipe,
-    getUserInfo
+    getUserInfo,
+    deleteRecipe
 };

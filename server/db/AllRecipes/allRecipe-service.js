@@ -29,7 +29,7 @@ module.exports = (app) => {
     };
     
     const addFollower = (req, res) =>{
-        allRecipeDao.addFollower(req.body._id, req.body.userID)
+        allRecipeDao.addFollower(req.body.id, req.body.userID)
             .then(status => res.sendStatus(200));
     }
     

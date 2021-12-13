@@ -31,6 +31,11 @@ const findRecipeByFileName = (fileName) =>
 const findRecipeByTitle = (title) =>
     model.find({"title": { $regex: `${title}`} });
 
+const deleteRecipe = (recipeId) =>
+    model.updateOne({id: recipeId},{
+        $set: {isDeleted: true}
+    });
+
 
 
 module.exports = {
@@ -38,5 +43,6 @@ module.exports = {
     createRecipe,
     findRecipeById,
     findRecipeByTitle,
-    findRecipeByFileName
+    findRecipeByFileName,
+    deleteRecipe
 };

@@ -1,9 +1,7 @@
-const model = require('./allRecipe-model');
-const { ObjectId } = require('mongodb')
+const model = require('./menu-model');
 
 
-
-const findAllRecipes = () => model.find().limit(4);
+const findAllRecipes = () => model.find().sort({"$natural": -1}).limit(4);
 
 const addRecipeAndFollower = (recipe) =>
     model.create(recipe);
