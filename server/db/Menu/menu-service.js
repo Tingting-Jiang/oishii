@@ -28,14 +28,15 @@ module.exports = (app) => {
     };
     
     const deleteRecipeFromMenu = (req, res) =>{
-        console.log("in deleteRecipe");
+  
         const sourceName = req.body.sourceName;
         const recipeId = req.body.recipeId;
+        console.log("in deleteRecipe", recipeId, "from ", req.body.menuId);
         
-        MenuDao.deleteRecipe(req.body.menuId, req.body.recipeId)
+        MenuDao.deleteRecipe(req.body.menuId, recipeId)
             .then(status => {
                 // delete from recent recipeList
-                if (req.body.sourceName === "NONE") {
+                if (sourceName === "NONE") {
                     console.log("API recipe deleted");
                     res.sendStatus(200);
                     return;
