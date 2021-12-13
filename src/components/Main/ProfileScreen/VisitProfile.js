@@ -71,6 +71,7 @@ const VisitProfile = () => {
                 console.log("profile Visited", data);
                 setUser(data);
             })
+            .catch(e => history.push('/profile'))
     }, []);
 
 

@@ -16,7 +16,11 @@ module.exports = (app) => {
         userDao.findUserById(req.body.userId)
             .then(user => {
                 console.log("get all user info by Id ", user)
-                res.json(user)
+                if (user[0]) {
+                    res.json(user[0])
+                } else {
+                    res.sendStatus(404);
+                }
             });
     
 

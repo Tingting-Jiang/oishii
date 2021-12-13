@@ -13,11 +13,11 @@ const Search = () => {
     // console.log("searchTerm in Search Screen", ingredient);
     const navigate = useHistory();
     let totalRecipes= [];
-    
+
     const [searchTerm, setSearchTerm] = useState(ingredient);
     const [searchResult, setSearchResult] = useState([]);
     const [recipeList, setRecipeList] = useState([]);
-    
+
     const searchRecipe = (event) => {
         setSearchTerm(event.target.value);
         recipeService.fetchSearchResult(event.target.value)
@@ -25,11 +25,11 @@ const Search = () => {
                 setSearchResult(data)
             });
     };
-    
 
-    
-    
-    
+
+
+
+
     const checkResult = (e) =>{
         if (e.key === "Enter")
             clickSearch()
@@ -45,11 +45,11 @@ const Search = () => {
                         console.log("search DB");
                         console.log(data);
                         totalRecipes = data;
-                        
+
                     }
                 }
             )
-        
+
         recipeService.fetchByIngredients(searchTerm)
             .then(data => {
                 if (totalRecipes.length !== 0) {
@@ -58,29 +58,28 @@ const Search = () => {
                 }
                 else {
                     totalRecipes = data;
-                    
+
                 }
                 setRecipeList(totalRecipes)
                 totalRecipes = [];
             });
     }
-    
-    
+
+
 
     const getRandomRecipe= () =>{
         console.log("in get random recipe");
         recipeService.getRandomRecipe()
             .then(data =>{
                 navigate.push(`/details/${data.id}`);
-            
             })
     }
-    
-    
+
+
     useEffect(clickSearch, [])
-  
-    
-    
+
+    const mid = Math.round(recipeList.length / 2);
+
     return (
         <>
             <Helmet>
@@ -109,8 +108,8 @@ const Search = () => {
                                        placeholder="Search Oishii"
                                        onChange={e => searchRecipe(e)}
                                         onKeyPress={e => checkResult(e)}/>
-    
-    
+
+
                                 <datalist id="item-list">
                                     {searchResult.map(item => (
                                         <option value={item.title} >
@@ -140,9 +139,9 @@ const Search = () => {
                     </div>
                 </div>
 
-                <div className="container">
-                    <ul className="list-group wd-search-result">
-                        {recipeList.map(item => {
+                <div className="row justify-content-evenly">
+                    <ul className="list-group wd-search-result col-12 col-md-6 row">
+                        {recipeList.slice(0, mid).map(item => {
                             return (
                                 <Link to={`/details/${item.id === undefined? item._id: item.id}`}>
                                     <li className="list-group-item wd-search-result-item d-flex"
@@ -155,11 +154,31 @@ const Search = () => {
 
                                         <span className="ms-3">
                                             <h4 className="wd-search-result-name fw-bold wd-color-coral">{item.title}</h4>
-                                             <h5 className="wd-search-result-name my-1"> Servings: {item.servings}</h5>
-                                             <h5 className="wd-search-result-name">Preparation Time: {item.readyInMinutes} minutes</h5>
+                                            <h6 className="my-1">servings: &nbsp;&nbsp;&nbsp;&nbsp;{item.servings}</h6>
+                                            <h6 className="">total time:  &nbsp;{item.readyInMinutes} min</h6>
+                                        </span>
+                                    </li>
+                                </Link>
+                            )
+                        })}
+                    </ul>
+                    <ul className="list-group wd-search-result col-12 col-md-6 row">
+                        {recipeList.slice(mid, recipeList.length).map(item => {
+                            return (
+                                <Link to={`/details/${item.id === undefined? item._id: item.id}`}>
+                                    <li className="list-group-item wd-search-result-item d-flex"
+                                        key={item.id}>
+
+                                        <span>
+                                            <img className="wd-search-result-image"
+                                                 src={item.image} alt=""/>
                                         </span>
 
-
+                                        <span className="ms-3">
+                                            <h4 className="wd-search-result-name fw-bold wd-color-coral">{item.title}</h4>
+                                            <h6 className="my-1">servings: &nbsp;&nbsp;&nbsp;&nbsp;{item.servings}</h6>
+                                            <h6 className="">total time:  &nbsp;{item.readyInMinutes} min</h6>
+                                        </span>
                                     </li>
                                 </Link>
                             )
