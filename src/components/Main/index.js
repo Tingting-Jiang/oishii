@@ -14,6 +14,7 @@ import Login from './LoginAndRegister/LoginScreen';
 import Register from './LoginAndRegister/RegisterScreen/';
 import Create from './CreateScreen';
 import EditProfile from "./ProfileScreen/EditProfile";
+import VisitProfile from "./ProfileScreen/VisitProfile";
 
 const store = createStore(userReducer);
 
@@ -24,10 +25,11 @@ const Main = () => {
 
             <Route path={["/", "/home", "/index"]} exact={true} component={Home} />
 
-            <Route path={["/profile", "/profile/:id"]} exact={true}>
+            <Route path={["/profile"]} exact={true}>
                 <Profile />
             </Route>
 
+            <Route path="/profile/:id" exact={true} component={VisitProfile}/>
             <Route path={["/edit-profile"]} exact={true} component={EditProfile}/>
 
             <Route path="/search" exact={true} component={Search} />

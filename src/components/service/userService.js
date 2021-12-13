@@ -89,10 +89,7 @@ export const getFollowerInfo = (userID) =>
             'content-type': 'application/json'
         }
     })
-        .then(res => res.json());
-
-
-
+        .then(res => res.json())
 
 
 
