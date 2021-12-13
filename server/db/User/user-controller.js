@@ -13,8 +13,9 @@ module.exports = (app) => {
 
 
     const findUserById = (req, res) =>
-        userDao.findUserById(req.userId)
+        userDao.findUserById(req.body.userId)
             .then(user => {
+                console.log("get all user info by Id ", user)
                 res.json(user)
             });
     
@@ -50,7 +51,7 @@ module.exports = (app) => {
     const login = (req, res) => {
         userDao.findByUsernameAndPassword(req.body)
             .then(user => {
-                if(user) {
+                if(user && !user.isDeleted) {
                     console.log(" USER login")
                     req.session['profile'] = user;
                     console.log(user);
@@ -150,7 +151,7 @@ module.exports = (app) => {
     app.put('/db/user/editProfile', updateProfile);
     app.delete('/db/user//delete/:userId', deleteUser);
     app.post('/db/user/allUsers', findAllUsers);
-    app.post('/db/user/:userId', findUserById);
+    app.post('/db/user/findUser', findUserById);
     // app.post('/db/user/userInfo', getUserInfo);
     
     app.post('/db/userInfo', getUserInfo);

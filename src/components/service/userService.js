@@ -3,6 +3,8 @@ const API_USER = 'http://localhost:4000/db/user';
 const API_RECIPE = 'http://localhost:4000/db/recipe';
 
 const API_ALL = 'http://localhost:4000/db/all';
+const API_MENU = 'http://localhost:4000/db/menu';
+
 
 export const login = (user) =>
     fetch(`${API_USER}/login`, {
@@ -89,7 +91,19 @@ export const getFollowerInfo = (userID) =>
             'content-type': 'application/json'
         }
     })
-        .then(res => res.json())
+        .then(res => res.json());
+
+
+export const getUserById = (userId) =>
+    fetch(`${API_USER}/findUser`, {
+        method: "POST",
+        body: JSON.stringify({userId: userId}),
+        credentials: 'include',
+        headers: {
+            'content-type': 'application/json'
+        }
+    })
+        .then(res => res.json());
 
 
 
@@ -211,8 +225,57 @@ export const getAllLatestRecipes = () =>
             console.log("");
             return res.json()
         });
-    
-    
+
+
+
+
+export const getMenuDetails = (menuId) =>
+    fetch(`${API_MENU}/getMenuDetail`, {
+        method: 'POST',
+        body: JSON.stringify({ menuId: menuId }),
+        credentials: 'include',
+        headers: {
+            'content-type': 'application/json'
+        }
+    })
+        .then(res => {
+            if (res.ok)
+                return res.json();
+            else throw res;
+        });
+
+
+export const addToMenu = (menuId, recipeId) =>
+    fetch(`${API_MENU}/addToMenu`, {
+        method: 'POST',
+        body: JSON.stringify({ menuId: menuId, recipeId: recipeId }),
+        credentials: 'include',
+        headers: {
+            'content-type': 'application/json'
+        }
+    })
+        .then(res => {
+            if (res.ok)
+                return res.json();
+            else throw res;
+        });
+
+export const deleteRecipeFromMenu = (menuId, recipeId) =>
+    fetch(`${API_MENU}/deleteRecipeFromMenu`, {
+        method: 'DELETE',
+        body: JSON.stringify({ menuId: menuId, recipeId: recipeId }),
+        credentials: 'include',
+        headers: {
+            'content-type': 'application/json'
+        }
+    })
+        .then(res => {
+            if (res.ok)
+                return res.json();
+            else throw res;
+        });
+
+
 
 
 
@@ -231,5 +294,8 @@ export default {
     getRecipeFollowers,
     updateProfile,
     getAllLatestRecipes,
-    getFollowerInfo
+    getFollowerInfo,
+    getMenuDetails,
+    deleteRecipeFromMenu,
+    addToMenu
 };

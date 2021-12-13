@@ -40,7 +40,8 @@ console.log("in server");
 require('./service/spoon')(app);
 require("./db/User/user-controller")(app);
 require("./db/UserRecipes/recipe-service")(app);
-require("./db/AllRecipes/allRecipe-service")(app)
+require("./db/AllRecipes/allRecipe-service")(app);
+require("./db/Menu/menu-service")(app);
 
 
 app.listen(process.env.PORT || 4000);

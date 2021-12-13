@@ -4,7 +4,7 @@ import {Link, useHistory, useParams} from "react-router-dom";
 import {Helmet} from "react-helmet";
 // useParams from react-router does not work
 import "./profile.css";
-import userService, {getFollowerInfo, getProfile, logout} from '../../service/userService';
+import {getUserById, getProfile} from '../../service/userService';
 import Header from "../Header";
 import RecipeCardItem from "../RecipeCards/RecipeCardItem";
 import FollowerList from "../FollowerList";
@@ -19,8 +19,8 @@ const VisitProfile = () => {
     const params = useParams();
     const profileVisited = params.id;
 
-    // http://localhost:3000/profile/61b2f65262c93ca6e081834b
-    // console.log("profileVisited");
+    // http://localhost:3000/profile/4
+    console.log("profileVisited");
     console.log(profileVisited);
 
     useEffect(() => getUser(dispatch), [history, dispatch]);
@@ -39,8 +39,8 @@ const VisitProfile = () => {
         getProfile(dispatch)
             // .then(res => setUser(profile))
             .then(newUser => {
-                console.log("returned from SESSION", newUser._id);
-                if (newUser._id === profileVisited) {
+                console.log("returned from SESSION", newUser.id);
+                if (newUser.id === profileVisited) {
                     console.log("@@@@@@@@@@@@@@@@@@@@@@@@@")
                     redirectProfile();
                 }
@@ -66,7 +66,7 @@ const VisitProfile = () => {
     console.log(user);
 
     useEffect(() =>{
-        userService.getFollowerInfo(Number(profileVisited))
+        getUserById(Number(profileVisited))
             .then(data => {
                 console.log("profile Visited", data);
                 setUser(data);

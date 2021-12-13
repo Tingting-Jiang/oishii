@@ -17,7 +17,8 @@ const userSchema = mongoose.Schema({
     bio: String,
     role: {type: String, defaultValue: "normal"},
     id: Number,
-    location: String
+    location: String,
+    isDeleted: {type: Boolean, defaultValue: false}
     
     
 }, {collection: 'oishiiUsers'});
