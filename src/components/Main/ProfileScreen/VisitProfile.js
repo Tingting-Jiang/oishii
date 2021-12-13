@@ -1,52 +1,78 @@
-import React, {useEffect} from 'react'
-import "./profile.css";
-import { getProfile, logout } from '../../service/userService';
+import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import Header from "../Header";
-import {Helmet} from "react-helmet";
-import RecipeCardItem from "../RecipeCards/RecipeCardItem";
 import {Link, useHistory, useParams} from "react-router-dom";
+import {Helmet} from "react-helmet";
+// useParams from react-router does not work
+import "./profile.css";
+import {getUserById, getProfile} from '../../service/userService';
+import Header from "../Header";
+import RecipeCardItem from "../RecipeCards/RecipeCardItem";
 import FollowerList from "../FollowerList";
-import DBRecipeCardItem from '../RecipeCards/DBRecipeCardItem';
+import DBRecipeCardItem from '../RecipeCards/DBRecipeCardItem'
 
 const selectProfile = (profile) => profile;
 
-const Profile = () => {
+const VisitProfile = () => {
 
     const dispatch = useDispatch();
     const history = useHistory();
+    const params = useParams();
+    const profileVisited = params.id;
+
+    // http://localhost:3000/profile/4
+    console.log("profileVisited");
+    console.log(profileVisited);
 
     useEffect(() => getUser(dispatch), [history, dispatch]);
 
-   let user = useSelector(selectProfile);
-    // console.log("user in profile screen 333333333333");
-    // console.log(user);
+    let profile = useSelector(selectProfile);
 
-    const redirectLogin = () => {
-        history.push('/login');
+    const redirectProfile = () => {
+        history.push('/profile');
     }
+
+    console.log("user logged in");
+    console.log(profile);
+
 
     const getUser = (dispatch) => {
         getProfile(dispatch)
             // .then(res => setUser(profile))
             .then(newUser => {
-                // console.log("returned from SESSION", newUser.favRecipeList);
-                if (newUser.username && newUser.password) {
-                    user = newUser;
-                } else {
-                    redirectLogin();
+                console.log("returned from SESSION", newUser.id);
+                if (newUser.id === profileVisited) {
+                    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@")
+                    redirectProfile();
                 }
             })
-            .catch(e => redirectLogin());
-            // .catch(e => console.log(e));
+        .catch(e => console.log(e));
     }
 
-    const logoutHandler = (dispatch) => {
-        logout(dispatch)
-            .then(res => {
-                history.push("/");
-            });
-    }
+    // user being visited
+    const [user, setUser] = useState({
+        username: "",
+        email: "",
+        favRecipeList: [],
+        usersRecipe: [],
+        usersFollowers: [],
+        userAvatar: "/images/sample-user.jpeg",
+        location: "",
+        dateOfBirth: "",
+        bio: "",
+        role: "normal",
+    });
+
+    console.log("user being visited");
+    console.log(user);
+
+    useEffect(() =>{
+        getUserById(Number(profileVisited))
+            .then(data => {
+                console.log("profile Visited", data);
+                setUser(data);
+            })
+            .catch(e => history.push('/profile'))
+    }, []);
 
 
     let userFavRecipes = [];
@@ -99,29 +125,9 @@ const Profile = () => {
                             </p>
                         </div>
 
-                        {
-                            user.username &&
-                                <>
-                                    <Link to="/edit-profile">
-                                        <button className="btn btn-outline-primary wd-button my-2">
-                                            Edit Profile
-                                        </button>
-                                    </Link>
-
-                                    <button className= "btn btn-outline-danger ms-3"
-                                            onClick={() => logoutHandler(dispatch)}>
-                                        Log out
-                                    </button>
-                                </>
-                        }
-                        {/*{*/}
-                        {/*    !user.username &&*/}
-                        {/*    <>*/}
-                        {/*        <button className="btn btn-outline-primary wd-button my-2">*/}
-                        {/*            Like <i className="fas fa-heart"/>*/}
-                        {/*        </button>*/}
-                        {/*    </>*/}
-                        {/*}*/}
+                        <button className="btn btn-outline-primary wd-button my-2">
+                            Like <i className="fas fa-heart"/>
+                        </button>
 
                     </div>
                 </div>
@@ -178,6 +184,17 @@ const Profile = () => {
     )
 };
 
+// const VisitProfile = () => {
+//     const params = useParams();
+//     const profileVisited = params.id;
+//
+//     console.log("profileVisited");
+//     console.log(profileVisited);
+//
+//     return (
+//         <h1>Visiting</h1>
+//     )
+// }
 
 
-export default Profile;
+export default VisitProfile;

@@ -107,9 +107,6 @@ export const getUserById = (userId) =>
 
 
 
-
-
-
 export const getFavList = (dispatch) =>
     fetch(`${API_USER}/profile`, {
         method: 'POST',
