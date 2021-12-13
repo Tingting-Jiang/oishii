@@ -76,12 +76,12 @@ const Menu = () => {
                 </div>
                 
                 <div className="mt-4 row justify-content-evenly">
-                    <ul className="list-group wd-search-result col-12 col-md-6 row">
+                    <ul className="list-group wd-search-result col-12 col-lg-6 row">
                         {recipeList.slice(0, mid).map(item =>
                             <MenuItem menuItemId={item} menuId={menuId} isEditor={isEditor}/>
                             )}
                     </ul>
-                    <ul className="list-group wd-search-result col-12 col-md-6 row">
+                    <ul className="list-group wd-search-result col-12 col-lg-6 row">
                         {recipeList.slice(mid, recipeList.length).map(item =>
                             <MenuItem menuItemId={item} menuId={menuId} isEditor={isEditor}/>
                         )}
