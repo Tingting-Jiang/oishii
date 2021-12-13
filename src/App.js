@@ -10,7 +10,7 @@ import React from "react";
 //         const cookies = document.cookie
 //             .split(';')
 //             .map(cookie => cookie.split('='))
-//             .reduce((acc, [key, value]) => ({ ...acc, [key.trim()]: value }));
+//             .reduce((acc, [key, value]) => ({ ...acc, [key.trim()]: value }), {} );
 //         return cookies[key];
 //     },
 //     setItem: (key, value) => {

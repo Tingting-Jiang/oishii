@@ -20,7 +20,7 @@ module.exports = (app) => {
         MenuDao.addToMenu(menuId, recipeId)
         // MenuDao.addToMenu(1, 241775)
             .then(status => {
-                // console.log(`add ${recipeId} to ${menuId} -----`)
+                console.log(`add ${recipeId} to ${menuId} -----`)
                 // console.log("add 241775 to 1 ---")
                 res.sendStatus(200)
                 

@@ -9,7 +9,10 @@ module.exports = (app) => {
     
     const findAllUsers = (req, res) =>
         userDao.findAllUsers()
-            .then(users => res.json(users));
+            .then(users => {
+                console.log(" all user list ==>", users.length)
+                res.json(users)
+            });
 
 
     const findUserById = (req, res) =>
@@ -35,10 +38,26 @@ module.exports = (app) => {
             )
     };
     
+    const changeRole = (req, res) =>{
+        const current = req.body.currentRole;
+        console.log(req.body.userId, current)
+        
+        if (current === "normal") {
+            userDao.changeRoleToEditor(req.body.userId)
+                .then(status => res.sendStatus(200));
+        }
+        else {
+            userDao.changeRoleToNormal(req.body.userId)
+                .then(status => res.sendStatus(200));
+        }
+    }
+    
 
-    const deleteUser = (req, res) =>
+    const deleteUser = (req, res) => {
+        console.log("delete --", req.body.useId)
         userDao.deleteUser(req.params.userId)
             .then(status => res.send(status));
+    }
 
 
     const updateProfile = (req, res) => {
@@ -153,7 +172,8 @@ module.exports = (app) => {
     app.post('/db/user/profile', profile);
     app.post('/db/user/logout', logout);
     app.put('/db/user/editProfile', updateProfile);
-    app.delete('/db/user//delete/:userId', deleteUser);
+    app.delete('/db/user/delete', deleteUser);
+    app.put('/db/user/changeRole', changeRole)
     app.post('/db/user/allUsers', findAllUsers);
     app.post('/db/user/findUser', findUserById);
     // app.post('/db/user/userInfo', getUserInfo);

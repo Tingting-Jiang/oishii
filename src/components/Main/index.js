@@ -17,6 +17,7 @@ import EditProfile from "./ProfileScreen/EditProfile";
 import VisitProfile from "./ProfileScreen/VisitProfile";
 import PrivacyPolicy from "./TermsAndConditions/PrivacyPolicy";
 import Menu from './SearchScreen/Menu';
+import AllUsers from './SearchScreen/AllUsers'
 
 const store = createStore(userReducer);
 
@@ -44,10 +45,15 @@ const Main = () => {
             <Route path="/create" exact={true} component={Create} />
     
             <Route path="/menu/:id" exact={true} component={Menu} />
-
-
-
-
+    
+            <Route path="/allUsers" exact={true} component={AllUsers} />
+    
+    
+    
+    
+    
+    
+    
             <Route path="/termsAndConditions" exact={true} component={PrivacyPolicy} />
 
 
