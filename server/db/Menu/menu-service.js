@@ -14,12 +14,13 @@ module.exports = (app) => {
  
     
     const addToMenu = (req, res) =>{
-        // console.log(`add ${req.body.recipeId} to ${res.body.menuId}`)
+        const menuId = req.body.menuId;
+        const recipeId = req.body.recipeId;
         
-        MenuDao.addToMenu(req.body.menuId, req.body.recipeId)
+        MenuDao.addToMenu(menuId, recipeId)
         // MenuDao.addToMenu(1, 241775)
             .then(status => {
-                console.log(`add ${req.body.recipeId} to ${res.body.menuId}`)
+                console.log(`add ${recipeId} to ${menuId} -----`)
                 // console.log("add 241775 to 1 ---")
                 res.sendStatus(200)
                 
@@ -56,7 +57,7 @@ module.exports = (app) => {
     
     
     app.post("/db/menu/getMenuDetail", getMenuDetail);
-    app.put("/db/menu/addToMenu", addToMenu);
+    app.post("/db/menu/addToMenu", addToMenu);
     app.delete("/db/menu/deleteRecipeFromMenu", deleteRecipeFromMenu);
     
     

@@ -193,9 +193,9 @@ const EditProfile = () => {
                             </div>
                             {imageUrl ? (
                                 <div className='row mt-2'>
-                                    <div className='col-md-6 m-auto'>
-                                        <h4 className='text-center'>{imageName.split("-",1)}</h4>
-                                        <img style={{width: '100%'}} src={imageUrl} alt=''/>
+                                    <div className='col-md-6 m-auto justify-content-center'>
+                                        {/*<h4 className='text-center'>{imageName.split("-",1)}</h4>*/}
+                                        <img className="wd-upload-thumbnail justify-self-center" src={imageUrl} alt=''/>
                                     </div>
                                 </div>
                             ) : (<h6 className="text-sm-center mt-4">Your uploaded picture will show here.</h6>)}

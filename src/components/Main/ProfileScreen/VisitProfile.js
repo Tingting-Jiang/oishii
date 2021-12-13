@@ -19,12 +19,8 @@ const VisitProfile = () => {
     const params = useParams();
     const profileVisited = params.id;
 
-    // http://localhost:3000/profile/4
-    console.log("profileVisited");
-    console.log(profileVisited);
-
+    // user logged in => profile
     useEffect(() => getUser(dispatch), [history, dispatch]);
-
     let profile = useSelector(selectProfile);
 
     const redirectProfile = () => {
@@ -34,21 +30,20 @@ const VisitProfile = () => {
     console.log("user logged in");
     console.log(profile);
 
-
     const getUser = (dispatch) => {
         getProfile(dispatch)
             // .then(res => setUser(profile))
             .then(newUser => {
                 console.log("returned from SESSION", newUser.id);
                 if (newUser.id === profileVisited) {
-                    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@")
+                    // console.log("@@@@@@@@@@@@@@@@@@@@@@@@@")
                     redirectProfile();
                 }
             })
         .catch(e => console.log(e));
     }
 
-    // user being visited
+    // user being visited => user
     const [user, setUser] = useState({
         username: "",
         email: "",
@@ -74,7 +69,7 @@ const VisitProfile = () => {
             .catch(e => history.push('/profile'))
     }, []);
 
-
+    // get user fav list
     let userFavRecipes = [];
     if (user && user.favRecipeList) {
         for (let i=0; i<4; i++) {
@@ -82,6 +77,17 @@ const VisitProfile = () => {
             userFavRecipes.push(user.favRecipeList[i]);
         }
     }
+
+    // get user generated list
+    let userCreateRecipes = [];
+    if (user && user.usersRecipe) {
+        for (let i=0; i<4; i++) {
+            user.usersRecipe[i] &&
+            userCreateRecipes.push(user.fusersRecipe[i]);
+        }
+    }
+
+    // get user followers
 
 
     return (
@@ -107,8 +113,8 @@ const VisitProfile = () => {
                                 user.dateOfBirth &&
                                 <span className="d-inline-block me-2">
                                 <i className="fas fa-birthday-cake me-2 wd-color-coral"/>
-                                    {/*<Birthdate birthdate={user.birthday}/>*/}
-                                    Born some date
+                                    {user.dateOfBirth}
+                                    {/*Born some date*/}
                                 </span>
                             }
                             {
@@ -137,7 +143,7 @@ const VisitProfile = () => {
                         {user.username}'s Recipes
                     </h2>
                     {
-                        (!user.usersRecipe || user.usersRecipe.length === 0) &&
+                        userCreateRecipes.length === 0 &&
                         <Link to="/create">
                             <div className="btn btn-outline-primary wd-button wd-button-transparent">
                                 <h4>Create your first recipe</h4>

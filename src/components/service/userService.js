@@ -107,6 +107,50 @@ export const getUserById = (userId) =>
 
 
 
+export const getAllUsers = () =>
+    fetch(`${API_USER}/allUsers`, {
+        method: 'POST',
+        credentials: 'include',
+    })
+        .then(res =>res.json());
+    
+
+
+
+
+export const deleteUser = (userId) =>
+    fetch(`${API_USER}/delete`, {
+        method: 'DELETE',
+        body: JSON.stringify({ userId: userId }),
+        credentials: 'include',
+        headers: {
+            'content-type': 'application/json'
+        }
+    })
+        .then(res => res.json());
+
+
+export const changeRole = (userId, currentRole) =>
+    fetch(`${API_USER}/changeRole`, {
+        method: 'PUT',
+        body: JSON.stringify({ userId: userId, currentRole: currentRole }),
+        credentials: 'include',
+        headers: {
+            'content-type': 'application/json'
+        }
+    })
+        .then(res => res.json());
+
+
+
+
+
+
+
+
+
+
+
 export const getFavList = (dispatch) =>
     fetch(`${API_USER}/profile`, {
         method: 'POST',
@@ -248,7 +292,7 @@ export const getMenuDetails = (menuId) =>
 export const addToMenu = (menuId, recipeId) =>
    
     fetch(`${API_MENU}/addToMenu`, {
-        method: 'PUT',
+        method: 'POST',
         body: JSON.stringify({ menuId: menuId, recipeId: recipeId }),
         credentials: 'include',
         headers: {
@@ -283,12 +327,17 @@ export const deleteRecipeFromMenu = (menuId, recipeId, sourceName) =>
 
 
 
+
+
 export default {
     login,
     register,
     getProfile,
     logout,
     likeRecipe,
+    getAllUsers,
+    deleteUser,
+    changeRole,
     unlikeRecipe,
     createRecipe,
     getRecipe,

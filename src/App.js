@@ -5,29 +5,19 @@ import Main from "./components/Main";
 import Footer from "./components/Main/Footer";
 import React from "react";
 
-// const reducer = (acc, [key, value]) => {
-//     return ({ [key.trim()]: value })
-// }
-
 const cookieStorage = {
     getItem: (key) => {
         const cookies = document.cookie
             .split(';')
-            .map((cookie) => cookie.split('='))[0];
-            // .reduce(reducer);
-
-        if (cookies[0] === key) {
-            return cookies[1] === 'true';
-        } else {
-            return false;
-        }
-        // return cookies[key];
+            .map(cookie => cookie.split('='))
+            .reduce((acc, [key, value]) => ({ ...acc, [key.trim()]: value }), {} );
+        return cookies[key];
     },
     setItem: (key, value) => {
         document.cookie = `${key}=${value}`;
     },
 }
-// cookie storage works without reducer;
+
 // remove Inspect -> application -> local storage -> oishii=true to show the notice again
 
 const storageType = cookieStorage;
@@ -55,7 +45,7 @@ window.onload = () => {
         // }
         setTimeout(() => {
             consentPopup.classList.remove('hidden');
-        }, 0);
+        }, 1000);
     }
 };
 

@@ -46,3 +46,10 @@
 textarea.wd-bio-input {
     min-height: 120px;
 }
+
+.wd-upload-thumbnail {
+    max-width: 200px;
+    max-height: 200px;
+    object-fit: cover;
+    width: 100%;
+}

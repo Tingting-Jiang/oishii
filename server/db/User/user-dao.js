@@ -2,7 +2,17 @@ const userModel = require('./user-model');
 const { ObjectId } = require('mongodb')
 
 const findAllUsers = () =>
-    userModel.find().sort({"$natural": -1});
+    userModel.find({isDelete: true},{
+        usersFollowers: 0,
+        __v: 0,
+        bio: 0,
+        location: 0,
+        password: 0,
+        dateOfBirth: 0,
+        favRecipeList: 0,
+        usersRecipe: 0
+    
+    }).sort({"$natural": -1});
 
 const findUserById = (userId) =>
     userModel.find({id: userId});
@@ -40,6 +50,20 @@ const deleteUser = (userId) =>
     userModel.updateOne({id: userId},{
         $set: {isDeleted: true}
     });
+
+
+
+const changeRoleToNormal = (userId) =>
+    userModel.updateOne({id: userId},{
+        $set: {role: "normal"}
+    });
+
+
+const changeRoleToEditor = (userId) =>
+    userModel.updateOne({id: userId},{
+        $set: {role: "editor"}
+    });
+    
 
 const createRecipe = (username, recipe ) =>
     userModel.updateOne({username},
@@ -84,5 +108,7 @@ module.exports = {
     createRecipe,
     getRecipe,
     getUserInfo,
-    deleteRecipe
+    deleteRecipe,
+    changeRoleToNormal,
+    changeRoleToEditor
 };
