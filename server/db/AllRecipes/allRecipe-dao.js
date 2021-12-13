@@ -1,4 +1,4 @@
-const model = require('./menu-model');
+const model = require('./allRecipe-model');
 
 
 const findAllRecipes = () => model.find().sort({"$natural": -1}).limit(4);

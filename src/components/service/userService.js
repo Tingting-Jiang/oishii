@@ -263,20 +263,19 @@ export const addToMenu = (menuId, recipeId) =>
             else throw res;
         });
 
-export const deleteRecipeFromMenu = (menuId, recipeId) =>
+export const deleteRecipeFromMenu = (menuId, recipeId, sourceName) =>
     fetch(`${API_MENU}/deleteRecipeFromMenu`, {
         method: 'DELETE',
-        body: JSON.stringify({ menuId: menuId, recipeId: recipeId }),
+        body: JSON.stringify({
+            menuId: menuId, recipeId:
+            recipeId, sourceName:
+            sourceName }),
         credentials: 'include',
         headers: {
             'content-type': 'application/json'
         }
     })
-        .then(res => {
-            if (res.ok)
-                return res.json();
-            else throw res;
-        });
+        .then(res => res.json());
 
 
 

@@ -1,5 +1,6 @@
 const MenuDao = require('./menu-dao')
-const recipeDao = require("../UserRecipes/recipe-dao")
+const recipeDao = require("../UserRecipes/recipe-dao");
+const userDao = require("../User/user-dao");
 
 
 
@@ -16,10 +17,9 @@ module.exports = (app) => {
             .then(status => res.sendStatus(200));
     };
     
-    const deleteRecipe = (req, res) =>{
+    const deleteRecipeFromMenu = (req, res) =>{
         console.log("in deleteRecipe");
         const sourceName = req.body.sourceName;
-    
         const recipeId = req.body.recipeId;
         
         MenuDao.deleteRecipe(req.body.menuId, req.body.recipeId)
@@ -29,22 +29,16 @@ module.exports = (app) => {
                     .then( status => {
                         // delete from user side
                         userDao.deleteRecipe(sourceName, recipeId)
+                            .then(status =>{
+                                res.sendStatus(200);
+                            })
                         
                     })})
-
-
-                
-    
-                
-
-
-
-            // }res.sendStatus(200));
     }
     
     app.post("/db/menu/getMenuDetail", getMenuDetail);
     app.put("/db/menu/addToMenu", addToMenu);
-    app.delete("/db/menu/deleteRecipeFromMenu", deleteRecipe);
+    app.delete("/db/menu/deleteRecipeFromMenu", deleteRecipeFromMenu);
     
     
     

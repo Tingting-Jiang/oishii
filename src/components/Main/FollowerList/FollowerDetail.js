@@ -21,11 +21,13 @@ const FollowerDetail = ({follower}) => {
     
     return (
         
+        
             <Link to={`/profile/${followerNew.id}`}>
                 <li className="nav-item text-center me-2">
                     <img className="wd-following-user-img"
                          src={followerNew.userAvatar} alt=""/>
                     {/*TODO: change to button or text*/}
+                    
                     <button className="nav-link wd-button-transparent">{followerNew.username}</button>
                 </li>
             </Link>
