@@ -4,3 +4,24 @@
     background-color: #fad2ca;
     position: relative;
 }
+
+#consent-popup {
+    position: fixed;
+    height: 150px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 2rem;
+    background-color: white;
+    opacity: 0.9;
+    transition: opacity .8s ease;
+}
+
+#consent-popup.hidden {
+    opacity: 0;
+}
+
+p>a, p>a:link, p>a:hover, p>a:focus, p>a:visited {
+    text-decoration: none;
+    color: #f36850 !important;
+}
