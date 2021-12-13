@@ -49,6 +49,34 @@ module.exports = (app) =>  {
     }
     
     
+    const fetchMainInfoByID = (req, res) => {
+        const detail = `/recipes/${req.params.id}/information`;
+        console.log("in FetchByID -->", detail);
+        fetch(URL + detail, {
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-host": HOST,
+                "x-rapidapi-key": API_KEY
+            }
+        })
+            .then(response => response.json())
+            .then((data) =>{
+                const item = {
+                    id: data.id,
+                    title: data.title,
+                    servings: data.servings,
+                    readyInMinutes: data.readyInMinutes,
+                    image: data.image,
+                    sourceName: data.sourceName
+                }
+                res.json(item);
+            }).catch(e => {
+            console.log("error is -->", e);
+        })
+        
+    }
+    
+    
     const fetchByIngredients= (req, res) => {
         const recipeList = `/recipes/findByIngredients?ingredients=${req.params.ingredients}&number=8&ignorePantry=true&ranking=1`;
         console.log("in fetchByTagAndIngredients -->", recipeList);
@@ -189,6 +217,7 @@ module.exports = (app) =>  {
     app.get("/api/similar/: id", fetchSimilar); // similar recipe list
     app.get("/api/instruction/:id", fetchInstruction); // only have instruction
     app.get("/api/random", getRandomRecipe);
+    app.get("/api/main/:id", fetchMainInfoByID);
     
     
 }

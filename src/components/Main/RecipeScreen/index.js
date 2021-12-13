@@ -93,7 +93,13 @@ const RecipeScreen = () => {
         []
     );
 
-    // const followers =["TT12", "kk"];
+    const addToMenu = (menuId, recipeID) =>{
+        console.log(`add ${recipeID} to ${menuId}`)
+        userService.addToMenu(menuId, recipeID)
+            .then(status =>{
+                alert("Successfully added to Menu");
+            })
+    }
 
     return (
         <>
@@ -113,7 +119,18 @@ const RecipeScreen = () => {
                         <div className="row">
                             <div className="col-12 col-md-8">
                                 <h6 className="wd-color-coral">Total Time: {recipe.readyInMinutes} min</h6>
-
+    
+    
+                                <ul className="form-select "  >
+                                    <p>Add it to Menu</p>
+                                    <button className="btn btn-primary" value="1" onClick={() =>addToMenu(1, recipeID)}>Main</button>
+                                    <button className="btn btn-primary" value="2" onClick={() =>addToMenu(2, recipeID)}>Salad</button>
+                                    <button className="btn btn-primary" value="3" onClick={() =>addToMenu(3, recipeID)}>Dessert</button>
+                                    <button className="btn btn-primary" value="4" onClick={() =>addToMenu(4, recipeID)}>Pizza</button>
+                                    <button className="btn btn-primary" value="5" onClick={() =>addToMenu(5, recipeID)}>Vegan</button>
+                                </ul>
+    
+    
                                 <h2 className="wd-recipe-title d-flex align-items-center">
                                     {recipe.title}
 
