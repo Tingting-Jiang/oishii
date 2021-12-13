@@ -4,7 +4,7 @@ import {Link, useHistory, useParams} from "react-router-dom";
 import {Helmet} from "react-helmet";
 // useParams from react-router does not work
 import "./profile.css";
-import {getUserById, getProfile} from '../../service/userService';
+import {getUserById, getProfile, updateProfile} from '../../service/userService';
 import Header from "../Header";
 import RecipeCardItem from "../RecipeCards/RecipeCardItem";
 import FollowerList from "../FollowerList";
@@ -55,13 +55,14 @@ const VisitProfile = () => {
         dateOfBirth: "",
         bio: "",
         role: "normal",
+        id: -1,
     });
 
     console.log("user being visited");
     console.log(user);
 
-    useEffect(() =>{
-        getUserById(Number(profileVisited))
+    useEffect(() => {
+        getUserById(profileVisited)
             .then(data => {
                 console.log("profile Visited", data);
                 setUser(data);
@@ -83,11 +84,49 @@ const VisitProfile = () => {
     if (user && user.usersRecipe) {
         for (let i=0; i<4; i++) {
             user.usersRecipe[i] &&
-            userCreateRecipes.push(user.fusersRecipe[i]);
+            userCreateRecipes.push(user.usersRecipe[i]);
         }
     }
 
-    // get user followers
+    // profile favs user, user followers +1
+    const likeUserHandler = () => {
+        if (!profile.username || !profile.id ) {
+            alert("Please log in to fav a user.");
+            return;
+        }
+        if (isFav) {
+            const newUser = {
+                ...user,
+                usersFollowers: [
+                    ...user.usersFollowers,
+                    profile.id
+                ],
+            }
+            updateProfile(dispatch, newUser)
+                .then(res => {
+                    console.log("Updated user's followers");
+                    console.log(user.username, " is liked by ", profile.username);
+                })
+        } else {
+            const newUser = {
+                ...user,
+                usersFollowers: user.usersFollowers.filter(
+                    followerId => followerId !== profile.id
+                )
+            }
+            updateProfile(dispatch, newUser)
+                .then(res => {
+                    console.log("Updated user's followers");
+                    console.log(user.username, " is unliked by ", profile.username);
+                })
+        }
+
+    }
+
+    // check if profile like visited user
+    const isFav = () => {
+        return (user.usersFollowers.includes(profile.id));
+    }
 
 
     return (
@@ -131,7 +170,7 @@ const VisitProfile = () => {
                             </p>
                         </div>
 
-                        <button className="btn btn-outline-primary wd-button my-2">
+                        <button className="btn btn-outline-primary wd-button my-2" onClick={likeUserHandler}>
                             Like <i className="fas fa-heart"/>
                         </button>
 
@@ -152,8 +191,7 @@ const VisitProfile = () => {
                     }
                     <div className="card-group">
                         {
-                            user.usersRecipe && user.usersRecipe.length > 0 &&
-                            user.usersRecipe.map(recipeId =>
+                            userCreateRecipes.map(recipeId =>
                                 <DBRecipeCardItem key={recipeId} recipeId={recipeId} user={user} dispatch={dispatch}/>
                             )
                         }
@@ -184,23 +222,9 @@ const VisitProfile = () => {
                     </h2>
                     <FollowerList followers={user.usersFollowers}/>
                 </div>
-
             </div>
         </>
     )
 };
-
-// const VisitProfile = () => {
-//     const params = useParams();
-//     const profileVisited = params.id;
-//
-//     console.log("profileVisited");
-//     console.log(profileVisited);
-//
-//     return (
-//         <h1>Visiting</h1>
-//     )
-// }
-
 
 export default VisitProfile;

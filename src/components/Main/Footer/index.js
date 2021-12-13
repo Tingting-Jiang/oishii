@@ -1,8 +1,5 @@
 import React from "react";
 import './footer.css';
-import PrivacyModal from "../TermsAndConditions/PrivacyPolicy";
-
-
 
 const Footer = () => {
 
