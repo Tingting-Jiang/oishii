@@ -1,7 +1,6 @@
-import React, {useEffect, useState} from 'react'
-import recipeService from '../../service/recipeService'
-import {Link, useHistory, useParams} from 'react-router-dom'
-import userService, {getProfile} from '../../service/userService'
+import React, {useEffect, useState} from 'react';
+import { useParams } from 'react-router-dom';
+import userService, {getProfile} from '../../service/userService';
 import '../SearchScreen/search.css';
 import Header from "../Header";
 import { Helmet } from 'react-helmet';
@@ -34,15 +33,11 @@ const Menu = () => {
             })
     }, []);
 
-    console.log(recipeList);
-
     const mid = Math.round(recipeList.length / 2);
 
     // get user information
     const dispatch = useDispatch();
-
     useEffect(() => getUser(dispatch), [dispatch]);
-
     let user = useSelector(selectProfile);
 
     const getUser = (dispatch) => {
@@ -57,11 +52,10 @@ const Menu = () => {
             .catch(e => console.log(e));
     }
 
-    console.log("user in menu =============");
-    console.log(user.username, user.role);
+    // console.log("user in menu =============");
+    // console.log(user.username, user.role);
     const isEditor = (user.role === 'editor');
-    console.log(user.role === 'editor');
-
+    // console.log(user.role === 'editor');
 
     return (
         <>

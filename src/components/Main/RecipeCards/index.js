@@ -10,13 +10,12 @@ import {useDispatch} from "react-redux";
 const RecipeCards = ({profile}) => {
 
     const dispatch = useDispatch();
-    console.log(11111111111111);
 
     useEffect(() => getFavList(dispatch), [dispatch]);
 
     const [trendingList, setTrendingList] = useState([]);
-    console.log("user favRecipeList 99999999999999999999999");
-    console.log(profile.favRecipeList);
+    // console.log("user favRecipeList 99999999999999999999999");
+    // console.log(profile.favRecipeList);
 
     // get user fav recipes
     let userFavRecipes = [];

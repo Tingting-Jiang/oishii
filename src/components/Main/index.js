@@ -17,6 +17,7 @@ import EditProfile from "./ProfileScreen/EditProfile";
 import VisitProfile from "./ProfileScreen/VisitProfile";
 import PrivacyPolicy from "./TermsAndConditions/PrivacyPolicy";
 import Menu from './Explore/Menu';
+import Explore from './Explore';
 
 const store = createStore(userReducer);
 
@@ -43,7 +44,7 @@ const Main = () => {
 
             <Route path="/create" exact={true} component={Create} />
 
-            <Route path="/explore" exact={true} component={Menu} />
+            <Route path="/explore" exact={true} component={Explore} />
             <Route path="/menu/:id" exact={true} component={Menu} />
 
             <Route path="/termsAndConditions" exact={true} component={PrivacyPolicy} />
