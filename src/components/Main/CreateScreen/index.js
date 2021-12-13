@@ -229,7 +229,7 @@ const CreateScreen = () => {
                                         <img style={{width: '100%'}} src={imageUrl} alt=''/>
                                     </div>
                                 </div>
-                            ) : null}
+                            ) : (<h6 className="text-sm-center mt-4">Your uploaded picture will show here.</h6>)}
                         </div>
 
                         <hr/>

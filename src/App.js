@@ -5,22 +5,32 @@ import Main from "./components/Main";
 import Footer from "./components/Main/Footer";
 import React from "react";
 
-// const cookieStorage = {
-//     getItem: (key) => {
-//         const cookies = document.cookie
-//             .split(';')
-//             .map(cookie => cookie.split('='))
-//             .reduce((acc, [key, value]) => ({ ...acc, [key.trim()]: value }));
-//         return cookies[key];
-//     },
-//     setItem: (key, value) => {
-//         document.cookie = `${key}=${value}`;
-//     },
+// const reducer = (acc, [key, value]) => {
+//     return ({ [key.trim()]: value })
 // }
-// cookie storage does not work;
+
+const cookieStorage = {
+    getItem: (key) => {
+        const cookies = document.cookie
+            .split(';')
+            .map((cookie) => cookie.split('='))[0];
+            // .reduce(reducer);
+
+        if (cookies[0] === key) {
+            return cookies[1] === 'true';
+        } else {
+            return false;
+        }
+        // return cookies[key];
+    },
+    setItem: (key, value) => {
+        document.cookie = `${key}=${value}`;
+    },
+}
+// cookie storage works without reducer;
 // remove Inspect -> application -> local storage -> oishii=true to show the notice again
 
-const storageType = localStorage;
+const storageType = cookieStorage;
 const consentPropertyName = 'oishii';
 
 const shouldShowPopup = () => !storageType.getItem(consentPropertyName);
@@ -45,7 +55,7 @@ window.onload = () => {
         // }
         setTimeout(() => {
             consentPopup.classList.remove('hidden');
-        }, 1000);
+        }, 0);
     }
 };
 

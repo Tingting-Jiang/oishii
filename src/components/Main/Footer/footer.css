@@ -19,6 +19,7 @@
 
 #consent-popup.hidden {
     opacity: 0;
+    z-index: -10;
 }
 
 p>a, p>a:link, p>a:hover, p>a:focus, p>a:visited {
