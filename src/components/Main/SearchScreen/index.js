@@ -156,6 +156,7 @@ const Search = () => {
                                             <h4 className="wd-search-result-name fw-bold wd-color-coral">{item.title}</h4>
                                             <h6 className="my-1">servings: &nbsp;&nbsp;&nbsp;&nbsp;{item.servings}</h6>
                                             <h6 className="">total time:  &nbsp;{item.readyInMinutes} min</h6>
+                                            <h6 >{item.id}</h6>
                                         </span>
                                     </li>
                                 </Link>
@@ -165,7 +166,7 @@ const Search = () => {
                     <ul className="list-group wd-search-result col-12 col-md-6 row">
                         {recipeList.slice(mid, recipeList.length).map(item => {
                             return (
-                                <Link to={`/details/${item.id === undefined? item._id: item.id}`}>
+                                <Link to={`/details/${item.id}`}>
                                     <li className="list-group-item wd-search-result-item d-flex"
                                         key={item.id}>
 
@@ -178,6 +179,7 @@ const Search = () => {
                                             <h4 className="wd-search-result-name fw-bold wd-color-coral">{item.title}</h4>
                                             <h6 className="my-1">servings: &nbsp;&nbsp;&nbsp;&nbsp;{item.servings}</h6>
                                             <h6 className="">total time:  &nbsp;{item.readyInMinutes} min</h6>
+                                             <h6 >{item.id}</h6>
                                         </span>
                                     </li>
                                 </Link>

@@ -3,7 +3,7 @@ const model = require('./menu-model');
 
 
 
-const getMenuDetail = (menuId) => model.find({id: menuId});
+const getMenuDetail = (menuId) => model.find({id: menuId}).limit(4);
 
 const addToMenu = (menuId, recipeId) =>
     model.updateOne({"id": menuId},
@@ -20,10 +20,15 @@ const deleteRecipe = (menuId, recipeId) =>
         { $pull: { recipeList: recipeId }});
 
 
+const initializeMenu = (menuItem) =>
+    model.create(menuItem);
+
+
 
 module.exports = {
     getMenuDetail,
     addToMenu,
-    deleteRecipe
+    deleteRecipe,
+    initializeMenu,
     
 };

@@ -4,11 +4,12 @@ const userDao = require("../User/user-dao");
 
 
 
+
 module.exports = (app) => {
     
     const getMenuDetail = (req, res) =>
         MenuDao.getMenuDetail(req.body.menuId)
-            .then(menuDetail => res.json(menuDetail));
+            .then(menuDetail => res.json(menuDetail[0]));
     
  
     
@@ -25,16 +26,26 @@ module.exports = (app) => {
         MenuDao.deleteRecipe(req.body.menuId, req.body.recipeId)
             .then(status => {
                 // delete from recent recipeList
+                if (req.body.sourceName === "NONE") {
+                    console.log("API recipe deleted");
+                    res.sendStatus(200);
+                    return;
+                } else {
+                
                 recipeDao.deleteRecipe(recipeId)
                     .then( status => {
                         // delete from user side
+                        console.log("remove from latest recipe list");
                         userDao.deleteRecipe(sourceName, recipeId)
                             .then(status =>{
+                                console.log('remove from user recipe list')
                                 res.sendStatus(200);
                             })
                         
-                    })})
+                    })}})
     }
+    
+    
     
     app.post("/db/menu/getMenuDetail", getMenuDetail);
     app.put("/db/menu/addToMenu", addToMenu);

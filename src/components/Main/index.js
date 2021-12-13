@@ -15,6 +15,7 @@ import Register from './LoginAndRegister/RegisterScreen/';
 import Create from './CreateScreen';
 import EditProfile from "./ProfileScreen/EditProfile";
 import VisitProfile from "./ProfileScreen/VisitProfile";
+import Menu from './SearchScreen/Menu'
 
 const store = createStore(userReducer);
 
@@ -40,6 +41,11 @@ const Main = () => {
             <Route path="/register" exact={true} component={Register} />
 
             <Route path="/create" exact={true} component={Create} />
+    
+            <Route path="/menu/:id" exact={true} component={Menu} />
+
+
+
 
         </Provider>
     )
