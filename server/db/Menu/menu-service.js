@@ -75,7 +75,7 @@ module.exports = (app) => {
                     
                     recipeDao.deleteRecipe(recipeId)
                         .then( status => {
-                            // delete from user side
+                            // delete from recent recipe list
                             console.log("remove from latest recipe list");
                             recipeDao.findSourceName(recipeId)
                                 .then(name => {

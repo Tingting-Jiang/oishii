@@ -169,10 +169,10 @@ export const getFavList = (dispatch) =>
         })
 
 
-export const unlikeRecipe = (recipeId, userID, dispatch) =>
+export const unlikeRecipe = (recipeId, username, dispatch) =>
     fetch(`${API_RECIPE}/unlike`, {
         method: "PUT",
-        body: JSON.stringify({recipeID: recipeId, userID: userID}),
+        body: JSON.stringify({recipeID: recipeId, username: username}),
         credentials: 'include',
         headers: {
             'content-type': 'application/json'
@@ -188,10 +188,10 @@ export const unlikeRecipe = (recipeId, userID, dispatch) =>
         })
 
 
-export const likeRecipe = (recipeId, userID, dispatch) =>
+export const likeRecipe = (recipeId, username, dispatch) =>
     fetch(`${API_RECIPE}/like`, {
         method: "PUT",
-        body: JSON.stringify({recipeID: recipeId, userID: userID}),
+        body: JSON.stringify({recipeID: recipeId, username: username}),
         credentials: 'include',
         headers: {
             'content-type': 'application/json'
