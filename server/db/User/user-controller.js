@@ -6,7 +6,7 @@ const userRecipeDao = require("../UserRecipes/recipe-dao")
 const defaultAvatar = "https://firebasestorage.googleapis.com/v0/b/oishii-794ac.appspot.com/o/category-dessert.jpg-1639336882948?alt=media&token=33586928-61f0-4926-a9af-67ebd84cc87e";
 const defaultRecipe = "https://firebasestorage.googleapis.com/v0/b/oishii-794ac.appspot.com/o/thumbnail_sample.jpg-1639439340116?alt=media&token=d9d0c437-a549-421c-a3ab-91b58fb4ee31";
 
-
+let userRecipe = [];
 
 module.exports = (app) => {
     
@@ -85,6 +85,7 @@ module.exports = (app) => {
                     console.log(" USER login")
                     req.session['profile'] = user;
                     console.log(user);
+                    userRecipe = user.usersRecipe
                     res.json(user);
                     return;
                 }
@@ -185,6 +186,7 @@ module.exports = (app) => {
 
     const profile = (req, res) => {
         if (req.session['profile']) {
+            req.session["profile"].usersRecipe = userRecipe;
             console.log("IN PROFILE session, length->", req.session['profile'].usersRecipe.length);
     
             res.json(req.session['profile']);
@@ -218,6 +220,7 @@ module.exports = (app) => {
                         console.log("after add the recipe to usersRecipe list", newUser.usersRecipe);
                         req.session['profile'] = newUser;
                         console.log(`add recipe in ${username} recipe list`);
+                        userRecipe =  newUser.usersRecipe;
                         console.log("New session,length->", req.session['profile'].usersRecipe.length);
                     });
                 console.log("add recipe in latest recipe list");
