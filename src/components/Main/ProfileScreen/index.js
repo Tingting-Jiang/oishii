@@ -52,11 +52,21 @@ const Profile = () => {
             });
     }
 
+    // get user fav list
     let userFavRecipes = [];
     if (user && user.favRecipeList) {
         for (let i=0; i<4; i++) {
             user.favRecipeList[i] &&
             userFavRecipes.push(user.favRecipeList[i]);
+        }
+    }
+
+    // get user generated list
+    let userCreateRecipes = [];
+    if (user && user.usersRecipe) {
+        for (let i=0; i<4; i++) {
+            user.usersRecipe[i] &&
+            userCreateRecipes.push(user.usersRecipe[i]);
         }
     }
 
@@ -133,7 +143,7 @@ const Profile = () => {
                         {user.username}'s Recipes
                     </h2>
                     {
-                        (!user.usersRecipe || user.usersRecipe.length === 0) &&
+                        userCreateRecipes.length === 0 &&
                         <Link to="/create">
                             <div className="btn btn-outline-primary wd-button wd-button-transparent">
                                 <h4>Create your first recipe</h4>
@@ -142,8 +152,7 @@ const Profile = () => {
                     }
                     <div className="card-group">
                         {
-                            user.usersRecipe && user.usersRecipe.length > 0 &&
-                            user.usersRecipe.map(recipeId =>
+                            userCreateRecipes.map(recipeId =>
                                 <DBRecipeCardItem key={recipeId} recipeId={recipeId} user={user} dispatch={dispatch}/>
                             )
                         }

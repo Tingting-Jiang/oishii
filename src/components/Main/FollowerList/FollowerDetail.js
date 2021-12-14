@@ -6,13 +6,13 @@ import {useHistory} from "react-router";
 
 
 const FollowerDetail = ({follower, profile}) => {
-    // console.log("in follower detail ===>", follower);
+    console.log("in follower detail ===>", follower);
     const history = useHistory();
     const [followerNew, setFollowerDetail] = useState( {});
     useEffect(() =>{
         userService.getFollowerInfo(follower)
             .then(data => {
-                // console.log("follower Detail", data);
+                console.log("follower Detail", data);
                 setFollowerDetail(data);
             })
     }, []);
@@ -30,14 +30,14 @@ const FollowerDetail = ({follower, profile}) => {
     return (
 
             <Link to={`/profile/${followerNew.id}`}>
-                <li className="nav-item text-center me-2">
+                <li className="nav-item text-center align-items-center mx-2 wd-follower flex">
                     <img className="wd-following-user-img"
                          src={followerNew.userAvatar} alt=""/>
 
-                    <button className="nav-link btn btn-outline-primary text-center wd-button-transparent"
+                    <p className="nav-link btn btn-outline-primary px-0 align-self-center wd-button-transparent"
                             onClick={reDirectHandler}>
                         {followerNew.username}
-                    </button>
+                    </p>
                 </li>
             </Link>
     )

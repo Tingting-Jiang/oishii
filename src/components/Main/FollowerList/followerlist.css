@@ -36,3 +36,8 @@
     object-fit: cover;
     border-radius: 50%;
 }
+
+.wd-follower {
+    width: 80px;
+    overflow: hidden;
+}
