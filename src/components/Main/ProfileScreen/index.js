@@ -15,6 +15,24 @@ const Profile = () => {
 
     const dispatch = useDispatch();
     const history = useHistory();
+    
+    
+    const getUser = (dispatch) => {
+        getProfile(dispatch)
+            // .then(res => setUser(profile))
+            .then(newUser => {
+                // console.log("returned from SESSION", newUser.favRecipeList);
+                console.log("returned from SESSION", newUser.usersRecipe);
+                
+                if (newUser.username && newUser.password) {
+                    user = newUser;
+                } else {
+                    redirectLogin();
+                }
+            })
+            .catch(e => redirectLogin());
+        // .catch(e => console.log(e));
+    }
 
     useEffect(() => getUser(dispatch), [history, dispatch]);
 
@@ -26,20 +44,7 @@ const Profile = () => {
         history.push('/login');
     }
 
-    const getUser = (dispatch) => {
-        getProfile(dispatch)
-            // .then(res => setUser(profile))
-            .then(newUser => {
-                // console.log("returned from SESSION", newUser.favRecipeList);
-                if (newUser.username && newUser.password) {
-                    user = newUser;
-                } else {
-                    redirectLogin();
-                }
-            })
-            .catch(e => redirectLogin());
-            // .catch(e => console.log(e));
-    }
+   
 
     const logoutHandler = (dispatch) => {
         logout(dispatch)

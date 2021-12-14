@@ -2,7 +2,9 @@
 
 const userDao = require('./user-dao');
 const allRecipeDao = require("../AllRecipes/allRecipe-dao");
+const userRecipeDao = require("../UserRecipes/recipe-dao")
 const defaultAvatar = "https://firebasestorage.googleapis.com/v0/b/oishii-794ac.appspot.com/o/category-dessert.jpg-1639336882948?alt=media&token=33586928-61f0-4926-a9af-67ebd84cc87e";
+const defaultRecipe = "https://firebasestorage.googleapis.com/v0/b/oishii-794ac.appspot.com/o/thumbnail_sample.jpg-1639439340116?alt=media&token=d9d0c437-a549-421c-a3ab-91b58fb4ee31";
 
 
 
@@ -185,6 +187,30 @@ module.exports = (app) => {
         console.log("LOG OUT");
         res.send(req.session.destroy());
     }
+    
+    
+    const createRecipe = (req, res) => {
+        const username = req.body.username;
+        const recipeId = req.body.recipe.id;
+        console.log("id ===", recipeId, username);
+        const recipe = req.body.recipe;
+        if(recipe.image === undefined)
+            recipe.image = defaultRecipe;
+        userRecipeDao.createRecipe(recipe)
+            .then(status =>{
+                userDao.createRecipe(username, recipeId)
+                    .then(result => {
+                        const newUser = req.session['profile'];
+                        newUser.usersRecipe = [recipeId, ...newUser.usersRecipe];
+                        console.log("after add the recipe to usersRecipe list", newUser.usersRecipe);
+                        req.session['profile'] = newUser;
+                        console.log(`add recipe in ${username} recipe list`);
+                        console.log(req.session['profile']);
+                    });
+                console.log("add recipe in latest recipe list");
+                res.sendStatus(200)
+            })
+    };
 
     
 
@@ -210,6 +236,7 @@ module.exports = (app) => {
     
     app.put('/db/recipe/like', likeRecipe);
     app.put('/db/recipe/unlike', unlikeRecipe);
+    app.post("/db/recipe/upload", createRecipe);
 
 
 

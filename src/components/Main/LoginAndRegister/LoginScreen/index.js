@@ -15,6 +15,13 @@ const Login = () => {
     const history = useHistory();
 
     const dispatch = useDispatch();
+    
+    
+    const checkLogin = (e)=>{
+        if (e.key === "Enter")
+            login()
+    
+    }
 
     const login = () => {
         userService.login(user)
@@ -87,7 +94,8 @@ const Login = () => {
                                    placeholder="your password"
                                    value={user.password}
                                    onChange={(e) =>
-                                       setUser({...user, password: e.target.value})}/>
+                                       setUser({...user, password: e.target.value})}
+                                    onKeyPress={e => checkLogin(e)}/>
                         </div>
                         <div className="mt-5 text-center">
                             <button className="btn btn-outline-primary wd-button w-50"
