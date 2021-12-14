@@ -4,13 +4,14 @@ import {Link, useHistory, useParams} from "react-router-dom";
 import {Helmet} from "react-helmet";
 // useParams from react-router does not work
 import "./profile.css";
-import userService, {getUserById, getProfile, updateProfile} from '../../service/userService';
+import userService, {getUserById, getProfile} from '../../service/userService';
 import Header from "../Header";
 import RecipeCardItem from "../RecipeCards/RecipeCardItem";
 import FollowerList from "../FollowerList";
-import DBRecipeCardItem from '../RecipeCards/DBRecipeCardItem'
+import DBRecipeCardItem from '../RecipeCards/DBRecipeCardItem';
 
 const selectProfile = (profile) => profile;
+
 
 const VisitProfile = () => {
 
@@ -41,7 +42,6 @@ const VisitProfile = () => {
     console.log("user logged in");
     console.log(profile);
 
-    
 
     // user being visited => user
     const [user, setUser] = useState({
@@ -68,7 +68,7 @@ const VisitProfile = () => {
                 setUser(data);
             })
             .catch(e => history.push('/profile'))
-    }, []);
+    }, [history, profileVisited]);
 
     // get user fav list
     let userFavRecipes = [];
@@ -90,6 +90,9 @@ const VisitProfile = () => {
     
     // check if profile like visited user
     const [isFav, setFav] = useState(user.usersFollowers.includes(profile.id));
+    
+    console.log("isFav");
+    console.log(isFav);
 
     // profile favs user, user followers +1
     const likeUserHandler = () => {
@@ -117,14 +120,7 @@ const VisitProfile = () => {
                     console.log(user.username, " is unliked by ", profile.username);
                 })
         }
-
     }
-
-   
-
-
-    console.log("isFav");
-    console.log(isFav);
 
 
     return (
@@ -218,7 +214,7 @@ const VisitProfile = () => {
                     <h2 className="wd-block-title">
                         They like {user.username}!
                     </h2>
-                    <FollowerList followers={user.usersFollowers}/>
+                    <FollowerList followers={user.usersFollowers} profile={profile}/>
                 </div>
             </div>
         </>

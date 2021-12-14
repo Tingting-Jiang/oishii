@@ -2,7 +2,7 @@ import React from 'react'
 import "./followerlist.css";
 import FollowerDetail from './FollowerDetail'
 
-const FollowerList = ({followers}) => {
+const FollowerList = ({followers, profile}) => {
     // console.log(" followers list =====", followers);
     
     return (
@@ -15,7 +15,7 @@ const FollowerList = ({followers}) => {
 
                 {
                     followers && followers.map(singleFollower => (
-                    <FollowerDetail follower={singleFollower}/>
+                    <FollowerDetail follower={singleFollower} profile={profile}/>
                     ))
                 }
 
