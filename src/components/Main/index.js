@@ -48,17 +48,13 @@ const Main = () => {
             <Route path="/register" exact={true} component={Register} />
 
             <Route path="/create" exact={true} component={Create} />
-
-    
             {/*<Route path="/menu/:id" exact={true} component={Menu} />*/}
     
             <Route path="/plmoknijnkdjcbdudbshxyajbf-manage-users" exact={true} component={AllUsers} />
             <Route path="/allUsers" exact={true} component={AllUsers} />
 
-
             <Route path="/explore" exact={true} component={Explore} />
             <Route path="/menu/:id" exact={true} component={Menu} />
-
 
             <Route path="/termsAndConditions" exact={true} component={PrivacyPolicy} />
 

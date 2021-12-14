@@ -1,5 +1,6 @@
 import React from "react";
 import './footer.css';
+import {Link} from "react-router-dom";
 
 const Footer = () => {
 
@@ -9,9 +10,11 @@ const Footer = () => {
                 <h3>Oishii</h3>
                 <p>Presented by Project Oishii Group</p>
                 <span>
-                    <button type="button" className="btn btn-outline-primary text-body wd-button-transparent p-0" >
+                    <Link to="/termsAndConditions">
+                        <button type="button" className="btn btn-outline-primary text-body wd-button-transparent p-0" >
                         Privacy Policy
                     </button>
+                    </Link>
                 </span>
                 &nbsp;&nbsp;|&nbsp;&nbsp;
                 <span>
