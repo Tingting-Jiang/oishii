@@ -59,8 +59,6 @@ const AllUsers = () => {
     const changeRole = (userId, currentRole) => {
         console.log("current role--", currentRole);
         userService.changeRole(userId, currentRole)
-
-            // .then(res =>res.json())
             .then(res => {
                 console.log("---", res)
                 if (res.ok){

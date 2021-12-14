@@ -56,6 +56,30 @@ const Menu = () => {
     // console.log(user.username, user.role);
     const isEditor = (user.role === 'editor');
     // console.log(user.role === 'editor');
+    
+    
+    const deleteRecipeFromMenu = (recipeId) => {
+        console.log("before delete recipe from menu ");
+        userService.deleteRecipeFromMenu(menuId, recipeId)
+            .then(res => {
+                console.log("---", res)
+                if (res.ok) {
+                    console.log("------", recipeList);
+                    setRecipeList(recipeList.filter(item => {
+                        return (item !== recipeId) ? item : null;
+                    }));
+                    console.log("recipe deleted")
+                    console.log("------", recipeList);
+                    ;
+                }
+            })
+            .catch(e => console.log(e));
+    }
+    
+    
+    
+    
+    
 
     return (
         <>
@@ -76,15 +100,47 @@ const Menu = () => {
                 </div>
                 
                 <div className="mt-4 row justify-content-evenly">
+                    {/*<ul className="list-group wd-search-result col-12 col-lg-6 row">*/}
+                    {/*    {recipeList.slice(0, mid).map(item =>*/}
+                    {/*        <MenuItem menuItemId={item} menuId={menuId} isEditor={isEditor}/>*/}
+                    {/*        )}*/}
+                    {/*</ul>*/}
+                    {/*<ul className="list-group wd-search-result col-12 col-lg-6 row">*/}
+                    {/*    {recipeList.slice(mid, recipeList.length).map(item =>*/}
+                    {/*        <MenuItem menuItemId={item} menuId={menuId} isEditor={isEditor}/>*/}
+                    {/*    )}*/}
+                    {/*</ul>*/}
                     <ul className="list-group wd-search-result col-12 col-lg-6 row">
-                        {recipeList.slice(0, mid).map(item =>
+                        {recipeList.slice(0, mid).map(item =>{
+                            return (
+                            <>
+                        {isEditor &&
+                            <button className="btn btn-sm btn-primary-outline wd-button-transparent"
+                            onClick={() => deleteRecipeFromMenu(item)}>
+                            <i className="fa fa-times fa-lg"/>
+                            </button>
+                        }
+    
                             <MenuItem menuItemId={item} menuId={menuId} isEditor={isEditor}/>
-                            )}
+                            </>
+                            )})}
                     </ul>
+                    
+    
                     <ul className="list-group wd-search-result col-12 col-lg-6 row">
-                        {recipeList.slice(mid, recipeList.length).map(item =>
+                        {recipeList.slice(mid, recipeList.length).map(item => {
+                            return (
+                                <>
+                            {isEditor &&
+                            <button className="btn btn-sm btn-primary-outline wd-button-transparent"
+                                    onClick={() => deleteRecipeFromMenu(item)}>
+                                <i className="fa fa-times fa-lg"/>
+                            </button>
+                        }
+                        
                             <MenuItem menuItemId={item} menuId={menuId} isEditor={isEditor}/>
-                        )}
+                                </>
+                        )})}
                     </ul>
                 </div>
             </div>

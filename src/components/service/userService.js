@@ -334,20 +334,35 @@ export const addToMenu = (menuId, recipeId) =>
             else throw res;
         });
 
-export const deleteRecipeFromMenu = (menuId, recipeId, sourceName) =>
+// export const deleteRecipeFromMenu1 = (menuId, recipeId, sourceName) =>
+//     fetch(`${API_MENU}/deleteRecipeFromMenu`, {
+//         method: 'DELETE',
+//         body: JSON.stringify({
+//             menuId: menuId,
+//             recipeId: recipeId,
+//             sourceName:
+//             sourceName }),
+//         credentials: 'include',
+//         headers: {
+//             'content-type': 'application/json'
+//         }
+//     })
+//         .then(res => res.json());
+
+
+export const deleteRecipeFromMenu = (menuId, recipeId) =>
     fetch(`${API_MENU}/deleteRecipeFromMenu`, {
         method: 'DELETE',
         body: JSON.stringify({
             menuId: menuId,
-            recipeId: recipeId,
-            sourceName:
-            sourceName }),
+            recipeId: recipeId
+        }),
         credentials: 'include',
         headers: {
             'content-type': 'application/json'
         }
     })
-        .then(res => res.json());
+
 
 
 

@@ -31,24 +31,24 @@ const MenuItem = ({menuItemId, menuId, isEditor}) => {
     );
 
 
-    const deleteRecipeFromMenu = () => {
-        console.log("before delete recipe from menu ", menuItem.id);
-        const sourceName = dbRecipe ? menuItem.sourceName : "NONE"
-        userService.deleteRecipeFromMenu(menuId, menuItem.id, sourceName)
-            .then(data =>
-                console.log(data));
-    }
+    // const deleteRecipeFromMenu = () => {
+    //     console.log("before delete recipe from menu ", menuItem.id);
+    //     const sourceName = dbRecipe ? menuItem.sourceName : "NONE"
+    //     userService.deleteRecipeFromMenu(menuId, menuItem.id, sourceName)
+    //         .then(data =>
+    //             console.log(data));
+    // }
 
 
     return (
         <div className="d-flex overflow-hidden align-content-start">
-            {
-                isEditor &&
-                <button className="btn btn-sm btn-primary-outline wd-button-transparent"
-                        onClick={deleteRecipeFromMenu}>
-                    <i className="fa fa-times fa-lg"/>
-                </button>
-            }
+            {/*{*/}
+            {/*    isEditor &&*/}
+            {/*    <button className="btn btn-sm btn-primary-outline wd-button-transparent"*/}
+            {/*            onClick={deleteRecipeFromMenu}>*/}
+            {/*        <i className="fa fa-times fa-lg"/>*/}
+            {/*    </button>*/}
+            {/*}*/}
 
             <Link to={`/details/${menuItemId}`}>
                 <li className="list-group-item wd-search-result-item d-flex overflow-hidden"
