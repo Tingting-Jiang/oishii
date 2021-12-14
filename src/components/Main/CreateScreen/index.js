@@ -80,6 +80,15 @@ const CreateScreen = () => {
     }
     
     const submitRecipe = () => {
+        if (title === "") {
+            alert("Please add a name for this wonderful recipe");
+            return;
+        }
+        if (ingredients === "") {
+            alert("Please add the ingredients for this wonderful recipe");
+            return;
+        }
+        
         const oldIngredients = ingredients.split(",");
         let newIngredients = [];
         for (let item of oldIngredients) {

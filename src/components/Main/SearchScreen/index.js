@@ -9,7 +9,7 @@ import { Helmet } from 'react-helmet';
 
 const Search = () => {
     const params = useParams();
-    const ingredient = params.searchTerm || "pork";
+    const ingredient = params.searchTerm || "sandwich";
     // console.log("searchTerm in Search Screen", ingredient);
     const navigate = useHistory();
     let totalRecipes= [];
