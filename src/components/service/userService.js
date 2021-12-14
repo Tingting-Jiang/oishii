@@ -47,6 +47,8 @@ export const getProfile = (dispatch) =>
             else throw res;
         })
         .then(newUser => {
+            console.log("dispatch get user in getProfile service")
+            console.log(newUser)
             dispatch({
                 type: 'get-user',
                 newUser
