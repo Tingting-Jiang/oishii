@@ -1,12 +1,9 @@
 import React, {useEffect, useState} from 'react'
-import {Link, useHistory} from 'react-router-dom'
-import userService, {getProfile} from '../../service/userService'
+import {Link} from 'react-router-dom'
+import userService from '../../service/userService'
 import './search.css';
 import Header from "../Header";
 import {Helmet} from 'react-helmet';
-import {useDispatch, useSelector} from "react-redux";
-
-const selectProfile = (profile) => profile;
 
 const AllUsers = () => {
 
@@ -44,8 +41,9 @@ const AllUsers = () => {
                 // console.log("menu list ", data.recipeList);
                 setUserList(data);
             })
-    }, [userList]);
+    }, []);
 
+    // console.log(userList);
 
     const mid = Math.round(userList.length / 2);
 
@@ -53,17 +51,27 @@ const AllUsers = () => {
     const deleteUser = (userId) => {
         console.log("to delete ", userId);
         userService.deleteUser(userId)
-            .then(data =>
-                console.log("user deleted"));
-
+            .then(data => {
+                setUserList(userList.filter(item=> item.id !== userId));
+                console.log("user deleted");
+            })
     }
 
     const changeRole = (userId, currentRole) => {
         console.log("current role--", currentRole);
         userService.changeRole(userId, currentRole)
-            .then(data =>
-                console.log("role changed"));
+            .then(data => {
+                // setUserList(userList.map(changeRoleHelper(targetId));
+                console.log("role changed");
+            })
+    }
 
+    const changeRoleHelper = (user, targetId) => {
+        if (user.id === targetId && user.role === 'normal') {
+            user.role = 'editor'
+        } else if (user.id === targetId && user.role === 'editor') {
+            user.role = 'normal'
+        }
     }
 
 
@@ -87,7 +95,8 @@ const AllUsers = () => {
 
                 <div className="row justify-content-evenly">
                     <ul className="list-group wd-search-result col-12 col-md-6 row border-0">
-                        {userList.slice(0, mid).map(item => {
+                        {userList.slice(0, mid).filter(user => user.role !== 'admin')
+                            .map(item => {
                             return (
                                 <>
                                     <Link to={`/profile/${item.id}`}>
@@ -121,7 +130,8 @@ const AllUsers = () => {
                         })}
                     </ul>
                     <ul className="list-group wd-search-result col-12 col-md-6 row border-0">
-                        {userList.slice(mid, userList.length).map(item => {
+                        {userList.slice(mid, userList.length).filter(user => user.role !== 'admin')
+                            .map(item => {
                                 return (
                                     <>
                                         <Link to={`/profile/${item.id}`}>

@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {Helmet} from "react-helmet";
-
 import "./recipe.css";
 
-import userService, {getProfile} from '../../service/userService';
+import userService, {getProfile, getRecipeFollowers} from '../../service/userService';
 import recipeService from '../../service/recipeService';
-
 import oldIngredient from "../../reducers/data/newRecipe.json";
 import Header from "../Header";
 import FollowerList from "../FollowerList";
@@ -82,18 +80,19 @@ const RecipeScreen = () => {
     };
 
     const[followers, setFollowers] = useState([]);
+
     useEffect(() =>{
         console.log("send -----", recipeID);
-        userService.getRecipeFollowers(recipeID)
+        getRecipeFollowers(recipeID)
             .then(data => {
                 console.log(" followers back ", data);
                 setFollowers(data);
 
-            }) .catch(e => {
+            }).catch(e => {
                 if (e.status === 200)
                     console.log("ERROR----------- followers, NO followers");
         })},
-        []
+        [recipeID]
     );
 
     const [selectedMenu, setSelectedMenu] = useState(-1);

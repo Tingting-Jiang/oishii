@@ -17,24 +17,17 @@ const VisitProfile = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const params = useParams();
-    const profileVisited = params.id;
+    const profileVisited = Number(params.id);
     
     const getUser = (dispatch) => {
-        console.log("00000000000");
         getProfile(dispatch)
-            // .then(res => setUser(profile))
             .then(newUser => {
-                console.log("returned from SESSION", newUser.id);
                 if (newUser.id === profileVisited) {
-                    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@")
                     redirectProfile();
                 }
             })
             .catch(e => console.log(e));
     }
-    
-    
-    
     
 
     // user logged in => profile

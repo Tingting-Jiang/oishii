@@ -12,18 +12,18 @@ const initialUser = {
 }
 
 const userReducer = (state = initialUser, action) => {
-    console.log("action: ")
-    console.log(action)
+    // console.log("action: ")
+    // console.log(action)
 
     switch (action.type) {
         // after login
         case "set-user":
             state = action.newUser;
-            console.log("after setting user", state);
+            // console.log("after setting user", state);
             return state;
 
         case "get-user":
-            console.log("state: ", state);
+            // console.log("state: ", state);
             state = action.newUser;
             return state;
 
@@ -45,8 +45,8 @@ const userReducer = (state = initialUser, action) => {
 
         case "update-profile":
             state = action.newProfile
-            console.log("new profile in reducer: ")
-            console.log(state);
+            // console.log("new profile in reducer: ")
+            // console.log(state);
             return state;
 
         case "like-recipe":
@@ -73,7 +73,7 @@ const userReducer = (state = initialUser, action) => {
                 ...state,
                 favRecipeList: action.list
             };
-            console.log("state: ", state.favRecipeList);
+            // console.log("state: ", state.favRecipeList);
             return state;
 
 

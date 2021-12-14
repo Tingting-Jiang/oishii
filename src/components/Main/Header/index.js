@@ -54,9 +54,6 @@ const Header = ({
             .catch(e => console.log(e));
     }
 
-    console.log("user in header !!!!!!!!!!!!!!")
-    console.log(user);
-
     return (
         <>
             <div className="row wd-home-header">
@@ -96,11 +93,15 @@ const Header = ({
                         </div>
                     </div>
                 </div>
-                <div className="d-none d-lg-block col-lg-1 align-self-center text-center">
-                    <img className="wd-header-profile-img"
-                         src={`${user.userAvatar || "/images/sample-user.jpeg"}`}
-                         alt=""/>
-                </div>
+                {
+                    user && user.username && user.id &&
+                    <div className="d-none d-lg-block col-lg-1 align-self-center text-center">
+                        <img className="wd-header-profile-img"
+                             src={`${user.userAvatar || "/images/sample-user.jpeg"}`}
+                             alt=""/>
+                    </div>
+                }
+
             </div>
 
 
