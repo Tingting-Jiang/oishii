@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import userService, {getProfile} from '../../service/userService';
+import React, {useEffect} from 'react';
+import {getProfile} from '../../service/userService';
 import '../SearchScreen/search.css';
 import Header from "../Header";
 import { Helmet } from 'react-helmet';

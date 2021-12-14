@@ -10,21 +10,39 @@ const Footer = () => {
                 <h3>Oishii</h3>
                 <p>Presented by Project Oishii Group</p>
                 <span>
-                    <Link to="/termsAndConditions">
+                    <Link to="/terms-of-service">
                         <button type="button" className="btn btn-outline-primary text-body wd-button-transparent p-0" >
-                        Privacy Policy
-                    </button>
+                            Terms of Service
+                        </button>
                     </Link>
                 </span>
                 &nbsp;&nbsp;|&nbsp;&nbsp;
                 <span>
-                    <button type="button" className="btn btn-outline-primary text-body wd-button-transparent p-0" >
-                        Send Feedback
-                    </button>
+                    <Link to="/privacy-policy">
+                        <button type="button" className="btn btn-outline-primary text-body wd-button-transparent p-0" >
+                            Privacy Policy
+                        </button>
+                    </Link>
+                </span>
+                &nbsp;&nbsp;|&nbsp;&nbsp;
+                <span>
+                    <Link to="/cookie-policy">
+                        <button type="button" className="btn btn-outline-primary text-body wd-button-transparent p-0" >
+                            Cookie Policy
+                        </button>
+                    </Link>
+                </span>
+                &nbsp;&nbsp;|&nbsp;&nbsp;
+                <span>
+                    <Link to="/send-feedback">
+                        <button type="button" className="btn btn-outline-primary text-body wd-button-transparent p-0" >
+                            Send Feedback
+                        </button>
+                    </Link>
                 </span>
 
                 <div id="consent-popup" className="hidden">
-                    <p>By using this site you agree to our <a href="/termsAndConditions" className="wd-color-coral fw-bold">Terms of Use and Privacy Policy</a>.
+                    <p>By using this site you agree to our <a href="/terms-and-conditions" className="wd-color-coral fw-bold">Terms of Use and Privacy Policy</a>.
                         Please <a id="accept" className="wd-color-coral fw-bold" href="#">Accept</a> before using our website.
                     </p>
                 </div>

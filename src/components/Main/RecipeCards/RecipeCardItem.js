@@ -60,6 +60,7 @@ const RecipeCardItem = ({recipeId, user, dispatch}) => {
     
 
     return (
+
         <div className="card mx-2">
             <img src={recipe.image} className="card-img-top wd-card-img" alt="sample"/>
             <button className="btn btn-outline-primary wd-button wd-button-on-img"
