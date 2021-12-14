@@ -5,6 +5,7 @@ import "../loginAndRgister.css";
 import {Helmet} from "react-helmet";
 import Header from "../../Header";
 import {useDispatch} from "react-redux";
+import stringToHash from '../stringtoHash'
 
 
 const Login = () => {
@@ -23,12 +24,11 @@ const Login = () => {
     
     }
 
-    // const hashedUser = {
-    //     ...user,
-    //     password: stringToHash(user.password),
-    // }
+   
 
     const login = () => {
+      
+        console.log()
         userService.login(user)
             .then(newUser => {
                 console.log("newUser");
