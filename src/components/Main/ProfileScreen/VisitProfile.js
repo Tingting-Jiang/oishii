@@ -64,7 +64,7 @@ const VisitProfile = () => {
     useEffect(() => {
         getUserById(profileVisited)
             .then(data => {
-                
+
                 console.log("profile Visited", data);
                 setUser(data);
             })
