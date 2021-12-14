@@ -27,6 +27,7 @@ const RecipeScreen = () => {
     // console.log("profile in detail screen ->", user.favRecipeList);
     
     const [recipe, setRecipe] = useState(oldIngredient);
+    
 
     // const [followers, setFollowers] = useState([]);
     const dbRecipe = recipeID > 1000000000;
@@ -50,15 +51,13 @@ const RecipeScreen = () => {
         []
     );
 
-    // get user session
-    // const [user, setUser] = useState({});
-    // const [error, setError] = useState(false);
+  
     const[followers, setFollowers] = useState([]);
 
     let inList = (recipeId) => {
         return user.favRecipeList.includes(recipeId);
     }
-
+    
 
     const likeRecipeHandler = (recipeId, dispatch) => {
         if (!user.username || user.username === "") {
@@ -153,13 +152,7 @@ const RecipeScreen = () => {
 
                                 <h6 className="wd-color-coral">Total Time: {recipe.readyInMinutes} min</h6>
 
-                                {/*<ul className="form-select" >*/}
-                                {/*    <p>Add it to Menu</p>*/}
-                                {/*    <button className="btn btn-primary" value="1" onClick={() =>addToMenu(1, recipeID)}>Main</button>*/}
-                                {/*    <button className="btn btn-primary" value="2" onClick={() =>addToMenu(2, recipeID)}>Salad</button>*/}
-                                {/*    <button className="btn btn-primary" value="3" onClick={() =>addToMenu(3, recipeID)}>Dessert</button>*/}
-                                {/*    <button className="btn btn-primary" value="4" onClick={() =>addToMenu(4, recipeID)}>Pizza</button>*/}
-                                {/*    <button className="btn btn-primary" value="5" onClick={() =>addToMenu(5, recipeID)}>Vegan</button>*/}
+              
                                 {/*</ul>*/}
     
     
@@ -201,11 +194,13 @@ const RecipeScreen = () => {
                                     </h5>
                                     <ul className="list-group">
 
-                                        {recipe.extendedIngredients.map(singleIngredient => (
+                                        { recipe.extendedIngredients.length === 0 ?
+                                                "Ha... Seems the chef forget to add ingredients list ":(
+                                                    recipe.extendedIngredients.map(singleIngredient => (
                                             <li className="list-group-item"
                                             key={singleIngredient.id}>
                                                 {singleIngredient.original}
-                                            </li>))}
+                                            </li>)))}
                                     </ul>
                                 </div>
                                 <div className="col-12 col-md-7">

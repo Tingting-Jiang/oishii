@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 
 const DBRecipeCardItem = ({recipeId, user, dispatch}) => {
 
-    console.log("in DB recipe CARD", recipeId);
+    // console.log("in DB recipe CARD", recipeId);
 
     const [recipe, setRecipe] = useState({});
 
@@ -54,7 +54,7 @@ const DBRecipeCardItem = ({recipeId, user, dispatch}) => {
             </button>
             <Link to={`/details/${recipe.id}`}>
                 <div className="card-body">
-                    {/*<h5 className="card-title">{recipe.id}</h5>*/}
+                    <h5 className="card-title">{recipe.id}</h5>
                     <h5 className="card-title">{recipe.title}</h5>
                     <p className="card-text">for {recipe.servings} servings</p>
                     <p className="card-text">

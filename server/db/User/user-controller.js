@@ -113,8 +113,7 @@ module.exports = (app) => {
                 
                 userDao.createUser(newUser)
                     .then(user => {
-                        // user.password = stringToHash(user.password)
-                        console.log("after register: ", user);
+                        // console.log("after register: ", user);
                         req.session['profile'] = user;
                         res.json(user)
                     });
@@ -186,6 +185,8 @@ module.exports = (app) => {
 
     const profile = (req, res) => {
         if (req.session['profile']) {
+            console.log("IN PROFILE session, length->", req.session['profile'].usersRecipe.length);
+    
             res.json(req.session['profile']);
         } else {
             res.sendStatus(403);
@@ -211,12 +212,13 @@ module.exports = (app) => {
             .then(status =>{
                 userDao.createRecipe(username, recipeId)
                     .then(result => {
+                        console.log("OLD session, length->", req.session['profile'].usersRecipe.length);
                         const newUser = req.session['profile'];
                         newUser.usersRecipe = [recipeId, ...newUser.usersRecipe];
                         console.log("after add the recipe to usersRecipe list", newUser.usersRecipe);
                         req.session['profile'] = newUser;
                         console.log(`add recipe in ${username} recipe list`);
-                        console.log(req.session['profile']);
+                        console.log("New session,length->", req.session['profile'].usersRecipe.length);
                     });
                 console.log("add recipe in latest recipe list");
                 res.sendStatus(200)

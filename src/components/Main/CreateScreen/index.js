@@ -83,17 +83,18 @@ const CreateScreen = () => {
         const oldIngredients = ingredients.split(",");
         let newIngredients = [];
         for (let item of oldIngredients) {
-            newIngredients.push({original: item});
+            if (item !== "")
+                newIngredients.push({original: item});
         }
 
         let newInstructions = [];
         let steps = []
         for (let item of instructions) {
-            steps.push({step: item});
+            if (item !== "")
+                steps.push({step: item});
         }
-        const content = {steps: steps};
-
-        newInstructions.push(content);
+        if(steps.length !== 0)
+            newInstructions.push({steps: steps});
 
         const newRecipe = {
             ...recipe,
@@ -153,15 +154,16 @@ const CreateScreen = () => {
                     </div>
 
                     <div className="col-12 col-md-8">
-                        <div className="form-floating mb-3">
+                        <form className="form-floating mb-3">
                             <input className="form-control" id="recipeNameInput"
                                    placeholder="Recipe Name"
                                    value={title}
+                                   required={true}
                                    onChange={e => setTitle(e.target.value)}/>
                             <label htmlFor="recipeNameInput">
                                 Recipe Name
                             </label>
-                        </div>
+                        </form>
 
                         <div className="form-floating mb-3">
                                 <textarea className="form-control"
