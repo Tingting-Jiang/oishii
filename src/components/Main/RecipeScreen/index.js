@@ -9,6 +9,7 @@ import oldIngredient from "../../reducers/data/newRecipe.json";
 import Header from "../Header";
 import FollowerList from "../FollowerList";
 import {useDispatch, useSelector} from "react-redux";
+import { useHistory } from 'react-router-dom'
 
 const selectProfile = (profile) => profile;
 
@@ -16,6 +17,7 @@ const RecipeScreen = () => {
     const params = useParams();
     const recipeID = parseInt(params.id);
     // console.log("check type -----@@", typeof recipeID);
+    const history = useHistory();
     
     
     
@@ -31,6 +33,7 @@ const RecipeScreen = () => {
 
     // const [followers, setFollowers] = useState([]);
     const dbRecipe = recipeID > 1000000000;
+    
 
 
     useEffect(() => {
@@ -104,12 +107,21 @@ const RecipeScreen = () => {
         if (menuId < 1) {
             return;
         }
-        // console.log("check type -----", typeof recipeID);
 
         // console.log(`add ${recipeID} to ${menuId}`)
         userService.addToMenu(menuId, recipeID)
             .then(status =>{
                 alert("Successfully added to Menu");
+            })
+    }
+    
+    
+    const deleteRecipe = () =>{
+        userService.deleteRecipe(recipe.id, recipe.sourceName)
+            .then(data =>{
+                console.log("back from delete recipe")
+                alert("Recipe Deleted");
+                history.push("/");
             })
     }
 
@@ -164,6 +176,11 @@ const RecipeScreen = () => {
                                         <i className={`fas fa-heart ${inList(recipe.id) ? "wd-color-red" : ""}`}/>
                                     </button>
                                 </h2>
+                                {user && user.username && user.role === 'editor' && dbRecipe &&
+                                    <button className="btn btn-primary"
+                                            onClick={deleteRecipe}
+                                    >Delete This Recipe </button>}
+                                
 
                                 <h6 className="wd-color-coral">
                                     By

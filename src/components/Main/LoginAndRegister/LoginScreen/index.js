@@ -5,7 +5,7 @@ import "../loginAndRgister.css";
 import {Helmet} from "react-helmet";
 import Header from "../../Header";
 import {useDispatch} from "react-redux";
-import stringToHash from '../stringtoHash'
+
 
 
 const Login = () => {

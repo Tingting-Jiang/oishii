@@ -36,9 +36,16 @@ module.exports = (app) => {
     }
     
     
+    
+    
+
+    
+    
     app.post("/db/recipe/details", findRecipeById);
     app.post("/db/recipe/getAll", findAllRecipes);
     app.post("/db/recipe/searchRecipe", findRecipeByTitle);
-  
+    
+    
+    
     
 }

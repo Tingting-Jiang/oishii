@@ -30,35 +30,6 @@ module.exports = (app) => {
             });
     };
     
-    const deleteRecipeFromMenu1 = (req, res) =>{
-  
-        const sourceName = req.body.sourceName;
-        const recipeId = req.body.recipeId;
-        console.log("in deleteRecipe", recipeId, "from ", req.body.menuId);
-        
-        MenuDao.deleteRecipe(req.body.menuId, recipeId)
-            .then(status => {
-                // delete from recent recipeList
-                if (sourceName === "NONE") {
-                    console.log("API recipe deleted");
-                    res.sendStatus(200);
-                    return;
-                } else {
-                
-                recipeDao.deleteRecipe(recipeId)
-                    .then( status => {
-                        // delete from user side
-                        console.log("remove from latest recipe list");
-                        userDao.deleteRecipe(sourceName, recipeId)
-                            .then(status =>{
-                                console.log('remove from user recipe list')
-                                res.sendStatus(200);
-                            })
-                        
-                    })}})
-    }
-    
-    
     
     
     const deleteRecipeFromMenu = (req, res) =>{
@@ -67,25 +38,9 @@ module.exports = (app) => {
         MenuDao.deleteRecipe(req.body.menuId, recipeId)
             .then(status => {
                 // delete from recent recipeList
-                if (recipeId < 100000000) {
                     console.log("API recipe deleted");
                     res.sendStatus(200);
-                    return;
-                } else {
-                    
-                    recipeDao.deleteRecipe(recipeId)
-                        .then( status => {
-                            // delete from recent recipe list
-                            console.log("remove from latest recipe list");
-                            recipeDao.findSourceName(recipeId)
-                                .then(name => {
-                                    // console.log("returned source name", name);
-                                    userDao.deleteRecipe(name[0].sourceName, recipeId)
-                                        .then(status =>{
-                                            console.log('remove from user recipe list')
-                                            res.send(status);
-                                        })
-                        })})}})
+                })
     }
     
     

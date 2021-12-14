@@ -2,7 +2,8 @@ const stringToHash = require("./stringtoHash")
 
 const userDao = require('./user-dao');
 const allRecipeDao = require("../AllRecipes/allRecipe-dao");
-const userRecipeDao = require("../UserRecipes/recipe-dao")
+const userRecipeDao = require("../UserRecipes/recipe-dao");
+
 const defaultAvatar = "https://firebasestorage.googleapis.com/v0/b/oishii-794ac.appspot.com/o/category-dessert.jpg-1639336882948?alt=media&token=33586928-61f0-4926-a9af-67ebd84cc87e";
 const defaultRecipe = "https://firebasestorage.googleapis.com/v0/b/oishii-794ac.appspot.com/o/thumbnail_sample.jpg-1639506109733?alt=media&token=dd67cefe-92ef-4950-a918-dc10e98b3c25"
 let userRecipe = [];
@@ -228,6 +229,27 @@ module.exports = (app) => {
                 res.sendStatus(200)
             })
     };
+    
+    
+    const deleteRecipe = (req, res) =>{
+        const recipeId = req.body.recipeId;
+        const sourceName = req.body.sourceName;
+        console.log("in deleteRecipe", recipeId, "from ", sourceName);
+        userRecipeDao.deleteRecipe(recipeId)
+            .then( status => {
+                // delete from recent recipe list
+                console.log("remove from latest recipe list");
+                userDao.deleteRecipe(sourceName, recipeId)
+                    .then(status =>{
+                        console.log('remove from user recipe list')
+                        const user = req.session['profile'];
+                        user.usersRecipe = user.usersRecipe.filter(item => item !== recipeId)
+                        req.session['profile'] = user;
+                        res.send(status);
+                    })
+                
+            })
+    }
 
     
 
@@ -254,6 +276,7 @@ module.exports = (app) => {
     app.put('/db/recipe/like', likeRecipe);
     app.put('/db/recipe/unlike', unlikeRecipe);
     app.post("/db/recipe/upload", createRecipe);
+    app.delete("/db/recipe/deleteRecipe", deleteRecipe);
 
 
 

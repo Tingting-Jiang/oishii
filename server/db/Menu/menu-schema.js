@@ -4,7 +4,6 @@ const schema = mongoose.Schema({
     recipeList: Array,
     menuName: String,
     tag:Array,
-    menuImage: String
     
     
 }, {collection: 'menu'});

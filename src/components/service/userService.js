@@ -363,6 +363,16 @@ export const deleteRecipeFromMenu = (menuId, recipeId) =>
         }
     })
 
+export const deleteRecipe = (recipeId, sourceName) =>
+    fetch(`${API_RECIPE}/deleteRecipe`, {
+        method: 'DELETE',
+        body: JSON.stringify({ recipeId: recipeId, sourceName: sourceName }),
+        credentials: 'include',
+        headers: {
+            'content-type': 'application/json'
+        }
+    })
+
 
 
 
@@ -393,5 +403,6 @@ export default {
     getFollowerInfo,
     getMenuDetails,
     deleteRecipeFromMenu,
-    addToMenu
+    addToMenu,
+    deleteRecipe
 };
