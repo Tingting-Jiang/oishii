@@ -1,4 +1,4 @@
-
+const stringToHash = require("./stringtoHash")
 
 const userDao = require('./user-dao');
 const allRecipeDao = require("../AllRecipes/allRecipe-dao");
@@ -75,7 +75,11 @@ module.exports = (app) => {
 
 
     const login = (req, res) => {
-        userDao.findByUsernameAndPassword(req.body)
+        const hashedUser = {
+            ...req.body,
+            password: stringToHash(req.body.password),
+        }
+        userDao.findByUsernameAndPassword(hashedUser)
             .then(user => {
                 if(user && !user.isDeleted) {
                     console.log(" USER login")
@@ -89,20 +93,27 @@ module.exports = (app) => {
     }
     
     const register = (req, res) => {
-        console.log(" NEW REGISTER REQUEST", req.body);
-        userDao.findByUsername(req.body)
+        console.log(" NEW REGISTER REQUEST");
+        const hashedUser = {
+            ...req.body,
+            password: stringToHash(req.body.password),
+        }
+   
+        userDao.findByUsername(hashedUser)
             .then(user => {
                 if(user) {
                     res.sendStatus(404);
                     return;
                 }
                 const newUser = {
-                    ...req.body,
+                    ...hashedUser,
                     id: Date.now(),
                     userAvatar: defaultAvatar
                 }
+                
                 userDao.createUser(newUser)
                     .then(user => {
+                        // user.password = stringToHash(user.password)
                         console.log("after register: ", user);
                         req.session['profile'] = user;
                         res.json(user)

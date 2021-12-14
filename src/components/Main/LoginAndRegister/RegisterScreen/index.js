@@ -4,6 +4,7 @@ import userService from '../../../service/userService'
 import { useDispatch } from 'react-redux'
 import {Helmet} from "react-helmet";
 import Header from "../../Header";
+import stringToHash from '../stringtoHash'
 
 const Register = () => {
     const [user, setUser] = useState({
@@ -17,12 +18,7 @@ const Register = () => {
 
     const history = useHistory();
     const dispatch = useDispatch();
-
-    // hash the user password
-    // const hashedUser = {
-    //     ...user,
-    //     password: stringToHash(user.password),
-    // }
+    
 
     const register = () => {
         console.log("before send, ", user);
