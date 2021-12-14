@@ -16,6 +16,11 @@ const Login = () => {
 
     const dispatch = useDispatch();
 
+    // const hashedUser = {
+    //     ...user,
+    //     password: stringToHash(user.password),
+    // }
+
     const login = () => {
         userService.login(user)
             .then(newUser => {

@@ -1,29 +1,49 @@
 import React, {useEffect, useState} from 'react'
-import recipeService from '../../service/recipeService'
-import {Link, useHistory, useParams} from 'react-router-dom'
-import userService from '../../service/userService'
+import {Link, useHistory} from 'react-router-dom'
+import userService, {getProfile} from '../../service/userService'
 import './search.css';
 import Header from "../Header";
 import { Helmet } from 'react-helmet';
+import {useDispatch, useSelector} from "react-redux";
 
+const selectProfile = (profile) => profile;
 
 const AllUsers = () => {
-    const [userList, setUserList] = useState([]);
-    useEffect(() =>{
-        userService.getAllUsers()
-            .then(data=> {
-                // console.log("menu list ", data.recipeList);
-                setUserList(data);
+
+    // get login user information
+    const dispatch = useDispatch();
+    const history = useHistory();
+    useEffect(() => getUser(dispatch), [history, dispatch]);
+
+    let user = useSelector(selectProfile);
+
+
+    const getUser = (dispatch) => {
+        getProfile(dispatch)
+            // .then(res => setUser(profile))
+            .then(newUser => {
+                // console.log("returned from SESSION", newUser.favRecipeList);
+                if (newUser.username && newUser.password) {
+                    user = newUser;
+                } else {
+                    history.push('/login');
+                }
+                if (user.role !== 'admin') {
+                    history.push('/');
+                }
             })
-        
-    }, []);
-    
-    
-    
+            .catch(e => history.push('/login'));
+        // .catch(e => console.log(e));
+    }
+
+    const [userList, setUserList] = useState([]);
+
+    useEffect(() => {userService.getAllUsers(dispatch).then(r => console.log(r))}, []);
+
+
     const mid = Math.round(userList.length / 2);
-    
-    
-    
+
+
     const deleteUser = (userId) =>{
         console.log("to delete ", userId);
         userService.deleteUser(userId)

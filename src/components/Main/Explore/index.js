@@ -5,8 +5,6 @@ import Header from "../Header";
 import { Helmet } from 'react-helmet';
 import {useDispatch, useSelector} from "react-redux";
 import './menu.css';
-import RecipeCardItem from "../RecipeCards/RecipeCardItem";
-import RouterContext from "react-router/modules/RouterContext";
 import ExploreMenuItem from "./ExploreMenuItem";
 
 

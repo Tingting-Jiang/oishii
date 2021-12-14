@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import Header from "../Header";
 import {Helmet} from "react-helmet";
 import RecipeCardItem from "../RecipeCards/RecipeCardItem";
-import {Link, useHistory, useParams} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import FollowerList from "../FollowerList";
 import DBRecipeCardItem from '../RecipeCards/DBRecipeCardItem';
 
@@ -18,7 +18,7 @@ const Profile = () => {
 
     useEffect(() => getUser(dispatch), [history, dispatch]);
 
-   let user = useSelector(selectProfile);
+    let user = useSelector(selectProfile);
     // console.log("user in profile screen 333333333333");
     // console.log(user);
 

@@ -6,7 +6,6 @@ const RecipeCardItemByObject = ({recipe, user, dispatch}) => {
 
     // console.log("In Recipe Card Object", recipe.id);
 
-
     const inList = (recipe) => {
         return user.favRecipeList.includes(recipe.id);
     }

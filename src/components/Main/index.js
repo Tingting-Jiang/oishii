@@ -54,8 +54,6 @@ const Main = () => {
     
             <Route path="/allUsers" exact={true} component={AllUsers} />
     
-    
-            
 
             <Route path="/explore" exact={true} component={Explore} />
             <Route path="/menu/:id" exact={true} component={Menu} />
