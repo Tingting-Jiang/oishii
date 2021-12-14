@@ -15,7 +15,7 @@ const FollowerDetail = ({follower, profile}) => {
                 console.log("follower Detail", data);
                 setFollowerDetail(data);
             })
-    }, []);
+    }, [follower]);
 
     const reDirectHandler = () => {
         if (followerNew.id === profile.id) {

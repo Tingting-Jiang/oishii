@@ -33,7 +33,7 @@ const Login = () => {
             .then(newUser => {
                 console.log("newUser");
                 console.log(newUser);
-                history.push('/profile');
+                // history.push('/profile');
                 dispatch({
                         type: "set-user",
                         newUser

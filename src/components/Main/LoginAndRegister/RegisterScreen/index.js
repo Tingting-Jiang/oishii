@@ -4,12 +4,12 @@ import userService from '../../../service/userService'
 import { useDispatch } from 'react-redux'
 import {Helmet} from "react-helmet";
 import Header from "../../Header";
-import stringToHash from '../stringtoHash'
 
 const Register = () => {
     const [user, setUser] = useState({
         username: "",
         password: "",
+        verifyPassword: "",
         email: "",
         location: "",
         dateOfBirth: "",
@@ -18,13 +18,20 @@ const Register = () => {
 
     const history = useHistory();
     const dispatch = useDispatch();
-    
+
 
     const register = () => {
+        // check password verify
+        if (user.username === "" ||
+            user.password === "" ||
+            user.password !== user.verifyPassword) {
+            alert("Please check your username and password.")
+            return;
+        }
         console.log("before send, ", user);
         userService.register(user)
             .then(newUser =>{
-                history.push('/profile');
+                // history.push('/profile');
                 dispatch({
                     type: "set-user",
                     newUser

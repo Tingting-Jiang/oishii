@@ -200,6 +200,7 @@ module.exports = (app) => {
     const logout = (req, res) => {
         console.log("LOG OUT");
         res.send(req.session.destroy());
+        userRecipe =[];
     }
     
     
