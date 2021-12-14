@@ -205,10 +205,36 @@ export const likeRecipe = (recipeId, userID, dispatch) =>
         })
 
 
-export const createRecipe = (recipe, userID) =>
+export const likeUser = (userId, otherUserId) =>
+    fetch(`${API_USER}/likeUser`, {
+            method: "PUT",
+        body: JSON.stringify({userId: userId, otherUserId: otherUserId}),
+        credentials: 'include',
+        headers: {
+            'content-type': 'application/json'
+        }
+    })
+        .then(res => res.json())
+
+
+export const unLikeUser = (userId, otherUserId) =>
+    fetch(`${API_USER}/unLikeUser`, {
+        method: "PUT",
+        body: JSON.stringify({userId: userId, otherUserId: otherUserId}),
+        credentials: 'include',
+        headers: {
+            'content-type': 'application/json'
+        }
+    })
+        .then(res => res.json())
+
+
+
+
+export const createRecipe = (recipe, username) =>
     fetch(`${API_RECIPE}/upload`, {
         method: "POST",
-        body: JSON.stringify({recipe: recipe, userID: userID}),
+        body: JSON.stringify({recipe: recipe, username: username}),
         credentials: 'include',
         headers: {
             'content-type': 'application/json'
@@ -335,6 +361,8 @@ export default {
     getProfile,
     logout,
     likeRecipe,
+    likeUser,
+    unLikeUser,
     getAllUsers,
     deleteUser,
     changeRole,

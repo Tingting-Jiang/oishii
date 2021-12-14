@@ -1,4 +1,5 @@
 
+
 const userDao = require('./user-dao');
 const allRecipeDao = require("../AllRecipes/allRecipe-dao");
 const defaultAvatar = "https://firebasestorage.googleapis.com/v0/b/oishii-794ac.appspot.com/o/category-dessert.jpg-1639336882948?alt=media&token=33586928-61f0-4926-a9af-67ebd84cc87e";
@@ -18,7 +19,7 @@ module.exports = (app) => {
     const findUserById = (req, res) =>
         userDao.findUserById(req.body.userId)
             .then(user => {
-                console.log("get all user info by Id ", user)
+                console.log("get all user info by Id ", user[0].usersFollowers)
                 if (user[0]) {
                     res.json(user[0])
                 } else {
@@ -54,8 +55,8 @@ module.exports = (app) => {
     
 
     const deleteUser = (req, res) => {
-        console.log("delete --", req.body.useId)
-        userDao.deleteUser(req.params.userId)
+        console.log("delete --", req.body.userId)
+        userDao.deleteUser(req.body.userId)
             .then(status => res.send(status));
     }
 
@@ -147,6 +148,28 @@ module.exports = (app) => {
     };
     
     
+    const likeUser= (req, res) => {
+        const userId = req.body.userId;
+        const otherUserId = req.body.otherUserId;
+        console.log("in like user, received -->", userId, otherUserId);
+        userDao.likeUser(userId, otherUserId)
+            .then(status => {
+                res.send(status);
+            })
+    };
+    
+    
+    const unLikeUser = (req, res) => {
+        const userId = req.body.userId;
+        const otherUserId = req.body.otherUserId;
+        console.log("in -unlike- user, received -->", userId, otherUserId);
+        userDao.unLikeUser(userId, otherUserId)
+            .then(status => {
+                res.send(status);
+            })
+    };
+    
+    
 
     const profile = (req, res) => {
         if (req.session['profile']) {
@@ -176,6 +199,10 @@ module.exports = (app) => {
     app.put('/db/user/changeRole', changeRole)
     app.post('/db/user/allUsers', findAllUsers);
     app.post('/db/user/findUser', findUserById);
+    app.put('/db/user/likeUser', likeUser);
+    app.put('/db/user/unLikeUser', unLikeUser);
+    
+    
     // app.post('/db/user/userInfo', getUserInfo);
     
     app.post('/db/userInfo', getUserInfo);

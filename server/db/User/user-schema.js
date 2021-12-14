@@ -4,14 +4,8 @@ const userSchema = mongoose.Schema({
     username: String,
     password: String,
     favRecipeList: [],
-    usersRecipe: [],
-    usersFollowers: [
-        {
-            username: String,
-            userAvatar:String,
-            userId: ObjectId,
-        }
-    ],
+    usersRecipe: Array,
+    usersFollowers: Array,
     userAvatar: String,
     dateOfBirth: String,
     bio: String,
