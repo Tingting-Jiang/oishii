@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import "./profile.css";
 import {Link, useHistory} from 'react-router-dom'; // must from dom, react-route won't work
-import userService, {getProfile, logout} from '../../service/userService'
+import userService, {getProfile} from '../../service/userService'
 import {useDispatch, useSelector} from 'react-redux'
 import firebase from '../../../firebase'
 import Header from "../Header";

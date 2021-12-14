@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
 import "./followerlist.css";
-import {Link} from "react-router-dom";
 import FollowerDetail from './FollowerDetail'
 
 const FollowerList = ({followers}) => {

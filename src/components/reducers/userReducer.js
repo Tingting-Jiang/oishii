@@ -8,7 +8,7 @@ const initialUser = {
     location: "",
     dateOfBirth: "",
     bio: "",
-    role: "normal",
+    role: "",
 }
 
 const userReducer = (state = initialUser, action) => {
@@ -44,7 +44,6 @@ const userReducer = (state = initialUser, action) => {
         
 
         case "update-profile":
-
             state = action.newProfile
             console.log("new profile in reducer: ")
             console.log(state);

@@ -112,7 +112,7 @@ export const getAllUsers = () =>
         method: 'POST',
         credentials: 'include',
     })
-        .then(res =>res.json());
+        .then(res => res.json());
     
 
 

@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import Header from "../Header";
 import {Helmet} from "react-helmet";
 import RecipeCardItem from "../RecipeCards/RecipeCardItem";
-import {Link, useHistory, useParams} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import FollowerList from "../FollowerList";
 import DBRecipeCardItem from '../RecipeCards/DBRecipeCardItem';
 
@@ -15,8 +15,22 @@ const Profile = () => {
 
     const dispatch = useDispatch();
     const history = useHistory();
+<<<<<<< HEAD
     
     
+=======
+
+    useEffect(() => getUser(dispatch), [history, dispatch]);
+
+    let user = useSelector(selectProfile);
+    // console.log("user in profile screen 333333333333");
+    // console.log(user);
+
+    const redirectLogin = () => {
+        history.push('/login');
+    }
+
+>>>>>>> b2233cee405f98af2428a08824c44e918359a044
     const getUser = (dispatch) => {
         getProfile(dispatch)
             // .then(res => setUser(profile))

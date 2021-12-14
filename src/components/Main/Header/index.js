@@ -1,13 +1,18 @@
-import React, { useState } from 'react'
+import React, {useEffect, useState} from 'react'
 import HeaderNavItem from "./HeaderNavItem";
 import headerNavs from "./headerNavs.json";
 import "./header.css";
 import recipeService from '../../service/recipeService';
 import { useHistory } from 'react-router-dom';
+import {useDispatch, useSelector} from "react-redux";
+import {getProfile} from "../../service/userService";
+
+const selectProfile = (profile) => profile;
 
 const Header = ({
         active = "home"
-    }) => {
+}) => {
+    const dispatch = useDispatch();
 
     // change the active nav's isActive field
     for (let i = 0; i < headerNavs.length; i++) {
@@ -33,7 +38,25 @@ const Header = ({
         if(e.key === "Enter")
             navigate.push(`/search/${searchTerm}`);
     }
-    
+
+
+    // get login in user
+    useEffect(() => getUser(dispatch), [dispatch]);
+    let user = useSelector(selectProfile);
+    const getUser = (dispatch) => {
+        getProfile(dispatch)
+            // .then(res => setUser(profile))
+            .then(newUser => {
+                // console.log("returned from SESSION", newUser.favRecipeList);
+                if (newUser.username && newUser.password) {
+                    user = newUser;
+                }})
+            .catch(e => console.log(e));
+    }
+
+    console.log("user in header !!!!!!!!!!!!!!")
+    console.log(user);
+
     return (
         <>
             <div className="row wd-home-header">
@@ -50,7 +73,7 @@ const Header = ({
                         })}
                     </ul>
                 </div>
-                <div className="d-none d-lg-block col-4 align-self-center">
+                <div className="d-none d-lg-block col-3 align-self-center">
                     <div className="align-items-center">
                         <div className="wd-magnifier">
                             <label htmlFor="SearchInput">
@@ -68,11 +91,15 @@ const Header = ({
                             <datalist id="datalistOptions">
                                 {searchResult.map(item => (
                                     <option value={item.title} />
-        
                                 ))}
                             </datalist>
                         </div>
                     </div>
+                </div>
+                <div className="d-none d-lg-block col-lg-1 align-self-center text-center">
+                    <img className="wd-header-profile-img"
+                         src={`${user.userAvatar || "/images/sample-user.jpeg"}`}
+                         alt=""/>
                 </div>
             </div>
 
