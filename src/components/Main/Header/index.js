@@ -63,7 +63,7 @@ const Header = ({
                 <div className="col-2 col-md-2">
                     <h1><a href="/home">Oishii</a></h1>
                 </div>
-                <div className="col-6 col-md-9 align-self-center">
+                <div className="col-6 col-md-9 col-xl-6 align-self-center">
                     <ul className="nav justify-content-left">
                         {headerNavs.map(nav => {
                             return (
@@ -79,7 +79,7 @@ const Header = ({
                         }
                     </ul>
                 </div>
-                <div className="d-none d-xl-block col-3 align-self-center">
+                <div className="d-none d-xl-block col-lg-3 align-self-center">
                     <div className="align-items-center">
                         <div className="wd-magnifier">
                             <label htmlFor="SearchInput">
