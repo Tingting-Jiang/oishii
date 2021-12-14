@@ -6,7 +6,7 @@ import "./recipe.css";
 
 import userService, {getProfile} from '../../service/userService';
 import recipeService from '../../service/recipeService';
-// TODO: fake loading recipe
+
 import oldIngredient from "../../reducers/data/newRecipe.json";
 import Header from "../Header";
 import FollowerList from "../FollowerList";
@@ -86,14 +86,20 @@ const RecipeScreen = () => {
             .then(data => {
                 console.log(" followers back ", data);
                 setFollowers(data);
-            }) .catch(e => {
+            }).catch(e => {
                 if (e.status === 403)
                     console.log("ERROR----------- followers, NO followers");
         }),
         []
     );
 
+    const [selectedMenu, setSelectedMenu] = useState(-1);
+
     const addToMenu = (menuId, recipeID) =>{
+        if (menuId < 1) {
+            return;
+        }
+
         console.log(`add ${recipeID} to ${menuId}`)
         userService.addToMenu(menuId, recipeID)
             .then(status =>{
@@ -118,17 +124,36 @@ const RecipeScreen = () => {
                     <div className="wd-recipe">
                         <div className="row">
                             <div className="col-12 col-md-8">
+                                {
+                                    user && user.username && user.role === 'editor' &&
+                                    <div className="d-flex mb-2">
+                                        <select name="" className="form-select form-select-sm" aria-label="menu select"
+                                                onChange={(e) => setSelectedMenu(e.target.value)}>
+                                            <option selected>Add this recipe to a selected Menu</option>
+                                            <option value="1">Main</option>
+                                            <option value="2">Salad</option>
+                                            <option value="3">Dessert</option>
+                                            <option value="4">Pizza</option>
+                                            <option value="5">Vegan</option>
+                                        </select>
+
+                                        <button className="btn btn-sm btn-outline-primary wd-button ms-2" onClick={() => addToMenu(selectedMenu, recipeID)}>
+                                            Add
+                                        </button>
+                                    </div>
+                                }
+
+
                                 <h6 className="wd-color-coral">Total Time: {recipe.readyInMinutes} min</h6>
-    
-    
-                                <ul className="form-select "  >
-                                    <p>Add it to Menu</p>
-                                    <button className="btn btn-primary" value="1" onClick={() =>addToMenu(1, recipeID)}>Main</button>
-                                    <button className="btn btn-primary" value="2" onClick={() =>addToMenu(2, recipeID)}>Salad</button>
-                                    <button className="btn btn-primary" value="3" onClick={() =>addToMenu(3, recipeID)}>Dessert</button>
-                                    <button className="btn btn-primary" value="4" onClick={() =>addToMenu(4, recipeID)}>Pizza</button>
-                                    <button className="btn btn-primary" value="5" onClick={() =>addToMenu(5, recipeID)}>Vegan</button>
-                                </ul>
+
+                                {/*<ul className="form-select" >*/}
+                                {/*    <p>Add it to Menu</p>*/}
+                                {/*    <button className="btn btn-primary" value="1" onClick={() =>addToMenu(1, recipeID)}>Main</button>*/}
+                                {/*    <button className="btn btn-primary" value="2" onClick={() =>addToMenu(2, recipeID)}>Salad</button>*/}
+                                {/*    <button className="btn btn-primary" value="3" onClick={() =>addToMenu(3, recipeID)}>Dessert</button>*/}
+                                {/*    <button className="btn btn-primary" value="4" onClick={() =>addToMenu(4, recipeID)}>Pizza</button>*/}
+                                {/*    <button className="btn btn-primary" value="5" onClick={() =>addToMenu(5, recipeID)}>Vegan</button>*/}
+                                {/*</ul>*/}
     
     
                                 <h2 className="wd-recipe-title d-flex align-items-center">
