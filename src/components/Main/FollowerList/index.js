@@ -3,7 +3,7 @@ import "./followerlist.css";
 import FollowerDetail from './FollowerDetail'
 
 const FollowerList = ({followers}) => {
-    console.log(" followers index", followers);
+    // console.log(" followers list =====", followers);
     
     return (
         <div className="wd-like-user-container">

@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import {Helmet} from "react-helmet";
 import "./recipe.css";
 
-import userService, {getProfile, getRecipeFollowers} from '../../service/userService';
+import userService, {getProfile} from '../../service/userService';
 import recipeService from '../../service/recipeService';
 import oldIngredient from "../../reducers/data/newRecipe.json";
 import Header from "../Header";
@@ -53,7 +53,7 @@ const RecipeScreen = () => {
     // get user session
     // const [user, setUser] = useState({});
     // const [error, setError] = useState(false);
-
+    const[followers, setFollowers] = useState([]);
 
     let inList = (recipeId) => {
         return user.favRecipeList.includes(recipeId);
@@ -67,35 +67,36 @@ const RecipeScreen = () => {
         }
 
         if (inList(recipeId)) {
-            console.log(user.id, " likes ", recipeId)
             userService.unlikeRecipe(recipeId, user.id, dispatch)
-                .then(status =>{
+                .then(status => {
                     console.log("returned@1", status);
-
+                    console.log(user.id, " unfavs ", recipeId)
+                    setFollowers(followers.filter(follower => follower !== user.id))
                 })
         } else {
-            console.log(user.id, " dislike ", recipeId)
             userService.likeRecipe(recipeId, user.id, dispatch)
                 .then(status => {
                     console.log("returned@2", status);
+                    console.log(user.id, " favs ", recipeId)
+                    setFollowers([...followers, user.id]);
                 })
         }
     };
 
-    const[followers, setFollowers] = useState([]);
+    console.log(" followers list =====", followers);
 
     useEffect(() =>{
         console.log("send -----", recipeID);
-        getRecipeFollowers(recipeID)
+        userService.getRecipeFollowers(recipeID)
             .then(data => {
-                console.log(" followers back ", data);
+                // console.log(" followers back ", data);
                 setFollowers(data);
 
             }).catch(e => {
                 if (e.status === 200)
                     console.log("ERROR----------- followers, NO followers");
         })},
-        [recipeID]
+        []
     );
 
     const [selectedMenu, setSelectedMenu] = useState(-1);

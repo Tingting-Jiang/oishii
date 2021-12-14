@@ -49,7 +49,6 @@ const RecipeCardItem = ({recipeId, user, dispatch}) => {
             userService.unlikeRecipe(recipeId, user.id, dispatch)
                 .then(status =>{
                     console.log("returned@1", status);
-
                 })
         } else {
             userService.likeRecipe(recipeId, user.id, dispatch)
@@ -70,7 +69,7 @@ const RecipeCardItem = ({recipeId, user, dispatch}) => {
             </button>
             <Link to={`/details/${recipe.id}`}>
                 <div className="card-body">
-                    <h5 className="card-title">{recipe.id}</h5>
+                    {/*<h5 className="card-title">{recipe.id}</h5>*/}
                     <h5 className="card-title">{recipe.title}</h5>
                     <p className="card-text">for {recipe.servings} servings</p>
                     <p className="card-text">
