@@ -29,7 +29,9 @@ const VisitProfile = () => {
             })
             .catch(e => console.log(e));
     }
-    
+
+    // initialize isFav const
+    const [isFav, setFav] = useState(true);
 
     // user logged in => profile
     useEffect(() => getUser(dispatch), [history, dispatch]);
@@ -64,11 +66,18 @@ const VisitProfile = () => {
     useEffect(() => {
         getUserById(profileVisited)
             .then(data => {
-                console.log("profile Visited", data);
+                // console.log("profile Visited", data);
                 setUser(data);
+                setFav(user.usersFollowers.includes(profile.id));
+                // console.log("user.usersFollowers.includes(profile.id)");
+                // console.log(user.usersFollowers);
+                // console.log(profile.id);
+                // console.log(user.usersFollowers.includes(profile.id));
+                // console.log("isFav in get user");
+                // console.log(isFav);
             })
             .catch(e => history.push('/profile'))
-    }, [history, profileVisited]);
+    }, [history, profileVisited, isFav]);
 
     // get user fav list
     let userFavRecipes = [];
@@ -89,10 +98,8 @@ const VisitProfile = () => {
     }
     
     // check if profile like visited user
-    const [isFav, setFav] = useState(user.usersFollowers.includes(profile.id));
-    
-    console.log("isFav");
-    console.log(isFav);
+    // console.log("isFav");
+    // console.log(isFav);
 
     // profile favs user, user followers +1
     const likeUserHandler = () => {

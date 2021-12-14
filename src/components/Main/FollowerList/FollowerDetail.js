@@ -6,13 +6,13 @@ import {useHistory} from "react-router";
 
 
 const FollowerDetail = ({follower, profile}) => {
-    // console.log("in follower detail ===>", follower);
+    console.log("in follower detail ===>", follower);
     const history = useHistory();
     const [followerNew, setFollowerDetail] = useState( {});
     useEffect(() =>{
         userService.getFollowerInfo(follower)
             .then(data => {
-                // console.log("follower Detail", data);
+                console.log("follower Detail", data);
                 setFollowerDetail(data);
             })
     }, []);
