@@ -198,7 +198,7 @@ module.exports = (app) => {
 
     
     const logout = (req, res) => {
-        console.log("LOG OUT");
+        // console.log("LOG OUT");
         userRecipe =[];
         res.send(req.session.destroy());
         userRecipe =[];
@@ -208,7 +208,7 @@ module.exports = (app) => {
     const createRecipe = (req, res) => {
         const username = req.body.username;
         const recipeId = req.body.recipe.id;
-        console.log("id ===", recipeId, username);
+        // console.log("id ===", recipeId, username);
         const recipe = req.body.recipe;
         if(recipe.image === undefined)
             recipe.image = defaultRecipe;
@@ -216,16 +216,16 @@ module.exports = (app) => {
             .then(status =>{
                 userDao.createRecipe(username, recipeId)
                     .then(result => {
-                        console.log("OLD session, length->", req.session['profile'].usersRecipe.length);
+                        // console.log("OLD session, length->", req.session['profile'].usersRecipe.length);
                         const newUser = req.session['profile'];
                         newUser.usersRecipe = [recipeId, ...newUser.usersRecipe];
-                        console.log("after add the recipe to usersRecipe list", newUser.usersRecipe);
+                        // console.log("after add the recipe to usersRecipe list", newUser.usersRecipe);
                         req.session['profile'] = newUser;
-                        console.log(`add recipe in ${username} recipe list`);
+                        // console.log(`add recipe in ${username} recipe list`);
                         userRecipe =  newUser.usersRecipe;
-                        console.log("New session,length->", req.session['profile'].usersRecipe.length);
+                        // console.log("New session,length->", req.session['profile'].usersRecipe.length);
                     });
-                console.log("add recipe in latest recipe list");
+                // console.log("add recipe in latest recipe list");
                 res.sendStatus(200)
             })
     };
