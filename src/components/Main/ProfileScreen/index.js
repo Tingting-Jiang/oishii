@@ -52,7 +52,6 @@ const Profile = () => {
             });
     }
 
-
     let userFavRecipes = [];
     if (user && user.favRecipeList) {
         for (let i=0; i<4; i++) {
@@ -60,7 +59,6 @@ const Profile = () => {
             userFavRecipes.push(user.favRecipeList[i]);
         }
     }
-
 
     return (
         <>

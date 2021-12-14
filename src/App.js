@@ -3,7 +3,7 @@ import {BrowserRouter, Route} from "react-router-dom";
 import './App.css';
 import Main from "./components/Main";
 import Footer from "./components/Main/Footer";
-import React from "react";
+import React, {Component} from "react";
 
 const cookieStorage = {
     getItem: (key) => {
@@ -62,3 +62,4 @@ function App() {
 }
 
 export default App;
+

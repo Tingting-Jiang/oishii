@@ -20,15 +20,14 @@ const RecipeCardItemByObject = ({recipe, user, dispatch}) => {
         if (inList(recipe)) {
             userService.unlikeRecipe(recipeId, user.id, dispatch)
                 .then(status =>{
-                    console.log("returned@3", status);
-
+                    // console.log("returned@3", status);
                 })
         } else {
             userService.likeRecipe(recipeId, user.id, dispatch)
                 .then(status => {
-                    console.log("recipeId in Object Cards");
-                    console.log(recipeId);
-                    console.log("returned@4", status);
+                    // console.log("recipeId in Object Cards");
+                    // console.log(recipeId);
+                    // console.log("returned@4", status);
                 })
         }
     };

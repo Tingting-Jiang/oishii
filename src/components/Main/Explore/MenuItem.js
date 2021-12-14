@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react'
-import userService from '../../service/userService'
-import recipeService from '../../service/recipeService'
-import {Link} from 'react-router-dom'
+import React, {useEffect, useState} from 'react';
+import userService from '../../service/userService';
+import recipeService from '../../service/recipeService';
+import {Link} from 'react-router-dom';
 
-const MenuItem = ({menuItemId, menuId, isEditor}) => {
+const MenuItem = ({menuItemId}) => {
     const [menuItem, setMenuItem] = useState({
         id: 236834,
         image: "/images/sample-recipe/thumbnail_sample.jpg",
@@ -29,8 +29,6 @@ const MenuItem = ({menuItemId, menuId, isEditor}) => {
         },
         [dbRecipe, menuItemId]
     );
-
-    //dbRecipe, menuItemId
 
     // const deleteRecipeFromMenu = () => {
     //     console.log("before delete recipe from menu ", menuItem.id);
