@@ -199,6 +199,7 @@ module.exports = (app) => {
     
     const logout = (req, res) => {
         console.log("LOG OUT");
+        userRecipe =[];
         res.send(req.session.destroy());
     }
     
