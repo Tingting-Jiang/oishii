@@ -16,7 +16,7 @@ const AllUsers = () => {
                 setUserList(data);
             })
         
-    }, []);
+    }, [userList]);
     
     
     

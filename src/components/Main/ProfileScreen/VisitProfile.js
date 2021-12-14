@@ -18,6 +18,24 @@ const VisitProfile = () => {
     const history = useHistory();
     const params = useParams();
     const profileVisited = params.id;
+    
+    const getUser = (dispatch) => {
+        console.log("00000000000");
+        getProfile(dispatch)
+            // .then(res => setUser(profile))
+            .then(newUser => {
+                console.log("returned from SESSION", newUser.id);
+                if (newUser.id === profileVisited) {
+                    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@")
+                    redirectProfile();
+                }
+            })
+            .catch(e => console.log(e));
+    }
+    
+    
+    
+    
 
     // user logged in => profile
     useEffect(() => getUser(dispatch), [history, dispatch]);
@@ -30,18 +48,7 @@ const VisitProfile = () => {
     console.log("user logged in");
     console.log(profile);
 
-    const getUser = (dispatch) => {
-        getProfile(dispatch)
-            // .then(res => setUser(profile))
-            .then(newUser => {
-                console.log("returned from SESSION", newUser.id);
-                if (newUser.id === profileVisited) {
-                    // console.log("@@@@@@@@@@@@@@@@@@@@@@@@@")
-                    redirectProfile();
-                }
-            })
-        .catch(e => console.log(e));
-    }
+    
 
     // user being visited => user
     const [user, setUser] = useState({

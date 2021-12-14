@@ -88,13 +88,9 @@ const RecipeScreen = () => {
             .then(data => {
                 console.log(" followers back ", data);
                 setFollowers(data);
-<<<<<<< HEAD
+
             }) .catch(e => {
                 if (e.status === 200)
-=======
-            }).catch(e => {
-                if (e.status === 403)
->>>>>>> 857888b040d1d93de40adfaf262159187a0365a1
                     console.log("ERROR----------- followers, NO followers");
         })},
         []

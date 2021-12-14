@@ -55,8 +55,8 @@ module.exports = (app) => {
     
 
     const deleteUser = (req, res) => {
-        console.log("delete --", req.body.useId)
-        userDao.deleteUser(req.params.userId)
+        console.log("delete --", req.body.userId)
+        userDao.deleteUser(req.body.userId)
             .then(status => res.send(status));
     }
 
