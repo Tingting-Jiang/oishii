@@ -21,7 +21,7 @@ module.exports = (app) => {
     const findUserById = (req, res) =>
         userDao.findUserById(req.body.userId)
             .then(user => {
-                console.log("get all user info by Id ", user[0].usersFollowers)
+                // console.log("get all user info by Id ", user[0].usersFollowers)
                 if (user[0]) {
                     res.json(user[0])
                 } else {

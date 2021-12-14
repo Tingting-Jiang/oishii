@@ -27,9 +27,10 @@ const MenuItem = ({menuItemId, menuId, isEditor}) => {
                     })
             }
         },
-        []
+        [dbRecipe, menuItemId]
     );
 
+    //dbRecipe, menuItemId
 
     // const deleteRecipeFromMenu = () => {
     //     console.log("before delete recipe from menu ", menuItem.id);
@@ -65,7 +66,7 @@ const MenuItem = ({menuItemId, menuId, isEditor}) => {
                             <h6 className="ms-2">| &nbsp;total time: {menuItem.readyInMinutes} min</h6>
                         </div>
 
-                        {/*<h6>{menuItem.id}</h6>*/}
+                        <h6>{menuItem.id}</h6>
                     </span>
                 </li>
             </Link>

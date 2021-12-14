@@ -69,24 +69,24 @@ const RecipeScreen = () => {
         if (inList(recipeId)) {
             userService.unlikeRecipe(recipeId, user.id, dispatch)
                 .then(status => {
-                    console.log("returned@1", status);
-                    console.log(user.id, " unfavs ", recipeId)
+                    // console.log("returned@1", status);
+                    // console.log(user.id, " unfavs ", recipeId)
                     setFollowers(followers.filter(follower => follower !== user.id))
                 })
         } else {
             userService.likeRecipe(recipeId, user.id, dispatch)
                 .then(status => {
-                    console.log("returned@2", status);
-                    console.log(user.id, " favs ", recipeId)
+                    // console.log("returned@2", status);
+                    // console.log(user.id, " favs ", recipeId)
                     setFollowers([...followers, user.id]);
                 })
         }
     };
 
-    console.log(" followers list =====", followers);
+    // console.log(" followers list =====", followers);
 
     useEffect(() =>{
-        console.log("send -----", recipeID);
+        // console.log("send -----", recipeID);
         userService.getRecipeFollowers(recipeID)
             .then(data => {
                 // console.log(" followers back ", data);
@@ -105,9 +105,9 @@ const RecipeScreen = () => {
         if (menuId < 1) {
             return;
         }
-        console.log("check type -----", typeof recipeID);
+        // console.log("check type -----", typeof recipeID);
 
-        console.log(`add ${recipeID} to ${menuId}`)
+        // console.log(`add ${recipeID} to ${menuId}`)
         userService.addToMenu(menuId, recipeID)
             .then(status =>{
                 alert("Successfully added to Menu");

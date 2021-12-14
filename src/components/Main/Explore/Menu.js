@@ -31,7 +31,7 @@ const Menu = () => {
                 setRecipeList(data.recipeList);
                 setMenuTitle(data.menuName);
             })
-    }, []);
+    }, [MenuItem]);
 
     const mid = Math.round(recipeList.length / 2);
 
@@ -66,6 +66,9 @@ const Menu = () => {
                 if (res.ok) {
                     console.log("------", recipeList);
                     setRecipeList(recipeList.filter(item => {
+                        console.log(item);
+                        console.log(recipeId);
+                        console.log(item !== recipeId)
                         return (item !== recipeId) ? item : null;
                     }));
                     console.log("recipe deleted")
