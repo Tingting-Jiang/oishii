@@ -1,5 +1,8 @@
 const dao = require('./recipe-dao')
 const userDao = require('../User/user-dao');
+const defaultRecipe = "https://firebasestorage.googleapis.com/v0/b/oishii-794ac.appspot.com/o/thumbnail_sample.jpg-1639439340116?alt=media&token=d9d0c437-a549-421c-a3ab-91b58fb4ee31";
+
+
 
 module.exports = (app) => {
     const findAllRecipes = (req, res) => {
@@ -16,7 +19,10 @@ module.exports = (app) => {
         const username = req.body.username;
         const recipeId = req.body.recipe.id;
         console.log("id ===", recipeId)
-        dao.createRecipe(req.body.recipe)
+        const recipe = req.body.recipe;
+        if(recipe.image === undefined)
+            recipe.image = defaultRecipe;
+        dao.createRecipe(recipe)
             .then(status =>{
                 userDao.createRecipe(username, recipeId)
                     .then(result => {

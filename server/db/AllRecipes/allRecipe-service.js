@@ -22,7 +22,7 @@ module.exports = (app) => {
                     return;
                 } else {
                     console.log("ERRRRor");
-                    res.sendStatus(403);
+                    res.sendStatus(404);
                     
                 }
             })
@@ -43,7 +43,7 @@ module.exports = (app) => {
             })
             .catch( e=> {
                 console.log("ERROR, NO RECORD");
-                res.sendStatus(403);
+                res.sendStatus(200);
                 }
             )
     };

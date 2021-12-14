@@ -78,7 +78,7 @@ const CreateScreen = () => {
         let storageRef = firebase.storage().ref();
         storageRef.child(imageName).getDownloadURL()
             .then(url=>{
-                // console.log(url);
+                console.log(url);
                 setImageUrl(url)
             })
     }

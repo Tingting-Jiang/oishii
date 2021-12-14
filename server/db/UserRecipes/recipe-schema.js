@@ -9,7 +9,7 @@ const schema = mongoose.Schema({
     extendedIngredients: Array,
     id: Number,
     sourceName:String,
-    isDeleted: {type: Boolean, defaultValue: false}
+    isDeleted: {type: Boolean, default: false}
     
     
 }, {collection: 'recentRecipe'});
