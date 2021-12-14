@@ -19,6 +19,7 @@ code {
 .wd-button {
   color: #F17C67;
   border-color: #F17C67;
+  z-index: 5;
 }
 
 .wd-button-mp {
