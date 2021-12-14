@@ -16,8 +16,11 @@ const selectProfile = (profile) => profile;
 
 const RecipeScreen = () => {
     const params = useParams();
-    const recipeID = params.id;
-
+    const recipeID = parseInt(params.id);
+    // console.log("check type -----@@", typeof recipeID);
+    
+    
+    
     const dispatch = useDispatch();
     const user = useSelector(selectProfile);
     useEffect(() => getProfile(dispatch), [dispatch]);
@@ -28,7 +31,7 @@ const RecipeScreen = () => {
     const [recipe, setRecipe] = useState(oldIngredient);
 
     // const [followers, setFollowers] = useState([]);
-    const dbRecipe = recipeID.length > 10;
+    const dbRecipe = recipeID > 1000000000;
 
 
     useEffect(() => {
@@ -102,6 +105,7 @@ const RecipeScreen = () => {
         if (menuId < 1) {
             return;
         }
+        console.log("check type -----", typeof recipeID);
 
         console.log(`add ${recipeID} to ${menuId}`)
         userService.addToMenu(menuId, recipeID)

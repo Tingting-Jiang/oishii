@@ -2,7 +2,7 @@ const userModel = require('./user-model');
 const { ObjectId } = require('mongodb')
 
 const findAllUsers = () =>
-    userModel.find({isDeleted: false, $not:[{role: "admin"}]},{
+    userModel.find({isDeleted: false, role:{$not: {$regex: "^admin.*"}}},{
         usersFollowers: 0,
         __v: 0,
         bio: 0,

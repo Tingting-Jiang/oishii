@@ -20,8 +20,9 @@ const addToMenu = (menuId, recipeId) =>
 
 
 const deleteRecipe = (menuId, recipeId) =>
-    model.updateOne({ "id": menuId },
-        { $pull: { recipeList: recipeId }});
+    model.updateOne({ id: menuId },
+        { $pull: { recipeList: recipeId } })
+;
 
 
 

@@ -15,22 +15,15 @@ const Profile = () => {
 
     const dispatch = useDispatch();
     const history = useHistory();
-<<<<<<< HEAD
-    
-    
-=======
+
 
     useEffect(() => getUser(dispatch), [history, dispatch]);
 
     let user = useSelector(selectProfile);
     // console.log("user in profile screen 333333333333");
     // console.log(user);
+    
 
-    const redirectLogin = () => {
-        history.push('/login');
-    }
-
->>>>>>> b2233cee405f98af2428a08824c44e918359a044
     const getUser = (dispatch) => {
         getProfile(dispatch)
             // .then(res => setUser(profile))
@@ -49,11 +42,7 @@ const Profile = () => {
     }
 
     useEffect(() => getUser(dispatch), [history, dispatch]);
-
-   let user = useSelector(selectProfile);
-    // console.log("user in profile screen 333333333333");
-    // console.log(user);
-
+    
     const redirectLogin = () => {
         history.push('/login');
     }

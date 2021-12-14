@@ -17,6 +17,8 @@ module.exports = (app) => {
     const addToMenu = (req, res) =>{
         const menuId = req.body.menuId;
         const recipeId = req.body.recipeId;
+        console.log("________");
+        console.log(typeof recipeId)
         
         MenuDao.addToMenu(menuId, recipeId)
         // MenuDao.addToMenu(1, 241775)
