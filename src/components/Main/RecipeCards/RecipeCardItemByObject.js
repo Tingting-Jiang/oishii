@@ -36,7 +36,11 @@ const RecipeCardItemByObject = ({recipe, user, dispatch}) => {
         recipe.image = "/images/sample-recipe/thumbnail_sample.jpg";
     }
 
+    // console.log("recipe in carditem by OBJECT");
+    // console.log(recipe);
+
     return (
+        !recipe.isDeleted &&
         <div className="card mx-2">
             <img src={recipe.image} className="card-img-top wd-card-img" alt="sample"/>
             <button className="btn btn-outline-primary wd-button wd-button-on-img"

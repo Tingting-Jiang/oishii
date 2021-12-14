@@ -164,10 +164,8 @@ const RecipeScreen = () => {
 
                                 <h6 className="wd-color-coral">Total Time: {recipe.readyInMinutes} min</h6>
 
-              
                                 {/*</ul>*/}
-    
-    
+
                                 <h2 className="wd-recipe-title d-flex align-items-center">
                                     {recipe.title}
 
@@ -175,11 +173,14 @@ const RecipeScreen = () => {
                                             className="btn btn-outline-primary wd-button ms-3">
                                         <i className={`fas fa-heart ${inList(recipe.id) ? "wd-color-red" : ""}`}/>
                                     </button>
+                                    {
+                                        user && user.username && user.role === 'editor' && dbRecipe &&
+                                        <button className="btn btn-outline-danger ms-2"
+                                                onClick={deleteRecipe}>Delete</button>
+                                    }
                                 </h2>
-                                {user && user.username && user.role === 'editor' && dbRecipe &&
-                                    <button className="btn btn-primary"
-                                            onClick={deleteRecipe}
-                                    >Delete This Recipe </button>}
+
+
                                 
 
                                 <h6 className="wd-color-coral">

@@ -3,7 +3,7 @@ import React from "react";
 const HeaderNavItem = (
     {
         nav = 'home',
-        isActive = true
+        isActive = true,
     }) => {
 
     // if active, change class string

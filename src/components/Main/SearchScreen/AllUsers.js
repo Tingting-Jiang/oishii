@@ -83,7 +83,7 @@ const AllUsers = () => {
             </Helmet>
 
             <div className="container mt-2">
-                <Header active=""/>
+                <Header active="none"/>
 
                 <img className="wd-search-bg"
                      src="/images/search-bg.jpg"

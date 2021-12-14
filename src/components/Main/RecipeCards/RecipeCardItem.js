@@ -47,7 +47,7 @@ const RecipeCardItem = ({recipeId, user, dispatch}) => {
 
         if (inList(recipeId)) {
             userService.unlikeRecipe(recipeId, user.id, dispatch)
-                .then(status =>{
+                .then(status => {
                     console.log("returned@1", status);
                 })
         } else {
@@ -57,10 +57,12 @@ const RecipeCardItem = ({recipeId, user, dispatch}) => {
                 })
         }
     };
-    
+
+    // console.log("recipe in carditem");
+    // console.log(recipe);
 
     return (
-
+        !recipe.isDeleted &&
         <div className="card mx-2">
             <img src={recipe.image} className="card-img-top wd-card-img" alt="sample"/>
             <button className="btn btn-outline-primary wd-button wd-button-on-img"

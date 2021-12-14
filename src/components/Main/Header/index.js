@@ -41,16 +41,19 @@ const Header = ({
 
 
     // get login in user
-    useEffect(() => getUser(dispatch), [dispatch]);
     let user = useSelector(selectProfile);
+
+    useEffect(() => getUser(dispatch), [dispatch]);
+
     const getUser = (dispatch) => {
         getProfile(dispatch)
             // .then(res => setUser(profile))
             .then(newUser => {
                 // console.log("returned from SESSION", newUser.favRecipeList);
-                if (newUser.username && newUser.password) {
+                if (newUser && newUser.username && newUser.password) {
                     user = newUser;
-                }})
+                }
+            })
             .catch(e => console.log(e));
     }
 
@@ -60,7 +63,7 @@ const Header = ({
                 <div className="col-2 col-md-2">
                     <h1><a href="/home">Oishii</a></h1>
                 </div>
-                <div className="col-6 col-md-6 align-self-center">
+                <div className="col-6 col-md-9 align-self-center">
                     <ul className="nav justify-content-left">
                         {headerNavs.map(nav => {
                             return (
@@ -68,9 +71,15 @@ const Header = ({
                                                nav={nav}
                                                isActive={nav.isActive}/>);
                         })}
+                        {
+                            user.role === 'admin' &&
+                            <li className="nav-item">
+                                <a className='nav-link text-danger' href="/allUsers">User</a>
+                            </li>
+                        }
                     </ul>
                 </div>
-                <div className="d-none d-lg-block col-3 align-self-center">
+                <div className="d-none d-xl-block col-3 align-self-center">
                     <div className="align-items-center">
                         <div className="wd-magnifier">
                             <label htmlFor="SearchInput">

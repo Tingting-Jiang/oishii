@@ -70,6 +70,8 @@ const Profile = () => {
         }
     }
 
+    console.log(userCreateRecipes);
+
     return (
         <>
             <Helmet>
