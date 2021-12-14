@@ -141,7 +141,7 @@ export const changeRole = (userId, currentRole) =>
             'content-type': 'application/json'
         }
     })
-        .then(res => res.json());
+    
 
 
 
