@@ -59,13 +59,24 @@ const AllUsers = () => {
     const changeRole = (userId, currentRole) => {
         console.log("current role--", currentRole);
         userService.changeRole(userId, currentRole)
-            .then(data => {
-                // const newRole = () => (currentRole === 'editor') ?  'normal' : 'editor';
-                // setUserList(userList.map(user => (user.id === userId) ? user.role = newRole : user));
-                console.log("role changed");
-            })
-    }
 
+            // .then(res =>res.json())
+            .then(res => {
+                console.log("---", res)
+                if (res.ok){
+                    const newRole = (currentRole === 'editor') ?  'normal' : 'editor';
+                    setUserList(userList.map(user => {
+                        if (user.id === userId) {
+                            user.role = newRole;
+                            return user;
+                        } else return user;
+                    }));
+             
+                    console.log("role changed");
+                } else throw res;
+            })
+            .catch(e =>console.log(e));
+    }
 
     return (
         <>
@@ -87,7 +98,7 @@ const AllUsers = () => {
 
                 <div className="row justify-content-evenly">
                     <ul className="list-group wd-search-result col-12 col-md-6 row border-0">
-                        {userList.slice(0, mid).filter(user => user.role !== 'admin')
+                        {userList.slice(0, mid)
                             .map(item => {
                             return (
                                 <>

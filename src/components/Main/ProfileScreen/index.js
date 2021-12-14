@@ -21,7 +21,6 @@ const Profile = () => {
     let user = useSelector(selectProfile);
     // console.log("user in profile screen 333333333333");
     // console.log(user);
-    
 
     const redirectLogin = () => {
         history.push('/login');
