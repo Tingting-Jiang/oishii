@@ -18,7 +18,7 @@ module.exports = (app) => {
     const createRecipe = (req, res) => {
         const username = req.body.username;
         const recipeId = req.body.recipe.id;
-        console.log("id ===", recipeId)
+        console.log("id ===", recipeId, username);
         const recipe = req.body.recipe;
         if(recipe.image === undefined)
             recipe.image = defaultRecipe;

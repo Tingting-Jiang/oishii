@@ -66,12 +66,14 @@ const RecipeScreen = () => {
         }
 
         if (inList(recipeId)) {
+            console.log(user.id, " likes ", recipeId)
             userService.unlikeRecipe(recipeId, user.id, dispatch)
                 .then(status =>{
                     console.log("returned@1", status);
 
                 })
         } else {
+            console.log(user.id, " dislike ", recipeId)
             userService.likeRecipe(recipeId, user.id, dispatch)
                 .then(status => {
                     console.log("returned@2", status);
@@ -80,16 +82,16 @@ const RecipeScreen = () => {
     };
 
     const[followers, setFollowers] = useState([]);
-    useEffect(() =>
-        // console.log("send -----", recipeID);
+    useEffect(() =>{
+        console.log("send -----", recipeID);
         userService.getRecipeFollowers(recipeID)
             .then(data => {
                 console.log(" followers back ", data);
                 setFollowers(data);
             }) .catch(e => {
-                if (e.status === 403)
+                if (e.status === 200)
                     console.log("ERROR----------- followers, NO followers");
-        }),
+        })},
         []
     );
 

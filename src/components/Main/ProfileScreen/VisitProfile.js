@@ -4,7 +4,7 @@ import {Link, useHistory, useParams} from "react-router-dom";
 import {Helmet} from "react-helmet";
 // useParams from react-router does not work
 import "./profile.css";
-import {getUserById, getProfile, updateProfile} from '../../service/userService';
+import userService, {getUserById, getProfile, updateProfile} from '../../service/userService';
 import Header from "../Header";
 import RecipeCardItem from "../RecipeCards/RecipeCardItem";
 import FollowerList from "../FollowerList";
@@ -64,7 +64,6 @@ const VisitProfile = () => {
     useEffect(() => {
         getUserById(profileVisited)
             .then(data => {
-
                 console.log("profile Visited", data);
                 setUser(data);
             })
@@ -88,6 +87,9 @@ const VisitProfile = () => {
             userCreateRecipes.push(user.usersRecipe[i]);
         }
     }
+    
+    // check if profile like visited user
+    const [isFav, setFav] = useState(user.usersFollowers.includes(profile.id));
 
     // profile favs user, user followers +1
     const likeUserHandler = () => {
@@ -95,35 +97,30 @@ const VisitProfile = () => {
             alert("Please log in to fav a user.");
             return;
         }
-        if (isFav) {
-            const newUser = {
-                ...user,
-                usersFollowers: [
-                    ...user.usersFollowers,
-                    profile.id
-                ],
-            }
-            updateProfile(dispatch, newUser)
+        if (!isFav) {
+            console.log("to like")
+            userService.likeUser(profile.id, user.id)
                 .then(res => {
+                    user.usersFollowers = [profile.id, ...user.usersFollowers]
+                    setUser(user)
+                    setFav(!isFav)
                     console.log(user.username, " is liked by ", profile.username);
                 })
         } else {
-            const newUser = {
-                ...user,
-                usersFollowers: user.usersFollowers.filter(
-                    followerId => followerId !== profile.id
-                )
-            }
-            updateProfile(dispatch, newUser)
+            console.log("to unlike")
+            userService.unLikeUser(profile.id, user.id)
                 .then(res => {
+                    user.usersFollowers = user.usersFollowers.filter(
+                        followerID => followerID !== profile.id)
+                    setUser(user)
+                    setFav(!isFav);
                     console.log(user.username, " is unliked by ", profile.username);
                 })
         }
 
     }
 
-    // check if profile like visited user
-    const isFav = (user.usersFollowers.includes(profile.id));
+   
 
 
     console.log("isFav");

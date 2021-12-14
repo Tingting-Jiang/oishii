@@ -44,6 +44,20 @@ const addFavRecipe = (userID, recipeID) =>
                         $position :0}
                 }});
 
+const likeUser = (userID, otherUserID) =>
+    userModel.updateOne({id: otherUserID},
+        {$push:
+                {usersFollowers: {
+                        $each: [userID],
+                        $position :0}
+                }});
+
+const unLikeUser = (userID, otherUserID) =>
+    userModel.updateOne({id: otherUserID},
+        { $pull: {usersFollowers: userID} });
+
+
+
 
 
 const deleteUser = (userId) =>
@@ -65,9 +79,16 @@ const changeRoleToEditor = (userId) =>
     });
     
 
-const createRecipe = (username, recipe ) =>
-    userModel.updateOne({username},
-        {$push: {usersRecipe : recipe}});
+const createRecipe = (username, recipeId ) =>
+    userModel.updateOne({username: username},
+    {$push:
+            {usersRecipe: {
+                    $each: [recipeId],
+                    $position :0}
+            }},
+    {upsert: true});
+
+
 
 const getRecipe = ( username, recipeID)=>
     userModel.find({username: username, usersRecipe: ObjectId(recipeID)});
@@ -95,6 +116,8 @@ const deleteRecipe =(username, recipeId) =>
 
 
 
+
+
 module.exports = {
     findByUsername,
     findAllUsers,
@@ -110,5 +133,7 @@ module.exports = {
     getUserInfo,
     deleteRecipe,
     changeRoleToNormal,
-    changeRoleToEditor
+    changeRoleToEditor,
+    likeUser,
+    unLikeUser
 };

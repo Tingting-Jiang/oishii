@@ -39,8 +39,7 @@ const CreateScreen = () => {
                 redirectLogin()
             });
     }
-
-    // const user = {username: "TT12"};
+    
 
     const [recipe] = useState({});
 
@@ -72,9 +71,6 @@ const CreateScreen = () => {
     }
     
     const handleSave = () =>{
-        // console.log("in handle save");
-        //
-        // console.log(imageName);
         let storageRef = firebase.storage().ref();
         storageRef.child(imageName).getDownloadURL()
             .then(url=>{
@@ -114,7 +110,7 @@ const CreateScreen = () => {
         // console.log("submit");
         // console.log(newRecipe);
    
-        userService.createRecipe(newRecipe, user.id)
+        userService.createRecipe(newRecipe, user.username)
             .then(data => {
                 console.log("DONE")
                 const path = "/details/" + newRecipe.id;
