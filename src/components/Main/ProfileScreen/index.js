@@ -15,10 +15,6 @@ const Profile = () => {
 
     const dispatch = useDispatch();
     const history = useHistory();
-<<<<<<< HEAD
-
-=======
->>>>>>> ce5ce2c9b4a84470637037cce30894463d73d524
 
     useEffect(() => getUser(dispatch), [history, dispatch]);
 
@@ -27,13 +23,10 @@ const Profile = () => {
     // console.log(user);
     
 
-<<<<<<< HEAD
-=======
     const redirectLogin = () => {
         history.push('/login');
     }
 
->>>>>>> ce5ce2c9b4a84470637037cce30894463d73d524
     const getUser = (dispatch) => {
         getProfile(dispatch)
             // .then(res => setUser(profile))
@@ -52,15 +45,6 @@ const Profile = () => {
     }
 
     useEffect(() => getUser(dispatch), [history, dispatch]);
-<<<<<<< HEAD
-    
-    const redirectLogin = () => {
-        history.push('/login');
-    }
-
-   
-=======
->>>>>>> ce5ce2c9b4a84470637037cce30894463d73d524
 
     const logoutHandler = (dispatch) => {
         logout(dispatch)

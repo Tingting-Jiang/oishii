@@ -43,10 +43,9 @@ const AllUsers = () => {
             })
     }, []);
 
-    // console.log(userList);
+    console.log(userList);
 
     const mid = Math.round(userList.length / 2);
-
 
     const deleteUser = (userId) => {
         console.log("to delete ", userId);
@@ -61,17 +60,10 @@ const AllUsers = () => {
         console.log("current role--", currentRole);
         userService.changeRole(userId, currentRole)
             .then(data => {
-                // setUserList(userList.map(changeRoleHelper(targetId));
+                // const newRole = () => (currentRole === 'editor') ?  'normal' : 'editor';
+                // setUserList(userList.map(user => (user.id === userId) ? user.role = newRole : user));
                 console.log("role changed");
             })
-    }
-
-    const changeRoleHelper = (user, targetId) => {
-        if (user.id === targetId && user.role === 'normal') {
-            user.role = 'editor'
-        } else if (user.id === targetId && user.role === 'editor') {
-            user.role = 'normal'
-        }
     }
 
 

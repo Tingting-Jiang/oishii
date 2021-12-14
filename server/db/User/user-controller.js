@@ -47,11 +47,11 @@ module.exports = (app) => {
         
         if (current === "normal") {
             userDao.changeRoleToEditor(req.body.userId)
-                .then(status => res.sendStatus(200));
+                .then(status => res.send(status));
         }
         else {
             userDao.changeRoleToNormal(req.body.userId)
-                .then(status => res.sendStatus(200));
+                .then(status => res.send(status));
         }
     }
     
