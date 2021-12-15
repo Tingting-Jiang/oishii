@@ -4,7 +4,7 @@ const userDao = require('./user-dao');
 const allRecipeDao = require("../AllRecipes/allRecipe-dao");
 const userRecipeDao = require("../UserRecipes/recipe-dao");
 
-const defaultAvatar = "https://firebasestorage.googleapis.com/v0/b/oishii-794ac.appspot.com/o/category-dessert.jpg-1639336882948?alt=media&token=33586928-61f0-4926-a9af-67ebd84cc87e";
+const defaultAvatar = "https://firebasestorage.googleapis.com/v0/b/oishii-794ac.appspot.com/o/logo-180p.jpg-1639517963904?alt=media&token=46e1f8b2-80de-4a0f-9f6c-225f7ea3223c"
 const defaultRecipe = "https://firebasestorage.googleapis.com/v0/b/oishii-794ac.appspot.com/o/thumbnail_sample.jpg-1639506109733?alt=media&token=dd67cefe-92ef-4950-a918-dc10e98b3c25"
 let userRecipe = [];
 

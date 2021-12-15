@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Helmet} from "react-helmet";
 import userService, {getProfile} from '../../service/userService';
-
 import "./create.css";
 import Header from "../Header";
 import firebase from '../../../firebase';
@@ -16,8 +15,6 @@ const CreateScreen = () => {
     useEffect(() => getUser(dispatch), [history, dispatch]);
 
     let user = useSelector(selectProfile);
-    // console.log("user in profile screen 333333333333");
-    // console.log(user);
 
     const redirectLogin = () => {
         history.push('/login');
@@ -25,9 +22,7 @@ const CreateScreen = () => {
 
     const getUser = (dispatch) => {
         getProfile(dispatch)
-            // .then(res => setUser(profile))
             .then(newUser => {
-                // console.log("returned from SESSION", newUser.favRecipeList);
                 if (newUser.username && newUser.password) {
                     user = newUser;
                 } else {
@@ -117,8 +112,6 @@ const CreateScreen = () => {
             sourceName:user.username,
             id: Date.now(),
         };
-        // console.log("submit");
-        // console.log(newRecipe);
    
         userService.createRecipe(newRecipe, user.username)
             .then(data => {

@@ -1,7 +1,7 @@
 import React from "react";
 import "./categoryNav.css";
+import menu from "../../../const/const"
 
-//TODO: hardcoded link
 
 const CategoryNav = () => {
     return (
@@ -9,31 +9,31 @@ const CategoryNav = () => {
             <ul className="nav justify-content-around">
                 <li className="nav-item text-center">
                     <img className="wd-category-img"
-                         src="/images/category-main.jpg"
+                         src={menu.main}
                          alt=""/>
                         <a className="nav-link" href="/menu/1">Main</a>
                 </li>
                 <li className="nav-item text-center">
                     <img className="wd-category-img"
-                         src="/images/category-salad.jpg"
+                         src={menu.salad}
                          alt=""/>
                         <a className="nav-link" href="/menu/2">Salad</a>
                 </li>
                 <li className="nav-item text-center">
                     <img className="wd-category-img"
-                         src="/images/category-dessert.jpg"
+                         src={menu.dessert}
                          alt=""/>
                         <a className="nav-link" href="/menu/3">Dessert</a>
                 </li>
                 <li className="nav-item text-center">
                     <img className="wd-category-img"
-                         src="/images/category-pizza.jpg"
+                         src={menu.pizza}
                          alt=""/>
                         <a className="nav-link" href="/menu/4">Pizza</a>
                 </li>
                 <li className="nav-item text-center">
                     <img className="wd-category-img"
-                         src="/images/category-vegan.jpg"
+                         src={menu.vegan}
                          alt=""/>
                         <a className="nav-link" href="/menu/5">Vegan</a>
                 </li>

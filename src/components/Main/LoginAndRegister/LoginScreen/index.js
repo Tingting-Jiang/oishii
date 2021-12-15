@@ -14,23 +14,17 @@ const Login = () => {
         password: "",
     });
     const history = useHistory();
-
     const dispatch = useDispatch();
 
     const checkLogin = (e)=>{
         if (e.key === "Enter")
             login()
-    
     }
 
     const login = () => {
-      
-        // console.log()
+
         userService.login(user)
             .then(newUser => {
-                // console.log("newUser");
-                // console.log(newUser);
-                // history.push('/profile');
                 dispatch({
                         type: "set-user",
                         newUser
