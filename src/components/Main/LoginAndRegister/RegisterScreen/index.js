@@ -28,10 +28,9 @@ const Register = () => {
             alert("Please check your username and password.")
             return;
         }
-        console.log("before send, ", user);
+        // console.log("before send, ", user);
         userService.register(user)
             .then(newUser =>{
-                // history.push('/profile');
                 dispatch({
                     type: "set-user",
                     newUser

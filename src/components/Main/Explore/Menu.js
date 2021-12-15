@@ -27,7 +27,6 @@ const Menu = () => {
     useEffect(() => {
         userService.getMenuDetails(menuId)
             .then(data => {
-                // console.log("menu list ", data.recipeList);
                 setRecipeList(data.recipeList);
                 setMenuTitle(data.menuName);
             })
@@ -42,27 +41,21 @@ const Menu = () => {
 
     const getUser = (dispatch) => {
         getProfile(dispatch)
-            // .then(res => setUser(profile))
             .then(newUser => {
-                // console.log("returned from SESSION", newUser.favRecipeList);
                 if (newUser.username && newUser.password) {
                     user = newUser;
                 }
             })
             .catch(e => console.log(e));
     }
-
-    // console.log("user in menu =============");
-    // console.log(user.username, user.role);
+    
     const isEditor = (user.role === 'editor');
-    // console.log(user.role === 'editor');
+
 
 
     const deleteRecipeFromMenu = (recipeId) => {
-        console.log("before delete recipe from menu ");
         userService.deleteRecipeFromMenu(menuId, recipeId)
             .then(res => {
-                console.log("---", res)
                 if (res.ok) {
                     setRecipeList(recipeList.filter(
                         item => (item !== recipeId) ? item : null)

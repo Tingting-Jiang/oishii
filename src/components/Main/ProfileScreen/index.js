@@ -12,7 +12,6 @@ import DBRecipeCardItem from '../RecipeCards/DBRecipeCardItem';
 const selectProfile = (profile) => profile;
 
 const Profile = () => {
-
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -28,7 +27,6 @@ const Profile = () => {
 
     const getUser = (dispatch) => {
         getProfile(dispatch)
-            // .then(res => setUser(profile))
             .then(newUser => {
                 // console.log("returned from SESSION", newUser.favRecipeList);
                 console.log("returned from SESSION", newUser.usersRecipe);
@@ -40,7 +38,6 @@ const Profile = () => {
                 }
             })
             .catch(e => redirectLogin());
-        // .catch(e => console.log(e));
     }
 
     useEffect(() => getUser(dispatch), [history, dispatch]);
@@ -96,7 +93,8 @@ const Profile = () => {
                                 <span className="d-inline-block me-2">
                                 <i className="fas fa-birthday-cake me-2 wd-color-coral"/>
                                     {/*<Birthdate birthdate={user.birthday}/>*/}
-                                    Born some date
+                                    {/*Born some date*/}
+                                    {user.dateOfBirth}
                                 </span>
                             }
                             {

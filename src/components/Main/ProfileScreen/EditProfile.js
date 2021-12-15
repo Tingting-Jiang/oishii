@@ -29,7 +29,6 @@ const EditProfile = () => {
 
     const getUser = (dispatch) => {
         getProfile(dispatch)
-            // .then(res => setUser(profile))
             .then(newUser => {
                 // console.log("returned from SESSION", newUser.favRecipeList);
                 if (newUser.username && newUser.password) {
@@ -39,7 +38,6 @@ const EditProfile = () => {
                 }
             })
             .catch(e => redirectLogin());
-        // .catch(e => console.log(e));
     }
 
     const handleChange = (e) => {
@@ -57,8 +55,7 @@ const EditProfile = () => {
     }
 
     const handleSave = () => {
-        // console.log("in handle save");
-        // console.log(imageName);
+      
         let storageRef = firebase.storage().ref();
         // let spaceRef = storageRef.child(imageName);
         storageRef.child(imageName).getDownloadURL()
@@ -90,8 +87,6 @@ const EditProfile = () => {
         userService.updateProfile(dispatch, newProfile)
             .then(res => {
                 alert("Profile updated.")
-                // res.json();
-                // history.push("/profile")
             })
 
     }
@@ -135,11 +130,7 @@ const EditProfile = () => {
                                     onClick={() => saveProfile(dispatch)}>
                                 Save Profile
                             </button>
-
-                            {/*<button className="btn btn-outline-danger ms-3"*/}
-                            {/*        onClick={() => logoutHandler(dispatch)}>*/}
-                            {/*    Log out*/}
-                            {/*</button>*/}
+                            
                         </div>
 
                         <hr/>

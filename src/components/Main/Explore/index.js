@@ -23,9 +23,7 @@ const Explore = () => {
 
     const getUser = (dispatch) => {
         getProfile(dispatch)
-            // .then(res => setUser(profile))
             .then(newUser => {
-                // console.log("returned from SESSION", newUser.favRecipeList);
                 if (newUser.username && newUser.password) {
                     user = newUser;
                 }

@@ -30,9 +30,7 @@ const Footer = () => {
 
                     </div>
                 </div>
-
-
-                {/*links*/}
+                
                 <div>
 
                 </div>
