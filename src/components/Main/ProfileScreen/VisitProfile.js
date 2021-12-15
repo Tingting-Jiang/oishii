@@ -184,11 +184,9 @@ const VisitProfile = () => {
                     </h2>
                     {
                         userCreateRecipes.length === 0 &&
-                        <Link to="/create">
-                            <div className="btn btn-outline-primary wd-button wd-button-transparent">
-                                <h4>Create your first recipe</h4>
-                            </div>
-                        </Link>
+                        <div className="btn btn-outline-primary wd-button wd-button-transparent">
+                            <h4>Oops, no recipes now.</h4>
+                        </div>
                     }
                     <div className="card-group">
                         {

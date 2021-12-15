@@ -53,7 +53,7 @@ const DBRecipeCardItem = ({recipeId, user, dispatch}) => {
     return (
         <>
             {
-                !recipe.isDeleted && recipe.title &&
+                !recipe.isDeleted && recipe.title && recipe.sourceName === user.username &&
                 <div className="card mx-2">
                     <img src={recipe.image} className="card-img-top wd-card-img" alt="sample"/>
                     <button className="btn btn-outline-primary wd-button wd-button-on-img"
