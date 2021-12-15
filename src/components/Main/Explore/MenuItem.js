@@ -47,7 +47,7 @@ const MenuItem = ({menuItemId}) => {
                             <h6 className="ms-2">| &nbsp;total time: {menuItem.readyInMinutes} min</h6>
                         </div>
 
-                        <h6>{menuItem.id}</h6>
+                        {/*<h6>{menuItem.id}</h6>*/}
                     </span>
                 </li>
             </Link>
