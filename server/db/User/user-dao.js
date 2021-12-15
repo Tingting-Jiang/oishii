@@ -31,13 +31,13 @@ const updateUser = (user) =>
         $set: user
     });
 
-const removeFavRecipe = (username, recipeID) =>
-    userModel.updateOne({username: username},
+const removeFavRecipe = (userId, recipeID) =>
+    userModel.updateOne({id: userId},
         { $pull: {favRecipeList: recipeID} });
 
 
-const addFavRecipe = (username, recipeID) =>
-    userModel.updateOne({username: username},
+const addFavRecipe = (id, recipeID) =>
+    userModel.updateOne({id: id},
         {$push:
                 {favRecipeList: {
                         $each: [recipeID],

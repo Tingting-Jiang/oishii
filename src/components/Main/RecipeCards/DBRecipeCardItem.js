@@ -31,13 +31,15 @@ const DBRecipeCardItem = ({recipeId, user, dispatch}) => {
         }
 
         if (inList(recipeId)) {
-            userService.unlikeRecipe(recipeId, user.username, dispatch)
+            console.log("to like", user.id);
+            userService.unlikeRecipe(recipeId, user.id, dispatch)
                 .then(status =>{
                     console.log("returned@5", status);
 
                 })
         } else {
-            userService.likeRecipe(recipeId, user.username, dispatch)
+            console.log("to dislike", user.id);
+            userService.likeRecipe(recipeId, user.id, dispatch)
                 .then(status => {
                     console.log("returned@6", status);
                 })
@@ -60,7 +62,7 @@ const DBRecipeCardItem = ({recipeId, user, dispatch}) => {
                     </button>
                     <Link to={`/details/${recipe.id}`}>
                         <div className="card-body">
-                            <h5 className="card-title">{recipe.id}</h5>
+                            {/*<h5 className="card-title">{recipe.id}</h5>*/}
                             <h5 className="card-title">{recipe.title}</h5>
                             <p className="card-text">for {recipe.servings} servings</p>
                             <p className="card-text">

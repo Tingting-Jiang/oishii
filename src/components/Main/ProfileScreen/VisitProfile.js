@@ -153,8 +153,8 @@ const VisitProfile = () => {
                                 user.dateOfBirth &&
                                 <span className="d-inline-block me-2">
                                 <i className="fas fa-birthday-cake me-2 wd-color-coral"/>
-                                    {user.dateOfBirth}
-                                    {/*Born some date*/}
+                                    {/*{user.dateOfBirth}*/}
+                                    Born some date
                                 </span>
                             }
                             {
