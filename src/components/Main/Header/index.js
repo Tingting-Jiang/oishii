@@ -79,7 +79,7 @@ const Header = ({
                         }
                     </ul>
                 </div>
-                <div className="d-none d-xl-block col-lg-3 align-self-center">
+                <div className="d-none d-xl-block col-xl-3 align-self-center">
                     <div className="align-items-center">
                         <div className="wd-magnifier">
                             <label htmlFor="SearchInput">

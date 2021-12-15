@@ -71,8 +71,10 @@ const Footer = () => {
 
 
             <div id="consent-popup" className="hidden">
-                <p>By using this site you agree to our <a href="/terms-and-conditions" className="wd-color-coral fw-bold">Terms of Use and Privacy Policy</a>.
-                    Please <a id="accept" className="wd-color-coral fw-bold" href="#">Accept</a> before using our website.
+                <p>Hello! Oishii is a website where you can explore recipes and menus for your dinner or just for fun!
+                </p>
+                <p>We value the privacy of each user. By using this site you agree to our <a href="/terms-and-conditions" className="wd-color-coral fw-bold">Terms of Use and Privacy Policy</a>.
+                    Please check the link and <a id="accept" className="wd-color-coral fw-bold" href="#">Accept</a> before using our website. We hope you have a good time here.
                 </p>
             </div>
 

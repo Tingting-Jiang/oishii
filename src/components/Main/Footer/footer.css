@@ -15,6 +15,7 @@
     background-color: white;
     opacity: 0.9;
     transition: opacity .8s ease;
+    overflow: scroll;
 }
 
 #consent-popup.hidden {
