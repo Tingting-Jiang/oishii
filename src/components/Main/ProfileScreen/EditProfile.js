@@ -21,7 +21,7 @@ const EditProfile = () => {
     const [dateOfBirth, setDOB] = useState(profile.dateOfBirth);
 
     const [imageName, setImageName] = useState("");
-    const [imageUrl, setImageUrl] = useState();
+    const [imageUrl, setImageUrl] = useState(profile.userAvatar);
 
     const redirectLogin = () => {
         history.push('/login');
@@ -33,6 +33,9 @@ const EditProfile = () => {
                 // console.log("returned from SESSION", newUser.favRecipeList);
                 if (newUser.username && newUser.password) {
                     profile = newUser;
+                    // setImageUrl(profile.userAvatar);
+                    console.log("imageUrl");
+                    console.log(imageUrl);
                 } else {
                     redirectLogin();
                 }
@@ -182,14 +185,14 @@ const EditProfile = () => {
                                         onClick={handleSave}><i className="fas fa-upload"/>
                                 </button>
                             </div>
-                            {imageUrl ? (
-                                <div className='row mt-2'>
-                                    <div className='col-md-6 m-auto justify-content-center'>
-                                        {/*<h4 className='text-center'>{imageName.split("-",1)}</h4>*/}
-                                        <img className="wd-upload-thumbnail justify-self-center" src={imageUrl} alt=''/>
-                                    </div>
-                                </div>
-                            ) : (<h6 className="text-sm-center mt-4">Your uploaded picture will show here.</h6>)}
+                            {/*{imageUrl ? (*/}
+                            {/*    <div className='row mt-2'>*/}
+                            {/*        <div className='col-md-6 m-auto justify-content-center'>*/}
+                            {/*            /!*<h4 className='text-center'>{imageName.split("-",1)}</h4>*!/*/}
+                            {/*            <img className="wd-upload-thumbnail justify-self-center" src={imageUrl} alt=''/>*/}
+                            {/*        </div>*/}
+                            {/*    </div>*/}
+                            {/*) : (<h6 className="text-sm-center mt-4">Your uploaded picture will show here.</h6>)}*/}
                         </div>
                     </div>
                 </div>
