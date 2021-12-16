@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import "./followerlist.css";
-import {Link} from "react-router-dom";
-import userService from '../../service/userService'
-import {useHistory} from "react-router";
+import {Link, useHistory} from "react-router-dom";
+import userService from '../../service/userService';
 
 
 const FollowerDetail = ({follower, profile}) => {
