@@ -129,6 +129,10 @@ module.exports = (app) => {
     const likeRecipe= (req, res) => {
         const recipeID = req.body.recipeID;
         const userID = req.body.userID;
+        if (userID === undefined) {
+            res.sendStatus(404);
+            return;
+        }
         console.log("in like recipe, received -->", recipeID, userID);
         userDao.addFavRecipe(userID, recipeID)
             .then(status => {
@@ -137,26 +141,34 @@ module.exports = (app) => {
                 console.log(`add recipe to ${userID} fav list`);
                 // console.log(req.session['profile']);
                 const user = req.session['profile'];
-                user.favRecipeList = [recipeID, ...user.favRecipeList];
-                req.session['profile'] = user;
-                // console.log(req.session['profile']);
-                // res.json(recipeID);
-                res.send(status);
+                if (user) {
+                    user.favRecipeList = [recipeID, ...user.favRecipeList];
+                    req.session['profile'] = user;
+                    // console.log(req.session['profile']);
+                    // res.json(recipeID);
+                    res.send(status);
+                } else res.sendStatus(404);
             })
     };
 
     const unlikeRecipe= (req, res) => {
         const recipeID = req.body.recipeID;
         const userID = req.body.userID;
+        if (userID === undefined) {
+            res.sendStatus(404);
+            return;
+        }
         console.log("in -unlike- recipe, received -->", recipeID);
         userDao.removeFavRecipe(userID, recipeID)
             .then(status => {
                 allRecipeDao.removeFollower(recipeID, userID)
                     .then(status => console.log(`remove ${userID} from recipeList`));
                 const user = req.session['profile'];
-                user.favRecipeList = user.favRecipeList.filter(recipeId => recipeId !== recipeID)
-                req.session['profile'] = user;
-                res.send(status);
+                if(user) {
+                    user.favRecipeList = user.favRecipeList.filter(recipeId => recipeId !== recipeID)
+                    req.session['profile'] = user;
+                    res.send(status);
+                } else res.sendStatus(404);
             })
     };
     
