@@ -1,12 +1,14 @@
-const API = 'https://oishii-server.herokuapp.com/';
-// const API = 'http://localhost:4000/';
+// const API_URL = 'http://localhost:4000/db';
+// const API_USER = 'http://localhost:4000/db/user';
+// const API_RECIPE = 'http://localhost:4000/db/recipe';
+// const API_ALL = 'http://localhost:4000/db/all';
+// const API_MENU = 'http://localhost:4000/db/menu';
 
-const API_URL = API + 'db';
-const API_USER = API + 'user';
-const API_RECIPE = API + 'recipe';
-
-const API_ALL = API + 'db/all';
-const API_MENU = API + 'db/menu';
+const API_URL = 'https://oishii-server.herokuapp.com/db';
+const API_USER = 'https://oishii-server.herokuapp.com/db/user';
+const API_RECIPE = 'https://oishii-server.herokuapp.com/db/recipe';
+const API_ALL = 'https://oishii-server.herokuapp.com/db/all';
+const API_MENU = 'https://oishii-server.herokuapp.com/db/menu';
 
 
 export const login = (user) =>
