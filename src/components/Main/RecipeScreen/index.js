@@ -119,7 +119,7 @@ const RecipeScreen = () => {
     const deleteRecipe = () =>{
         userService.deleteRecipe(recipe.id, recipe.sourceName)
             .then(data =>{
-                console.log("back from delete recipe")
+                // console.log("back from delete recipe")
                 alert("Recipe Deleted");
                 history.push("/");
             })
@@ -200,6 +200,7 @@ const RecipeScreen = () => {
                             <div className="d-none d-md-block col-4">
                                 <div>
                                     <img className="wd-recipe-thumbnail d-md-float-end"
+                                         alt=""
                                          src={recipe.image}/>
                                 </div>
                             </div>

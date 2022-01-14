@@ -30,20 +30,19 @@ const Search = () => {
 
     const checkResult = (e) =>{
         if (e.key === "Enter")
+            navigate.push(`/search/`);
             clickSearch()
-
     }
 
     const clickSearch = () => {
         navigate.push(`/search/${searchTerm}`);
         userService.searchRecipeByTitle(searchTerm)
             .then(data => {
-                    console.log("db data length ==>", data.length );
+                    // console.log("db data length ==>", data.length );
                     if (data.length !== 0) {
-                        console.log("search DB");
-                        console.log(data);
+                        // console.log("search DB");
+                        // console.log(data);
                         totalRecipes = data;
-
                     }
                 }
             )
@@ -66,7 +65,7 @@ const Search = () => {
 
 
     const getRandomRecipe= () =>{
-        console.log("in get random recipe");
+        // console.log("in get random recipe");
         recipeService.getRandomRecipe()
             .then(data =>{
                 navigate.push(`/details/${data.id}`);

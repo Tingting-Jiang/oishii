@@ -34,8 +34,8 @@ const EditProfile = () => {
                 if (newUser.username && newUser.password) {
                     profile = newUser;
                     // setImageUrl(profile.userAvatar);
-                    console.log("imageUrl");
-                    console.log(imageUrl);
+                    // console.log("imageUrl");
+                    // console.log(imageUrl);
                 } else {
                     redirectLogin();
                 }
@@ -53,7 +53,7 @@ const EditProfile = () => {
         uploadTask
             .on(firebase.storage.TaskEvent.STATE_CHANGED,
                 () => {
-                    let downloadUrl = uploadTask.snapshot.getDownloadURL;
+                    // let downloadUrl = uploadTask.snapshot.getDownloadURL;
                 })
     }
 
@@ -124,6 +124,7 @@ const EditProfile = () => {
 
                         <div className="text-center mb-3">
                             <img className="wd-profile-img"
+                                 alt=""
                                  src={imageUrl || profile.userAvatar || "/images/sample-user.jpeg"}/>
                             <h5 className="mt-3">{`Update ${profile.username}'s Profile`}</h5>
                         </div>

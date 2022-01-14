@@ -1,9 +1,12 @@
-const API_URL = 'http://localhost:4000/db';
-const API_USER = 'http://localhost:4000/db/user';
-const API_RECIPE = 'http://localhost:4000/db/recipe';
+const API = 'https://oishii-server.herokuapp.com/';
+// const API = 'http://localhost:4000/';
 
-const API_ALL = 'http://localhost:4000/db/all';
-const API_MENU = 'http://localhost:4000/db/menu';
+const API_URL = API + 'db';
+const API_USER = API + 'user';
+const API_RECIPE = API + 'recipe';
+
+const API_ALL = API + 'db/all';
+const API_MENU = API + 'db/menu';
 
 
 export const login = (user) =>
@@ -47,8 +50,8 @@ export const getProfile = (dispatch) =>
             else throw res;
         })
         .then(newUser => {
-            console.log("dispatch get user in getProfile service")
-            console.log(newUser)
+            // console.log("dispatch get user in getProfile service")
+            // console.log(newUser)
             dispatch({
                 type: 'get-user',
                 newUser
@@ -141,16 +144,6 @@ export const changeRole = (userId, currentRole) =>
             'content-type': 'application/json'
         }
     })
-    
-
-
-
-
-
-
-
-
-
 
 
 export const getFavList = (dispatch) =>
@@ -231,8 +224,6 @@ export const unLikeUser = (userId, otherUserId) =>
         .then(res => res.json())
 
 
-
-
 export const createRecipe = (recipe, username) =>
     fetch(`${API_RECIPE}/upload`, {
         method: "POST",
@@ -242,7 +233,6 @@ export const createRecipe = (recipe, username) =>
             'content-type': 'application/json'
         }
     });
-
 
 
 export const getRecipe = (recipeID) =>
@@ -284,10 +274,6 @@ export const getRecipeFollowers = (recipeID) =>
         });
    
 
-
-
-
-
 export const getAllLatestRecipes = () =>
     fetch(`${API_RECIPE}/getAll`, {
         method: 'POST',
@@ -297,8 +283,6 @@ export const getAllLatestRecipes = () =>
             console.log("");
             return res.json()
         });
-
-
 
 
 export const getMenuDetails = (menuId) =>

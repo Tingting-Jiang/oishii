@@ -1,5 +1,5 @@
-import React from 'react';
-const URL = 'http://localhost:4000/api';
+// const URL = 'http://localhost:4000/api';
+const URL = 'https://oishii-server.herokuapp.com/api';
 
 export const fetchSearchResult = (key_words) =>
     // key_words = key_words.replace(/\s+/g, '%20');

@@ -58,7 +58,7 @@ const TermsOfService = () => {
                                 using Cookies and how that information is used. This Cookies Policy has been created
                                 with the help of the <a
                                     href="https://www.freeprivacypolicy.com/free-cookies-policy-generator/"
-                                    target="_blank">Cookies Policy Generator</a>.</p>
+                                    target="_blank" rel="noreferrer" >Cookies Policy Generator</a>.</p>
                             <p>Cookies do not typically contain any information that personally identifies a user, but
                                 personal information that we store about You may be linked to the information stored in
                                 and obtained from Cookies. For further information on how We use, store and keep your
@@ -82,7 +82,7 @@ const TermsOfService = () => {
                                     on that website among its many uses.
                                 </li>
                                 <li><strong>Website</strong> refers to Oishii, accessible from <a
-                                    href="http://localhost:3000/" rel="external nofollow noopener"
+                                    href="http://localhost:3000/" rel="external nofollow noopener noreferrer"
                                     target="_blank">http://localhost:3000/</a></li>
                                 <li><strong>You</strong> means the individual accessing or using the Website, or a
                                     company, or any legal entity on behalf of which such individual is accessing or
@@ -130,25 +130,25 @@ const TermsOfService = () => {
                                 <li>
                                     <p>For the Chrome web browser, please visit this page from Google: <a
                                         href="https://support.google.com/accounts/answer/32050"
-                                        rel="external nofollow noopener"
+                                        rel="external nofollow noopener noreferrer"
                                         target="_blank">https://support.google.com/accounts/answer/32050</a></p>
                                 </li>
                                 <li>
                                     <p>For the Internet Explorer web browser, please visit this page from Microsoft: <a
-                                        href="http://support.microsoft.com/kb/278835" rel="external nofollow noopener"
+                                        href="http://support.microsoft.com/kb/278835" rel="external nofollow noopener noreferrer"
                                         target="_blank">http://support.microsoft.com/kb/278835</a></p>
                                 </li>
                                 <li>
                                     <p>For the Firefox web browser, please visit this page from Mozilla: <a
                                         href="https://support.mozilla.org/en-US/kb/delete-cookies-remove-info-websites-stored"
-                                        rel="external nofollow noopener"
+                                        rel="external nofollow noopener noreferrer"
                                         target="_blank">https://support.mozilla.org/en-US/kb/delete-cookies-remove-info-websites-stored</a>
                                     </p>
                                 </li>
                                 <li>
                                     <p>For the Safari web browser, please visit this page from Apple: <a
                                         href="https://support.apple.com/guide/safari/manage-cookies-and-website-data-sfri11471/mac"
-                                        rel="external nofollow noopener"
+                                        rel="external nofollow noopener noreferrer"
                                         target="_blank">https://support.apple.com/guide/safari/manage-cookies-and-website-data-sfri11471/mac</a>
                                     </p>
                                 </li>
@@ -156,7 +156,7 @@ const TermsOfService = () => {
                             <p>For any other web browser, please visit your web browser's official web pages.</p>
                             <h3 className="wd-terms-title">More Information about Cookies</h3>
                             <p>You can learn more about cookies: <a
-                                href="https://www.freeprivacypolicy.com/blog/cookies/" target="_blank">Cookies: What Do
+                                href="https://www.freeprivacypolicy.com/blog/cookies/" rel="noreferrer" target="_blank">Cookies: What Do
                                 They Do?</a>.</p>
                             <h3 className="wd-terms-title">Contact Us</h3>
                             <p>If you have any questions about this Cookies Policy, You can contact us:</p>
